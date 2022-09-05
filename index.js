@@ -1,0 +1,8 @@
+const btnStart = document.getElementById("start-game")
+const btnAddWord = document.getElementById("add-word")
+btnStart.onclick = ()=>{
+    location.href = "./game.html"
+}
+btnAddWord.onclick = ()=>{
+    location.href = "./addWord.html"
+}
