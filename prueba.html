@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <canvas width="500px" height="500px" id="screen-game">
+
+    </canvas>
+    <button id="dibujar">Dibujar</button>
+
+    <script>
+
+        const canvas = document.getElementById("screen-game")
+        let context = canvas.getContext("2d");
+        // algoritmo-1 => guarda en variables o objetos las posiciones 
+        //  las posiciones de cada dibujo
+        // y despues iterarlas de acuerdo a numeros de fallos
+
+        const btn = document.getElementById("dibujar")
+        const piso = {
+            inicialX: 50,
+            inicialY: 450,
+            finalX: 450,
+            finalY: 450,
+        }
+        const tubo = {
+            inicialX: 100,
+            inicialY: 50,
+            finalX: 100,
+            finalY: 450,
+        }
+        const techo = {
+            inicialX: 100,
+            inicialY: 50,
+            finalX: 320,
+            finalY: 50,
+        }
+        const horca = {
+            inicialX: 320,
+            inicialY: 50,
+            finalX: 320,
+            finalY: 100,
+        }
+        const cuerpo = {
+            inicialX: 320,
+            inicialY: 180,
+            finalX: 320,
+            finalY: 320,
+        }
+        const brazoDerecho = {
+            inicialX: 320,
+            inicialY: 180,
+            finalX: 370,
+            finalY: 250,
+        }
+        const cabeza = {
+            inicialX: 320,
+            inicialY: 140,
+        }
+        const brazoIzquierdo = {
+            inicialX: 320,
+            inicialY: 180,
+            finalX: 270,
+            finalY: 250,
+        }
+        const pataDerecha = {
+            inicialX: 320,
+            inicialY: 320,
+            finalX: 380,
+            finalY: 400,
+        }
+        const pataIzquierda = {
+
+            inicialX: 320,
+            inicialY: 320,
+            finalX: 260,
+            finalY: 400,
+        }
+        const arrayPiezas = [tubo, techo, horca, cabeza, cuerpo, brazoDerecho, brazoIzquierdo, pataDerecha, pataIzquierda]
+
+        init()
+
+        let fallos = 0;
+        let aciertos = 0;
+        let palabra = "alura";
+        let largoDeLaPalabra = palabra.length
+        let letrasAcertadas = []
+        let letrasNoAcertadas = []
+        let repeticionesDeLetras = {}
+        palabra.split("").forEach(letra => {
+            if (repeticionesDeLetras[letra]) {
+                repeticionesDeLetras[letra] +=1
+            }else{
+                repeticionesDeLetras[letra] =1
+            }
+        });
+        let letrasPalabraEscrita = palabra.split("")
+
+        console.log(repeticionesDeLetras);
+        console.log(letrasPalabraEscrita);
+        window.addEventListener("keyup", paint, event)
+        function paint(event) {
+            let teclaPulsada = event.key
+
+            if (palabra.includes(teclaPulsada) && repeticionesDeLetras[teclaPulsada] !== 0) {
+                aciertos++
+                repeticionesDeLetras[teclaPulsada] -= 1 
+                // console.log("ACERTASTE");
+                letrasAcertadas.push(teclaPulsada)
+                if (aciertos == palabra.length) {
+                    console.log("%cGANASTE", "font-size:25px");
+                    window.removeEventListener("keyup", paint)
+                }
+
+            } else {
+                if (!letrasNoAcertadas.includes(teclaPulsada)) {
+                    letrasNoAcertadas.push(teclaPulsada)
+                    
+                }
+                // console.log("NO acertaste mano");
+                let pieza = arrayPiezas[fallos]
+                if (pieza == undefined) {
+                    console.log("Perdiste causa");
+                    window.removeEventListener("keyup", paint)
+                    return
+                }
+                if (fallos == 3) {
+                    dibujarCabeza(pieza.inicialX, pieza.inicialY)
+                    fallos++
+                } else {
+                    dibujarLinea(pieza.inicialX, pieza.inicialY, pieza.finalX, pieza.finalY)
+                    fallos++
+                }
+
+
+            }
+            console.log(letrasAcertadas );
+            console.log("acertadas");
+            console.log(letrasNoAcertadas);
+            console.log("no acertadas");
+            // console.log(palabraEscrita);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function dibujarLinea(inicialX, inicialY, finalX, finalY) {
+            context.beginPath();
+
+            context.lineWidth = 6;
+            context.moveTo(inicialX, inicialY);
+            context.lineTo(finalX, finalY);
+            context.lineCap = "round";
+            context.stroke();
+
+            context.closePath();
+        }
+
+
+        function dibujarCabeza(x, y) {
+            context.beginPath();
+            context.strokeStyle = 'black';
+            context.lineWidth = 8;
+
+            context.arc(x, y, 40, Math.PI / 180 * 0, Math.PI / 180 * 360);
+
+            context.stroke();
+
+
+            context.closePath();
+
+        }
+        function init() {
+            dibujarLinea(piso.inicialX, piso.inicialY, piso.finalX, piso.finalY) // piso
+        }
+    </script>
+    <style>
+        body {
+            background-color: rgb(196, 226, 236);
+        }
+
+        #screen-game {
+            border: 2px solid;
+        }
+    </style>
+
+</body>
+
+</html>
