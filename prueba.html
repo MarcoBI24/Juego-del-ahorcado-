@@ -88,48 +88,65 @@
         init()
 
         let fallos = 0;
-        let aciertos = 0;
-        let palabra = "alura";
-        let largoDeLaPalabra = palabra.length
+        let palabraOrigin= "Marco"
+        let palabra = palabraOrigin.split("");
         let letrasAcertadas = []
         let letrasNoAcertadas = []
-        let repeticionesDeLetras = {}
-        palabra.split("").forEach(letra => {
-            if (repeticionesDeLetras[letra]) {
-                repeticionesDeLetras[letra] +=1
-            }else{
-                repeticionesDeLetras[letra] =1
-            }
-        });
-        let letrasPalabraEscrita = palabra.split("")
+        let letrasPalabraEscrita = ["-", "-", "-", "-", "-"]
 
-        console.log(repeticionesDeLetras);
         console.log(letrasPalabraEscrita);
         window.addEventListener("keyup", paint, event)
         function paint(event) {
             let teclaPulsada = event.key
 
-            if (palabra.includes(teclaPulsada) && repeticionesDeLetras[teclaPulsada] !== 0) {
-                aciertos++
-                repeticionesDeLetras[teclaPulsada] -= 1 
-                // console.log("ACERTASTE");
-                letrasAcertadas.push(teclaPulsada)
-                if (aciertos == palabra.length) {
-                    console.log("%cGANASTE", "font-size:25px");
-                    window.removeEventListener("keyup", paint)
+
+            let verificacionDeLaTecla = verificacionYProcesamientoDeLaTeclaPulsada(teclaPulsada)
+            if (verificacionDeLaTecla) {
+                console.log("%cGANASTE!!", "font-size: 24px;");
+                window.removeEventListener("keyup",paint)
+            } else if (verificacionDeLaTecla == false) {
+                console.log("%cPERDISTE!!", "font-size: 24px;");
+                window.removeEventListener("keyup",paint)
+   
+            }
+
+
+
+            console.log(letrasAcertadas);
+            console.log("acertadas");
+            console.log(letrasNoAcertadas);
+            console.log("no acertadas");
+            // console.log(palabraEscrita);
+
+
+        }
+
+
+        function verificacionYProcesamientoDeLaTeclaPulsada(teclaPulsada) {
+            if (palabra.includes(teclaPulsada)) {
+                for (let j = 0; j < palabra.length; j++) {
+                    if (palabra[j] == teclaPulsada && letrasPalabraEscrita[j] == "-") {
+                        letrasPalabraEscrita[j] = palabra[j]
+                        letrasAcertadas.push(teclaPulsada)
+                        if (letrasPalabraEscrita.join("") == palabra.join("")) {
+                            return true
+                        }
+
+                        return
+                    }
+
                 }
+
+
 
             } else {
                 if (!letrasNoAcertadas.includes(teclaPulsada)) {
                     letrasNoAcertadas.push(teclaPulsada)
-                    
+
                 }
-                // console.log("NO acertaste mano");
                 let pieza = arrayPiezas[fallos]
                 if (pieza == undefined) {
-                    console.log("Perdiste causa");
-                    window.removeEventListener("keyup", paint)
-                    return
+                    return false
                 }
                 if (fallos == 3) {
                     dibujarCabeza(pieza.inicialX, pieza.inicialY)
@@ -141,15 +158,7 @@
 
 
             }
-            console.log(letrasAcertadas );
-            console.log("acertadas");
-            console.log(letrasNoAcertadas);
-            console.log("no acertadas");
-            // console.log(palabraEscrita);
         }
-
-
-
 
 
 
