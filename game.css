@@ -1,0 +1,71 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto";
+}
+body{
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to top , rgba(173, 173, 173, 0.534), transparent, transparent, transparent);
+
+}
+.contenedor-general{
+    border: 2px solid saddlebrown;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+    .contenedor-canvas{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+        #screen-game{
+            border: 1px solid;
+        }
+    .contenedor-palabras{
+        /* background-color: salmdn; */
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+        .contenedor-palabras-correctas{
+            display: flex;
+            gap: 10px;
+            /* background-color: #899; */
+            justify-content: center;
+        }
+        .letra-correcta{
+            padding: 15px;
+            background-color: #979797;
+            max-width: 60px;
+            max-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #fff;
+            font-size: 36px;
+
+
+        }
+        .contenedor-palabras-incorrectas{
+            display: flex;
+            /* background-color: bisque; */
+            justify-content: center;
+            gap: 15px;
+            
+
+        }
+            .letra-incorrecta{
+                font-size: 18px;
+                color: #8B8B8B;
+                font-weight: 300;
+
+            }
+    .contenedor-teclado{
+    
+    }

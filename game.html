@@ -1,12 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./game.css">
+
     <title>Jugar</title>
 </head>
+
 <body>
-    
+    <div class="contenedor-general">
+        <div class="contenedor-canvas">
+            <canvas width="400px" height="400px" id="screen-game"></canvas>
+        </div>
+        <div class="contenedor-palabras">
+            <div class="contenedor-palabras-correctas">
+                <div class="letra-correcta"  >M</div>
+                <div class="letra-correcta"  >A</div>
+                <div class="letra-correcta"  >R</div>
+                <div class="letra-correcta"  >C</div>
+                <div class="letra-correcta"  >O</div>
+            </div>
+            <div class="contenedor-palabras-incorrectas">
+                <div class="letra-incorrecta">L</div>
+                <div class="letra-incorrecta">K</div>
+                <div class="letra-incorrecta">S</div>
+                <div class="letra-incorrecta">T</div>
+                <div class="letra-incorrecta">P</div>
+                <div class="letra-incorrecta">D</div>
+                <div class="letra-incorrecta">U</div>
+                <div class="letra-incorrecta">I</div>
+            </div>
+        </div>
+        <div class="contenedor-teclado">
+            <button value="a" class="tecla">A</button>
+            <button value="b" class="tecla">B</button>
+            <button value="c" class="tecla">C</button>
+            <button value="d" class="tecla">D</button>
+            <button value="e" class="tecla">E</button>
+            <button value="f" class="tecla">F</button>
+            <button value="g" class="tecla">G</button>
+            <button value="h" class="tecla">H</button>
+            <button value="i" class="tecla">I</button>
+            <button value="j" class="tecla">J</button>
+            <button value="k" class="tecla">K</button>
+            <button value="l" class="tecla">L</button>
+            <button value="m" class="tecla">M</button>
+            <button value="n" class="tecla">N</button>
+            <button value="ñ" class="tecla">Ñ</button>
+            <button value="o" class="tecla">O</button>
+            <button value="p" class="tecla">P</button>
+            <button value="q" class="tecla">Q</button>
+            <button value="r" class="tecla">R</button>
+            <button value="s" class="tecla">S</button>
+            <button value="t" class="tecla">T</button>
+            <button value="u" class="tecla">U</button>
+            <button value="v" class="tecla">V</button>
+            <button value="w" class="tecla">W</button>
+            <button value="x" class="tecla">X</button>
+            <button value="y" class="tecla">Y</button>
+            <button value="z" class="tecla">Z</button>
+        </div>
+    </div>
+    <script src="./game.js"></script>
 </body>
 </html>
