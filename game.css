@@ -17,6 +17,8 @@ body{
     display: flex;
     gap: 20px;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
     .contenedor-canvas{
         display: flex;
@@ -67,5 +69,21 @@ body{
 
             }
     .contenedor-teclado{
-    
+        background-color: bisque;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        max-width: 650px;
     }
+        .tecla{
+            padding: calc(5px + 1vw);
+            max-width: 60px;
+            max-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: yellow;
+        }
+        
