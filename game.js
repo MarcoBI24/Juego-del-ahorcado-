@@ -1,17 +1,26 @@
 let btns = document.querySelectorAll(".tecla")
-btns[0].onmouseover = () => {   console.log("mouseover") }
-console.log(btns);
+let arrayValues =[]
+btns.forEach(btn => {
+    arrayValues.push(btn.value)
+});
+// guardar todos los valores en un array y cuando quiero verficar el index de la letra el array lo convierto en una palabra y obtengo el charAt y lo pase al array de los elmeento y le pongo un style y con keyUp igual
 window.onkeydown = (e) => {
-    let teclaPulsada = e.key
-    console.log(teclaPulsada);
-    btns.forEach(btn => {
-        if (btn.value == teclaPulsada) {
-            console.log("pulsaste la tecla " + btn)
-            console.log(btn);
-
-                const eventHover = new Event("click");
-            console.log(eventHover);
-            btn.dispatchEvent(eventHover);
-        }
-    });
+    if (!arrayValues.includes(e.key)) {
+        return
+    }
+    let indiceDeLaTecla = arrayValues.indexOf(e.key)
+    btns[indiceDeLaTecla].style.backgroundColor = "orange"
 };
+window.onkeyup = (e)=>{
+    if (!arrayValues.includes(e.key)) {
+        return
+    }
+    let indiceDeLaTecla = arrayValues.indexOf(e.key)
+    btns[indiceDeLaTecla].style.backgroundColor = "yellow"
+
+}
+window.onfocus = ()=>{
+    btns.forEach((btn)=>{
+        btn.style.backgroundColor = "yellow"
+    })
+}
