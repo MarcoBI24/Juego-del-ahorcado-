@@ -222,7 +222,7 @@ window.onkeydown = (e) => {
         return
     }
     let indiceDeLaTecla = arrayValues.indexOf(e.key)
-    btns[indiceDeLaTecla].style.boxShadow = "inset 0px 3px 20px -15px rgba(0,0,0)"
+    btns[indiceDeLaTecla].style.boxShadow = "inset 0px 0px 25px -16px rgba(0,0,0)"
 };
 window.onkeyup = (e) => {
     if (!arrayValues.includes(e.key)) {

@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Roboto";
+    font-family: "Concert One";
 }
 body{
     width: 100%;
@@ -14,7 +14,7 @@ body{
 
 /* desde 1000px para abajo */
 .contenedor-general{
-    border: 2px solid red;
+    /* border: 2px solid red; */
     height: 100vh;
     width: 100%;
     display: flex;
@@ -27,10 +27,18 @@ body{
         display: flex;
         justify-content: center;
         align-items: center;
-
+        /* border: 1px solid blue; */
+        /* width: 100%; */
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #959aa0ed;
+        
     }
-        #screen-game{
-            border: 1px solid;
+    #screen-game{
+            background-color: #b5bdc7;
+            border-radius: 8px;
+
+            border: 2px solid #888d92;
         }
     .contenedor-palabras{
         /* background-color: salmdn; */
@@ -46,15 +54,20 @@ body{
         }
         .letra-correcta{
             padding: calc(20px + 1vw);
+            width: 100%;
+            height: 100%;
             background-color: #979797;
             max-width: 50px;
             max-height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            min-width: 30px;
+            min-height: 30px;
 
+            /* display: flex; */
+            /* align-items: center;
+            justify-content: center; */
+            text-align: center;
             color: #fff;
-            font-size: calc(1rem + 1vw);
+            font-size: calc(1rem + 2vw);
 
 
         }
@@ -68,37 +81,60 @@ body{
         }
             .letra-incorrecta{
                 font-size: 18px;
-                color: #8B8B8B;
+                color: #525252;
                 font-weight: 300;
             }
     .contenedor-teclado{
         display: flex;
         flex-direction: row;
         justify-content: center;
-        gap: 1px;
+        gap: 5px;
         flex-wrap: wrap;
-        max-width: 650px;
+        max-width: 500px;
     }
-        .tecla{
-            padding: calc(5px + 1vw);
-            max-width: 60px;
-            max-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color .1,4s;
-            background-color: #e2e6ea;
-            width: 100%;
-            height: 100%; 
-            min-width: 50px;
-            min-height: 50px;
-            border: 1.4px solid transparent;
-            background-color: transparent;
-            border: .1px solid #8b8b8b4e;
-
+    /* .tecla{
+        padding: calc(5px + 1vw);
+        max-width: 60px;
+        max-height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color .14s;
+        background-color: #e2e6ea;
+        min-width: 50px;
+        min-height: 50px;
+        border: 1.4px solid transparent;
+        background-color: transparent;
+        border: .1px solid #3434344e;
+        font-family: "Concert One";
+        border-radius: 10px;
+        font-weight: 400;
+        font-size: calc(.5rem + 1vw);
+    } */
+    .tecla{
+        padding: calc(5px + 1vw);
+        max-width: 60px;
+        max-height: 60px;
+        min-height: 40px;
+        min-width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color .14s;
+        background-color: #e2e6ea;
+       
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: calc(.5rem + 1.3vw);
+        font-family: "Concert One";
+        border: 0px solid;
+    }   
+        .tecla:active{
+            padding: calc(5px + .5vw);
+            
         }
         .tecla:hover{ 
-            box-shadow: inset 0px 3px 20px -15px rgba(0,0,0);
-            
+            box-shadow: inset 0px 3px 25px -15px rgba(0,0,0);
+            background-color: #888d92;
         }
         
