@@ -84,12 +84,11 @@ let letrasNoAcertadas = []
 let letrasPalabraEscrita = ["-", "-", "-", "-", "-"]
 let arrayPalabraCorrectas = document.querySelectorAll(".letra-correcta")
 let contenedorPalabraIncorrectas = document.getElementById("contenedor-palabras-incorrectas")
-console.log(letrasPalabraEscrita);
 window.addEventListener("keyup", paint, event)
 function paint(event) {
     let teclaPulsada = event.key
-
-
+    if(teclaPulsada.length !== 1 || teclaPulsada == " ") return 
+    teclaPulsada = teclaPulsada.toLowerCase()
     let verificacionDeLaTecla = verificacionYProcesamientoDeLaTeclaPulsada(teclaPulsada)
     if (verificacionDeLaTecla) {
         console.log("%cGANASTE!!", "font-size: 24px;");
@@ -183,7 +182,6 @@ function dibujarCabeza(x, y) {
     context.beginPath();
     context.strokeStyle = 'black';
     context.lineWidth = 8;
-
     context.arc(x, y, 40, Math.PI / 180 * 0, Math.PI / 180 * 360);
 
     context.stroke();
