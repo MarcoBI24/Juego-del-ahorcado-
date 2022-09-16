@@ -7,11 +7,12 @@
 body{
     width: 100%;
     height: 100%;
-    padding: 0px calc(3vw) ;
-    background: linear-gradient(to top , rgba(173, 173, 173, 0.534), transparent, transparent, transparent);
-    background-color: rgb(170, 183, 215);
-    
+    padding: 0px calc(3vw);
+    background-color: #b5bdc7;
+  
 }
+
+/* desde 1000px para abajo */
 .contenedor-general{
     border: 2px solid red;
     height: 100vh;
@@ -26,6 +27,7 @@ body{
         display: flex;
         justify-content: center;
         align-items: center;
+
     }
         #screen-game{
             border: 1px solid;
@@ -43,16 +45,16 @@ body{
             justify-content: center;
         }
         .letra-correcta{
-            padding: 15px;
+            padding: calc(20px + 1vw);
             background-color: #979797;
-            max-width: 60px;
-            max-height: 60px;
+            max-width: 50px;
+            max-height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
 
             color: #fff;
-            font-size: 36px;
+            font-size: calc(1rem + 1vw);
 
 
         }
@@ -68,13 +70,12 @@ body{
                 font-size: 18px;
                 color: #8B8B8B;
                 font-weight: 300;
-
             }
     .contenedor-teclado{
         display: flex;
         flex-direction: row;
         justify-content: center;
-        gap: 20px;
+        gap: 1px;
         flex-wrap: wrap;
         max-width: 650px;
     }
@@ -86,6 +87,18 @@ body{
             align-items: center;
             justify-content: center;
             transition: background-color .1,4s;
-            background-color: yellow;
+            background-color: #e2e6ea;
+            width: 100%;
+            height: 100%; 
+            min-width: 50px;
+            min-height: 50px;
+            border: 1.4px solid transparent;
+            background-color: transparent;
+            border: .1px solid #8b8b8b4e;
+
+        }
+        .tecla:hover{ 
+            box-shadow: inset 0px 3px 20px -15px rgba(0,0,0);
+            
         }
         

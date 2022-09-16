@@ -87,7 +87,7 @@ let contenedorPalabraIncorrectas = document.getElementById("contenedor-palabras-
 window.addEventListener("keyup", paint, event)
 function paint(event) {
     let teclaPulsada = event.key
-    if(teclaPulsada.length !== 1 || teclaPulsada == " ") return 
+    if(teclaPulsada.length !== 1 || teclaPulsada == " " || event.altKey || event.ctrlkey) return 
     teclaPulsada = teclaPulsada.toLowerCase()
     let verificacionDeLaTecla = verificacionYProcesamientoDeLaTeclaPulsada(teclaPulsada)
     if (verificacionDeLaTecla) {
@@ -222,18 +222,18 @@ window.onkeydown = (e) => {
         return
     }
     let indiceDeLaTecla = arrayValues.indexOf(e.key)
-    btns[indiceDeLaTecla].style.backgroundColor = "orange"
+    btns[indiceDeLaTecla].style.boxShadow = "inset 0px 3px 20px -15px rgba(0,0,0)"
 };
 window.onkeyup = (e) => {
     if (!arrayValues.includes(e.key)) {
         return
     }
     let indiceDeLaTecla = arrayValues.indexOf(e.key)
-    btns[indiceDeLaTecla].style.backgroundColor = "yellow"
+    btns[indiceDeLaTecla].style.boxShadow = "none"
 
 }
 window.onfocus = () => {
     btns.forEach((btn) => {
-        btn.style.backgroundColor = "yellow"
+        btn.style.boxShadow = "none"
     })
 }
