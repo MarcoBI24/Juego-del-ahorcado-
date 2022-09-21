@@ -2,7 +2,12 @@ let btns = document.querySelectorAll(".tecla")
 let arrayValues = []
 btns.forEach(btn => {
     arrayValues.push(btn.value)
-});
+    btn.onclick = () => {
+        let teclaPulsada = btn.value
+        verificarLaTecla(teclaPulsada)
+    }
+}
+);
 // canvas para dibujar el muñeco
 const canvas = document.getElementById("screen-game")
 let context = canvas.getContext("2d");
@@ -31,11 +36,11 @@ const techo = {
     finalY: 50,
 }
 const horca = {
-        inicialX: 220,
-        inicialY: 50,
-        finalX: 220,
-        finalY: 100,
-    }
+    inicialX: 220,
+    inicialY: 50,
+    finalX: 220,
+    finalY: 100,
+}
 const cuerpo = {
     inicialX: 220,
     inicialY: 180,
@@ -87,17 +92,8 @@ let contenedorPalabraIncorrectas = document.getElementById("contenedor-palabras-
 window.addEventListener("keyup", paint, event)
 function paint(event) {
     let teclaPulsada = event.key
-    if(teclaPulsada.length !== 1 || teclaPulsada == " " || event.altKey || event.ctrlkey) return 
-    teclaPulsada = teclaPulsada.toLowerCase()
-    let verificacionDeLaTecla = verificacionYProcesamientoDeLaTeclaPulsada(teclaPulsada)
-    if (verificacionDeLaTecla) {
-        console.log("%cGANASTE!!", "font-size: 24px;");
-        window.removeEventListener("keyup", paint)
-    } else if (verificacionDeLaTecla == false) {
-        console.log("%cPERDISTE!!", "font-size: 24px;");
-        window.removeEventListener("keyup", paint)
-
-    }
+    if (teclaPulsada.length !== 1 || teclaPulsada == " " || event.altKey || event.ctrlkey) return
+    verificarLaTecla(teclaPulsada)
 
 
 
@@ -110,17 +106,27 @@ function paint(event) {
 
 }
 
+function verificarLaTecla(teclaPulsada) {
+    teclaPulsada = teclaPulsada.toLowerCase()
+    let verificacionDeLaTecla = verificacionYProcesamientoDeLaTeclaPulsada(teclaPulsada)
+    if (verificacionDeLaTecla) {
+        console.log("%cGANASTE!!", "font-size: 24px;");
+        window.removeEventListener("keyup", paint)
+    } else if (verificacionDeLaTecla == false) {
+        console.log("%cPERDISTE!!", "font-size: 24px;");
+        window.removeEventListener("keyup", paint)
 
+    }
+}
 function verificacionYProcesamientoDeLaTeclaPulsada(teclaPulsada) {
     console.log(arrayPalabraCorrectas);
 
     if (palabra.includes(teclaPulsada)) {
-        let posicionDeLaTeclaPulsada = palabra.indexOf(teclaPulsada)
-        arrayPalabraCorrectas[posicionDeLaTeclaPulsada].innerHTML = teclaPulsada
-                letrasAcertadas.push(teclaPulsada)
-                if (letrasAcertadas.join("") == palabra.join("")) {
-                    return true
-                }
+        agregarLetraCorrecta(teclaPulsada)
+        letrasAcertadas.push(teclaPulsada)
+        if (letrasAcertadas.join("") == palabra.join("")) {
+            return true
+        }
 
 
 
@@ -158,7 +164,10 @@ function verificacionYProcesamientoDeLaTeclaPulsada(teclaPulsada) {
 
 
 
-
+function agregarLetraCorrecta(teclaPulsada) {
+    let posicionDeLaTeclaPulsada = palabra.indexOf(teclaPulsada)
+    arrayPalabraCorrectas[posicionDeLaTeclaPulsada].innerHTML = teclaPulsada
+}
 function agregarLetraIncorrecta(teclaPulsada) {
     let div = document.createElement("div")
     div.classList.add("letra-incorrecta")
