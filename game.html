@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link id="d" href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Palanquin+Dark:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./game.css">
@@ -24,11 +25,21 @@
 <body>
     <div class="contenedor-general">
         <div class="contenedor-header">
-            <header class="titulo">Alura-Ahorcado</header>
+            <header class="contenedor-puntaje">
+                <div class="puntos">
+                   <span id="puntos"> 100 PT</span>
+                </div>
+                <div class="record"> <span id="record">500 PT</span></div>
+            </header>
             <div class="contenedor-menu">
                 <button class="btn-menu" id="btn-menu">
                     <span class="icon-menu"></span>
                 </button>
+            </div>
+        </div>
+        <div class="contenedor-descripcion">
+            <div class="descripcion">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius unde, officia, cupiditate quod culpa nobis natus repellendus placeat sit ad sequi velit.
             </div>
         </div>
         <div class="contenedor-canvas">

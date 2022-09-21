@@ -12,14 +12,14 @@ btnCloseModal.onclick = ()=>{
     setTimeout(() => {
         modalLink.disabled = true
         
-    }, 1000);
+    }, 400);
 }
 btnMenu.onclick = ()=>{
 
     modalLink.disabled = false
     setTimeout(() => {
-        
+        // el translate Y es -50vh - la mitad del alto del modal
         contenedorModal.style.transform = "translateY(calc(-50vh - 227px))"
-    }, 500);
+    }, 400);
     
 }

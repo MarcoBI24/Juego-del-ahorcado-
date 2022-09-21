@@ -27,6 +27,27 @@ body{
     padding: 20px;
     overflow: hidden;
 }
+    .contenedor-descripcion{
+        display: flex;
+        width: max-content;
+        /* max-width: 420px; */
+        border-radius: 10px;
+        padding: 10px;
+        background-color: #959aa0ed;
+    }
+    .descripcion{
+            /* font-family: ""; */
+            max-width: 400px;
+            max-height: 70px;
+            border-radius: 8px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background-color: #b5bdc7;
+            border: 2px solid #888d92;
+        }
     .contenedor-canvas{
         display: flex;
         justify-content: center;
@@ -133,10 +154,25 @@ body{
         /* justify-content: space-between; */
         /* justify-content: space-around; */
     }
-        .titulo{
-            font-size: 40px;
-            text-align: center;
-            justify-self: start;
+    .contenedor-puntaje{
+        display: flex;
+        gap: 20px;
+    }
+        .puntos, .record{
+            font-weight: 700;
+            /* background-color: #b5bdc7; */
+            border: 5px solid #959aa0ed;
+            padding: 0px 10px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }    
+        
+        #puntos, #record{
+            font-size: 20px;
+            font-family: "roboto";
+            
         }    
         .contenedor-menu{
             display: flex;
@@ -165,6 +201,6 @@ body{
                 }
 .contenedor-modal{
     display: none;
-    transition: transform 1.3s;
+    transition: transform .5s;
 
 }
