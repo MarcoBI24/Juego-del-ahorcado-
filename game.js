@@ -221,19 +221,20 @@ window.onkeydown = (e) => {
     if (!arrayValues.includes(e.key)) {
         return
     }
+
     let indiceDeLaTecla = arrayValues.indexOf(e.key)
-    btns[indiceDeLaTecla].style.boxShadow = "inset 0px 0px 25px -16px rgba(0,0,0)"
+    btns[indiceDeLaTecla].style = "background-color: #46484a;color: #fff;"
 };
 window.onkeyup = (e) => {
     if (!arrayValues.includes(e.key)) {
         return
     }
     let indiceDeLaTecla = arrayValues.indexOf(e.key)
-    btns[indiceDeLaTecla].style.boxShadow = "none"
+    btns[indiceDeLaTecla].style = "background-color:e2e6ea;"
 
 }
 window.onfocus = () => {
     btns.forEach((btn) => {
-        btn.style.boxShadow = "none"
+        btn.style = "background-color:e2e6ea;"
     })
 }

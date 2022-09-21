@@ -13,6 +13,7 @@ body{
 }
 
 /* desde 1000px para abajo */
+/* hasta los 500 */
 .contenedor-general{
     /* border: 2px solid red; */
     height: 100vh;
@@ -52,8 +53,16 @@ body{
             /* background-color: #899; */
             justify-content: center;
         }
-        .letra-correcta{
-            padding: calc(20px + 1vw);
+        .contenedor-letra{
+            background-color: #525252;
+            /* padding: 1vw; */
+            width: calc(2.5vw + 20px);
+            height: calc(2.5vw + 20px);
+            /* color: #888d92; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* padding: calc(20px + 1vw);
             width: 100%;
             height: 100%;
             background-color: #979797;
@@ -65,11 +74,17 @@ body{
             /* display: flex; */
             /* align-items: center;
             justify-content: center; */
-            text-align: center;
-            color: #fff;
-            font-size: calc(1rem + 2vw);
+            /* text-align: center; */
+            /* color: #fff; */
+            /* font-size: calc(1rem + 2vw); */ 
 
 
+        }
+        .letra-correcta{
+            display: block;
+            color:whitesmoke;
+            font-size: calc(1rem + 1vw);   
+            font-family: "Palanquin Dark";
         }
         .contenedor-palabras-incorrectas{
             display: flex;
@@ -112,6 +127,8 @@ body{
         font-size: calc(.5rem + 1vw);
     } */
     .tecla{
+        width: auto;
+        height: auto;
         padding: calc(5px + 1vw);
         max-width: 60px;
         max-height: 60px;
@@ -122,7 +139,7 @@ body{
         justify-content: center;
         transition: background-color .14s;
         background-color: #e2e6ea;
-       
+        margin: 0;
         border-radius: 10px;
         font-weight: 700;
         font-size: calc(.5rem + 1.3vw);
@@ -130,11 +147,15 @@ body{
         border: 0px solid;
     }   
         .tecla:active{
-            padding: calc(5px + .5vw);
+            
+            width: 40px;
+            height: 40px;
+            margin: auto;
             
         }
         .tecla:hover{ 
-            box-shadow: inset 0px 3px 25px -15px rgba(0,0,0);
-            background-color: #888d92;
+            /* box-shadow: inset 0px 3px 25px -15px rgba(0,0,0); */
+            background-color: #46484a;
+            /* color: #bfc1c3; */
         }
         
