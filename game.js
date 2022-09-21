@@ -5,7 +5,21 @@ btns.forEach(btn => {
     btn.addEventListener("click", paint, event)
 }
 );
-// canvas para dibujar el muñeco
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const canvas = document.getElementById("screen-game")
 let context = canvas.getContext("2d");
 // algoritmo-1 => guarda en variables o objetos las posiciones 
