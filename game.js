@@ -137,26 +137,22 @@ function verificacionYProcesamientoDeLaTeclaPulsada(teclaPulsada) {
     if (palabra.includes(teclaPulsada)) {
         let posicionDeLaTeclaPulsada = palabra.indexOf(teclaPulsada)
         arrayPalabraCorrectas[posicionDeLaTeclaPulsada].innerHTML = teclaPulsada
-        if (letrasAcertadas[posicionDeLaTeclaPulsada] == undefined || letrasAcertadas[posicionDeLaTeclaPulsada] !== teclaPulsada ) {
-            
+        
+            // hacer un array d eltras vacias e iterar cada array y colocar un letra por la posicion de la tecla pulsada de acuerda a la palabra original y despues verificar con un join el array completo, solo se puede pushear si la posicion de la tecla de acuerdo a la palabra sea diferente de un string vacio o "-" en caso contrario significa que ya contiene la tecla
+            // TIENE QUE RETORNAR TRUE PARA QUE INDIQUE QUE HA GANADO EL JUEGO    
+        if (letrasPalabraEscrita[posicionDeLaTeclaPulsada] == "-") {
+            letrasPalabraEscrita[posicionDeLaTeclaPulsada] = teclaPulsada
+            palabra[posicionDeLaTeclaPulsada] = "-"
             letrasAcertadas.push(teclaPulsada)
         }
-            // hacer un array d eltras vacias e iterar cada array y colocar un letra por la posicion de la tecla pulsada de acuerda a la palabra original y despues verificar con un join el array completo, solo se puede pushear si la posicion de la tecla de acuerdo a la palabra sea diferente de un string vacio o "-" en caso contrario significa que ya contiene la tecla
-            
-        let palabraCompleta = ""
-        letrasAcertadas.forEach((letra)=>{
-            if (palabra.includes(letra)) {
-              palabraCompleta = false  
-            }
-        })
-        if (palabraCompleta) {
+        if (letrasPalabraEscrita.join("") == palabraOrigin) {
             return true
         }
 
 
 
-    } else {
-        if (!letrasNoAcertadas.includes(teclaPulsada)) {
+    } else { //TIENE QUE RETORNAR FALSE PARA QUE INDIQUE QUE HA PERDIDO EL JUEGO
+        if (!letrasNoAcertadas.includes(teclaPulsada) && !palabraOrigin.includes(teclaPulsada)) {
             letrasNoAcertadas.push(teclaPulsada)
             agregarLetraIncorrecta(teclaPulsada)
         }
@@ -253,14 +249,14 @@ window.onkeydown = (e) => {
     }
 
     let indiceDeLaTecla = arrayValues.indexOf(e.key)
-    btns[indiceDeLaTecla].style = "background-color: #46484a;color: #fff;"
+    btns[indiceDeLaTecla].style = "background-color: #46484a;color: #fff;transform: scale(1.08)"
 };
 window.onkeyup = (e) => {
     if (!arrayValues.includes(e.key)) {
         return
     }
     let indiceDeLaTecla = arrayValues.indexOf(e.key)
-    btns[indiceDeLaTecla].style = "background-color:e2e6ea;"
+    btns[indiceDeLaTecla].style = "background-color:e2e6ea;margin:0;"
 
 }
 window.onfocus = () => {
