@@ -2,10 +2,7 @@ let btns = document.querySelectorAll(".tecla")
 let arrayValues = []
 btns.forEach(btn => {
     arrayValues.push(btn.value)
-    btn.onclick = () => {
-        let teclaPulsada = btn.value
-        verificarLaTecla(teclaPulsada)
-    }
+    btn.addEventListener("click", paint, event)
 }
 );
 // canvas para dibujar el muñeco
@@ -90,8 +87,16 @@ let letrasPalabraEscrita = ["-", "-", "-", "-", "-"]
 let arrayPalabraCorrectas = document.querySelectorAll(".letra-correcta")
 let contenedorPalabraIncorrectas = document.getElementById("contenedor-palabras-incorrectas")
 window.addEventListener("keyup", paint, event)
+
 function paint(event) {
-    let teclaPulsada = event.key
+    let teclaPulsada
+    if (event.key) {
+
+        teclaPulsada = event.key
+    } else {
+        teclaPulsada = event.target.value
+    }
+    console.log(teclaPulsada);
     if (teclaPulsada.length !== 1 || teclaPulsada == " " || event.altKey || event.ctrlkey) return
     verificarLaTecla(teclaPulsada)
 
@@ -107,24 +112,44 @@ function paint(event) {
 }
 
 function verificarLaTecla(teclaPulsada) {
-    teclaPulsada = teclaPulsada.toLowerCase()
+    // teclaPulsada = teclaPulsada.toLowerCase()
     let verificacionDeLaTecla = verificacionYProcesamientoDeLaTeclaPulsada(teclaPulsada)
     if (verificacionDeLaTecla) {
         console.log("%cGANASTE!!", "font-size: 24px;");
-        window.removeEventListener("keyup", paint)
+        eliminarFuncionesDeLosEventos()
+
+
     } else if (verificacionDeLaTecla == false) {
         console.log("%cPERDISTE!!", "font-size: 24px;");
-        window.removeEventListener("keyup", paint)
-
+        eliminarFuncionesDeLosEventos()
     }
+}
+function eliminarFuncionesDeLosEventos() {
+    window.removeEventListener("keyup", paint)
+    btns.forEach(btn => {
+        btn.removeEventListener("click", paint)
+    });
+
 }
 function verificacionYProcesamientoDeLaTeclaPulsada(teclaPulsada) {
     console.log(arrayPalabraCorrectas);
 
     if (palabra.includes(teclaPulsada)) {
-        agregarLetraCorrecta(teclaPulsada)
-        letrasAcertadas.push(teclaPulsada)
-        if (letrasAcertadas.join("") == palabra.join("")) {
+        let posicionDeLaTeclaPulsada = palabra.indexOf(teclaPulsada)
+        arrayPalabraCorrectas[posicionDeLaTeclaPulsada].innerHTML = teclaPulsada
+        if (letrasAcertadas[posicionDeLaTeclaPulsada] == undefined || letrasAcertadas[posicionDeLaTeclaPulsada] !== teclaPulsada ) {
+            
+            letrasAcertadas.push(teclaPulsada)
+        }
+            // hacer un array d eltras vacias e iterar cada array y colocar un letra por la posicion de la tecla pulsada de acuerda a la palabra original y despues verificar con un join el array completo, solo se puede pushear si la posicion de la tecla de acuerdo a la palabra sea diferente de un string vacio o "-" en caso contrario significa que ya contiene la tecla
+            
+        let palabraCompleta = ""
+        letrasAcertadas.forEach((letra)=>{
+            if (palabra.includes(letra)) {
+              palabraCompleta = false  
+            }
+        })
+        if (palabraCompleta) {
             return true
         }
 
@@ -164,10 +189,6 @@ function verificacionYProcesamientoDeLaTeclaPulsada(teclaPulsada) {
 
 
 
-function agregarLetraCorrecta(teclaPulsada) {
-    let posicionDeLaTeclaPulsada = palabra.indexOf(teclaPulsada)
-    arrayPalabraCorrectas[posicionDeLaTeclaPulsada].innerHTML = teclaPulsada
-}
 function agregarLetraIncorrecta(teclaPulsada) {
     let div = document.createElement("div")
     div.classList.add("letra-incorrecta")
