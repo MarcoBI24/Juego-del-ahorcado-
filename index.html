@@ -6,16 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="./style-icons.css">
+    <link rel="stylesheet" href="./modal.css" disabled="true" id="modal-link">
+
 </head>
 <body>
     <div class="contenedor-header">
         <img src="./img/logoAlura.png">
-
+        <div class="contenedor-general">
+            <button class="btn-menu" id="btn-menu">
+                <span class="icon-menu"></span>
+            </button>
+        </div>
     </div>
     <div class="contenedor-buttons">  
         <button id="start-game">Iniciar juego</button>
         <button id="add-word">Agregar nueva palabra</button>
     </div>
+    <div class="contenedor-modal" id="modal">
+        <div class="contenedor-header-modal">
+            <p class="info-header">Seleccione una de las opciones</p>
+            <button class="close-modal" id="close-modal"><span class="icon-cross"></span></button>
+        </div>
+        <div class="contenedor-opciones">
+            <button class="btn-opcion" id="btn-como-jugar">
+                ¿Cómo se juega?
+                <span class="icon-question"></span>
+            </button>
+            <button class="btn-opcion" id="btn-redes">
+                Mis redes
+                <span class="icon-facebook2"></span>
+                <span class="icon-github"></span>
+                <span class="icon-instagram"></span>
+                <span class="icon-whatsapp"></span>
+
+            </button>
+            <button class="btn-opcion" id="btn-silenciar">
+                Silenciar
+            </button>
+            <button class="btn-opcion" id="btn-cambiarTema">
+                Cambiar tema
+                <span class="icon-contrast"></span>
+            </button>
+        </div>
+    </div>
+
     <script src="./index.js"></script>
+    <script src="./modal.js"></script>
+
 </body>
 </html>

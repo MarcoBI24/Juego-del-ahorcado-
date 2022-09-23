@@ -70,6 +70,28 @@ body{
             
 
         }
+        .btn-opcion:active{
+            transform: scale(.9);
+        }
         .btn-opcion:hover > span {
             color: rgb(224, 108, 13);
         }
+
+
+
+        /* para la pagina de inicio */
+.btn-opcion{
+    display: flex;
+    flex-direction: row;
+
+}
+#btn-redes:active{
+    transform: scale(1);
+}
+#btn-redes > span:hover { 
+    color: royalblue;
+}
+#btn-redes > span:active { 
+    color: royalblue;
+    transform: scale(.9);
+}
