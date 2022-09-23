@@ -32,19 +32,21 @@ body{
         width: max-content;
         /* max-width: 420px; */
         border-radius: 10px;
-        padding: 10px;
+        padding: 5px;
         background-color: #959aa0ed;
     }
     .descripcion{
             /* font-family: ""; */
-            max-width: 400px;
+            max-width: 410px;
             max-height: 70px;
             border-radius: 8px;
             text-align: center;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 10px;
+            padding: 20px;
+            font-family: "Roboto";
+            font-size: calc(.4rem + .8vw);
             background-color: #b5bdc7;
             border: 2px solid #888d92;
         }
@@ -54,17 +56,146 @@ body{
         align-items: center;
         /* border: 1px solid blue; */
         /* width: 100%; */
-        padding: 10px;
+        /* width: 100%; */
+        max-width: 420px;
         border-radius: 10px;
         background-color: #959aa0ed;
         
+        overflow: hidden;
     }
-    #screen-game{
-            background-color: #b5bdc7;
-            border-radius: 8px;
+    .contenedor-canvas-slider{
+        padding: 10px;
+        height: 100%;
+        width: 200%;
+        display: flex;
+        gap: 20px;
+        /* gap: 5px; */
+        
+        justify-content: center;
+        align-items: center;
+        transition: margin .5s;
+        margin-left: -100%;
+        /* outline: 2px solid royalblue; */
+    }
+        #screen-game{
+                background-color: #b5bdc7;
+                border-radius: 8px;
 
-            border: 2px solid #888d92;
-        }
+                /* border: 2px solid #888d92; */
+            }
+        #screen-finished{
+            /* width: 100%; */
+            width: 400px;
+            height: 400px;
+            display: flex;
+            flex-direction: row;
+            padding:  15px;
+            /* max-width: 400px; */
+            background-color: #e2e6ea;
+            /* align-items: center; */
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            /* align-items: center; */
+            overflow: hidden;
+            border-radius: 10px;
+        }   
+
+            .text-finish{
+                flex: 1 1 100%;
+
+                /* display: flex; */
+                height: min-content;
+                /* border: 1px solid; */
+                font-family: "roboto";
+                text-align: center;
+                font-weight: 800;
+                letter-spacing: 1px;
+                font-size: calc(1rem + 2.5vw);
+                color: rgb(102, 102, 102);
+            }
+            .contenedor-foto-perfil{
+                /* border: 1px solid red; */
+                flex: 1 1 50%;
+                width: calc(100px + 7vw);
+                max-width: 150px;
+                height: min-content;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                /* justify-content: center; */
+
+            }
+                .contenedor-foto{
+                    width: calc(100px + 7vw);
+                    max-width: 120px;    
+                    outline: 5px solid #959aa0ed;
+                    border-radius:  100%;
+                    padding: 30px;
+                }
+                    #foto{
+                        object-fit: cover;
+                        width: 100%;
+                        height: 100%;
+                    }
+                .nombre-text{
+                    text-align: center;
+                    font-size: calc(.6rem + 1.2vw);
+                }
+                .contenedor-medalla{
+
+                }
+            .contenedor-clasificacion{
+                /* border: 1px solid saddlebrown; */
+                flex: 1 1 50%;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+                .contenedor-puntos-realizados, .contenedor-puntos-record, .contenedor-tiempo{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 5px;
+                }
+                    .text-puntos, .text-record, .text-tiempo{
+                        font-size: 20px;
+                        font-family: "roboto";
+                        font-weight: 700;
+                        color: #525252;
+                        font-size: calc(.4rem + 1vh) !important;
+                    }
+                    .puntos, .record{
+                        padding: 0px 30px !important;
+                        font-size: calc(.5rem + 1.5vh) !important;
+                    }
+                
+                .btn-jugar-denuevo{
+                    flex: 1 1 100%;
+                    align-self: center;
+                    width: 100%;
+                }
+                    .jugar-denuevo{
+                        width: 100%;
+                        padding: 10px;
+                        display: flex;
+                        justify-content: center;
+                        font-family: "roboto";
+                        background-color: #adebab;
+                        border: 0px solid;
+                        border-radius: 5px;
+                        font-size: 18px;
+                        font-weight: 700;
+                        color: #46484a;
+                        transition: transform .1s, background-color .2s;
+                    }
+                    .jugar-denuevo:active{
+                        transform: scale(.9);
+                        background-color: #aaffa8;
+                    }
+
     .contenedor-palabras{
         /* background-color: salmdn; */
         display: flex;
@@ -158,7 +289,7 @@ body{
         display: flex;
         gap: 20px;
     }
-        .puntos, .record{
+        .puntos, .record, .tiempo{
             font-weight: 700;
             /* background-color: #b5bdc7; */
             border: 5px solid #959aa0ed;
@@ -166,7 +297,9 @@ body{
             border-radius: 5px;
             display: flex;
             flex-direction: row;
+            font-family: "roboto";
             align-items: center;
+            font-size: 20px;
         }    
         
         #puntos, #record{

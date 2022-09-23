@@ -43,7 +43,41 @@
             </div>
         </div>
         <div class="contenedor-canvas">
-            <canvas width="400px" height="400px" id="screen-game"></canvas>
+            <div class="contenedor-canvas-slider">
+                <canvas width="400px" height="400px" id="screen-game"></canvas>
+                <div id="screen-finished">
+                    <div class="text-finish">Se terminó el tiempo</div>
+                    <div class="contenedor-foto-perfil">
+                        <div class="contenedor-foto">
+                            <img src="./img/user.png" id="foto">
+                        </div>
+                        <div class="nombre-text">Marco Antonio</div>
+                        <div class="contenedor-medalla">
+                            <span class="icon-meter"></span>
+                            <img src="" alt=""> <!-- MEDALLA -->
+                        </div>
+                    </div>
+                    <div class="contenedor-clasificacion">
+                        <div class="contenedor-puntos-realizados">
+                            <p class="text-puntos">Puntos</p>
+                            <p class="puntos" id="puntos">100pt</p>
+                        </div>
+                        <div class="contenedor-puntos-record">
+                            <p class="text-record">Nuevo record :</p>
+                            <p class="record"> 500pt</p>
+                        </div>
+                        <div class="contenedor-tiempo">
+                            <p class="text-tiempo">Tiempo</p>
+                            <p class="tiempo">01:35</p>
+                        </div>
+
+                    </div>
+                    <div class="btn-jugar-denuevo">
+                        <button class="jugar-denuevo">Jugar de nuevo</button>
+                    </div>
+                </div>
+
+            </div>
         </div>
         <div class="contenedor-palabras">
             <div class="contenedor-palabras-correctas" id="contenedor-palabras-correctas">
