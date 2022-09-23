@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Palanquin+Dark:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./game.css">
     <meta charset="UTF-8" content="UTF-8" />
-    <link rel="stylesheet"  href="./style-icons.css">
+    <link rel="stylesheet" href="./style-icons.css">
     <link rel="stylesheet" href="./modal.css" disabled="true" id="modal-link">
     <title>Jugar</title>
 </head>
@@ -27,9 +27,14 @@
         <div class="contenedor-header">
             <header class="contenedor-puntaje">
                 <div class="puntos">
-                   <span id="puntos"> 100 PT</span>
+                    <span id="puntos"> 100 PT</span>
                 </div>
-                <div class="record"> <span id="record">500 PT</span></div>
+                <div class="record">
+                    <span id="record">500 PT</span>
+                </div>
+                <div class="tiempo">
+                    <span id="tiempo">00:00</span>
+                </div>
             </header>
             <div class="contenedor-menu">
                 <button class="btn-menu" id="btn-menu">
@@ -39,13 +44,14 @@
         </div>
         <div class="contenedor-descripcion">
             <div class="descripcion">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius unde, officia, cupiditate quod culpa nobis natus repellendus placeat sit ad sequi velit.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius unde, officia, cupiditate quod culpa nobis
+                natus repellendus placeat sit ad sequi velit.
             </div>
         </div>
         <div class="contenedor-canvas">
             <div class="contenedor-canvas-slider">
                 <canvas width="400px" height="400px" id="screen-game"></canvas>
-                <div id="screen-finished">
+                <div class="screen" id="screen-finished">
                     <div class="text-finish">Se terminó el tiempo</div>
                     <div class="contenedor-foto-perfil">
                         <div class="contenedor-foto">
@@ -72,8 +78,40 @@
                         </div>
 
                     </div>
-                    <div class="btn-jugar-denuevo">
+                    <div class="btns">
                         <button class="jugar-denuevo">Jugar de nuevo</button>
+                    </div>
+                </div>
+                <div class="screen" id="screen-finished-thewords">
+                    <div class="text-finish">Se terminaron las palabras</div>
+                    <div class="contenedor-foto-perfil">
+                        <div class="contenedor-foto">
+                            <img src="./img/user.png" id="foto">
+                        </div>
+                        <div class="nombre-text">Antonio</div>
+                        <div class="contenedor-medalla">
+                            <span class="icon-meter"></span>
+                            <img src="" alt=""> <!-- MEDALLA -->
+                        </div>
+                    </div>
+                    <div class="contenedor-clasificacion">
+                        <div class="contenedor-puntos-realizados">
+                            <p class="text-puntos">Puntos</p>
+                            <p class="puntos" id="puntos">100pt</p>
+                        </div>
+                        <div class="contenedor-puntos-record">
+                            <p class="text-record">Nuevo record</p>
+                            <p class="record"> 500pt</p>
+                        </div>
+                        <div class="contenedor-tiempo">
+                            <p class="text-tiempo">Tiempo</p>
+                            <p class="tiempo">01:35</p>
+                        </div>
+
+                    </div>
+                    <div class="btns">
+                        <button class="jugar-denuevo">Jugar de nuevo</button>
+                        <button class="agregar-mas-palabras">Agregar palabras</button>
                     </div>
                 </div>
 
@@ -136,7 +174,7 @@
     <div class="contenedor-modal" id="modal">
         <div class="contenedor-header-modal">
             <p class="info-header">Seleccione una de las opciones</p>
-            <button class="close-modal"  id="close-modal"><span class="icon-cross"></span></button>
+            <button class="close-modal" id="close-modal"><span class="icon-cross"></span></button>
         </div>
         <div class="contenedor-opciones">
             <button class="btn-opcion" id="btn-desistir">
