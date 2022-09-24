@@ -91,9 +91,9 @@ const pataIzquierda = {
 const arrayPiezas = [tubo, techo, horca, cabeza, cuerpo, brazoDerecho, brazoIzquierdo, pataDerecha, pataIzquierda]
 
 init()
-
+// HACER UNA FUNCION QUE PARA QUE CUANDO EXISTA 2 O MAS VECES UNA LETRA EN LA PALABRA SE MUESTRE LA LETRA 
 let fallos = 0;
-let palabraOrigin = "marco"
+let palabraOrigin = "banana0"
 let palabra = palabraOrigin.split("");
 let letrasAcertadas = []
 let letrasNoAcertadas = []
