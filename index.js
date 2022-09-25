@@ -1,3 +1,4 @@
+
 const btnStart = document.getElementById("start-game")
 const btnAddWord = document.getElementById("add-word")
 btnStart.onclick = ()=>{

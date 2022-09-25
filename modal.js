@@ -10,7 +10,7 @@ if (btnInicio) {
     btnInicio.onclick = ()=>{
         location.href = location.origin + "/" + "index.html"
     }
-    
+      
 }
 btnCloseModal.onclick = ()=>{
 
@@ -25,7 +25,8 @@ btnMenu.onclick = ()=>{
     modalLink.disabled = false
     setTimeout(() => {
         // el translate Y es -50vh - la mitad del alto del modal
-        contenedorModal.style.transform = "translateY(calc(-50vh - 227px))"
-    }, 200);
+        let heigthModal = contenedorModal.clientHeight
+        contenedorModal.style.transform = 'translateY(calc(-50vh - ${heigthModal / 2 }))'
+    }, 200);    
     
 }
