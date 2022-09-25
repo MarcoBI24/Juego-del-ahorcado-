@@ -203,8 +203,8 @@ body{
 
 .contenedor-modal{
     display: none;
-    /* position: absolute; */
-    /* top: 50%; */
-    transition: transform .3s;
+    position: absolute;
+    top: -50%;
+    transition: top .2s;
 
 }

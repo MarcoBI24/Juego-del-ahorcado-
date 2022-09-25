@@ -14,22 +14,20 @@ if (btnInicio) {
 }
 btnCloseModal.onclick = ()=>{
 
-    contenedorModal.style.transform = "translateY(0%)"
+    let heigthModal = contenedorModal.clientHeight;
+    contenedorModal.style.top = `-${heigthModal}px`
     setTimeout(() => {
         modalLink.disabled = true
         
-    }, 200);
+    }, 300);
 }
 btnMenu.onclick = ()=>{
-
     modalLink.disabled = false
     setTimeout(() => {
-        // el translate Y es -50vh - la mitad del alto del modal
         let heigthModal = contenedorModal.clientHeight;
-        let heigthPage = document.body.clientHeight;
-        console.log(heigthPage);
-        // contenedorModal.style.transform = `translateY(calc(-${heigthPage/2}px ))`
-        contenedorModal.style.top = `calc(50vh - ${heigthModal /2}px)`
+        window.scrollBy(0,-window.scrollY)
+        // el translate Y es -50vh - la mitad del alto del modal
+        contenedorModal.style.top = `calc(50vh - ${heigthModal / 2}px)`
 
     }, 200);
     

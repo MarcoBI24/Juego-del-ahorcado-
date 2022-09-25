@@ -354,6 +354,7 @@ body{
     
 .contenedor-modal{
     display: none;
-    transition: transform .3s;
-
+    top: -50%;
+    transition: top .3s;
+    position: absolute;
 }
