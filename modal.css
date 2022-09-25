@@ -80,7 +80,7 @@ body{
 
 
         /* para la pagina de inicio */
-.btn-opcion{
+#btn-como-jugar, #btn-redes{
     display: flex;
     flex-direction: row;
 
