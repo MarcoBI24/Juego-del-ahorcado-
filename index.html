@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="./style-icons.css">
     <link rel="stylesheet" href="./modal.css" disabled="true" id="modal-link">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="contenedor-general">
@@ -20,9 +24,27 @@
                 </button>
             </div>
         </div>
+        <div class="contenedor-titulo">
+            <h1 class="titulo">Juego del ahorcado</h1>
+        </div>
         <div class="contenedor-buttons">  
-            <button id="start-game">Iniciar juego</button>
-            <button id="add-word">Agregar nueva palabra</button>
+            <button class="btn" id="start-game">Iniciar juego</button>
+            <button class="btn" id="add-word">Agregar palabras</button>
+            <button class="btn" id="clasification">Clasificación</button>
+            <button class="btn" id="ayuda">¿Cómo se juega?</button>
+        </div>
+    </div>
+    <div class="contenedor-footer">
+        <p class="nombre">Marco Berna</p>
+        <div class="btn-opcion" id="btn-redes">
+            Mis redes
+            <div class="contenedor-redes">
+                <button class="icon-facebook2"></button>
+                <button class="icon-github"></button>
+                <button class="icon-instagram"></button>
+                <button class="icon-whatsapp"></button>
+            </div>
+
         </div>
     </div>
     <div class="contenedor-modal" id="modal">
