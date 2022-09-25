@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./elegirModo.css">
+    <link rel="stylesheet" href="./style-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="./modal.css" disabled="true" id="modal-link">
+    <title>Elige el modo de juego</title>
+</head>
+<body>
+    <div class="contenedor-general">
+        <div class="contenedor-header">
+            <button id="btn-retroceder">
+                <span class="icon-undo2"></span>
+            </button>
+            <div class="contenedor-menu">
+                <button class="btn-menu" id="btn-menu">
+                    <span class="icon-menu" ></span>
+                </button>
+            </div>   
+        
+        </div>
+        <div class="contenedor-titulo">
+            <div class="titulo">Elige el modo juego</div>
+            <p class="descripcion">Hola! Marco... <br>Elige el modo de juego en que seran sorteadas las palabras que tendras que adivinar</p>
+        </div>
+
+        <div class="contenedor-btn-modos">
+            <button id="modo-aleatorio">Aleatorias</button>
+            <button id="modo-agregadas">Agregadas</button>
+            <button id="modo-aleatorio-agregado">Aleatorias con agregadas</button>
+            <button id="modo-animales">Animales</button>
+            <button id="modo-nombres">Nombres</button>
+            <button id="modo-onomatopeya">Onomatopeya</button>
+        </div>
+    </div>
+
+    <div class="contenedor-modal" id="modal">
+        <div class="contenedor-header-modal">
+            <p class="info-header">Seleccione una de las opciones</p>
+            <button class="close-modal" id="close-modal"><span class="icon-cross"></span></button>
+        </div>
+        <div class="contenedor-opciones">
+            
+            <button class="btn-opcion" id="btn-redes">
+                Mis redes
+                <span class="icon-facebook2"></span>
+                <span class="icon-github"></span>
+                <span class="icon-instagram"></span>
+                <span class="icon-whatsapp"></span>
+
+            </button>
+            <button class="btn-opcion" id="btn-silenciar">
+                Silenciar
+                <span class="icon-volume-high"></span>
+            </button>
+            <button class="btn-opcion" id="btn-cambiarTema">
+                Cambiar tema
+                <span class="icon-contrast"></span>
+            </button>
+        </div>
+    </div>
+
+
+
+    <script src="./modal.js"></script>
+    <script src="./elegirModo.js"></script>
+</body>
+</html>
+

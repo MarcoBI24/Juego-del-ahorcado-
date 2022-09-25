@@ -24,7 +24,7 @@ body{
 
     .contenedor-general{
         width: 100%;
-        height: 100vw;
+        height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -45,38 +45,39 @@ body{
             .logo{
                 
             }
-            .btn-menu{
-                height: min-content;
-                background-color: #3e8ae6;
-                color: #fff;
-                border: 0px solid;
-                padding: 5px;
-                border-radius: 5px;
-                font-size: calc(.5rem + 1.7vw);
+            .contenedor-menu{
                 display: flex;
+                /* height: 10px; */
                 justify-content: center;
                 align-items: center;
+                /* justify-self: flex-end; */
+                
             }
-            .btn-menu:active{
-                background-color: #fff;
-                color: rgb(82, 81, 80);
-                transform: scale(.9);
-                transition: transform .7s;
-            }
-            .btn-menu:hover{
-                opacity: .8;
-            }
-                    .icon-menu{
-
-                    }
-                .contenedor-menu{
+                .btn-menu{
+                    height: min-content;
+                    background-color: #3e8ae6;
+                    color: #fff;
+                    border: 0px solid;
+                    padding: 5px;
+                    border-radius: 5px;
+                    font-size: calc(.5rem + 1.6vw);
                     display: flex;
-                    /* height: 10px; */
                     justify-content: center;
                     align-items: center;
-                    /* justify-self: flex-end; */
-                    
                 }
+                .btn-menu:active{
+                    background-color: #fff;
+                    color: rgb(82, 81, 80);
+                    transform: scale(.9);
+                    transition: transform .7s;
+                }
+                .btn-menu:hover{
+                    opacity: .8;
+                }
+                        .icon-menu{
+
+                        }
+                
 
         .contenedor-titulo{
             /* word-wrap: break-word; */

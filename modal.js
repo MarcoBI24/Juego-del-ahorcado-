@@ -1,11 +1,11 @@
-const $ = (id) => {
+const $$ = (id) => {
     return document.getElementById(id)
 }
-let modalLink = $("modal-link")
-let btnMenu = $("btn-menu")
-let contenedorModal = $("modal")
-let btnCloseModal = $("close-modal")
-let btnInicio = $("btn-irAInicio")
+let modalLink = $$("modal-link")
+let btnMenu = $$("btn-menu")
+let contenedorModal = $$("modal")
+let btnCloseModal = $$("close-modal")
+let btnInicio = $$("btn-irAInicio")
 if (btnInicio) {
     btnInicio.onclick = ()=>{
         location.href = location.origin + "/" + "index.html"

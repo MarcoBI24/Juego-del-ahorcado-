@@ -1,13 +1,9 @@
-
-const btnStart = document.getElementById("start-game")
-const btnAddWord = document.getElementById("add-word")
+const $ = (id)=>{return document.getElementById(id)};
+const btnStart = $("start-game")
+const btnAddWord = $("add-word")
 btnStart.onclick = ()=>{
-    location.href = "./game.html"
+    location.href = "./elegirModo.html"
 }
 btnAddWord.onclick = ()=>{
     location.href = "./addWord.html"
 }
-let contenedorFooter = document.getElementById("footer")
-// window.on = ()=>{
-//     contenedorFooter.style.display = "flex"
-// }
