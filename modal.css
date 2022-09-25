@@ -1,5 +1,9 @@
 body{
     overflow-y: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 .contenedor-general{
     filter: blur(4px);
@@ -11,7 +15,9 @@ body{
     max-width: 650px;
     /* height: ; */
     margin: auto;
-    
+    /* left: 20%; */
+    /* right: 50%; */
+    position: absolute;
     background-color: aliceblue;
     /* border: 2px solid; */
     border-radius: 10px;
@@ -65,7 +71,7 @@ body{
             align-items: center;
         }
         .btn-opcion:hover{
-            border-color: rgb(224, 108, 13);
+            border-color: royalblue;
             border-width: 2px 0px 2px 0px;
             
 
@@ -74,7 +80,7 @@ body{
             transform: scale(.9);
         }
         .btn-opcion:hover > span {
-            color: rgb(224, 108, 13);
+            color: royalblue;
         }
 
 

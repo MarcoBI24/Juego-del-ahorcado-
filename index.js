@@ -7,3 +7,7 @@ btnStart.onclick = ()=>{
 btnAddWord.onclick = ()=>{
     location.href = "./addWord.html"
 }
+let contenedorFooter = document.getElementById("footer")
+// window.on = ()=>{
+//     contenedorFooter.style.display = "flex"
+// }

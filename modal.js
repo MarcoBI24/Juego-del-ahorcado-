@@ -25,8 +25,15 @@ btnMenu.onclick = ()=>{
     modalLink.disabled = false
     setTimeout(() => {
         // el translate Y es -50vh - la mitad del alto del modal
-        let heigthModal = contenedorModal.clientHeight
-        contenedorModal.style.transform = 'translateY(calc(-50vh - ${heigthModal / 2 }))'
-    }, 200);    
+        let heigthModal = contenedorModal.clientHeight;
+        let heigthPage = document.body.clientHeight;
+        console.log(heigthPage);
+        // contenedorModal.style.transform = `translateY(calc(-${heigthPage/2}px ))`
+        contenedorModal.style.top = `calc(50vh - ${heigthModal /2}px)`
+
+    }, 200);
     
+}
+window.onscroll = ()=>{
+
 }
