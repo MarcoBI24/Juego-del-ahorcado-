@@ -215,40 +215,169 @@ body{
 
 /* CONTENEDOR DEL MODAL PARA LOGEARSE Y REGISTRARSE */
 .contenedor-identificacion{
-    background-color: #fff;
-    padding: 20px;
-    /* border-radius: 10px; */
-    display: flex;
-    width: 100%;
-    /* display: none; */
+    /* background-color: #fff; */
+    /* max-height: 500px; */
+    /* padding: 20px; */
     position: absolute;
+    /* border-radius: 10px; */
+    /* display: flex; */
+    width: 100%;
+    height: min-content;
+    /* max-height: max-content; */
+    /* display: none; */
     top: -100%;
     transition: top .6s;
     /* overflow: hidden; */
-    
+    padding: 10px; 
     
 }
     .contenedor-identificacion-slider{
-        padding: 20px;
-        background-color: rgb(136, 127, 127);
+        /* padding: 20px; */
         border-radius: 10px;
         display: flex;
+
         justify-content: center;
-        /* align-items: center; */
-        gap: 40px;
+        align-items: center;
+        gap: 30px;
+        padding: 10px;
         width: 200%;
+        margin-left: 00%;
+        height: 100%;
+        max-height: 500px;
+        transition: margin-left 1s;
     }
         .contenedor-login{
-            /* width: 100%; */
-            flex: 1 0 100%;
-            background-color: #b5bdc7;
+            padding: 20px;
+            border-radius: 10px;
+            height: 100%;
+            width: 100%;
+            display:flex ;
+            flex-direction: column;
+            align-items: center;
+            /* flex: 1 0 100%; */
+            background-color: #edebeb;
+            gap: 20px;
         }
+            .contenedor-login-header{
+                font-family: "Indie flower";
+                letter-spacing: 3px;
+                font-size: calc(.6rem + 3vw);
+                font-weight: 900;
+                /* text-shadow: 1px 2px 3px #0f72eb; */
+                
+            }
+            .contenedor-login-body{
+                display: flex;
+                flex-direction: column;
+                align-self: center;
+                width: 100%;
+                max-width: 300px;
+                /* border: 1px solid darkblue; */
+                gap: 30px;
+                /* align-items: center; */
+            }
+            
+                .label-login{
+                    display: flex;
+                    font-family: "Indie flower";
+                    flex-direction: column;
+                    font-size: calc(.5rem + 1.4vw);
+                    position: relative;
+                }
+                    .label-text{
+                        position: absolute;
+                        top: 0;
+                        transition: top .2s;
+                        /* top: -30px; */
+                    }
+                    .input-login{
+                        font-family: "Indie flower";
+                        padding: 5px;
+                        font-weight: 900;
+                        background-color: transparent;
+                        border: 2px solid #0073ff;
+                        border-width: 0px 0px 3px 0px;
+                        font-size: calc(.5rem + 1vw);
+                        outline: none;
+                    }
+                    .input-login:focus ~ .label-text{
+                        /* position: relative; */
+                        top: -53%;
+                    }
+            .contenedor-login-footer{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                align-self: center;
+            }
+
+                .btn-login{
+                    flex: 1 1 ;
+                    padding: 10px 40px;
+                    font-family: "Indie flower";
+                    font-size: calc(.9rem + .6vw);
+                    background-color: #fff;
+                    border: none;
+                    color: #0073ff;
+                    border-radius: 10px;
+                    transition: transform .1s;
+                }
+                .btn-login:active{
+                    transform: scale(.9);
+                }
+                .btn-login:hover{
+                    background: #0073ff;
+                    color: #fff;
+                }
+
+
+
+
+
+
+
+
         .contenedor-registro{
-            background-color: rgb(103, 103, 103);
-            flex: 1 0 100%;
+            width: 100%;
+            height: 100%;
+            /* max-height: 400px; */
+            display: flex;
+            padding: 20px;
+            flex-direction: row;
+            flex-wrap: wrap;
+            background-color: #edebeb;
+            border-radius: 10px;
+            /* flex: 1 0 100%; */
         }
 
+            .contenedor-registro-header{
+                display: flex;
+                flex-wrap: wrap;
+            }
+            .contenedor-registro-body{
+                display: flex;
+                flex-wrap: wrap;
+            }
 
+                .contenedor-foto{
+                    display: flex;
+                    /* flex-wrap: wrap; */
+                }
+                    .foto{
+                        /* width: 100%; */
+                    }
+                    .foto-img{
+                        width: 100%;
+                    }
+                    .input-rango{
+
+                    }
+                    .input-subirArchivo{
+
+                    }
+            .contenedor-registro-footer{
+
+            }
 
 
 

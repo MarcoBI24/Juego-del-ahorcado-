@@ -89,24 +89,24 @@
     </div>
 
     <div class="contenedor-identificacion" id="contenedor-identificacion">
-       <div class="contenedor-identificacion-slider">
+       <div class="contenedor-identificacion-slider" id="contenedor-identificacion-slider">
         <div class="contenedor-login">
             <div class="contenedor-login-header">
                 Inicie sesión
             </div>
             <div class="contenedor-login-body">
-                <label class="nombre-login">
-                    Usuario
-                    <input type="text" id="nombre-usuario-login">
+                <label class="nombre-login label-login">
+                    <input type="text" class="input-login" id="nombre-usuario-login">
+                    <span class="label-text">Usuario</span>
                 </label>
-                <label class="contraseña-login">
-                    Contraseña
-                    <input type="text" id="contraseña-login">
+                <label class="contraseña-login label-login">
+                    <input type="password"  class="input-login" id="contraseña-login">
+                    <span class="label-text" id="contra-text">Contraseña</span>
                 </label>
             </div>
             <div class="contenedor-login-footer">
-                <button id="btn-registro">Registrarme</button>
-                <button id="login-form">Iniciar sesion</button>
+                <button class="btn-login" id="login-form">Iniciar sesion</button>
+                <button class="btn-login"  id="btn-registro">Registrarme</button>
             </div>
         </div>
         
@@ -145,7 +145,7 @@
             </div>
             <div class="contenedor-registro-footer">
                 <button id="registrarse-form">Registrase</button>
-                
+                <button id="btn-login">Iniciar sesión</button>
             </div>
         </div>
        </div>
