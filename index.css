@@ -342,9 +342,10 @@ body{
             height: 100%;
             /* max-height: 400px; */
             display: flex;
-            padding: 20px;
-            flex-direction: row;
-            flex-wrap: wrap;
+            padding: 10px;
+            flex-direction: column;
+            /* flex-wrap: wrap; */
+            gap: 20px;
             background-color: #edebeb;
             border-radius: 10px;
             /* flex: 1 0 100%; */
@@ -352,34 +353,104 @@ body{
 
             .contenedor-registro-header{
                 display: flex;
-                flex-wrap: wrap;
+                /* flex-wrap: wrap; */
+                /* border: 1px solid salmon; */
+                width: 100%;
+                align-items: center;
+                justify-content: space-between;
             }
+                .titulo-header{
+
+                    font-size: calc(.7rem + 1vw);
+                    font-family: "Indie flower";
+                }
+                .contenedor-icono{
+                    padding: 6px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    /* width: 100%; */
+                    background-color: #f04;
+                    border-radius: 50%;
+                }
+                .contenedor-icono:active{
+                    transform: scale(.9);
+                }
+                .icon-cross{
+                    font-size: calc(.4rem + .9vw);
+                    color: #fff;
+                }
+
+
             .contenedor-registro-body{
                 display: flex;
-                flex-wrap: wrap;
+                width: 100%;
+                border: 1px solid saddlebrown;
             }
-
                 .contenedor-foto{
+                    border: 1px solid #f70;
                     display: flex;
-                    /* flex-wrap: wrap; */
+                    flex-direction: column;
+                    gap: 20px;
+                    /* justify-content: center; */
+                    align-items: center;
                 }
                     .foto{
-                        /* width: 100%; */
-                    }
-                    .foto-img{
+                        display: flex;
+                        justify-content: center;
                         width: 100%;
+                        border-radius: 50%;
+                        overflow: hidden;
+                        max-width: 200px;
+                        max-height: 200px;
+                        border: 1px solid blue;
                     }
+                        .foto-img{
+                            object-fit: cover;
+                            border: 1px solid yellow;
+                            width: 100%;
+
+                        }
                     .input-rango{
 
                     }
                     .input-subirArchivo{
 
                     }
+
+
+
+                .contenedor-formulario{
+
+                }
+                    .contenedor-nombre{
+
+                    }
+                    .contenedor-contraseña{
+
+                    }
+                        .label-form{
+                            position: relative;
+                            display: flex;
+                            flex-direction: column;
+                        }
+                            .label-text{
+                                /* position: relative; */
+                            }
+                            .input-registro{
+
+
+                            }
+
+
+                   
             .contenedor-registro-footer{
 
             }
 
+                .btn-registro{
 
+                }
 
 
 
