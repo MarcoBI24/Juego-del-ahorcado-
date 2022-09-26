@@ -1,3 +1,7 @@
+/* hacer que no se pueda seleccionar texto */
+
+
+
 *{
     padding: 0;
     margin: 0;
@@ -147,6 +151,7 @@ body{
             border-radius: 10px;
             color: #0abf7d;
             background-color: rgb(55, 55, 55);
+            box-shadow: 0px 0px 5px rgb(1, 1, 1);
             transition: transform 200ms, background-color 200ms;
         }
         .btn-modo:active{
@@ -190,6 +195,7 @@ body{
             /* gap: 20px; */
             /* color: #fff; */
             border-radius: 20px;
+            box-shadow: 0px 0px 6px rgb(22, 22, 22);
         }
         #mas-modos span{
             transition: transform 1s ;

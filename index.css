@@ -15,10 +15,19 @@ html::-webkit-scrollbar-thumb{
     background-color: #3e8ae6;
     border-radius: 20px;
 }   
+html{
+    width: 100%;
+}
 body{
+    width: 100%;
     background-color: #b5bdc7;
     /* overflow: ; */
     position: relative;
+    /* overflow-y: hidden; */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
     
 
@@ -204,8 +213,40 @@ body{
                 
             }
 
-
-
+/* CONTENEDOR DEL MODAL PARA LOGEARSE Y REGISTRARSE */
+.contenedor-identificacion{
+    background-color: #fff;
+    padding: 20px;
+    /* border-radius: 10px; */
+    display: flex;
+    width: 100%;
+    /* display: none; */
+    position: absolute;
+    top: -100%;
+    transition: top .6s;
+    /* overflow: hidden; */
+    
+    
+}
+    .contenedor-identificacion-slider{
+        padding: 20px;
+        background-color: rgb(136, 127, 127);
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        /* align-items: center; */
+        gap: 40px;
+        width: 200%;
+    }
+        .contenedor-login{
+            /* width: 100%; */
+            flex: 1 0 100%;
+            background-color: #b5bdc7;
+        }
+        .contenedor-registro{
+            background-color: rgb(103, 103, 103);
+            flex: 1 0 100%;
+        }
 
 
 
