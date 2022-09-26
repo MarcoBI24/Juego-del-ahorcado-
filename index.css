@@ -45,14 +45,32 @@ body{
             .logo{
                 
             }
-            .contenedor-menu{
+            .contenedor-menu-login{
                 display: flex;
                 /* height: 10px; */
+                gap: 20px;
                 justify-content: center;
                 align-items: center;
                 /* justify-self: flex-end; */
                 
-            }
+            }   
+                #login{
+                    padding:5px 15px;
+                    background-color: #3e8ae6;
+                    color: white;
+                    font-family: "Indie flower";
+                    font-weight: 900;
+                    letter-spacing: 1px;
+                    border: 0px solid;
+                    border-radius: 3px;
+                    font-size: calc(.5rem + .7vw);
+                    transition: transform 100ms , background-color 500ms;
+                }
+                #login:hover{
+                    background-color: #086fec;}
+                #login:active{
+                    transform: scale(.8);
+                }
                 .btn-menu{
                     height: min-content;
                     background-color: #3e8ae6;
@@ -75,7 +93,7 @@ body{
                     opacity: .8;
                 }
                         .icon-menu{
-
+                            margin: auto;
                         }
                 
 
