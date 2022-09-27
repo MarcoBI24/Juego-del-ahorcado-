@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,17 +14,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <!-- Para el editor usaremos croppr.js, importamos sus CDNs -->
+    <script src="https://cdn.jsdelivr.net/gh/jamesssooi/Croppr.js@2.3.0/dist/croppr.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/jamesssooi/Croppr.js@2.3.0/dist/croppr.min.css" rel="stylesheet"/>
 </head>
+
 <body>
     <!-- hacer que el inicio de sesion sea automatico con el ultimo usuario logeado y que no haya cerrado sesion -->
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
     <div class="contenedor-general" id="contenedor-general">
         <div class="contenedor-header">
             <img src="./img/logoAlura.png" class="logo">
@@ -40,7 +45,7 @@
         <div class="contenedor-titulo">
             <h1 class="titulo">Juego del ahorcado</h1>
         </div>
-        <div class="contenedor-buttons">  
+        <div class="contenedor-buttons">
             <button class="btn" id="start-game">Iniciar juego</button>
             <button class="btn" id="add-word">Agregar palabras</button>
             <button class="btn" id="clasification">Logros</button>
@@ -89,71 +94,75 @@
     </div>
 
     <div class="contenedor-identificacion" id="contenedor-identificacion">
-       <div class="contenedor-identificacion-slider" id="contenedor-identificacion-slider">
-        <div class="contenedor-login">
-            <div class="contenedor-login-header">
-                Inicie sesión
+        <div class="contenedor-identificacion-slider" id="contenedor-identificacion-slider">
+
+            <div class="contenedor-login">
+                <div class="contenedor-login-header">
+                    Inicie sesión
+                </div>
+                <div class="contenedor-login-body">
+                    <label class="nombre-login label-login">
+                        <input type="text" class="input-login" id="nombre-usuario-login">
+                        <span class="label-text">Usuario</span>
+                    </label>
+                    <label class="contraseña-login label-login">
+                        <input type="password" class="input-login" id="contraseña-login">
+                        <span class="label-text" id="contra-text">Contraseña</span>
+                    </label>
+                </div>
+                <div class="contenedor-login-footer">
+                    <button class="btn-login" id="login-form">Iniciar sesion</button>
+                    <button class="btn-login" id="btn-registro">Registrarme</button>
+                </div>
             </div>
-            <div class="contenedor-login-body">
-                <label class="nombre-login label-login">
-                    <input type="text" class="input-login" id="nombre-usuario-login">
-                    <span class="label-text">Usuario</span>
-                </label>
-                <label class="contraseña-login label-login">
-                    <input type="password"  class="input-login" id="contraseña-login">
-                    <span class="label-text" id="contra-text">Contraseña</span>
-                </label>
-            </div>
-            <div class="contenedor-login-footer">
-                <button class="btn-login" id="login-form">Iniciar sesion</button>
-                <button class="btn-login"  id="btn-registro">Registrarme</button>
+
+
+
+
+            <div class="contenedor-registro">
+                <div class="contenedor-registro-header">
+                    <p class="titulo-header">Rellene los campos para registrarse</p>
+                    <div class="contenedor-icono">
+                        <span class="icon-cross"></span>
+                    </div>
+                </div>
+                <div class="contenedor-registro-body">
+                    <div class="contenedor-foto">
+                        <div class="foto" id="contenedor-foto">
+                            <img src="./img/user.png" class="foto-img" id="foto">
+                        </div>
+                        <canvas class="preview-foto" id="canvas"></canvas>
+                        <input type="file" class="input-subirArchivo" id="input-subirFoto">
+                    </div>
+
+                    <div class="contenedor-formulario">
+                        <div class="contenedor-nombre">
+                            <label class="label-form">
+                                <input type="text" class="input-registro" id="nombre-usuario">
+                                <span class="label-text">Usuario</span>
+                            </label>
+                        </div>
+                        <div class="contenedor-contraseña">
+                            <label class="label-form">
+
+                                <input type="password" class="input-registro" id="contraseña-usuario">
+                                <span class="label-text" id="contra-text">Contraseña</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="contenedor-registro-footer">
+                    <button class="btn-registro" id="registrarse-form">Registrase</button>
+                    <button class="btn-registro" id="btn-login">Iniciar sesión</button>
+                </div>
             </div>
         </div>
-        
-        
-        
-        
-        <div class="contenedor-registro">
-            <div class="contenedor-registro-header">
-                <p class="titulo-header">Rellene los campos para registrarse</p>
-                <div class="contenedor-icono">
-                    <span class="icon-cross"></span>
-                </div>
-            </div>
-            <div class="contenedor-registro-body">
-                <div class="contenedor-foto">
-                    <div class="foto">
-                        <img src="./img/logoAlura.png" class="foto-img">
-                    </div>
-                    <input type="range" class="input-rango">
-                    <input type="file" class="input-subirArchivo">
-                </div>
-                <div class="contenedor-formulario">
-                    <div class="contenedor-nombre">
-                        <label class="label-form">
-                            <input type="text" class="input-registro" id="nombre-usuario">
-                            <span class="label-text">Usuario</span>
-                        </label>
-                    </div>
-                    <div class="contenedor-contraseña">
-                        <label class="label-form">
-                            
-                            <input type="password" class="input-registro" id="contraseña-usuario">
-                            <span class="label-text" id="contra-text">Contraseña</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="contenedor-registro-footer">
-                <button class="btn-registro" id="registrarse-form">Registrase</button>
-                <button class="btn-registro" id="btn-login">Iniciar sesión</button>
-            </div>
-        </div>
-       </div>
     </div>
+    
     <script src="./index.js"></script>
     <script src="./modal.js"></script>
-    
+
 
 </body>
+
 </html>

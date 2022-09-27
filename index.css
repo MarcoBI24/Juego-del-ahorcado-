@@ -5,8 +5,8 @@
     box-sizing: border-box;
 }
 html::-webkit-scrollbar{
-    width: 8px;
-    height: 20px;
+    width: 5px;
+    height: 5px;
     /* display: none; */
     padding: 10px;
     
@@ -19,6 +19,7 @@ html{
     width: 100%;
 }
 body{
+    overflow-x: hidden;
     width: 100%;
     background-color: #b5bdc7;
     /* overflow: ; */
@@ -289,6 +290,7 @@ body{
                         top: 0;
                         transition: top .2s;
                         /* top: -30px; */
+                        color: rgb(86, 85, 85);
                     }
                     .input-login{
                         font-family: "Indie flower";
@@ -301,8 +303,8 @@ body{
                         outline: none;
                     }
                     .input-login:focus ~ .label-text{
-                        /* position: relative; */
-                        top: -53%;
+                        transform: scale(.8);
+                        color: #000;
                     }
             .contenedor-login-footer{
                 display: flex;
@@ -390,32 +392,41 @@ body{
                 .contenedor-foto{
                     border: 1px solid #f70;
                     display: flex;
-                    flex-direction: column;
+                    flex-direction: row;
                     gap: 20px;
-                    /* justify-content: center; */
+                    padding: 30px;
+                    justify-content: center;
                     align-items: center;
+                    flex-wrap: wrap;
                 }
                     .foto{
                         display: flex;
                         justify-content: center;
                         width: 100%;
-                        border-radius: 50%;
+                        /* border-radius: 50%; */
                         overflow: hidden;
                         max-width: 200px;
                         max-height: 200px;
                         border: 1px solid blue;
+                        padding: 5px;
                     }
                         .foto-img{
+
+                            /* display: none; */
                             object-fit: cover;
-                            border: 1px solid yellow;
+                            /* border-radius: 10px; */
+                            border: 4px solid  xc}|ñ+ed;
                             width: 100%;
 
                         }
-                    .input-rango{
-
+                    
+                    .preview-foto{
+                        max-height: 200px;
+                        max-width: 200px;
+                        border: 1px solid #0073ff;
                     }
                     .input-subirArchivo{
-
+                        flex: 1 1 100%;
                     }
 
 
