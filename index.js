@@ -59,42 +59,68 @@ const contenedorFoto = $('contenedor-foto')
 const canvas = $('canvas')
 const context = canvas.getContext('2d')
 let imagenSubida = $("foto")
-let urlImagen = URL.createObjectURL(btnSubirFoto.files[0])
-context.drawImage(imagenSubida, 0, 0, imagenSubida.width, imagenSubida.height, 0, 0, imagenSubida.width, imagenSubida.height);
+let urlImagen = imagenSubida.src
+imagenSubida.onload = ()=>{
+    console.log(imagenSubida.width)
+    canvas.width = 400
+    canvas.height = 400
+    context.drawImage(imagenSubida, 0, 0, 400, 400, 0, 0, 400, 400); // esto que se seleccione de acuerdo al croppr en el cropInizialise
+    croppr(imagenSubida)
 
-console.log(urlImagen)
-new Croppr("#foto", {
-    aspectRatio: 1,
-    minSize: [80, 80],
-    maxSize: [120, 120],
-    startSize: [100, 100],
-    onInitialize: recortar,
-    onCropMove: recortar
-})
+}
+
+
+
 function recortar(e) {
     let inicioX = e.x
+    console.log(e);
     let inicioY = e.y
     let nuevoAncho = e.width
     let nuevoAlto = e.height
+    canvas.width = nuevoAncho
+    canvas.height = nuevoAlto
     context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(imagenSubida, inicioX, inicioY, nuevoAncho, nuevoAlto, 0, 0, nuevoAncho, nuevoAlto);
+    let imgTemp = new Image()
+    imgTemp.src = urlImagen
+    context.drawImage(imgTemp, inicioX, inicioY, nuevoAncho, nuevoAlto, 0, 0, nuevoAncho, nuevoAlto);
+
 
 }
-
-
-
 btnSubirFoto.onchange = (e) => {
     urlImagen = URL.createObjectURL(e.target.files[0])
+    contenedorFoto.innerHTML = ""
+    let img = document.createElement("img")
+    img.classList.add("foto-img")
+    img.setAttribute("id", "foto")
+    contenedorFoto.appendChild(img)
+    img.src = urlImagen
+    
+    croppr(img)
+
+    // imagenSubida.src = urlImagen
     // se limpia por si habia una imagen antes 
-    // contenedorFoto.innerHTML = ""
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    imagenSubida.src = urlImagen
+    // context.clearRect(0, 0, canvas.width, canvas.height);
 
 
 }
 
 
+function croppr(element) {
+    new Croppr(element, {
+        aspectRatio: 1,
+        // minSize: [80, 80],
+        // maxSize: [120, 120],
+        startSize: [80, 80],
+        // onInitialize: recortar,}
+        onCropMove: recortar
+    })
+    // element 
+    // element.onloadeddata = ()=>{
+    //     console.log(element.height);
 
+    //     context.drawImage(element, 0, 0, element.width, element.height, 0, 0, element.width, element.height);
+    // }
+}
 
 
 
