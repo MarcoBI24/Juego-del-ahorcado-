@@ -407,8 +407,15 @@ body{
                         overflow: hidden;
                         max-width: 200px;
                         max-height: 200px;
-                        border: 1px solid blue;
-                        padding: 5px;
+                        /* border: 1px solid blue; */
+                        /* padding: 5px; */
+                        display: flex;
+                        align-items: center;
+                        min-height: 200px;
+                        background-image: url("./img/bg.jpg");
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: cover;
                     }
                         .foto-img{
 
@@ -425,6 +432,7 @@ body{
                         max-width: 200px;
                         padding: 5px;
                         border: 1px solid #0073ff;
+                        border-radius: 100%;
                     }
                     .input-subirArchivo{
                         flex: 1 1 100%;
