@@ -60,69 +60,49 @@ const canvas = $('canvas')
 const context = canvas.getContext('2d')
 let imagenSubida = $("foto")
 let urlImagen = imagenSubida.src
-imagenSubida.onload = ()=>{
-    console.log(imagenSubida.width)
-    canvas.width = 400
-    canvas.height = 400
-    context.drawImage(imagenSubida, 0, 0, 400, 400, 0, 0, 400, 400); // esto que se seleccione de acuerdo al croppr en el cropInizialise
-    croppr(imagenSubida)
-
-}
-
-
-
-function recortar(e) {
-    let inicioX = e.x
-    console.log(e);
-    let inicioY = e.y
-    let nuevoAncho = e.width
-    let nuevoAlto = e.height
-    canvas.width = nuevoAncho
-    canvas.height = nuevoAlto
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    let imgTemp = new Image()
-    imgTemp.src = urlImagen
-    context.drawImage(imgTemp, inicioX, inicioY, nuevoAncho, nuevoAlto, 0, 0, nuevoAncho, nuevoAlto);
-
-
-}
-btnSubirFoto.onchange = (e) => {
-    urlImagen = URL.createObjectURL(e.target.files[0])
-    contenedorFoto.innerHTML = ""
-    let img = document.createElement("img")
-    img.classList.add("foto-img")
-    img.setAttribute("id", "foto")
-    contenedorFoto.appendChild(img)
-    img.src = urlImagen
-    
-    croppr(img)
-
-    // imagenSubida.src = urlImagen
-    // se limpia por si habia una imagen antes 
-    // context.clearRect(0, 0, canvas.width, canvas.height);
-
-
-}
-
-
-function croppr(element) {
-    new Croppr(element, {
+let crop
+imagenSubida.onload = () => {
+    crop = new Croppr(imagenSubida, {
         aspectRatio: 1,
         // minSize: [80, 80],
         // maxSize: [120, 120],
         startSize: [80, 80],
         // onInitialize: recortar,}
-        onCropMove: recortar
+        onCropMove: ()=>{
+            recortar2(imagenSubida)
+        }
     })
-    // element 
-    // element.onloadeddata = ()=>{
-    //     console.log(element.height);
+    crop.moveTo(20, 0);
+    recortar2(imagenSubida)
+}
 
-    //     context.drawImage(element, 0, 0, element.width, element.height, 0, 0, element.width, element.height);
-    // }
+btnSubirFoto.onchange = (e) => {
+    let urlImagen = URL.createObjectURL(e.target.files[0])
+    imagenSubida.src = urlImagen
+    crop.setImage(urlImagen)
+    imagenSubida.onload = () => {
+        crop.moveTo(20, 0);
+        recortar2(imagenSubida)
+    }
+
+
+
 }
 
 
+
+let imgTemp = new Image()
+
+
+function recortar2(element) {
+
+    let parametros = crop.getValue()
+    canvas.width = parametros.width
+    canvas.height = parametros.height
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(element, parametros.x, parametros.y, parametros.width, parametros.height, 0, 0, parametros.width, parametros.height);
+
+}
 
 
 
