@@ -164,7 +164,7 @@ for (let i = 0; i < itemsDeLaGaleria.length; i++) {
                 recortarImg(imagenPorDefecto)
            }, 300); 
             // recortarImg(item)
-            item.style.filter = "grayscale(100%)"
+            item.style.filter = "grayscale(90%)"
         // }
     }
 }
