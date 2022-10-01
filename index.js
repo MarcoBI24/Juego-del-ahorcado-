@@ -8,6 +8,7 @@ const btnLoginModal = $("login")
 const btnAbrirGaleria = $("btn-abrir-galeria")
 const contenedorGaleria = $("contenedor-galeria")
 let itemsDeLaGaleria = document.getElementsByClassName("item-galery")
+cargarImagenesDeLaGaleria()
 // itemDeLaGaleria.forEach(item =>{
 
 // })
@@ -30,17 +31,6 @@ btnAbrirGaleria.parentElement.onclick = () => {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -72,13 +62,15 @@ const inputLogins = document.querySelectorAll('.input-login');
 const labelDelInputLogin = document.querySelectorAll('.label-text');
 inputLogins.forEach(input => {
     input.onfocus = () => {
-        input.nextElementSibling.style.top = "-53%"
+        input.nextElementSibling.style.top = "-40%"
     };
     input.onblur = () => {
         if (input.value == "") {
             input.nextElementSibling.style.top = "0%"
-
+            input.nextElementSibling.style.fontSize = "16px"
+            return  
         }
+        input.nextElementSibling.style.fontSize = "15px"
     }
 });
 btnLoginModal.onclick = () => {
@@ -108,7 +100,7 @@ window.onload = () => {
         aspectRatio: 1,
         // minSize: [80, 80],
         // maxSize: [120, 120],
-        startSize: [80, 80],
+        startSize: [120, 120],
         // onInitialize: recortar,}
         onCropMove: () => {
             recortarImg(imagenPorDefecto)
@@ -140,7 +132,7 @@ let imgTemp = new Image()
 function recortarImg(element) {
 
     let parametros = crop.getValue()
-    console.log(parametros);
+    // console.log(parametros);
     canvas.width = parametros.width
     canvas.height = parametros.height
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -152,24 +144,36 @@ function recortarImg(element) {
 
 
 for (let i = 0; i < itemsDeLaGaleria.length; i++) {
-    const item = itemsDeLaGaleria[i];
+    const item = itemsDeLaGaleria[i];    
     item.onclick = () => {
         imagenPorDefecto.src = item.src
 
-        // imagenPorDefecto.onload = () => {
-            crop.setImage(item.src)
-            console.log(crop);
-            setTimeout(() => {
-                
-                recortarImg(imagenPorDefecto)
-           }, 300); 
-            // recortarImg(item)
-            item.style.filter = "grayscale(90%)"
-        // }
+        crop.setImage(item.src)
+        setTimeout(() => {
+
+            recortarImg(imagenPorDefecto)
+        }, 300);
+        for (let j = 0; j < itemsDeLaGaleria.length; j++) {
+            itemsDeLaGaleria[j].style.filter = "grayscale(0%)"
+
+        }
+        item.style.filter = "grayscale(100%)"
     }
 }
 
 
+function cargarImagenesDeLaGaleria() {
+    for (let i = 1; i <= 31; i++) {
+        let img = document.createElement("img")
+        img.src = `./galeria/user-${i}.jpg`
+        img.classList.add("item-galery")
+        contenedorGaleria.appendChild(img)
+    }
+    
+    
+
+
+}
 
 
 

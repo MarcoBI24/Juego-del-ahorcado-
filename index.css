@@ -303,8 +303,8 @@ body{
                         outline: none;
                     }
                     .input-login:focus ~ .label-text{
-                        transform: scale(.8);
-                        color: #000;
+                        /* transform: scale(.8);
+                        color: #000; */
                     }
             .contenedor-login-footer{
                 display: flex;
@@ -403,7 +403,7 @@ body{
                         justify-content: center;
                         width: 100%;
                         gap: 20px;
-                        border: 1px solid blue;
+                        /* border: 1px solid blue; */
                         padding: 5px;
                         align-items: center;
                         /* background-color: #bacbf2; */
@@ -436,15 +436,39 @@ body{
                             border: 2px solid #4a4a4b;
                             border-radius: 100%;
                         }
-                    .input-subirArchivo{
-                        /* flex: 1 1 100%; */
-                        /* width: 100%;} */
+                    .contenedor-input-subirFoto{
+                        border: 0px solid;
+                        border-radius: 5px;
+                        padding: 5px;
+                        background-color: #676767;
+                        position: relative;
+                        display: flex;
+                        justify-content: center;
                     }
+                    .contenedor-input-subirFoto:active , .abrir-galeria:active {
+                        transform: scale(.96);
+                        background-color: rgb(143, 141, 141);
+
+                    }
+                        .contenedor-input-subirFoto span{
+                            text-align: center;
+                            color: #fafafa;
+                            font-size: 20px;
+                        }
+                        .input-subirArchivo{
+                            position: absolute;
+                            opacity: .0;
+                            /* visibility: hidden; */
+                            /* flex: 1 1 100%; */
+                            /* width: 100%;} */
+                        }
                     .abrir-galeria{
                         /* flex: 1 1 100%; */
                         width: 100%;
-                        background-color: #b5bdc7;
+                        background-color: #676767;
                         /* border: 1px solid green; */
+                        padding: 5px;
+                        border-radius: 5px;
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -454,7 +478,7 @@ body{
                     }
                             .icon-abrir-galeria{
                                 font-size: 20px;
-                                color: #0f72eb;
+                                color: #fff;
 
                             }
                             .btn-abrir-galeria{
@@ -462,6 +486,7 @@ body{
                                 /* width: 100%; */
                                 display: flex;
                                 border-radius: 50%;
+                                background: transparent;
                                 border: 0px solid;
                                 transition: transform 200ms;
 
@@ -538,7 +563,8 @@ body{
                     }
                         .item-galery{
                             padding: 5px;
-                            border: 2px solid #3e8ae6;
+                            box-shadow: 0px 0px 4px #000;
+                            /* border: 2px solid #3e8ae6; */
 
                             /* flex: 1 1; */
                             /* width: 100%;
@@ -554,26 +580,64 @@ body{
                             filter: grayscale(100%);
                         }
                         
-                        .contenedor-formulario{
+                .contenedor-formulario{
+                    max-width: 300px;
+                    flex: 1 0 50%;
+                    border: 1px solid salmon;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 10px;
+                    gap: 20px;
+                    /* justify-content: center; */
                 }
-                    .contenedor-nombre{
-
+                    .contenedor-nombre, .contenedor-contraseña, .contenedor-correo{
+                        display: flex;
+                        font-family: "roboto";
+                        flex-direction: column;
+                        font-size: calc(.5rem + 1.4vw);
+                        position: relative;
+                        justify-items: center;
+                        gap: 10px;
                     }
                     .contenedor-contraseña{
 
                     }
+                    
                         .label-form{
-                            position: relative;
                             display: flex;
+                            /* gap: 10px; */
                             flex-direction: column;
+                            position: relative;
+                            justify-content: center;
                         }
                             .label-text{
                                 /* position: relative; */
+                                position: absolute;
+
+                                top: 0%;
+                                transition: top .2s;
+                                /* top: -30px; */
+                                font-size: 16px;
+                                color: rgb(86, 85, 85);
                             }
                             .input-registro{
-
-                                width: 300px;
+                                
+                                width: 100%;
+                                font-family: "Roboto";
+                                padding: 5px;
+                                font-weight: 900;
+                                background-color: transparent;
+                                border: 2px solid #0073ff;
+                                border-width: 0px 0px 3px 0px;
+                                font-size: calc(.5rem + 1vw);
+                                outline: none;
                             }
+                            .input-registro:focus ~ .label-text{
+                                /* transform: scale(.8); */
+                                /* font-size: 10px;
+                                color: #000; */
+                            }
+                                
 
 
                    

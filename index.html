@@ -132,28 +132,16 @@
                             <img src="./galeria/user-14.jpg" class="foto-img" id="foto">
                             <canvas class="preview-foto" id="canvas"></canvas>
                         </div>
-                        <input type="file" class="input-subirArchivo" id="input-subirFoto">
+                        <button class="contenedor-input-subirFoto">
+                            <span class="icon-upload"></span>
+                            <input type="file" class="input-subirArchivo" id="input-subirFoto">
+                        </button>
                         <div class="abrir-galeria">
                             <button id="btn-abrir-galeria" class="btn-abrir-galeria">
                                 <span class="icon-circle-down icon-abrir-galeria"></span>
                             </button>
                         </div>
                         <div class="contenedor-galeria" data-cerrado="true" id="contenedor-galeria">
-                            <img src="./galeria/user-1.jpg" alt="" class="item-galery">
-                            <img src="./galeria/user-2.jpg" alt="" class="item-galery">
-                            <img src="./galeria/user-3.jpg" alt="" class="item-galery">
-                            <img src="./galeria/user-4.jpg" alt="" class="item-galery">
-                            <img src="./galeria/user-4.jpg" alt="" class="item-galery">
-                            <img src="./galeria/user-4.jpg" alt="" class="item-galery">
-                            <img src="./galeria/user-4.jpg" alt="" class="item-galery">
-                            <img src="./galeria/user-4.jpg" alt="" class="item-galery">
-                            <img src="./galeria/user-4.jpg" alt="" class="item-galery">
-                            <img src="./galeria/user-4.jpg" alt="" class="item-galery">
-                            <img src="./galeria/user-4.jpg" alt="" class="item-galery">
-                            <img src="./galeria/user-4.jpg" alt="" class="item-galery">
-                            <img src="./galeria/user-4.jpg" alt="" class="item-galery">
-                            <img src="./galeria/user-4.jpg" alt="" class="item-galery">
-                            <img src="./galeria/user-4.jpg" alt="" class="item-galery">
 
                         </div>
                     </div>
@@ -161,15 +149,22 @@
                     <div class="contenedor-formulario">
                         <div class="contenedor-nombre">
                             <label class="label-form">
-                                <input type="text" class="input-registro" id="nombre-usuario">
+                                <input type="text" class="input-login" id="nombre-usuario">
                                 <span class="label-text">Usuario</span>
                             </label>
                         </div>
                         <div class="contenedor-contraseña">
                             <label class="label-form">
 
-                                <input type="password" class="input-registro" id="contraseña-usuario">
-                                <span class="label-text" id="contra-text">Contraseña</span>
+                                <input type="password" class="input-login" id="contraseña-usuario">
+                                <span class="label-text">Contraseña</span>
+                            </label>
+                        </div>
+                        <div class="contenedor-correo">
+                            <label class="label-form">
+
+                                <input type="email" class="input-login" id="correo-usuario">
+                                <span class="label-text">Correo</span>
                             </label>
                         </div>
                     </div>
