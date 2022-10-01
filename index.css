@@ -405,13 +405,14 @@ body{
                         width: 100%;
                         /* border-radius: 50%; */
                         overflow: hidden;
-                        max-width: 200px;
-                        max-height: 200px;
+                        max-width: 160px;
+                        max-height: 160px;
                         /* border: 1px solid blue; */
                         /* padding: 5px; */
                         display: flex;
                         align-items: center;
-                        min-height: 200px;
+                        min-height: 160px;
+                        /* background-color: #bacbf2; */
                         background-image: url("./img/bg.jpg");
                         background-position: center;
                         background-repeat: no-repeat;
@@ -428,8 +429,8 @@ body{
                         }
                     
                     .preview-foto{
-                        min-height: 200px;
-                        max-width: 200px;
+                        min-height: 160px;
+                        max-width: 160px;
                         padding: 5px;
                         border: 1px solid #0073ff;
                         border-radius: 100%;
@@ -437,8 +438,75 @@ body{
                     .input-subirArchivo{
                         flex: 1 1 100%;
                     }
+                    .abrir-galeria{
+                        width: 100%;
+                        background-color: #b5bdc7;
+                        /* border: 1px solid green; */
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
 
 
+
+                    }
+                    .icon-abrir-galeria{
+                        font-size: 20px;
+                        color: #0f72eb;
+
+
+                    }
+                    .btn-abrir-galeria{
+                        /* padding: 10px; */
+                        /* width: 100%; */
+                        display: flex;
+                        border-radius: 50%;
+                        border: 0px solid;
+
+                    }
+                    .btn-abrir-galeria:active{
+                        transform: scale(.9);
+                        
+                    } 
+                    .btn-abrir-galeria:active > .icon-abrir-galeria{
+                        animation: none;
+                    }
+                    .icon-abrir-galeria:hover{
+                        animation: sacurdir 2s ease 0s infinite normal;
+
+                    }
+
+                    @keyframes sacurdir {
+                        0%,
+                        100% {
+                            transform: rotate(0deg);
+                            /* transform-origin: 50% 50%; */
+                        }
+                    
+                        10% {
+                            color: green;
+                            transform: rotate(8deg);
+                        }
+                    
+                        20%,
+                        40%,
+                        60% {
+                            transform: rotate(-20deg);
+                        }
+                    
+                        30%,
+                        50%,
+                        70% {
+                            transform: rotate(20deg);
+                        }
+                    
+                        80% {
+                            transform: rotate(-8deg);
+                        }
+                    
+                        90% {
+                            transform: rotate(8deg);
+                        }
+                    }
 
                 .contenedor-formulario{
 

@@ -58,31 +58,34 @@ const btnSubirFoto = $('input-subirFoto')
 const contenedorFoto = $('contenedor-foto')
 const canvas = $('canvas')
 const context = canvas.getContext('2d')
-let imagenSubida = $("foto")
-let urlImagen = imagenSubida.src
+let imagenPorDefecto = $("foto")
+let urlImagen = imagenPorDefecto.src
 let crop
-imagenSubida.onload = () => {
-    crop = new Croppr(imagenSubida, {
+window.onload = () => {
+    crop = new Croppr(imagenPorDefecto, {
         aspectRatio: 1,
         // minSize: [80, 80],
         // maxSize: [120, 120],
         startSize: [80, 80],
         // onInitialize: recortar,}
-        onCropMove: ()=>{
-            recortar2(imagenSubida)
+        onCropMove: () => {
+            recortarImg(imagenPorDefecto)
         }
     })
-    crop.moveTo(20, 0);
-    recortar2(imagenSubida)
+    // console.log(imagenPorDefecto.clientWidth);
+    // crop.moveTo(((contenedorFoto.clientWidth - imagenPorDefecto.clientWidth) / 2), 0);
+    recortarImg(imagenPorDefecto)
+
+
+
 }
 
 btnSubirFoto.onchange = (e) => {
     let urlImagen = URL.createObjectURL(e.target.files[0])
-    imagenSubida.src = urlImagen
+    imagenPorDefecto.src = urlImagen
     crop.setImage(urlImagen)
-    imagenSubida.onload = () => {
-        crop.moveTo(20, 0);
-        recortar2(imagenSubida)
+    imagenPorDefecto.onload = () => {
+        recortarImg(imagenPorDefecto)
     }
 
 
@@ -94,7 +97,7 @@ btnSubirFoto.onchange = (e) => {
 let imgTemp = new Image()
 
 
-function recortar2(element) {
+function recortarImg(element) {
 
     let parametros = crop.getValue()
     canvas.width = parametros.width

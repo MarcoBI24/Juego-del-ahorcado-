@@ -97,7 +97,7 @@ body{
         display: flex;
         width: max-content;
         border: 10px solid #959aa0ed;
-        /* max-width: 420px; */
+        max-width: 360px;
         border-radius: 10px;
         padding: 10px;
         gap: 5px;
@@ -124,21 +124,21 @@ body{
     .contenedor-canvas{
         display: flex;
       
-        max-width: 420px;
-        max-height: 420px;
+        max-width: 360px;
+        min-height: 360px;
         /* min-height: max-content; */
         border-radius: 10px;
         background-color: #959aa0ed;
         
         height: 100%;
         width: 300%;
-        overflow: hidden;
+        /* overflow: hidden; */
     }
     .contenedor-canvas-slider{
         width: 100%;
         padding: 10px;
         height: 100%;
-        min-height: 420px;
+        min-height: 360px;
         display: flex;
         flex-direction: row;
         gap: 20px;
@@ -147,7 +147,7 @@ body{
         /* justify-content: center; */
         /* align-items: center; */
         transition: margin .5s;
-        margin-left: 00%;
+        margin-left: -100%;
         /* outline: 2px solid royalblue; */
     }
         #screen-game{
@@ -157,8 +157,10 @@ body{
             }
         .screen{
             width: 100%;
-            min-width: 400px;
-            max-width: 400px;
+            height: 100%;
+            max-height: 340px;
+            min-width: 340px;
+            max-width: 340px;
             display: flex;
             flex-direction: row;
             padding:  15px;
@@ -179,16 +181,17 @@ body{
                 text-align: center;
                 font-weight: 800;
                 letter-spacing: 1px;
-                font-size: calc(1rem + 2vw);
+                font-size: calc(1rem + 1vw);
                 color: rgb(102, 102, 102);
             }
             .contenedor-foto-perfil{
-                /* border: 1px solid red; */
-                flex: 1 1 50%;
-                width: calc(100px + 7vw);
-                max-width: 150px;
+                border: 1px solid red;
+                flex: 0 1 40%;
+                /* width: calc(100px + 7vw); */
+                /* max-width: 100px; */
                 height: min-content;
                 display: flex;
+                border: 1px solid green;
                 flex-direction: column;
                 align-items: center;
                 gap: 15px;
