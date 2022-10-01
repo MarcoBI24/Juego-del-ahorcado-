@@ -7,19 +7,26 @@ const contenedorGeneral = $("contenedor-general")
 const btnLoginModal = $("login")
 const btnAbrirGaleria = $("btn-abrir-galeria")
 const contenedorGaleria = $("contenedor-galeria")
-btnAbrirGaleria.onclick = ()=> { 
+let itemsDeLaGaleria = document.getElementsByClassName("item-galery")
+// itemDeLaGaleria.forEach(item =>{
+
+// })
+
+console.log(itemsDeLaGaleria.item(2));
+console.log(itemsDeLaGaleria);
+btnAbrirGaleria.parentElement.onclick = () => {
     console.log(contenedorGaleria.dataset.cerrado);
-     if (contenedorGaleria.dataset.cerrado == "true") {
-         contenedorGaleria.style.maxHeight = "150px"
-         contenedorGaleria.dataset.cerrado = "false"
-         contenedorGaleria.style.padding = "10px 0px 10px 5px"
-         btnAbrirGaleria.style.transform = "rotate(180deg)"
-     }else { 
+    if (contenedorGaleria.dataset.cerrado == "true") {
+        contenedorGaleria.style.maxHeight = "150px"
+        contenedorGaleria.dataset.cerrado = "false"
+        contenedorGaleria.style.padding = "10px 0px 10px 5px"
+        btnAbrirGaleria.style.transform = "rotate(180deg)"
+    } else {
         contenedorGaleria.style.maxHeight = "0"
         contenedorGaleria.style.padding = "0px"
         contenedorGaleria.dataset.cerrado = "true"
         btnAbrirGaleria.style.transform = "rotate(0deg)"
-    
+
     }
 
 }
@@ -133,6 +140,7 @@ let imgTemp = new Image()
 function recortarImg(element) {
 
     let parametros = crop.getValue()
+    console.log(parametros);
     canvas.width = parametros.width
     canvas.height = parametros.height
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -143,7 +151,23 @@ function recortarImg(element) {
 
 
 
+for (let i = 0; i < itemsDeLaGaleria.length; i++) {
+    const item = itemsDeLaGaleria[i];
+    item.onclick = () => {
+        imagenPorDefecto.src = item.src
 
+        // imagenPorDefecto.onload = () => {
+            crop.setImage(item.src)
+            console.log(crop);
+            setTimeout(() => {
+                
+                recortarImg(imagenPorDefecto)
+           }, 300); 
+            // recortarImg(item)
+            item.style.filter = "grayscale(100%)"
+        // }
+    }
+}
 
 
 
