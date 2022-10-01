@@ -72,8 +72,6 @@ window.onload = () => {
             recortarImg(imagenPorDefecto)
         }
     })
-    // console.log(imagenPorDefecto.clientWidth);
-    // crop.moveTo(((contenedorFoto.clientWidth - imagenPorDefecto.clientWidth) / 2), 0);
     recortarImg(imagenPorDefecto)
 
 
