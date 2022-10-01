@@ -5,9 +5,43 @@ const contenedorIdentificacion = $("contenedor-identificacion")
 const contenedorIdentificacionSlider = $("contenedor-identificacion-slider")
 const contenedorGeneral = $("contenedor-general")
 const btnLoginModal = $("login")
+const btnAbrirGaleria = $("btn-abrir-galeria")
+const contenedorGaleria = $("contenedor-galeria")
+btnAbrirGaleria.onclick = ()=> { 
+    console.log(contenedorGaleria.dataset.cerrado);
+     if (contenedorGaleria.dataset.cerrado == "true") {
+         contenedorGaleria.style.maxHeight = "150px"
+         contenedorGaleria.dataset.cerrado = "false"
+         btnAbrirGaleria.style.transform = "rotate(180deg)"
+     }else { 
+        contenedorGaleria.style.maxHeight = "0"
+        contenedorGaleria.dataset.cerrado = "true"
+        btnAbrirGaleria.style.transform = "rotate(0deg)"
+    
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Logear el usuario
 // obtener datos del usuario (nombre de usuario,contraseña, foto )
-//  de ahi guarda en un objeto llamado usuario que tenga NOMBRE, CONTRASEÑA, URL DE LA FOTO, RECORD, MELLADA Y SI ESTA LOGEADO 
+//  de ahi guarda en un objeto llamado usuario que tenga NOMBRE, CONTRASEÑA, URL DE LA FOTO(guardar todas las que usó anterior mente y mostrarla en la galeria), RECORD, MELLADA, Y SI ESTA LOGEADO 
 // Guardar datos del usuario en el localStorage
 
 
@@ -20,7 +54,6 @@ btnRegistrarseModal.onclick = () => {
 btnLogearModal.onclick = () => {
     contenedorIdentificacionSlider.style.marginLeft = "0%"
 }
-
 
 
 

@@ -174,7 +174,7 @@ body{
             display: flex;
             flex-direction: column;
             gap: 10px;
-            max-height: 0;
+            max-height: 0px;
             overflow: hidden;
             
             transition: max-height 1s;
