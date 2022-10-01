@@ -12,9 +12,11 @@ btnAbrirGaleria.onclick = ()=> {
      if (contenedorGaleria.dataset.cerrado == "true") {
          contenedorGaleria.style.maxHeight = "150px"
          contenedorGaleria.dataset.cerrado = "false"
+         contenedorGaleria.style.padding = "10px 0px 10px 5px"
          btnAbrirGaleria.style.transform = "rotate(180deg)"
      }else { 
         contenedorGaleria.style.maxHeight = "0"
+        contenedorGaleria.style.padding = "0px"
         contenedorGaleria.dataset.cerrado = "true"
         btnAbrirGaleria.style.transform = "rotate(0deg)"
     
