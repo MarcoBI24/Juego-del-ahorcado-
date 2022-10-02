@@ -4,10 +4,13 @@ const btnAddWord = $("add-word")
 const contenedorIdentificacion = $("contenedor-identificacion")
 const contenedorIdentificacionSlider = $("contenedor-identificacion-slider")
 const contenedorGeneral = $("contenedor-general")
-const btnLoginModal = $("login")
+const loginEnElHeader = $("login")
 const btnAbrirGaleria = $("btn-abrir-galeria")
 const contenedorGaleria = $("contenedor-galeria")
 let itemsDeLaGaleria = document.getElementsByClassName("item-galery")
+const btnsCerrarContenedorIdentificacion = document.querySelectorAll(".icon-cross")
+
+console.log(btnsCerrarContenedorIdentificacion);
 cargarImagenesDeLaGaleria()
 // itemDeLaGaleria.forEach(item =>{
 
@@ -63,22 +66,29 @@ const labelDelInputLogin = document.querySelectorAll('.label-text');
 inputLogins.forEach(input => {
     input.onfocus = () => {
         input.nextElementSibling.style.top = "-40%"
+        input.nextElementSibling.style.fontSize = "15px"
     };
     input.onblur = () => {
         if (input.value == "") {
             input.nextElementSibling.style.top = "0%"
-            input.nextElementSibling.style.fontSize = "16px"
-            return  
+            input.nextElementSibling.style.fontSize = "20px"
+            return
         }
         input.nextElementSibling.style.fontSize = "15px"
     }
 });
-btnLoginModal.onclick = () => {
+loginEnElHeader.onclick = () => {
     mostrarLogin()
 }
 
 btnStart.onclick = () => {
     mostrarLogin()
+    btnsCerrarContenedorIdentificacion.forEach(btn => {
+        btn.onclick = () => {
+            cerrarLogin()
+        }
+    })
+    
     // location.href = "./elegirModo.html"
 }
 
@@ -144,7 +154,7 @@ function recortarImg(element) {
 
 
 for (let i = 0; i < itemsDeLaGaleria.length; i++) {
-    const item = itemsDeLaGaleria[i];    
+    const item = itemsDeLaGaleria[i];
     item.onclick = () => {
         imagenPorDefecto.src = item.src
 
@@ -169,8 +179,8 @@ function cargarImagenesDeLaGaleria() {
         img.classList.add("item-galery")
         contenedorGaleria.appendChild(img)
     }
-    
-    
+
+
 
 
 }
@@ -214,5 +224,10 @@ function mostrarLogin() {
     let heigthContenedor = contenedorIdentificacion.clientHeight;
     window.scrollBy(0, -window.scrollY)
     contenedorIdentificacion.style.top = `calc(50vh - ${heigthContenedor / 2}px)`
+
+}
+function cerrarLogin() {
+    contenedorGeneral.style.filter = "blur(0px)"
+    contenedorIdentificacion.style.top = `-100%`
 
 }

@@ -17,6 +17,7 @@ btnCloseModal.onclick = ()=>{
     let heigthModal = contenedorModal.clientHeight;
     contenedorModal.style.top = `-${heigthModal}px`
     setTimeout(() => {
+        
         modalLink.disabled = true
         
     }, 300);
