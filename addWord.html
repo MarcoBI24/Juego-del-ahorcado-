@@ -5,9 +5,62 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar palabra</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style-icons.css">
+    <link rel="stylesheet" href="./addWord.css">
+    <link rel="stylesheet" href="./modal.css" disabled="true" id="modal-link">
 </head>
 <body>
+    <div class="contenedor-general">
+        <div class="contenedor-header">
+            <button id="btn-retroceder">
+                <span class="icon-undo2"></span>
+            </button>
+            <div class="contenedor-menu">
+                <button class="btn-menu" id="btn-menu">
+                    <span class="icon-menu"></span>
+                </button>
+            </div>
+        </div>
+        <div class="contenedor-body">
+            <div class="contenedor-titulo">
+                <h1 class="titulo">Agregar palabras</h1>
+            </div>
+        </div>
+        <div class="contenedor-footer"></div>
         
-    
+    </div>
+    <div class="contenedor-modal" id="modal">
+        <div class="contenedor-header-modal">
+            <p class="info-header">Seleccione una de las opciones</p>
+            <button class="close-modal" id="close-modal"><span class="icon-cross"></span></button>
+        </div>
+        <div class="contenedor-opciones">
+            <button class="btn-opcion" id="btn-ayuda">
+                Ayuda
+                <span class="icon-question"></span>
+            </button>
+            <button class="btn-opcion" id="btn-silenciar">
+                Silenciar
+                <span class="icon-music"></span>
+
+            </button>
+            <button class="btn-opcion" id="btn-irAInicio">
+                Ir a Inicio
+                <span class="icon-home3"></span>
+            </button>
+            <button class="btn-opcion" id="btn-cambiarTema">
+                Cambiar tema
+                <span class="icon-contrast"></span>
+            </button>
+            <!-- agregar un boton para silenciar la musica -->
+        </div>
+    </div>
+
+
+    <script src="./modal.js"></script>
 </body>
 </html>

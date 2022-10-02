@@ -1,0 +1,105 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+html::-webkit-scrollbar{
+    width: 5px;
+    height: 20px;
+    /* display: none; */
+    padding: 10px;
+    
+}
+html::-webkit-scrollbar-thumb{
+    background-color: #3e8ae6;
+    border-radius: 20px;
+}   
+
+body{
+    height: 100vh;
+    width: 100%;
+    border: 3px solid red;
+    /* overflow: hidden; */
+    background-color: #b5bdc7;
+    /* overflow: ; */
+    position: relative;
+    padding: 0px 5px;
+}
+   
+
+.contenedor-general{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    /* height: 100%; */
+
+}
+    .contenedor-header{
+        overflow: hidden;
+        /* border: 1px solid; */
+        border-radius: 100px;
+        padding: 3px;
+        width: 100%;
+        display: flex;
+        /* max-height: 50px; */
+        justify-content: space-between;
+    }
+        #btn-retroceder{
+            border: 0px solid;
+            padding: 10px;
+            background-color: #3e8ae6;
+            transition: transform .1s;
+        }
+
+            .icon-undo2{
+                transition: color .1s;
+                color: #fff;
+                font-size: 17px;
+            }
+        .contenedor-menu{
+            
+        }
+                .btn-menu{
+                    border: 0px solid;
+                    background-color: #3e8ae6;
+                    padding: 10px;
+                    transition: transform .1s;
+                }
+                    .icon-menu{
+                        transition: color .1s;
+
+                        color: #fff;
+                        font-size: 17px;
+                    }
+        #btn-retroceder:active , .btn-menu:active{
+            /* transform: scale(.9); */
+            background-color: #fff;
+            /* color: #3e8ae6; */
+        }
+        #btn-retroceder:active > .icon-undo2, .btn-menu:active > .icon-menu{
+            color: #3e8ae6;
+        }
+    .contenedor-body{
+
+    }
+    .contenedor-footer{
+
+    }
+
+
+
+
+
+
+
+
+
+
+.contenedor-modal{
+    display: none;
+    position: absolute;
+    top: -50%;
+    transition: top .2s;
+
+}
