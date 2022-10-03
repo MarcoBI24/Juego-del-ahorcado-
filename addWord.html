@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,6 +14,7 @@
     <link rel="stylesheet" href="./addWord.css">
     <link rel="stylesheet" href="./modal.css" disabled="true" id="modal-link">
 </head>
+
 <body>
     <div class="contenedor-general">
         <div class="contenedor-header">
@@ -28,10 +30,76 @@
         <div class="contenedor-body">
             <div class="contenedor-titulo">
                 <h1 class="titulo">Agregar palabras</h1>
+                <p class="descripcion">
+                    <b class="resaltado">¡Hola Marco!</b>
+                    <br>
+                    Aqui puede agregar o eliminar palabras en caso quiera retar a un amigo o solo quiere jugar con sus
+                    propias palabras para que despues pueda usarlas en los diferentes modos de juego...
+                </p>
+            </div>
+            <div class="contenedor-agregar-eliminar-palabra">
+                <textarea id="input-palabra" placeholder="Escribe la palabra que va a agregar o eliminar"></textarea>
+                <div class="contenedor-btns">
+                    <button class="btn-agregar-palabra">Agregar</button>
+                    <button class="btn-eliminar-palabra">Eliminar</button>
+                </div>
+            </div>
+            <button class="contenedor-abrir-palabras" id="contenedor-abrir-palabras">
+                <span class="icono-abrir-palabra icon-circle-down"></span>
+            </button>
+            <div class="contenedor-palabras" data-abrierto="false" id="contenedor-palabras">
+                <ol class="palabras">
+                    <!-- <input type="checkbox" name="" id="palabra-checkbox" > -->
+                    <li class="palabra">
+                        hola
+                        <span class="icon-copy icono-palabra"></span>
+                    </li>
+                    <li class="palabra">
+                        compadre
+                        <span class="icon-copy icono-palabra"></span>
+                    </li>
+                    <li class="palabra">
+                        saludo
+                        <span class="icon-copy icono-palabra"></span>
+                    </li>
+                    <li class="palabra">
+                        señora
+                        <span class="icon-copy icono-palabra"></span>
+                    </li>
+                    <li class="palabra">
+                        redes
+                        <span class="icon-copy icono-palabra"></span>
+                    </li>
+                    <li class="palabra">
+                        neuronas
+                        <span class="icon-copy icono-palabra"></span>
+                    </li>
+                    <li class="palabra">
+                        fisica
+                        <span class="icon-copy icono-palabra"></span>
+                    </li>
+                    <li class="palabra">
+                        señora
+                        <span class="icon-copy icono-palabra"></span>
+                    </li>
+                    <li class="palabra">
+                        comida
+                        <span class="icon-copy icono-palabra"></span>
+                    </li>
+                    <li class="palabra">
+                        deporte
+                        <span class="icon-copy icono-palabra"></span>
+                    </li>
+                    <li class="palabra">
+                        deporte
+                        <span class="icon-copy icono-palabra"></span>
+                    </li>
+
+                </ol>
             </div>
         </div>
         <div class="contenedor-footer"></div>
-        
+
     </div>
     <div class="contenedor-modal" id="modal">
         <div class="contenedor-header-modal">
@@ -62,5 +130,7 @@
 
 
     <script src="./modal.js"></script>
+    <script src="./addWord.js"></script>
 </body>
+
 </html>

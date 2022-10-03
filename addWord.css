@@ -2,7 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-
+    font-family: "Indie flower";
 }
 html::-webkit-scrollbar{
     width: 5px;
@@ -17,14 +17,15 @@ html::-webkit-scrollbar-thumb{
 }   
 
 body{
+    user-select: none;
     height: 100vh;
     width: 100%;
-    border: 3px solid red;
+    /* border: 3px solid red; */
     /* overflow: hidden; */
     background-color: #b5bdc7;
     /* overflow: ; */
     position: relative;
-    padding: 0px 5px;
+    padding: 0px 10px;
 }
    
 
@@ -32,17 +33,18 @@ body{
     display: flex;
     width: 100%;
     flex-direction: column;
-    /* height: 100%; */
+    height: 100%;
 
 }
     .contenedor-header{
-        overflow: hidden;
+        /* overflow: hidden; */
         /* border: 1px solid; */
-        border-radius: 100px;
-        padding: 3px;
+        border-radius: 5px;
+        padding: 10px;
         width: 100%;
         display: flex;
         /* max-height: 50px; */
+        box-shadow: 0px 0px 5px rgb(105, 104, 104);
         justify-content: space-between;
     }
         #btn-retroceder{
@@ -50,6 +52,12 @@ body{
             padding: 10px;
             background-color: #3e8ae6;
             transition: transform .1s;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+
         }
 
             .icon-undo2{
@@ -61,10 +69,17 @@ body{
             
         }
                 .btn-menu{
+                    border-radius: 5px;
                     border: 0px solid;
                     background-color: #3e8ae6;
                     padding: 10px;
                     transition: transform .1s;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+        
+
+                
                 }
                     .icon-menu{
                         transition: color .1s;
@@ -81,8 +96,203 @@ body{
             color: #3e8ae6;
         }
     .contenedor-body{
-
+        padding: 10px;
+        /* border: 1px solid sandybrown; */
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        justify-content: center;
+        align-items: center;
     }
+        .contenedor-titulo{
+            /* border: 1px solid green; */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+            .titulo{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                font-weight: 700;
+                color: #5d5c5c;
+                letter-spacing: 5px;
+                font-size: 60px;
+            }
+            .descripcion{
+                letter-spacing: 1px;
+                font-size: 22px;
+                color: #5d5c5c;
+            }
+                .resaltado{
+                    /* font-family: "roboto"; */
+                    font-weight: 900;
+                    color: #3e8ae6;
+                }
+        .contenedor-agregar-eliminar-palabra{
+            /* border: 1px solid; */
+            display: flex;
+            /* flex-wrap: wrap; */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 600px;
+            align-items: center;
+            
+        }
+            #input-palabra{
+                background-color: #fff;
+                outline: 2px solid #3e8ae6;
+                outline-offset: -6px;
+                color: #000;
+                border: 0px solid;
+                border-radius: 5px;
+                width: 100%;
+                padding: 15px;
+                font-size: 20px;
+                resize: none;
+                min-height: 250px;
+                transition: outline-offset 1.5s, outline 1.5s, box-shadow 1.2s;
+
+            }
+            #input-palabra:focus{
+                box-shadow: 0px 0px 10px 1px #3e8ae6;
+                outline: 1px solid #3e8ae6;
+                outline-offset: 0px;
+
+
+            }
+            .contenedor-btns{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+            }
+                .btn-agregar-palabra, .btn-eliminar-palabra{
+                    width: 100%;
+                    padding: 10px 50px;
+                    font-size: 20px;
+                    border-radius: 5px;
+                    background-color: #fff;
+                    color: #3e8ae6;
+                    border: 0px solid;
+                    transition: background-color .3s;
+                }
+                .btn-agregar-palabra:active, .btn-eliminar-palabra:active{
+                    outline: 1px solid #3e8ae6;
+                    transform: scaleX(.95);
+                }
+                .btn-eliminar-palabra:hover, .btn-agregar-palabra:hover{
+                    box-shadow: 0px 0px 10px #3e8ae6;
+                    background-color: #3e8ae6;
+                    color: #fff;
+                }
+                /* .btn-agregar-palabra:hover,{
+                    background-color: #fff;
+                    color: #3e8ae6;
+                } */
+            .contenedor-abrir-palabras{
+                background-color: #3e8ae6;
+                border: 0px solid;
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: background-color .3s;
+                padding: 5px;
+            }
+            .contenedor-abrir-palabras:hover{
+                background-color: #fff;
+            }
+            .contenedor-abrir-palabras:hover > .icono-abrir-palabra{
+                /* transform: rotate(-180deg); */
+                color: #3e8ae6;
+            }
+            .contenedor-abrir-palabras:focus + .contenedor-palabras > .palabras{
+                flex-direction: column;
+                /* background-color: #b5bdc7; */
+            }
+                .icono-abrir-palabra{
+                    transition: transform 1s, color .4s;
+                    font-size: 23px;
+                    color: #fff;
+
+                }
+
+            .contenedor-palabras{
+                width: 100%;
+                height: 100%;
+                background-color: #5d5c5c;
+                border-radius: 10px;
+                /* padding: 10px; */
+                /* height: min-content; */
+                display: flex;
+                max-height: 0px;
+                overflow-x: hidden;
+                transition: max-height 1.2s;
+                overflow-y: scroll;
+            }
+            .contenedor-palabras:hover{
+                box-shadow: 0px 0px 10px #3e8ae6;
+                border: 1px solid #fff;
+            }
+            .contenedor-palabras::-webkit-scrollbar{
+                width: 5px;
+                height: 5px;
+                /* display: none; */
+                padding: 10px;
+                
+            }
+            .contenedor-palabras::-webkit-scrollbar-thumb{
+                background-color: #3e8ae6;
+                border-radius: 20px;
+            }  
+                .palabras{
+                    list-style: none;
+                    
+                    flex-direction: column;
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    /* row-gap: 10px; */
+                    font-family: "roboto";
+                }
+                    .palabra{
+                        padding: 10px;
+                        font-size: 20px;
+                        color: #fff;
+                        text-align: center;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .palabra:hover{
+                        color: #3e8ae6;
+                    }
+                    .palabra:hover > .icono-palabra{
+                        display: flex;
+                    }
+                    .icono-palabra{
+                        display: none;
+                        justify-content: center;
+                        font-size: 15px;
+                        color: #3e8ae6;
+                        
+                    }
+                    .icono-palabra:hover{
+                        color: #fff;
+                        width: min-content;
+                        border-radius: 100%;
+                        box-shadow: 0px 0px 10px 5px #3e8ae6;
+                    }
+                    .icono-palabra:active{
+                        transform: scale(1.2);
+                    }
     .contenedor-footer{
 
     }
