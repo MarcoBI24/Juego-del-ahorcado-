@@ -41,6 +41,9 @@ body{
         background-color: red;
         border: 0px solid;
         box-shadow: inset 0px 2px ;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .close-modal:active{
         box-shadow: inset 0px 0px ;

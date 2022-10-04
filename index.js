@@ -1,6 +1,15 @@
+
+
+
+
+
+
+
 const $ = (id) => { return document.getElementById(id) };
 const btnStart = $("start-game")
 const btnAddWord = $("add-word")
+const btnLogros = $("clasification")
+const btnComoSeJuega = $("como-se-juega")
 const contenedorIdentificacion = $("contenedor-identificacion")
 const contenedorIdentificacionSlider = $("contenedor-identificacion-slider")
 const contenedorGeneral = $("contenedor-general")
@@ -22,8 +31,61 @@ const context = canvas.getContext('2d')
 let imagenPorDefecto = $("foto")
 let urlImagen = imagenPorDefecto.src
 let crop
+// Logear el usuario
+// obtener datos del usuario (nombre de usuario,contraseña, foto )
+//  de ahi guarda en un objeto llamado usuario que tenga NOMBRE, CONTRASEÑA, URL DE LA FOTO(guardar todas las que usó anterior mente y mostrarla en la galeria), RECORD, MELLADA, configuracion, palabras Y SI ESTA LOGEADO 
+// Guardar datos del usuario en el localStorage
+
+// REGISTRAR AL NUEVO USUARIO
+/* obtener datos del usuario {
+    nombre: Marco,
+    contraseña: ******,
+    correo: mbernaildeonso@gmail.com,
+    foto: fotobase64,
+    fotos: [], solo fotos subidas por el mismo usuario
+    record: 5000,
+    medalla: aguila, foto de la medalla o nombre
+    palabras: [], solo palabras agregadas
+    configuracion: {
+        tema: oscuro,
+        efectosDeSonido: off,
+        musica: off,
+        efectosDeSonidoDelTeclado: off,
+        inicioDeSesionAutomatico: on, 'cuando este en on deja el LS como esta y cuando este en off ejecutar la funcion cerrarSesion() cuando cierre la página' y la funcion cerrarSesion() va a hacer cambiar la propiedad logeada a false para que cuando vuelva a cargar la pagina itere los usuarios y no encontrara un usuario logeado || crear un usuario logeado en el LS y ponerle el usuaurio que tiene la propiedad logeado en true y cuando cierre sesion ese usuario vaciarlo el problema estaria cuando quiera hacer un cambio tendria que hacerlo en el usuario logeado y cuando cierre la pagina actualizar el usuario logeado con sus nuevas configuraciones || o sino solo tener un usuario con la propiedad logeado y a la carga de cada pagina crear una variabla con los datos del usuario y cuando haya un cambio actualizarlo al instante ***
+        ...
+    },
+    logeado: true,
+    ...
+
+}*/
+
+
+
+//cuando carga el js en LS crear un un array de Usuarios y en caso ya exista obtener el array de Usuarios 
+// En caso exista el array se tiene que iterar  y buscar un Usuario que tenga la propiedad Logeado en true 
+// en caso exista :: Iniciar sesión y asignarlo a la Constante USUARIO (hacer para cada página) para despues de ese usuario ya usarlos en las diferentes partes de la aplicación
+// en caso no exista :: no habra nada que asignar a la Constante USUARIO entonces quedara en undefined y hacer lo que conviene en cada parte de la aplicacion
+// En caso no exista el array se tiene que crear un array vacio llamado Usuarios y se hará lo mismo que se hace cuando no existe un usuario logeado
+
+const USUARIO = {};
+let USUARIOS = localStorage.getItem('usuarios');
+
+if (USUARIOS === null) {
+
+}
+
+
+
+
+
+
+
+
+
+
+
 // window.document.onload = () => {
-    // init()
+// init()
 // }
 window.onload = () => {
     init()
@@ -48,13 +110,33 @@ window.onload = () => {
 
 
 
+
+
 function init() {
-   
+
 
     btnAddWord.onclick = () => {
-        location.href = "./addWord.html"
-    }
+        if (USUARIOS === null) {
+            mostrarLogin();
+        } else {
 
+            location.href = "./addWord.html"
+        }
+    }
+    btnLogros.onclick = () => {
+        if (USUARIOS === null) {
+            mostrarLogin()
+        } else {
+
+        }
+    }
+    btnComoSeJuega.onclick = () => {
+        if (USUARIOS === null) {
+            mostrarLogin();
+        } else {
+
+        }
+    }
     btnSubirFoto.onchange = (e) => {
         let urlImagen = URL.createObjectURL(e.target.files[0])
         imagenPorDefecto.src = urlImagen
@@ -186,30 +268,15 @@ function cerrarLogin() {
 
 }
 
-// Logear el usuario
-// obtener datos del usuario (nombre de usuario,contraseña, foto )
-//  de ahi guarda en un objeto llamado usuario que tenga NOMBRE, CONTRASEÑA, URL DE LA FOTO(guardar todas las que usó anterior mente y mostrarla en la galeria), RECORD, MELLADA, configuracion, palabras Y SI ESTA LOGEADO 
-// Guardar datos del usuario en el localStorage
 
-// REGISTRAR AL NUEVO USUARIO
-/* obtener datos del usuario {
-    nombre: Marco,
-    contraseña: ******,
-    correo: mbernaildeonso@gmail.com,
-    foto: fotobase64,
-    fotos: [], solo fotos subidas por el mismo usuario
-    record: 5000,
-    medalla: aguila, foto de la medalla o nombre
-    palabras: [], solo palabras agregadas
-    configuracion: {
-        tema: oscuro,
-        efectosDeSonido: off,
-        musica: off,
-        efectosDeSonidoDelTeclado: off,
-        inicioDeSesionAutomatico: on, 'cuando este en on deja el LS como esta y cuando este en off ejecutar la funcion cerrarSesion() cuando cierre la página' y la funcion cerrarSesion() va a hacer cambiar la propiedad logeada a false para que cuando vuelva a cargar la pagina itere los usuarios y no encontrara un usuario logeado || crear un usuario logeado en el LS y ponerle el usuaurio que tiene la propiedad logeado en true y cuando cierre sesion ese usuario vaciarlo el problema estaria cuando quiera hacer un cambio tendria que hacerlo en el usuario logeado y cuando cierre la pagina actualizar el usuario logeado con sus nuevas configuraciones || o sino solo tener un usuario con la propiedad logeado y a la carga de cada pagina crear una variabla con los datos del usuario y cuando haya un cambio actualizarlo al instante ***
-        ...
-    },
-    logeado: true,
-    ...
 
-}*/
+
+
+
+
+
+
+
+
+
+
