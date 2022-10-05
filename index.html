@@ -110,16 +110,17 @@
                 </div>
                 <div class="contenedor-login-body">
                     <label class="nombre-login label-login">
-                        
-                        <input type="text" class="input-login" id="nombre-usuario-login">
+
                         <span class="label-text">Usuario</span>
+                        <input type="text" class="input-login" id="nombre-usuario-login">
                     </label>
                     <label class="contraseña-login label-login">
-                        <input type="password" class="input-login" id="contraseña-login">
-                        
                         <span class="label-text" id="contra-text">Contraseña</span>
+                        <input type="password" class="input-login" id="contraseña-login">
+
                     </label>
-                    <label class="checkbox"><input type="checkbox" id="input-inicio-sesion-automatico">Inicio de sesion automatico</label>
+                    <label class="checkbox"><input type="checkbox" id="input-inicio-sesion-automatico">Inicio de sesion
+                        automatico</label>
                 </div>
                 <div class="contenedor-login-footer">
                     <button class="btn-login" id="login-form">Iniciar sesion</button>
@@ -156,39 +157,37 @@
 
                         </div>
                     </div>
-
+                    <!-- ---------------------------------------------------------------------------- -->
                     <div class="contenedor-formulario">
-                        <div class="contenedor-nombre">
-                            <label class="label-form">
+                        <label class="label-form">
+                            <span class="label-text">Nombre de usuario</span>
+                            <div class="contenedor-input">
                                 <input type="text" class="input-login" id="nombre-usuario">
-                                <span class="label-text">Nombre de usuario</span>
-                            </label>
-                        </div>
-                        <div class="contenedor-contraseña">
-                            <label class="label-form">
+                                <div class="icono-input-invalid">
+                                    <span class="icon-cross"></span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="label-form">
 
-                                <input type="password" class="input-login" id="contraseña-usuario">
-                                <span class="label-text">Contraseña</span>
-                            </label>
-                            <label class="label-form">
+                            <span class="label-text">Contraseña</span>
+                            <input type="password" class="input-login" id="contraseña-usuario">
+                        </label>
+                        <label class="label-form">
+                            <span class="label-text">Repita la contraseña<span>
+                                    <input type="password" class="input-login" id="contraseña2-usuario">
 
-                                <input type="password" class="input-login" id="contraseña2-usuario">
-                                <span class="label-text">Repita la contraseña<span>
-                            </label>
-                        </div>
-                        <div class="contenedor-correo">
-                            <label class="label-form">
+                        </label>
+                        <label class="label-form">
 
-                                <input type="email" class="input-login" id="correo-usuario">
-                                <span class="label-text">Correo</span>
-                            </label>
-                        </div>
+                            <span class="label-text">Correo</span>
+                            <input type="email" class="input-login" id="correo-usuario">
+                        </label>
                     </div>
                 </div>
                 <div class="contenedor-registro-footer">
                     <!-- hacer que este bototn cuando ya registre haga un margin-left a 0% osea lo mande para el modal de iniciar sesion -->
-                    <button class="btn-registro" 
-                    id="registrarse-form">Registrase</button> 
+                    <button class="btn-registro" id="registrarse-form">Registrase</button>
                     <button class="btn-registro" id="btn-login">Iniciar sesión</button>
                 </div>
             </div>

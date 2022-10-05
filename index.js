@@ -94,10 +94,7 @@ function verificarYAlertarInputsVacios(inputs) {
         return true
     }
     inputs.forEach(input => {
-        if (input.nextElementSibling.nextElementSibling == undefined) {
-            alertarInputVacio(input)
-            
-        }
+        alertarError(input, "Este campo esta vacio")
     })
 }
 btnRegistrarUsuario.onclick = () => {
@@ -142,13 +139,18 @@ function iniciarSesión(nombreDeUsuario, contraseña) {
 
 
 
-function alertarInputVacio(input) {
-    let spanAlert = document.createElement('span')
-    spanAlert.innerHTML = "Esta campo esta vacio"
-    spanAlert.className = "alerta-input-vacio"
-    input.parentElement.appendChild(spanAlert)
-    input.style.borderColor = "#c91c2a"
-    input.style.borderWidth = "1px"
+function alertarError(input,errorMessage) {
+    if (input.nextElementSibling.nextElementSibling == undefined) {
+        let spanAlert = document.createElement('span')
+        spanAlert.innerHTML = errorMessage
+        spanAlert.className = "alerta-input-vacio"
+        input.parentElement.appendChild(spanAlert)        
+        input.style.borderColor = "#c91c2a"
+        input.style.borderWidth = "1px"
+    }else{
+        input.nextElementSibling.nextElementSibling.innerHTML = errorMessage
+    }
+
 }
 
 
@@ -193,6 +195,15 @@ window.onload = () => {
 
 function init() {
 
+    inputNombreUsuarioRegister.onkeydown = (e) => {
+        if (e.key === " ") {
+            e.preventDefault();
+            alertarError(inputNombreUsuarioRegister,"El usuario tiene que ser de 4 a 16 digitos y solo puede contener numeros, letras y guion bajo.")
+        }1
+    }
+    inputNombreUsuarioRegister.onblur = () => {
+
+     }
     btnStart.onclick = () => {
         if (USUARIO == undefined) {
             mostrarLogin();
@@ -279,20 +290,20 @@ function init() {
 
 
 function hacerAnimacionACadaInputAlEscribir() {
-    inputLogins.forEach(input => {
-        input.onfocus = () => {
-            input.nextElementSibling.style.top = "-40%"
-            input.nextElementSibling.style.fontSize = "15px"
-        };
-        input.onblur = () => {
-            if (input.value == "") {
-                input.nextElementSibling.style.top = "0%"
-                input.nextElementSibling.style.fontSize = "20px"
-                return
-            }
-            input.nextElementSibling.style.fontSize = "15px"
-        }
-    });
+    // inputLogins.forEach(input => {
+    //     input.onfocus = () => {
+    //         input.previousSibling.style.top = "-40%"
+    //         input.previousSibling.style.fontSize = "15px"
+    //     };
+    //     input.onblur = () => {
+    //         if (input.value == "") {
+    //             input.nextElementSibling.style.top = "0%"
+    //             input.nextElementSibling.style.fontSize = "16px"
+    //             return
+    //         }
+    //         input.nextElementSibling.style.fontSize = "15px"
+    //     }
+    // });
 }
 
 function recortarImg(element) {

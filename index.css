@@ -286,24 +286,44 @@ body{
                     flex-direction: column;
                     font-size: calc(.5rem + 1.4vw);
                     position: relative;
+
                 }
                     .label-text{
-                        position: absolute;
-                        top: 0;
-                        transition: top .2s;
+                        /* position: absolute; */
+                        /* top: 0; */
+                        /* transition: top .2s; */
                         /* top: -30px; */
                         font-size: 18px;
                         color: rgb(86, 85, 85);
                     }
                     .input-login{
-                        font-family: "Indie flower";
-                        padding: 5px;
-                        font-weight: 900;
+                        flex:  0 1 90%;
+                        font-family: "Roboto";
+                        padding: 7px;
+                        font-weight: 500;
                         background-color: transparent;
-                        border: 2px solid #0073ff;
-                        border-width: 0px 0px 3px 0px;
-                        font-size: calc(.5rem + 1vw);
+                        border: 0px solid #0073ff;
+                        /* width: 100%; */
+                        /* border-width: 0px 0px 3px 0px; */
+                        font-size: 16px;
                         outline: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+
+                    }
+                    .icono-input-invalid{
+                        flex: 0 1 2%;
+                        background-color: #f04;
+                        color: #fff;
+                        padding: 5px;
+                        border-radius: 100%;
+                        display: flex;
+                        height: min-content;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    .icono-input-invalid span{
+                        font-size: 10px;
                     }
                     .checkbox{
                         display: flex;
@@ -600,53 +620,29 @@ body{
                     /* border: 1px solid salmon; */
                     display: flex;
                     flex-direction: column;
-                    padding: 40px 10px;
+                    /* padding: 40px 10px; */
                     justify-content: center;
-                    gap: 40px;
+                    gap: 20px;
                     /* justify-content: center; */
-                }
-                    .contenedor-nombre, .contenedor-contraseña, .contenedor-correo{
-                        display: flex;
-                        font-family: "Indie FLower";
-                        flex-direction: column;
-                        font-size: calc(.5rem + 1.4vw);
-                        position: relative;
-                        justify-items: center;
-                        gap: 40px;
-                    }
-                    .contenedor-contraseña{
-
-                    }
+                }   
                     
                         .label-form{
                             display: flex;
-                            /* gap: 10px; */
-                            flex-direction: column;
+                            gap: 5px;
+                            flex-direction: row;
                             position: relative;
-                            justify-content: center;
+                            flex-wrap: wrap;
+                            /* justify-content: center; */
+                            font-family: "Indie FLower";
+                            background-color: #ccc;
+                            font-size: calc(.5rem + 1.4vw);
                         }
                             .label-text{
-                                /* position: relative; */
-                                position: absolute;
-
-                                top: 0%;
-                                transition: top .2s;
-                                /* top: -30px; */
-                                font-size: 20px;
+                                font-size: 16px;
                                 color: rgb(86, 85, 85);
                             }
-                            .input-registro{
-                                
-                                width: 100%;
-                                font-family: "Roboto";
-                                padding: 5px;
-                                font-weight: 900;
-                                background-color: transparent;
-                                border: 2px solid #0073ff;
-                                border-width: 0px 0px 3px 0px;
-                                font-size: calc(.5rem + 1vw);
-                                outline: none;
-                            }
+                            
+                            /* input-login - se modifico arriba porque es un clase para todos los inputs  */
                             .input-registro:focus ~ .label-text{
                                 /* transform: scale(.8); */
                                 /* font-size: 10px;
@@ -695,14 +691,15 @@ body{
 
 
 .alerta-input-vacio{
-    font-size: 13px;
-    font-weight: 900;
-    background-color: #c91b2a;
-    color: #fff;
+    font-size: 11px;
+    font-family: "Roboto";
+    /* font-weight: 900; */
+    /* background-color: #c91b2a; */
+    color: rgb(97, 97, 97);
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
 
-    /* padding: 2px; */
+    /* padding: 5px; */
 
 }
 .contenedor-modal{
