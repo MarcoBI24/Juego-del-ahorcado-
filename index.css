@@ -305,7 +305,9 @@ body{
                         font-size: calc(.5rem + 1vw);
                         outline: none;
                     }
-                    .input-login:focus ~ .label-text{
+                    .input-login:focus{
+                        /* border: 2px solid #0073ff; */
+                        /* border-width: 0px 0px 3px 0px; */
                         /* transform: scale(.8);
                         color: #000; */
                     }
@@ -686,7 +688,17 @@ body{
 
 
 
+.alerta-input-vacio{
+    font-size: 13px;
+    font-weight: 900;
+    background-color: #c91b2a;
+    color: #fff;
+    display: flex;
+    justify-content: center;
 
+    /* padding: 2px; */
+
+}
 .contenedor-modal{
     display: none;
     position: absolute;

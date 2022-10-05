@@ -79,30 +79,31 @@ const inputNombreUsuarioLogin = $('nombre-usuario-login')
 const inputContraseñaLogin = $('contraseña-login')
 btnIniciarSesionUsuario.onclick = () => {
     // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
-    if (inputNombreUsuarioLogin.value == "") {
-        alertarInputVacio(inputNombreUsuarioLogin)
+    let inputs = [inputNombreUsuarioLogin, inputContraseñaLogin]
+    if (!verificarYAlertarInputsVacios(inputs)) {
         return
     }
-    if (inputContraseñaLogin.value == "" ) {
-        alertarInputVacio(inputContraseñaLogin)
-        return
-    }
+
     let nombre = inputNombreUsuarioLogin.value
     let contraseña = inputContraseñaLogin.value
     iniciarSesión(nombre, contraseña)
 }
+function verificarYAlertarInputsVacios(inputs) {
+    inputs = inputs.filter(input => input.value === "")
+    if (inputs.length === 0) {
+        return true
+    }
+    inputs.forEach(input => {
+        if (input.nextElementSibling.nextElementSibling == undefined) {
+            alertarInputVacio(input)
+            
+        }
+    })
+}
 btnRegistrarUsuario.onclick = () => {
     // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
-    if (inputNombreUsuarioRegister.value == "") {
-        alertarInputVacio(inputNombreUsuarioRegister)
-        return
-    }
-    if (inputContraseñaUsuarioRegister.value == "") {
-        alertarInputVacio(inputContraseñaUsuarioRegister)
-        return
-    }
-    if (inputCorreoUsuario.value == "") {
-        alertarInputVacio(inputCorreoUsuario)
+    let inputs = [inputNombreUsuarioRegister, inputContraseñaUsuarioRegister, inputContraseña2Usuario, inputCorreoUsuario]
+    if (!verificarYAlertarInputsVacios(inputs)) {
         return
     }
     let usuarioTemp = {
@@ -141,7 +142,14 @@ function iniciarSesión(nombreDeUsuario, contraseña) {
 
 
 
-
+function alertarInputVacio(input) {
+    let spanAlert = document.createElement('span')
+    spanAlert.innerHTML = "Esta campo esta vacio"
+    spanAlert.className = "alerta-input-vacio"
+    input.parentElement.appendChild(spanAlert)
+    input.style.borderColor = "#c91c2a"
+    input.style.borderWidth = "1px"
+}
 
 
 // window.document.onload = () => {
