@@ -68,66 +68,76 @@ let crop
 // En caso no exista el array se tiene que crear un array vacio llamado Usuarios y se hará lo mismo que se hace cuando no existe un usuario logeado
 
 let USUARIO;
-let USUARIOS = localStorage.getItem('usuarios');
-const inputNombreUsuario = $('nombre-usuario')
-const inputContraseñaUsuario = $('contraseña-usuario')
+let USUARIOS = JSON.parse(localStorage.getItem('usuarios'));
+const inputNombreUsuarioRegister = $('nombre-usuario')
+const inputContraseñaUsuarioRegister = $('contraseña-usuario')
 const inputContraseña2Usuario = $('contraseña2-usuario')
 const inputCorreoUsuario = $('correo-usuario')
 const btnRegistrarUsuario = $('registrarse-form')
+const btnIniciarSesionUsuario = $('login-form')
+const inputNombreUsuarioLogin = $('nombre-usuario-login')
+const inputContraseñaLogin = $('contraseña-login')
+btnIniciarSesionUsuario.onclick = () => {
+    // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
+    if (inputNombreUsuarioLogin.value == "") {
+        alertarInputVacio(inputNombreUsuarioLogin)
+        return
+    }
+    if (inputContraseñaLogin.value == "" ) {
+        alertarInputVacio(inputContraseñaLogin)
+        return
+    }
+    let nombre = inputNombreUsuarioLogin.value
+    let contraseña = inputContraseñaLogin.value
+    iniciarSesión(nombre, contraseña)
+}
 btnRegistrarUsuario.onclick = () => {
     // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
+    if (inputNombreUsuarioRegister.value == "") {
+        alertarInputVacio(inputNombreUsuarioRegister)
+        return
+    }
+    if (inputContraseñaUsuarioRegister.value == "") {
+        alertarInputVacio(inputContraseñaUsuarioRegister)
+        return
+    }
+    if (inputCorreoUsuario.value == "") {
+        alertarInputVacio(inputCorreoUsuario)
+        return
+    }
     let usuarioTemp = {
-        nombre: "",
-        contraseña: "",
-        correo: "",
-        foto: "",
+        nombre: inputNombreUsuarioRegister.value,
+        contraseña: inputContraseñaUsuarioRegister.value,
+        correo: inputCorreoUsuario.value,
+        foto: canvas.toDataURL(),
         fotos: [],
         record: "0",
-        medalla: "",
+        medalla: "huevo",
         palabras: [],
         configuracion: {
-            tema: "claro",
+            tema: "light",
             efectosDeSonido: "off",
             musica: "off",
             efectosDeSonidoDelTeclado: "off",
-            inicioDeSesionAutomatico: "on0",
+            inicioDeSesionAutomatico: "on",
         },
         logeado: true,
     }
-    if (usuarioTemp.nombre == undefined || usuarioTemp.contraseña == undefined || usuarioTemp.contraseña == undefined) {
-        aletarInputVacio()
-    }
-    let nombreDeUsuario =
-        inputNombreUsuario.value !== "" ?
-            inputNombreUsuario.value : undefined
-    let contraseñaDeUsuario =
-        inputContraseñaUsuario.value !== "" ?
-            inputContraseñaUsuario.value : undefined
-    let contraseña2DeUsuario =
-        inputContraseña2Usuario.value !== "" ?
-            inputContraseña2Usuario.value : undefined
-    let correoDeUsuario =
-        inputCorreoUsuario.value !== "" ?
-            inputCorreoUsuario.value : undefined
-    if (nombreDeUsuario === undefined || contraseñaDeUsuario === undefined || contraseña2DeUsuario === undefined || correoDeUsuario === undefined) {
-
-
-
-    }
+    USUARIOS.push(usuarioTemp)
+    localStorage.setItem("usuarios", JSON.stringify(USUARIOS))
 }
 
-if (USUARIOS !== null) {
+
+
+
+function iniciarSesión(nombreDeUsuario, contraseña) {
+    // esta funcion debe buscar el usuario en el array de USUARIOS y verificar la contraseña y el nombre de usuario
     USUARIOS.forEach(usuario => {
-        if (usuario.logeado === true) {
+        if (nombreDeUsuario === usuario.nombre && contraseña === usuario.contraseña) {
             USUARIO = usuario
-            iniciarSesión(usuario)
         }
-    });
+    })
 }
-
-
-
-
 
 
 
@@ -138,6 +148,17 @@ if (USUARIOS !== null) {
 // init()
 // }
 window.onload = () => {
+    if (USUARIOS === null || USUARIOS.length === 0) {
+        USUARIOS = []
+        localStorage.setItem('usuarios', JSON.stringify(USUARIOS));
+    } else {
+        // Inicio de sesion automatico
+        USUARIOS.forEach(usuario => {
+            if (usuario.logeado === true) {
+                USUARIO = usuario
+            }
+        });
+    }
     init()
     crop = new Croppr(imagenPorDefecto, {
         aspectRatio: 1,
@@ -164,29 +185,37 @@ window.onload = () => {
 
 function init() {
 
-
+    btnStart.onclick = () => {
+        if (USUARIO == undefined) {
+            mostrarLogin();
+            return
+        }
+        location.href = "./elegirModo.html"
+    }
     btnAddWord.onclick = () => {
         if (USUARIO == undefined) {
             mostrarLogin();
-        } else {
-
-            location.href = "./addWord.html"
+            return
         }
+        location.href = "./addWord.html"
+
     }
     btnLogros.onclick = () => {
         if (USUARIO == undefined) {
             mostrarLogin()
-        } else {
-
+            return
         }
+        // ....
     }
+
     btnComoSeJuega.onclick = () => {
         if (USUARIO == undefined) {
             mostrarLogin();
-        } else {
-
+            return
         }
+        // ......
     }
+
     btnSubirFoto.onchange = (e) => {
         let urlImagen = URL.createObjectURL(e.target.files[0])
         imagenPorDefecto.src = urlImagen
@@ -213,11 +242,7 @@ function init() {
             cerrarLogin()
         }
     })
-    btnStart.onclick = () => {
-        mostrarLogin()
 
-        // location.href = "./elegirModo.html"
-    }
     btnAbrirGaleria.parentElement.onclick = () => {
         console.log(contenedorGaleria.dataset.cerrado);
         if (contenedorGaleria.dataset.cerrado == "true") {
