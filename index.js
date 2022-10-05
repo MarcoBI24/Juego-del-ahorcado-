@@ -61,19 +61,69 @@ let crop
 
 
 
-//cuando carga el js en LS crear un un array de Usuarios y en caso ya exista obtener el array de Usuarios 
+//cuando carga el js en LS crear un array de Usuarios y en caso ya exista obtener el array de Usuarios 
 // En caso exista el array se tiene que iterar  y buscar un Usuario que tenga la propiedad Logeado en true 
 // en caso exista :: Iniciar sesión y asignarlo a la Constante USUARIO (hacer para cada página) para despues de ese usuario ya usarlos en las diferentes partes de la aplicación
 // en caso no exista :: no habra nada que asignar a la Constante USUARIO entonces quedara en undefined y hacer lo que conviene en cada parte de la aplicacion
 // En caso no exista el array se tiene que crear un array vacio llamado Usuarios y se hará lo mismo que se hace cuando no existe un usuario logeado
 
-const USUARIO = {};
+let USUARIO;
 let USUARIOS = localStorage.getItem('usuarios');
+const inputNombreUsuario = $('nombre-usuario')
+const inputContraseñaUsuario = $('contraseña-usuario')
+const inputContraseña2Usuario = $('contraseña2-usuario')
+const inputCorreoUsuario = $('correo-usuario')
+const btnRegistrarUsuario = $('registrarse-form')
+btnRegistrarUsuario.onclick = () => {
+    // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
+    let usuarioTemp = {
+        nombre: "",
+        contraseña: "",
+        correo: "",
+        foto: "",
+        fotos: [],
+        record: "0",
+        medalla: "",
+        palabras: [],
+        configuracion: {
+            tema: "claro",
+            efectosDeSonido: "off",
+            musica: "off",
+            efectosDeSonidoDelTeclado: "off",
+            inicioDeSesionAutomatico: "on0",
+        },
+        logeado: true,
+    }
+    if (usuarioTemp.nombre == undefined || usuarioTemp.contraseña == undefined || usuarioTemp.contraseña == undefined) {
+        aletarInputVacio()
+    }
+    let nombreDeUsuario =
+        inputNombreUsuario.value !== "" ?
+            inputNombreUsuario.value : undefined
+    let contraseñaDeUsuario =
+        inputContraseñaUsuario.value !== "" ?
+            inputContraseñaUsuario.value : undefined
+    let contraseña2DeUsuario =
+        inputContraseña2Usuario.value !== "" ?
+            inputContraseña2Usuario.value : undefined
+    let correoDeUsuario =
+        inputCorreoUsuario.value !== "" ?
+            inputCorreoUsuario.value : undefined
+    if (nombreDeUsuario === undefined || contraseñaDeUsuario === undefined || contraseña2DeUsuario === undefined || correoDeUsuario === undefined) {
 
-if (USUARIOS === null) {
 
+
+    }
 }
 
+if (USUARIOS !== null) {
+    USUARIOS.forEach(usuario => {
+        if (usuario.logeado === true) {
+            USUARIO = usuario
+            iniciarSesión(usuario)
+        }
+    });
+}
 
 
 
@@ -116,7 +166,7 @@ function init() {
 
 
     btnAddWord.onclick = () => {
-        if (USUARIOS === null) {
+        if (USUARIO == undefined) {
             mostrarLogin();
         } else {
 
@@ -124,14 +174,14 @@ function init() {
         }
     }
     btnLogros.onclick = () => {
-        if (USUARIOS === null) {
+        if (USUARIO == undefined) {
             mostrarLogin()
         } else {
 
         }
     }
     btnComoSeJuega.onclick = () => {
-        if (USUARIOS === null) {
+        if (USUARIO == undefined) {
             mostrarLogin();
         } else {
 
