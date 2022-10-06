@@ -21,7 +21,7 @@ const btnsCerrarContenedorIdentificacion = document.querySelectorAll(".contenedo
 const btnRegistrarseModal = $("btn-registro")
 const btnLogearModal = $("btn-login")
 // LOS 2 SIGUIENTES CONSTANTES SIRVEN PARA HACER LA ANIMACION DE LOS INPUTS AL ESCRIBIR
-const inputLogins = document.querySelectorAll('.input-login');
+const inputLogins = document.querySelectorAll('.input');
 const labelDelInputLogin = document.querySelectorAll('.label-text');
 let imgTemp = new Image()
 const btnSubirFoto = $('input-subirFoto')
@@ -93,7 +93,7 @@ function verificarYAlertarInputs(inputs) {
     let inputsVacios = inputs.filter(input => input.value === "")
     let inputsInvalidos = inputs.filter(input => input.dataset.valid === "false")
     if (inputsVacios.length === 0 && inputsInvalidos.length === 0) {
-        
+
         return true
     }
     inputsInvalidos.forEach(inputInvalido => {
@@ -103,7 +103,7 @@ function verificarYAlertarInputs(inputs) {
         alertarError(inputVacio, "Este campo esta vacio")
     })
 }
-    
+
 
 function iniciarSesión(nombreDeUsuario, contraseña) {
     // esta funcion debe buscar el usuario en el array de USUARIOS y verificar la contraseña y el nombre de usuario
@@ -117,15 +117,18 @@ function iniciarSesión(nombreDeUsuario, contraseña) {
 
 
 function alertarError(input, errorMessage) {
-    if (input.nextElementSibling.nextElementSibling == undefined) {
+    if (input.nextElementSibling == undefined) {
         let spanAlert = document.createElement('span')
+        let spanAlertIcon = document.createElement('span')
+        spanAlertIcon.className = 'icon-cross'
+        spanAlertIcon.setAttribute('id', 'icono-input-invalid')
         spanAlert.innerHTML = errorMessage
-        spanAlert.className = "alerta-input-vacio"
-        input.parentElement.appendChild(spanAlert)
-        input.style.borderColor = "#c91c2a"
-        input.style.borderWidth = "1px"
+        spanAlert.className = "alerta-input-invalid"
+        input.parentElement.appendChild(spanAlertIcon)
+        input.parentElement.parentElement.appendChild(spanAlert)
+        input.parentElement.style.border = "2px solid #f04"
     } else {
-        input.nextElementSibling.nextElementSibling.innerHTML = errorMessage
+        input.parentElement.nextElementSibling.innerHTML = errorMessage
     }
 
 }
@@ -161,13 +164,13 @@ function init() {
 
 
     }
-    btnRegistrarUsuario.onclick = ()=> {
+    btnRegistrarUsuario.onclick = () => {
         // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
         let inputs = [inputNombreUsuarioRegister, inputContraseñaUsuarioRegister, inputContraseña2Usuario, inputCorreoUsuario]
         if (!verificarYAlertarInputs(inputs)) {
             return
         }
-    
+
         let usuarioTemp = {
             nombre: inputNombreUsuarioRegister.value,
             contraseña: inputContraseñaUsuarioRegister.value,
@@ -190,8 +193,8 @@ function init() {
         localStorage.setItem("usuarios", JSON.stringify(USUARIOS))
         console.log(`${usuarioTemp.nombre} registrado con exito!`);
     }
-    
-    
+
+
     btnStart.onclick = () => {
         if (USUARIO == undefined) {
             mostrarLogin();
@@ -269,7 +272,7 @@ function init() {
 
     }
     cargarImagenesDeLaGaleria()
-    hacerAnimacionACadaInputAlEscribir()
+    // hacerAnimacionACadaInputAlEscribir()
     queSeMuestrenConUnClickLosItemDeLaGaleria()
 }
 
@@ -300,9 +303,7 @@ window.onload = () => {
         }
     })
     recortarImg(imagenPorDefecto)
-
-
-
+    
 }
 
 
@@ -379,12 +380,6 @@ function cerrarLogin() {
     contenedorIdentificacion.style.top = `-100%`
 
 }
-
-
-
-
-
-
 
 
 

@@ -280,63 +280,61 @@ body{
                 /* align-items: center; */
             }
             
-                .label-login{
+                .label-form{
                     display: flex;
-                    font-family: "Indie flower";
                     flex-direction: column;
                     font-size: calc(.5rem + 1.4vw);
                     position: relative;
 
                 }
                     .label-text{
-                        /* position: absolute; */
-                        /* top: 0; */
-                        /* transition: top .2s; */
-                        /* top: -30px; */
+                        
                         font-size: 18px;
                         color: rgb(86, 85, 85);
                     }
-                    .input-login{
-                        flex:  0 1 90%;
-                        font-family: "Roboto";
-                        padding: 7px;
-                        font-weight: 500;
-                        background-color: transparent;
-                        border: 0px solid #0073ff;
-                        /* width: 100%; */
-                        /* border-width: 0px 0px 3px 0px; */
-                        font-size: 16px;
-                        outline: none;
-                        border-radius: 5px;
-                        cursor: pointer;
-
-                    }
-                    .icono-input-invalid{
-                        flex: 0 1 2%;
-                        background-color: #f04;
-                        color: #fff;
-                        padding: 5px;
-                        border-radius: 100%;
+                    .contenedor-input{
+                        background-color: #cecece;
+                        width: 100%;
                         display: flex;
-                        height: min-content;
-                        justify-content: center;
+                        flex-wrap: wrap;
                         align-items: center;
+                        border-radius: 5px;
+                        
                     }
-                    .icono-input-invalid span{
-                        font-size: 10px;
-                    }
+                        .input{
+                            flex: 0 1 90%;
+                            font-family: "Roboto";
+                            padding: 7px;
+                            font-weight: 500;
+                            background-color: transparent;
+                            border: 0px solid #0073ff;
+                            /* width: 100%; */
+                            /* border-width: 0px 0px 3px 0px; */
+                            font-size: 16px;
+                            outline: none;
+                            border-radius: 5px;
+                            cursor: pointer;
+
+                        }
+                        #icono-input-invalid{
+                            flex: 0 1 5%;
+                            background-color: #f04;
+                            color: #fff;
+                            padding: 5px;
+                            border-radius: 100%;
+                            display: flex;
+                            /* height: min-content; */
+                            justify-content: center;
+                            align-items: center;
+                            font-size: 10px;
+                        }
                     .checkbox{
                         display: flex;
                         gap: 10px;
                         font-size: 15px;
                         align-self: center;
                     }
-                    .input-login:focus{
-                        /* border: 2px solid #0073ff; */
-                        /* border-width: 0px 0px 3px 0px; */
-                        /* transform: scale(.8);
-                        color: #000; */
-                    }
+                    
             .contenedor-login-footer{
                 display: flex;
                 flex-direction: column;
@@ -629,25 +627,38 @@ body{
                         .label-form{
                             display: flex;
                             gap: 5px;
-                            flex-direction: row;
+                            flex-direction: column;
                             position: relative;
-                            flex-wrap: wrap;
-                            /* justify-content: center; */
-                            font-family: "Indie FLower";
-                            background-color: #ccc;
-                            font-size: calc(.5rem + 1.4vw);
+                            width: 100%;
                         }
+                            
+
                             .label-text{
                                 font-size: 16px;
                                 color: rgb(86, 85, 85);
                             }
                             
-                            /* input-login - se modifico arriba porque es un clase para todos los inputs  */
-                            .input-registro:focus ~ .label-text{
-                                /* transform: scale(.8); */
-                                /* font-size: 10px;
-                                color: #000; */
+                            .contenedor-input{
+                                width: 100%;
+                                display: flex;
+                                flex-wrap: wrap;
+                                align-items: center;
                             }
+                                #icono-input-invalid{
+                                    flex: 0 1 5%;
+                                    
+                                    background-color: #f04;
+                                    color: #fff;
+                                    padding: 5px;
+                                    border-radius: 100%;
+                                    display: flex;
+                                    /* height: min-content; */
+                                    justify-content: center;
+                                    align-items: center;
+                                    font-size: 8px;
+                                }
+                            /* input - se modifico arriba porque es un clase para todos los inputs  */
+                            
                                 
 
 
@@ -690,7 +701,7 @@ body{
 
 
 
-.alerta-input-vacio{
+.alerta-input-invalid{
     font-size: 11px;
     font-family: "Roboto";
     /* font-weight: 900; */
