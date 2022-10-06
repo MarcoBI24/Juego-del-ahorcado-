@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi perfil</title>
+    <link rel="stylesheet" href="./style-icons.css">
+    <link rel="stylesheet" href="./perfil.css">
+    <!-- Para el editor usaremos croppr.js, importamos sus CDNs -->
+    <script src="https://cdn.jsdelivr.net/gh/jamesssooi/Croppr.js@2.3.0/dist/croppr.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/jamesssooi/Croppr.js@2.3.0/dist/croppr.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="contenedor-general">
+        <div class="contenedor-header">
+            <button class="contenedor-btn-retroceder">
+                <span class="icon-undo2"></span>
+            </button>
+            <button class="contenedor-btn-modal">
+                <span class="icon-menu"></span>
+            </button>
+        </div>
+        <div class="contenedor-body">
+            <div class="contenedor-foto">
+                <div class="foto" id="contenedor-foto">
+                    <img src="./galeria/user-14.jpg" class="foto-img" id="foto">
+                </div>
+                <canvas class="preview-foto" id="canvas"></canvas>
+                <button class="contenedor-input-subirFoto">
+                    <span class="icon-upload"></span>
+                    <input type="file" class="input-subirArchivo" id="input-subirFoto">
+                </button>
+                <div class="abrir-galeria">
+                    <button id="btn-abrir-galeria" class="btn-abrir-galeria">
+                        <span class="icon-circle-down icon-abrir-galeria"></span>
+                    </button>
+                </div>
+                <div class="contenedor-galeria" data-cerrado="true" id="contenedor-galeria">
+
+                </div>
+            </div>
+        </div>
+        <div class="contenedor-footer"></div>
+    </div>
+
+    <script src="./perfil.js" type="module"></script>
+</body>
+
+</html>

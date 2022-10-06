@@ -27,6 +27,7 @@ let imgTemp = new Image()
 const btnSubirFoto = $('input-subirFoto')
 const contenedorFoto = $('contenedor-foto')
 const canvas = $('canvas')
+const btnPerfil = $("btn-perfil")
 const context = canvas.getContext('2d')
 let imagenPorDefecto = $("foto")
 let urlImagen = imagenPorDefecto.src
@@ -174,7 +175,7 @@ window.onload = () => {
         aspectRatio: 1,
         // minSize: [80, 80],
         // maxSize: [120, 120],
-        startSize: [120, 120],
+        startSize: [80, 80],
         // onInitialize: recortar,}
         onCropMove: () => {
             recortarImg(imagenPorDefecto)
@@ -195,15 +196,6 @@ window.onload = () => {
 
 function init() {
 
-    inputNombreUsuarioRegister.onkeydown = (e) => {
-        if (e.key === " ") {
-            e.preventDefault();
-            alertarError(inputNombreUsuarioRegister,"El usuario tiene que ser de 4 a 16 digitos y solo puede contener numeros, letras y guion bajo.")
-        }1
-    }
-    inputNombreUsuarioRegister.onblur = () => {
-
-     }
     btnStart.onclick = () => {
         if (USUARIO == undefined) {
             mostrarLogin();
@@ -234,7 +226,9 @@ function init() {
         }
         // ......
     }
-
+    btnPerfil.onclick = () => {
+        location.href = "./perfil.html"
+     }
     btnSubirFoto.onchange = (e) => {
         let urlImagen = URL.createObjectURL(e.target.files[0])
         imagenPorDefecto.src = urlImagen
@@ -281,10 +275,7 @@ function init() {
     cargarImagenesDeLaGaleria()
     hacerAnimacionACadaInputAlEscribir()
     queSeMuestrenConUnClickLosItemDeLaGaleria()
-
-
 }
-
 
 
 
@@ -306,6 +297,7 @@ function hacerAnimacionACadaInputAlEscribir() {
     // });
 }
 
+// saludar()
 function recortarImg(element) {
 
     let parametros = crop.getValue()
