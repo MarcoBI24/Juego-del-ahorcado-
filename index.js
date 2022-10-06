@@ -81,7 +81,7 @@ const inputContraseñaLogin = $('contraseña-login')
 btnIniciarSesionUsuario.onclick = () => {
     // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
     let inputs = [inputNombreUsuarioLogin, inputContraseñaLogin]
-    if (!verificarYAlertarInputsVacios(inputs)) {
+    if (!verificarYAlertarInputs(inputs)) {
         return
     }
 
@@ -89,45 +89,21 @@ btnIniciarSesionUsuario.onclick = () => {
     let contraseña = inputContraseñaLogin.value
     iniciarSesión(nombre, contraseña)
 }
-function verificarYAlertarInputsVacios(inputs) {
-    inputs = inputs.filter(input => input.value === "")
-    if (inputs.length === 0) {
+function verificarYAlertarInputs(inputs) {
+    let inputsVacios = inputs.filter(input => input.value === "")
+    let inputsInvalidos = inputs.filter(input => input.dataset.valid === "false")
+    if (inputsVacios.length === 0 && inputsInvalidos.length === 0) {
+        
         return true
     }
-    inputs.forEach(input => {
-        alertarError(input, "Este campo esta vacio")
+    inputsInvalidos.forEach(inputInvalido => {
+        alertarError(inputInvalido, "Este campo es invalido")
+    })
+    inputsVacios.forEach(inputVacio => {
+        alertarError(inputVacio, "Este campo esta vacio")
     })
 }
-btnRegistrarUsuario.onclick = () => {
-    // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
-    let inputs = [inputNombreUsuarioRegister, inputContraseñaUsuarioRegister, inputContraseña2Usuario, inputCorreoUsuario]
-    if (!verificarYAlertarInputsVacios(inputs)) {
-        return
-    }
-    let usuarioTemp = {
-        nombre: inputNombreUsuarioRegister.value,
-        contraseña: inputContraseñaUsuarioRegister.value,
-        correo: inputCorreoUsuario.value,
-        foto: canvas.toDataURL(),
-        fotos: [],
-        record: "0",
-        medalla: "huevo",
-        palabras: [],
-        configuracion: {
-            tema: "light",
-            efectosDeSonido: "off",
-            musica: "off",
-            efectosDeSonidoDelTeclado: "off",
-            inicioDeSesionAutomatico: "on",
-        },
-        logeado: true,
-    }
-    USUARIOS.push(usuarioTemp)
-    localStorage.setItem("usuarios", JSON.stringify(USUARIOS))
-}
-
-
-
+    
 
 function iniciarSesión(nombreDeUsuario, contraseña) {
     // esta funcion debe buscar el usuario en el array de USUARIOS y verificar la contraseña y el nombre de usuario
@@ -140,62 +116,82 @@ function iniciarSesión(nombreDeUsuario, contraseña) {
 
 
 
-function alertarError(input,errorMessage) {
+function alertarError(input, errorMessage) {
     if (input.nextElementSibling.nextElementSibling == undefined) {
         let spanAlert = document.createElement('span')
         spanAlert.innerHTML = errorMessage
         spanAlert.className = "alerta-input-vacio"
-        input.parentElement.appendChild(spanAlert)        
+        input.parentElement.appendChild(spanAlert)
         input.style.borderColor = "#c91c2a"
         input.style.borderWidth = "1px"
-    }else{
+    } else {
         input.nextElementSibling.nextElementSibling.innerHTML = errorMessage
     }
 
 }
 
 
-// window.document.onload = () => {
-// init()
-// }
-window.onload = () => {
-    if (USUARIOS === null || USUARIOS.length === 0) {
-        USUARIOS = []
-        localStorage.setItem('usuarios', JSON.stringify(USUARIOS));
-    } else {
-        // Inicio de sesion automatico
-        USUARIOS.forEach(usuario => {
-            if (usuario.logeado === true) {
-                USUARIO = usuario
-            }
-        });
-    }
-    init()
-    crop = new Croppr(imagenPorDefecto, {
-        aspectRatio: 1,
-        // minSize: [80, 80],
-        // maxSize: [120, 120],
-        startSize: [80, 80],
-        // onInitialize: recortar,}
-        onCropMove: () => {
-            recortarImg(imagenPorDefecto)
+
+
+function alertarInputValid(input) {
+    // aqui crear un span con un icono de check y darle color verde al border del contenedor
+}
+function nombreInvalid(nombre) {
+    USUARIOS.filter(usuario => {
+        if (usuario.nombre === nombre) {
+            console.log("Ese nombre ya existe");
+            inputNombreUsuarioRegister.dataset.valid = "false"
+            alertarError(inputNombreUsuarioRegister, "Este usuario ya existe")
+            return true
         }
     })
-    recortarImg(imagenPorDefecto)
-
-
-
 }
-
-
-
-
-
-
-
-
 function init() {
+    // ya verifica que  no tenga espacios en otro commit 
+    inputNombreUsuarioRegister.onblur = () => {
+        let nombreTemp = inputNombreUsuarioRegister.value
+        // verificar que el nombre de usuario no exista en el LS
+        if (!nombreInvalid(nombreTemp)) {
+            inputNombreUsuarioRegister.dataset.valid = "true"
+            alertarInputValid()
+        }
 
+
+
+
+
+    }
+    btnRegistrarUsuario.onclick = ()=> {
+        // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
+        let inputs = [inputNombreUsuarioRegister, inputContraseñaUsuarioRegister, inputContraseña2Usuario, inputCorreoUsuario]
+        if (!verificarYAlertarInputs(inputs)) {
+            return
+        }
+    
+        let usuarioTemp = {
+            nombre: inputNombreUsuarioRegister.value,
+            contraseña: inputContraseñaUsuarioRegister.value,
+            correo: inputCorreoUsuario.value,
+            foto: canvas.toDataURL(),
+            fotos: [],
+            record: "0",
+            medalla: "huevo",
+            palabras: [],
+            configuracion: {
+                tema: "light",
+                efectosDeSonido: "off",
+                musica: "off",
+                efectosDeSonidoDelTeclado: "off",
+                inicioDeSesionAutomatico: "on",
+            },
+            logeado: false,
+        }
+        USUARIOS.push(usuarioTemp)
+        localStorage.setItem("usuarios", JSON.stringify(USUARIOS))
+        console.log(`${usuarioTemp.nombre} registrado con exito!`);
+    }
+    
+    
     btnStart.onclick = () => {
         if (USUARIO == undefined) {
             mostrarLogin();
@@ -228,7 +224,7 @@ function init() {
     }
     btnPerfil.onclick = () => {
         location.href = "./perfil.html"
-     }
+    }
     btnSubirFoto.onchange = (e) => {
         let urlImagen = URL.createObjectURL(e.target.files[0])
         imagenPorDefecto.src = urlImagen
@@ -278,6 +274,36 @@ function init() {
 }
 
 
+
+window.onload = () => {
+    if (USUARIOS === null || USUARIOS.length === 0) {
+        USUARIOS = []
+        localStorage.setItem('usuarios', JSON.stringify(USUARIOS));
+    } else {
+        // Inicio de sesion automatico
+        USUARIOS.forEach(usuario => {
+            if (usuario.logeado === true) {
+                USUARIO = usuario
+
+            }
+        });
+    }
+    init()
+    crop = new Croppr(imagenPorDefecto, {
+        aspectRatio: 1,
+        // minSize: [80, 80],
+        // maxSize: [120, 120],
+        startSize: [80, 80],
+        // onInitialize: recortar,}
+        onCropMove: () => {
+            recortarImg(imagenPorDefecto)
+        }
+    })
+    recortarImg(imagenPorDefecto)
+
+
+
+}
 
 
 function hacerAnimacionACadaInputAlEscribir() {
