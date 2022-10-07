@@ -157,6 +157,12 @@ function verificarNombre(nombre) {
     }
 
 }
+const expRegContraseñas = {
+    inseguro: /[a-zA-z]{4,7}/,
+    noTanSeguro: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{4,7}$/,
+    seguro: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,12}$/,
+    muySeguro: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#.$($)$-$_])[A-Za-z\d$@$!%*?&#.$($)$-$_]{12,20}$/
+}
 function validarInput(e) {
     console.log(e.target.validity.valid);
     const INPUT = e.target
@@ -173,7 +179,13 @@ function validarInput(e) {
                 alertarInputValid(INPUT)
             }
             break;
-
+        case "contraseña":
+            if (INPUT.validity.valid == false) {
+                alertarError(INPUT, "La contraseña tiene que ser desde 6 hasta 20 caracteres entre letra mayusculas, digitos y caracteres especiales(#*&) y sin espacios en blanco")
+                
+            }else{
+                alertarInputValid(INPUT)
+            }
         default:
             break;
     }
@@ -282,8 +294,7 @@ function init() {
         }
     })
 
-    btnAbrirGaleria.parentElement.onclick = () => {
-        console.log(contenedorGaleria.dataset.cerrado);
+    btnAbrirGaleria.onclick = () => {
         if (contenedorGaleria.dataset.cerrado == "true") {
             contenedorGaleria.style.maxHeight = "150px"
             contenedorGaleria.dataset.cerrado = "false"
@@ -299,7 +310,6 @@ function init() {
 
     }
     cargarImagenesDeLaGaleria()
-    // hacerAnimacionACadaInputAlEscribir()
 }
 
 
