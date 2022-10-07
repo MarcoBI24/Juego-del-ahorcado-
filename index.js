@@ -128,7 +128,12 @@ function alertarError(input, errorMessage) {
         input.parentElement.parentElement.appendChild(spanAlert)
         input.parentElement.style.border = "2px solid #f04"
     } else {
+
+
         input.parentElement.nextElementSibling.innerHTML = errorMessage
+        input.nextElementSibling.className = "icon-cross"
+        input.nextElementSibling.id = "icono-input-invalid"
+        input.parentElement.style.border = "2px solid #f04"
     }
 
 }
@@ -137,33 +142,69 @@ function alertarError(input, errorMessage) {
 
 
 function alertarInputValid(input) {
+    if (input.nextElementSibling == undefined) {
+        let spanAlertIcon = document.createElement('span')
+        spanAlertIcon.className = 'icon-checkmark'
+        spanAlertIcon.setAttribute('id', 'icono-input-valid')
+        input.parentElement.appendChild(spanAlertIcon)
+    } else {
+        input.nextElementSibling.setAttribute("id", "icono-input-valid")
+        input.nextElementSibling.className = "icon-checkmark"
+        input.parentElement.nextElementSibling.innerHTML = ""
+
+    }
+
+    input.parentElement.style.border = "2px solid #30ff44"
     // aqui crear un span con un icono de check y darle color verde al border del contenedor
 }
-function nombreInvalid(nombre) {
-    USUARIOS.filter(usuario => {
+function verificarNombre(nombre) {
+    let existe = false
+    USUARIOS.forEach(usuario => {
         if (usuario.nombre === nombre) {
-            console.log("Ese nombre ya existe");
-            inputNombreUsuarioRegister.dataset.valid = "false"
-            alertarError(inputNombreUsuarioRegister, "Este usuario ya existe")
-            return true
+            existe = true            
         }
     })
+    if (existe) {
+        console.log("Ese nombre ya existe");
+        inputNombreUsuarioRegister.dataset.valid = "false"
+        alertarError(inputNombreUsuarioRegister, "Este usuario ya existe")
+        
+    }else{
+        inputNombreUsuarioRegister.dataset.valid = "true"
+        alertarInputValid(inputNombreUsuarioRegister)
+
+    }
+
 }
 function init() {
-    // ya verifica que  no tenga espacios en otro commit 
+    function validarInput(e) {
+        console.log(e.target.validity.valid);
+        const INPUT = e.target
+        switch (INPUT.name) {
+            case "usuario":
+                if (INPUT.value.includes(" ") || INPUT.validity.valid == false || INPUT.value.length == 0) {
+                    alertarError(INPUT, "El usuario tiene que ser de 4 a 16 digitos y solo puede contener numeros, letras y guion bajo")
+                } else {
+                    alertarInputValid(INPUT)
+                }
+                break;
+
+            default:
+                break;
+        }
+
+    }
+    inputLogins.forEach(input => {
+        input.onkeyup = validarInput
+    });
     inputNombreUsuarioRegister.onblur = () => {
         let nombreTemp = inputNombreUsuarioRegister.value
         // verificar que el nombre de usuario no exista en el LS
-        if (!nombreInvalid(nombreTemp)) {
-            inputNombreUsuarioRegister.dataset.valid = "true"
-            alertarInputValid()
-        }
-
-
-
+        verificarNombre(nombreTemp)
 
 
     }
+
     btnRegistrarUsuario.onclick = () => {
         // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
         let inputs = [inputNombreUsuarioRegister, inputContraseñaUsuarioRegister, inputContraseña2Usuario, inputCorreoUsuario]
@@ -303,7 +344,7 @@ window.onload = () => {
         }
     })
     recortarImg(imagenPorDefecto)
-    
+
 }
 
 

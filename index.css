@@ -259,7 +259,7 @@ body{
             align-items: center;
             /* flex: 1 0 100%; */
             background-color: #edebeb;
-            gap:   40px;
+            gap: 30px;
         }
             .contenedor-login-header{
                 font-family: "Indie flower";
@@ -276,7 +276,7 @@ body{
                 width: 100%;
                 max-width: 300px;
                 /* border: 1px solid darkblue; */
-                gap: 30px;
+                gap: 0px;
                 /* align-items: center; */
             }
             
@@ -319,6 +319,18 @@ body{
                         #icono-input-invalid{
                             flex: 0 1 5%;
                             background-color: #f04;
+                            color: #fff;
+                            padding: 5px;
+                            border-radius: 100%;
+                            display: flex;
+                            /* height: min-content; */
+                            justify-content: center;
+                            align-items: center;
+                            font-size: 10px;
+                        }
+                        #icono-input-valid{
+                            flex: 0 1 5%;
+                            background-color: #00e613;
                             color: #fff;
                             padding: 5px;
                             border-radius: 100%;
@@ -620,7 +632,7 @@ body{
                     flex-direction: column;
                     /* padding: 40px 10px; */
                     justify-content: center;
-                    gap: 20px;
+                    gap: 0px;
                     /* justify-content: center; */
                 }   
                     
@@ -630,6 +642,9 @@ body{
                             flex-direction: column;
                             position: relative;
                             width: 100%;
+                            /* border: 1px solid red; */
+                            min-height: 100px;
+
                         }
                             
 
@@ -713,6 +728,7 @@ body{
     /* padding: 5px; */
 
 }
+
 .contenedor-modal{
     display: none;
     position: absolute;
