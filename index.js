@@ -118,23 +118,20 @@ function iniciarSesión(nombreDeUsuario, contraseña) {
 
 function alertarError(input, errorMessage) {
     if (input.nextElementSibling == undefined) {
-        let spanAlert = document.createElement('span')
         let spanAlertIcon = document.createElement('span')
         spanAlertIcon.className = 'icon-cross'
         spanAlertIcon.setAttribute('id', 'icono-input-invalid')
-        spanAlert.innerHTML = errorMessage
-        spanAlert.className = "alerta-input-invalid"
         input.parentElement.appendChild(spanAlertIcon)
-        input.parentElement.parentElement.appendChild(spanAlert)
         input.parentElement.style.border = "2px solid #f04"
     } else {
 
 
-        input.parentElement.nextElementSibling.innerHTML = errorMessage
         input.nextElementSibling.className = "icon-cross"
         input.nextElementSibling.id = "icono-input-invalid"
         input.parentElement.style.border = "2px solid #f04"
     }
+    input.parentElement.nextElementSibling.className = "alerta-input-invalid"
+    input.parentElement.nextElementSibling.innerHTML = errorMessage
 
 }
 
@@ -152,6 +149,7 @@ function alertarInputValid(input) {
         input.nextElementSibling.className = "icon-checkmark"
         input.parentElement.nextElementSibling.innerHTML = ""
 
+
     }
 
     input.parentElement.style.border = "2px solid #30ff44"
@@ -161,39 +159,44 @@ function verificarNombre(nombre) {
     let existe = false
     USUARIOS.forEach(usuario => {
         if (usuario.nombre === nombre) {
-            existe = true            
+            existe = true
         }
     })
     if (existe) {
         console.log("Ese nombre ya existe");
         inputNombreUsuarioRegister.dataset.valid = "false"
         alertarError(inputNombreUsuarioRegister, "Este usuario ya existe")
-        
-    }else{
+
+    } else {
         inputNombreUsuarioRegister.dataset.valid = "true"
         alertarInputValid(inputNombreUsuarioRegister)
 
     }
 
 }
-function init() {
-    function validarInput(e) {
-        console.log(e.target.validity.valid);
-        const INPUT = e.target
-        switch (INPUT.name) {
-            case "usuario":
-                if (INPUT.value.includes(" ") || INPUT.validity.valid == false || INPUT.value.length == 0) {
-                    alertarError(INPUT, "El usuario tiene que ser de 4 a 16 digitos y solo puede contener numeros, letras y guion bajo")
-                } else {
-                    alertarInputValid(INPUT)
-                }
-                break;
+function validarInput(e) {
+    console.log(e.target.validity.valid);
+    const INPUT = e.target
+    switch (INPUT.name) {
+        case "usuario":
+            if (INPUT.value[0] == "_") {
+                alertarError(INPUT, "El usuario no puede empezar por el guion bajo")
+                return
+            }
 
-            default:
-                break;
-        }
+            if (INPUT.value.includes(" ") || INPUT.validity.valid == false || INPUT.value.length == 0) {
+                alertarError(INPUT, "El usuario tiene que ser de 4 a 16 digitos y solo puede contener numeros, letras y guion bajo")
+            } else {
+                alertarInputValid(INPUT)
+            }
+            break;
 
+        default:
+            break;
     }
+
+}
+function init() {
     inputLogins.forEach(input => {
         input.onkeyup = validarInput
     });
