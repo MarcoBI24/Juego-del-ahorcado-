@@ -16,7 +16,6 @@ const contenedorGeneral = $("contenedor-general")
 const loginEnElHeader = $("login")
 const btnAbrirGaleria = $("btn-abrir-galeria")
 const contenedorGaleria = $("contenedor-galeria")
-const itemsDeLaGaleria = document.getElementsByClassName("item-galery")
 const btnsCerrarContenedorIdentificacion = document.querySelectorAll(".contenedor-icono")
 const btnRegistrarseModal = $("btn-registro")
 const btnLogearModal = $("btn-login")
@@ -301,7 +300,6 @@ function init() {
     }
     cargarImagenesDeLaGaleria()
     // hacerAnimacionACadaInputAlEscribir()
-    queSeMuestrenConUnClickLosItemDeLaGaleria()
 }
 
 
@@ -335,24 +333,7 @@ window.onload = () => {
 }
 
 
-function hacerAnimacionACadaInputAlEscribir() {
-    // inputLogins.forEach(input => {
-    //     input.onfocus = () => {
-    //         input.previousSibling.style.top = "-40%"
-    //         input.previousSibling.style.fontSize = "15px"
-    //     };
-    //     input.onblur = () => {
-    //         if (input.value == "") {
-    //             input.nextElementSibling.style.top = "0%"
-    //             input.nextElementSibling.style.fontSize = "16px"
-    //             return
-    //         }
-    //         input.nextElementSibling.style.fontSize = "15px"
-    //     }
-    // });
-}
 
-// saludar()
 function recortarImg(element) {
 
     let parametros = crop.getValue()
@@ -365,8 +346,8 @@ function recortarImg(element) {
 }
 
 function queSeMuestrenConUnClickLosItemDeLaGaleria() {
-    for (let i = 0; i < itemsDeLaGaleria.length; i++) {
-        const item = itemsDeLaGaleria[i];
+    const itemsDeLaGaleria = document.querySelectorAll(".item-galery")
+    itemsDeLaGaleria.forEach(item => {
         item.onclick = () => {
             imagenPorDefecto.src = item.src
 
@@ -375,13 +356,13 @@ function queSeMuestrenConUnClickLosItemDeLaGaleria() {
 
                 recortarImg(imagenPorDefecto)
             }, 200);
-            for (let j = 0; j < itemsDeLaGaleria.length; j++) {
-                itemsDeLaGaleria[j].style.filter = "grayscale(0%)"
-
-            }
+           itemsDeLaGaleria.forEach(item => {
+                item.style.filter = "grayscale(0%)"
+           });
             item.style.filter = "grayscale(100%)"
         }
-    }
+    });
+  
 
 }
 function cargarImagenesDeLaGaleria() {
@@ -391,6 +372,7 @@ function cargarImagenesDeLaGaleria() {
         img.classList.add("item-galery")
         contenedorGaleria.appendChild(img)
     }
+    queSeMuestrenConUnClickLosItemDeLaGaleria()
 
 
 
