@@ -117,19 +117,12 @@ function iniciarSesión(nombreDeUsuario, contraseña) {
 
 
 function alertarError(input, errorMessage) {
-    if (input.nextElementSibling == undefined) {
-        let spanAlertIcon = document.createElement('span')
-        spanAlertIcon.className = 'icon-cross'
-        spanAlertIcon.setAttribute('id', 'icono-input-invalid')
-        input.parentElement.appendChild(spanAlertIcon)
-        input.parentElement.style.border = "2px solid #f04"
-    } else {
 
 
-        input.nextElementSibling.className = "icon-cross"
-        input.nextElementSibling.id = "icono-input-invalid"
-        input.parentElement.style.border = "2px solid #f04"
-    }
+    input.nextElementSibling.className = "icon-cross"
+    input.nextElementSibling.id = "icono-input-invalid"
+    input.parentElement.style.border = "2px solid #f04"
+
     input.parentElement.nextElementSibling.className = "alerta-input-invalid"
     input.parentElement.nextElementSibling.innerHTML = errorMessage
 
@@ -139,19 +132,10 @@ function alertarError(input, errorMessage) {
 
 
 function alertarInputValid(input) {
-    if (input.nextElementSibling == undefined) {
-        let spanAlertIcon = document.createElement('span')
-        spanAlertIcon.className = 'icon-checkmark'
-        spanAlertIcon.setAttribute('id', 'icono-input-valid')
-        input.parentElement.appendChild(spanAlertIcon)
-    } else {
-        input.nextElementSibling.setAttribute("id", "icono-input-valid")
-        input.nextElementSibling.className = "icon-checkmark"
-        input.parentElement.nextElementSibling.innerHTML = ""
 
-
-    }
-
+    input.nextElementSibling.setAttribute("id", "icono-input-valid")
+    input.nextElementSibling.className = "icon-checkmark"
+    input.parentElement.nextElementSibling.innerHTML = ""
     input.parentElement.style.border = "2px solid #30ff44"
     // aqui crear un span con un icono de check y darle color verde al border del contenedor
 }
