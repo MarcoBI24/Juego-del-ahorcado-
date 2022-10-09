@@ -184,13 +184,15 @@ function validarInput(e) {
             console.log(contraseña.length);
 
 
-            if (expContraseñaValida.test(contraseña) && contraseña.length >= 5) {
-                validarContraseña(contraseña, INPUT)
+
+            if (!(expContraseñaValida.test(contraseña) && contraseña.length >= 5 && validarContraseña(contraseña, INPUT))) {
+                alertarError(INPUT, "La contraseña debe ser de 5 a 20 caracteres entre digitos y letras(minúsculas o mayúsculas) y para mas seguridad caracteres especiales")
+
                 break
             }
 
-            /* 
-                20-24: {
+            /*
+              20-24: {
                         MUYSEGUROS
                         minusculas-mayusculas-digitos-caracteresEspeciales
                         minusculas-mayusculas-digitos
@@ -253,8 +255,7 @@ function validarInput(e) {
                     mayusculas                                          (5-13)
                 }
             */
-            alertarError(INPUT, "La contraseña debe ser de 5 a 24 caracteres entre digitos y letras(minúsculas o mayúsculas) y para mas seguridad caracteres especiales")
-            // }
+
             break
 
 
@@ -274,7 +275,7 @@ function verificarSiEsMinusculaOMayuscula(contraseña) {
 function validarContraseña(contraseña, INPUT) {
     const length = contraseña.length
 
-    if (length <= 24 && length >= 20) {
+    if (length <= 20 && length >= 15) {
         // hacer las condificiones para muyseguro y seguro
         if (verificarSiEsMinusculaOMayuscula(contraseña)) {
 
@@ -284,7 +285,7 @@ function validarContraseña(contraseña, INPUT) {
         alertarInputValid(INPUT, "#19ff1c", "Muy seguro")
         return true
     }
-    if (length <= 20 && length >= 13) {
+    if (length <= 15 && length >= 10) {
         // hacer las condificiones para seguro y noTanSeguro
         if (verificarSiEsMinusculaOMayuscula(contraseña)) {
             alertarInputValid(INPUT, "#beee00", "No tan seguro")
@@ -294,7 +295,7 @@ function validarContraseña(contraseña, INPUT) {
         return true
     }
 
-    if (length <= 13 && length >= 5) {
+    if (length <= 10 && length >= 5) {
         // hacer las condificiones para seguroCorto, noTanSeguro e inseguro
         if (expContraseñaMuySegura.test(contraseña)) {
             alertarInputValid(INPUT, "#ffaa17", "Tu contraseña es seguro pero corto")
