@@ -299,7 +299,6 @@ body{
                         flex-wrap: wrap;
                         align-items: center;
                         border-radius: 5px;
-                        
                     }
                         .input{
                             flex: 0 1 90%;
@@ -330,7 +329,7 @@ body{
                         }
                         #icono-input-valid{
                             flex: 0 1 5%;
-                            background-color: #00e613;
+                            background-color: inherit;
                             color: #fff;
                             padding: 5px;
                             border-radius: 100%;
