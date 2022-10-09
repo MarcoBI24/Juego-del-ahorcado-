@@ -109,26 +109,32 @@
                     Inicie sesión
                 </div>
                 <div class="contenedor-login-body">
-                    <label class="label-form">
+                    <div class="label-form">
 
                         <span class="label-text">Usuario</span>
                         <div class="contenedor-input">
-                            <input type="text" class="input" id="nombre-usuario-login" name="usuario-login" >
+                            <input type="text" class="input" id="nombre-usuario-login" name="usuario-login">
                             <!-- Aqui va el icono -->
                             <span></span>
                         </div>
                         <!-- Aqui va el mensaje de error -->
                         <span></span>
-                    </label>
-                    <label class="label-form">
-                        <span class="label-text" id="contra-text">Contraseña</span>
+                    </div>
+                    <div class="label-form">
+                        <span class="label-text" id="contra-text">
+                            Contraseña
+                            <label class="mostrar-contraseña">
+                                <input type="checkbox" value="off" class="btn-checkbox">
+                                <span class="circle"></span>
+                            </label>
+                        </span>
                         <div class="contenedor-input">
                             <input type="password" class="input" id="contraseña-login" name="contraseña-login">
                             <span></span>
                         </div>
                         <span></span>
 
-                    </label>
+                    </div>
                     <label class="checkbox"><input type="checkbox" id="input-inicio-sesion-automatico">Inicio de sesion
                         automatico</label>
                 </div>
@@ -169,40 +175,48 @@
                     </div>
                     <!-- ---------------------------------------------------------------------------- -->
                     <div class="contenedor-formulario">
-                        <label class="label-form">
+                        <div class="label-form">
                             <span class="label-text">Nombre de usuario</span>
                             <div class="contenedor-input">
                                 <input type="text" class="input" id="nombre-usuario" name="usuario"
-                                pattern="^[a-zA-Z0-9ü][a-zA-Z0-9ü_]{3,9}$">
+                                    pattern="^[a-zA-Z0-9ü][a-zA-Z0-9ü_]{3,9}$">
                                 <span></span>
                             </div>
                             <span></span>
 
-                        </label>
-                        <label class="label-form">
+                        </div>
+                        <div class="label-form">
 
-                            <span class="label-text">Contraseña</span>
+                            <span class="label-text">
+                                Contraseña
+                                <label class="mostrar-contraseña" for="contraseña-usuario">
+                                    <input type="checkbox" value="off" class="btn-checkbox">
+                                    <span class="circle"></span>
+                                </label>
+                            </span>
                             <div class="contenedor-input">
-                                <input type="password" 
-                                class="input"
-                                id="contraseña-usuario" 
-                                name="contraseña"
-                                >
+                                <input type="password" class="input" id="contraseña-usuario" name="contraseña">
                                 <span></span>
                             </div>
                             <span></span>
 
-                        </label>
-                        <label class="label-form">
-                            <span class="label-text">Repita la contraseña<span>
+                        </div>
+                        <div class="label-form">
+                            <span class="label-text">
+                                Repita la contraseña
+                                <label class="mostrar-contraseña">
+                                    <input type="checkbox" value="off" class="btn-checkbox">
+                                    <span class="circle"></span>
+
+                                </label>
+                            </span>
                             <div class="contenedor-input">
                                 <input type="password" class="input" id="contraseña2-usuario" name="contraseña2">
                                 <span></span>
                             </div>
                             <span></span>
-
-                        </label>
-                        <label class="label-form">
+                        </div>
+                        <div class="label-form">
 
                             <span class="label-text">Correo</span>
                             <div class="contenedor-input">
@@ -210,7 +224,7 @@
                                 <span></span>
                             </div>
                             <span></span>
-                        </label>
+                        </div>
                     </div>
                 </div>
                 <div class="contenedor-registro-footer">

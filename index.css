@@ -641,17 +641,61 @@ body{
                             flex-direction: column;
                             position: relative;
                             width: 100%;
-                            /* border: 1px solid red; */
                             min-height: 100px;
-
+                            /* flex-wrap: wrap; */
                         }
                             
 
                             .label-text{
                                 font-size: 16px;
                                 color: rgb(86, 85, 85);
+                                display: flex;
+                                
+                                /* flex-direction: column; */
+
+                                /* width: 100%; */
+                                justify-content: space-between;
+                                font-family: "Roboto";
                             }
-                            
+                                .mostrar-contraseña{
+                                    display: flex;
+                                    gap: 10px;
+                                    font-size: 14px;
+                                    font-family: inherit;
+                                    align-items: center;
+                                    cursor: pointer;
+                                    padding: 2px;
+                                    border-radius: 20px;
+                                    background-color: #cecece;
+                                    border: 0px solid;
+                                    position: relative;
+                                    width: 35px;
+                                    padding: 2px;
+                                    cursor: pointer;
+                                }
+                               
+                                .mostrar-contraseña input{
+                                    width: 100%;
+                                    height: 100%;
+                                    position: absolute;
+                                    opacity: 0;
+                                    cursor: pointer;
+
+                                }
+                                .circle{
+                                    border-radius: 100%;
+                                    width: 15px;
+                                    height: 15px;
+                                    /* position: absolute; */
+                                    margin-left: 0%;
+                                    background-color: #676767;
+                                    transition: margin-left .2s;
+                                }
+                                 
+                                .mostrar-contraseña input:checked + .circle{
+                                    margin-left: 50%;
+                                }   
+
                             .contenedor-input{
                                 width: 100%;
                                 display: flex;

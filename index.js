@@ -76,17 +76,6 @@ let expContraseñaMuySegura = /(?=.*[a-z]+)?(?=.*[A-Z]+)(?=.*\d+)(?=.*[$@$!%*?&#
 let expRegMinuscula = /^[a-z]+$/
 let expRegMayuscula = /^[A-Z]+$/
 let expRegMinusYMayus = /^(?=[a-zA-Z])(?=.*[a-z][A-Z]+|.*[A-Z][a-z]+)[a-zA-Z]+$/
-btnIniciarSesionUsuario.onclick = () => {
-    // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
-    let inputs = [inputNombreUsuarioLogin, inputContraseñaLogin]
-    if (!verificarYAlertarInputs(inputs)) {
-        return
-    }
-
-    let nombre = inputNombreUsuarioLogin.value
-    let contraseña = inputContraseñaLogin.value
-    iniciarSesión(nombre, contraseña)
-}
 function verificarYAlertarInputs(inputs) {
     let inputsVacios = inputs.filter(input => input.value === "")
     let inputsInvalidos = inputs.filter(input => input.dataset.valid === "false")
@@ -182,9 +171,6 @@ function validarInput(e) {
 
             let contraseña = INPUT.value
             console.log(contraseña.length);
-
-
-
             if (!(expContraseñaValida.test(contraseña) && contraseña.length >= 5 && validarContraseña(contraseña, INPUT))) {
                 alertarError(INPUT, "La contraseña debe ser de 5 a 20 caracteres entre digitos y letras(minúsculas o mayúsculas) y para mas seguridad caracteres especiales")
 
@@ -192,7 +178,7 @@ function validarInput(e) {
             }
 
             /*
-              20-24: {
+                20-24: {
                         MUYSEGUROS
                         minusculas-mayusculas-digitos-caracteresEspeciales
                         minusculas-mayusculas-digitos
@@ -255,7 +241,6 @@ function validarInput(e) {
                     mayusculas                                          (5-13)
                 }
             */
-
             break
 
 
@@ -348,6 +333,17 @@ function init() {
         console.log(`${usuarioTemp.nombre} registrado con exito!`);
     }
 
+    btnIniciarSesionUsuario.onclick = () => {
+        // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
+        let inputs = [inputNombreUsuarioLogin, inputContraseñaLogin]
+        if (!verificarYAlertarInputs(inputs)) {
+            return
+        }
+
+        let nombre = inputNombreUsuarioLogin.value
+        let contraseña = inputContraseñaLogin.value
+        iniciarSesión(nombre, contraseña)
+    }
 
     btnStart.onclick = () => {
         if (USUARIO == undefined) {
@@ -425,6 +421,7 @@ function init() {
 
     }
     cargarImagenesDeLaGaleria()
+    mostrarContraseña()
 }
 
 
@@ -470,34 +467,32 @@ function recortarImg(element) {
 
 }
 
-function queSeMuestrenConUnClickLosItemDeLaGaleria() {
+function queSeMuestrenConUnClickLosItemDeLaGaleria(e) {
+    let img = e.target
+    imagenPorDefecto.src = img.src
+
+    crop.setImage(img.src)
+    setTimeout(() => {
+
+        recortarImg(imagenPorDefecto)
+    }, 200);
     const itemsDeLaGaleria = document.querySelectorAll(".item-galery")
     itemsDeLaGaleria.forEach(item => {
-        item.onclick = () => {
-            imagenPorDefecto.src = item.src
-
-            crop.setImage(item.src)
-            setTimeout(() => {
-
-                recortarImg(imagenPorDefecto)
-            }, 200);
-            itemsDeLaGaleria.forEach(item => {
-                item.style.filter = "grayscale(0%)"
-            });
-            item.style.filter = "grayscale(100%)"
-        }
+        item.style.filter = "grayscale(0%)"
     });
-
-
+    img.style.filter = "grayscale(100%)"
 }
+
+
 function cargarImagenesDeLaGaleria() {
     for (let i = 1; i <= 31; i++) {
+
         let img = document.createElement("img")
         img.src = `./galeria/user-${i}.jpg`
         img.classList.add("item-galery")
         contenedorGaleria.appendChild(img)
+        img.onclick = queSeMuestrenConUnClickLosItemDeLaGaleria
     }
-    queSeMuestrenConUnClickLosItemDeLaGaleria()
 
 
 
@@ -518,7 +513,25 @@ function cerrarLogin() {
 
 
 
+function mostrarContraseña() {
+    const btnsChecks = document.querySelectorAll(".btn-checkbox")
+    console.log(btnsChecks);
+    btnsChecks.forEach(btn =>{
+        btn.onclick = ()=>{
+            const input = btn.parentElement.parentElement.nextElementSibling.children[0]
+            console.log(input);
+            if (btn.value == "off") {
+                input.setAttribute("type", "text")
+                btn.value = "on"
+                
+            }else{
+                input.setAttribute("type", "password")
+                btn.value = "off"
+            }
+            console.log(btn.value);
 
-
+        }
+    }) 
+}
 
 
