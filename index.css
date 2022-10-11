@@ -1,3 +1,7 @@
+/* hacer las aniamciones de los modales, de los botones y cambios de pagina con la libreria Velocity.js */
+
+
+
 *{
     padding: 0;
     margin: 0;
@@ -637,15 +641,25 @@ body{
                     
                         .label-form{
                             display: flex;
-                            gap: 5px;
-                            flex-direction: column;
+                            /* gap: 5px; */
+                            flex-direction: row;
                             position: relative;
                             width: 100%;
                             min-height: 100px;
-                            /* flex-wrap: wrap; */
+                            flex-wrap: wrap;
                         }
                             
-
+                            .porcentaje{
+                                border: 1px solid saddlebrown;
+                                width: 7%;
+                                font-size: 16px;
+                                align-self: flex-end;
+                            }
+                            .span-alert{
+                                font-size: 16px;
+                                border: 1px solid;
+                                width: 90%;
+                            }
                             .label-text{
                                 font-size: 16px;
                                 color: rgb(86, 85, 85);
@@ -663,6 +677,7 @@ body{
                                     font-size: 14px;
                                     font-family: inherit;
                                     align-items: center;
+                                    
                                     cursor: pointer;
                                     padding: 2px;
                                     border-radius: 20px;
@@ -670,6 +685,7 @@ body{
                                     border: 0px solid;
                                     position: relative;
                                     width: 35px;
+                                    height: 20px;
                                     padding: 2px;
                                     cursor: pointer;
                                 }
@@ -760,8 +776,9 @@ body{
 
 
 .alerta-input-invalid{
-    font-size: 11px;
+    font-size: 12px;
     font-family: "Roboto";
+    width: 90%;
     /* font-weight: 900; */
     /* background-color: #c91b2a; */
     color: rgb(97, 97, 97);
@@ -770,6 +787,9 @@ body{
 
     /* padding: 5px; */
 
+}
+#contraseña2-usuario{
+    animation: errorAnim .3s 100ms infinite;
 }
 
 .contenedor-modal{

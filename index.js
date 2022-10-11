@@ -71,6 +71,7 @@ const btnRegistrarUsuario = $('registrarse-form')
 const btnIniciarSesionUsuario = $('login-form')
 const inputNombreUsuarioLogin = $('nombre-usuario-login')
 const inputContraseñaLogin = $('contraseña-login')
+const porcentajeText = $("porcentaje")
 let expContraseñaValida = /(?=.*[a-z]+)?(?=.*[A-Z]+)?(?=.*\d+)?(?=.*[$@$!%*?&#.$($)$-$_])?.*[a-zA-Z\d@!%*?&#.$($)$-$_]+/
 let expContraseñaMuySegura = /(?=.*[a-z]+)?(?=.*[A-Z]+)(?=.*\d+)(?=.*[$@$!%*?&#.$($)$-$_]).*[a-zA-Z\d@!%*?&#.$($)$-$_]+/
 let expRegMinuscula = /^[a-z]+$/
@@ -171,12 +172,13 @@ function validarInput(e) {
 
             let contraseña = INPUT.value
             console.log(contraseña.length);
+
+            verificarSiLasContraseñaCoincide()
             if (!(expContraseñaValida.test(contraseña) && contraseña.length >= 5 && validarContraseña(contraseña, INPUT))) {
                 alertarError(INPUT, "La contraseña debe ser de 5 a 20 caracteres entre digitos y letras(minúsculas o mayúsculas) y para mas seguridad caracteres especiales")
 
                 break
             }
-
             /*
                 20-24: {
                         MUYSEGUROS
@@ -242,13 +244,64 @@ function validarInput(e) {
                 }
             */
             break
+        case "contraseña2":
+            let contraseña1 = inputContraseñaUsuarioRegister.value
+            let contraseña2 = INPUT.value
+            if (e.type == "blur" && contraseña1 !== contraseña2) {
+                alertarError(INPUT, "La contraseña no coincide")
+                verificarSiLasContraseñaCoincide()
 
+                break
 
+            }
+
+            if ((e.key.length == 1 && e.key !== " ") || e.key == "Backspace" ) {
+                
+                verificarSiLasContraseñaCoincide()
+            }
+
+            console.log(contraseña1);
+            console.log(contraseña2);
+            break
 
         default:
             break;
     }
 
+}
+let letrasIncorrectas = 0
+let letrasCorrectas = 0
+
+// hacer el porcentaje que cuando esta desordenado
+function verificarSiLasContraseñaCoincide() {
+
+    const contraseña1 = inputContraseñaUsuarioRegister.value
+    const contraseña2 = inputContraseña2Usuario.value
+    if (contraseña2 == "") {
+        return "0%"
+    }
+    if (contraseña2 === contraseña1) {
+        alertarInputValid(inputContraseña2Usuario)
+    } else {
+
+        alertarError(inputContraseña2Usuario, "La contraseña no coincide")
+    }
+    if (contraseña2.slice(0,contraseña2.length) == contraseña1.slice(0, contraseña2.length)) {
+        letrasCorrectas = contraseña2.length
+        // letrasIncorrectas = 0
+    }else{
+        letrasCorrectas = letrasCorrectas - 1
+        // letrasIncorrectas = contraseña1.length - contraseña2.length
+    }
+    if (letrasCorrectas >= 0) {
+        porcentajeText.innerHTML = obtenerPorcentaje(letrasCorrectas, contraseña1.length)
+    }
+}
+
+function obtenerPorcentaje(numero, numeroBase) {
+    // let vBase = numeroBase / 100
+    let calculo = (numero / numeroBase) * 100
+    return `${Math.round(calculo)}%`
 }
 function verificarSiEsMinusculaOMayuscula(contraseña) {
     if (expRegMayuscula.test(contraseña) || expRegMinusYMayus.test(contraseña) || expRegMinuscula.test(contraseña)) {
@@ -300,6 +353,7 @@ function validarContraseña(contraseña, INPUT) {
 }
 function init() {
     inputLogins.forEach(input => {
+        input.onkeydown = validarInput
         input.onkeyup = validarInput
         input.onblur = validarInput
     });
@@ -516,22 +570,22 @@ function cerrarLogin() {
 function mostrarContraseña() {
     const btnsChecks = document.querySelectorAll(".btn-checkbox")
     console.log(btnsChecks);
-    btnsChecks.forEach(btn =>{
-        btn.onclick = ()=>{
-            const input = btn.parentElement.parentElement.nextElementSibling.children[0]
+    btnsChecks.forEach(btn => {
+        btn.onclick = () => {
+            const input = btn.parentElement.parentElement.nextElementSibling.children[0];
             console.log(input);
             if (btn.value == "off") {
                 input.setAttribute("type", "text")
                 btn.value = "on"
-                
-            }else{
+
+            } else {
                 input.setAttribute("type", "password")
                 btn.value = "off"
             }
             console.log(btn.value);
 
         }
-    }) 
+    })
 }
 
 
