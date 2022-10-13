@@ -77,6 +77,8 @@ let expContraseñaMuySegura = /(?=.*[a-z]+)?(?=.*[A-Z]+)(?=.*\d+)(?=.*[$@$!%*?&#
 let expRegMinuscula = /^[a-z]+$/
 let expRegMayuscula = /^[A-Z]+$/
 let expRegMinusYMayus = /^(?=[a-zA-Z])(?=.*[a-z][A-Z]+|.*[A-Z][a-z]+)[a-zA-Z]+$/
+let expRegNombreUsuario = /^[a-zA-Z0-9ü][a-zA-Z0-9ü_]{3,16}$/
+
 function verificarYAlertarInputs(inputs) {
     let inputsVacios = inputs.filter(input => input.value === "")
     let inputsInvalidos = inputs.filter(input => input.dataset.valid === "false")
@@ -109,9 +111,9 @@ function alertarError(input, errorMessage) {
 
     input.nextElementSibling.className = "icon-cross"
     input.nextElementSibling.id = "icono-input-invalid"
-    input.parentElement.style.border = "3px solid #f04"
-
-    input.parentElement.nextElementSibling.className = "alerta-input-invalid"
+    input.parentElement.style.border = "3px solid #F20530"
+    input.nextElementSibling.style.background = "#F20530"
+    // input.parentElement.nextElementSibling.className = "span-alert"
     input.parentElement.nextElementSibling.innerHTML = errorMessage
 
 }
@@ -119,10 +121,11 @@ function alertarError(input, errorMessage) {
 
 
 
-function alertarInputValid(input, color = "#30ff44", mensaje = "") {
+function alertarInputValid(input, color = "#0BD904", mensaje = "") {
 
     input.nextElementSibling.setAttribute("id", "icono-input-valid")
     input.nextElementSibling.className = "icon-checkmark"
+    input.nextElementSibling.style.background = color
     input.parentElement.nextElementSibling.innerHTML = mensaje
     input.parentElement.style.border = `3px solid ${color}`
     // aqui crear un span con un icono de check y darle color verde al border del contenedor
@@ -159,8 +162,14 @@ function validarInput(e) {
                 alertarError(INPUT, "El usuario no puede empezar por el guion bajo")
                 return
             }
+            if (e.key == " ") {
+                alertarError(INPUT, "El usuario tiene que ser de 4 a 16 digitos y solo puede contener numeros, letras y guion bajo")
 
-            if (INPUT.value.includes(" ") || INPUT.validity.valid == false || INPUT.value.length == 0) {
+            }
+            if ((e.type == "keydown" || e.type == "keyup") && !((e.key.length == 1 && e.key !== " ") || e.key == "Backspace")) {
+                return
+            }
+            if (INPUT.value.includes(" ") || expRegNombreUsuario.test(INPUT.value) == false || INPUT.value.length == 0) {
                 alertarError(INPUT, "El usuario tiene que ser de 4 a 16 digitos y solo puede contener numeros, letras y guion bajo")
             } else {
                 alertarInputValid(INPUT)
@@ -175,11 +184,126 @@ function validarInput(e) {
 
             verificarSiLasContraseñaCoincide()
             if (!(expContraseñaValida.test(contraseña) && contraseña.length >= 5 && validarContraseña(contraseña, INPUT))) {
-                alertarError(INPUT, "La contraseña debe ser de 5 a 20 caracteres entre digitos y letras(minúsculas o mayúsculas) y para mas seguridad caracteres especiales")
-
+                alertarError(INPUT, "Debe tener 5-20 caracteres(digitos, minúsculas, mayúsculas y para mas seguridad usa signos")
+                // )
+                // <b>Muy seguro >>> </b> az-AZ-09-#?!<br><b>Seguro >>></b> az-AZ-09<br><b>Inseguro >>></b> az-AZ<br>
                 break
             }
-            /*
+            
+            break
+        case "contraseña2":
+            let contraseña1 = inputContraseñaUsuarioRegister.value
+            let contraseña2 = INPUT.value
+            if (e.type == "blur" && contraseña1 !== contraseña2) {
+                alertarError(INPUT, "La contraseña no coincide")
+                verificarSiLasContraseñaCoincide()
+
+                break
+
+            }
+
+            if ((e.key.length == 1 && e.key !== " ") || e.key == "Backspace") {
+
+                verificarSiLasContraseñaCoincide()
+            }
+
+            console.log(contraseña1);
+            console.log(contraseña2);
+            break
+
+        case "correo" : 
+            let expRegCorreo = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
+            if (expRegCorreo.test(INPUT.value) && !INPUT.value.includes(" ")) {
+                alertarInputValid(INPUT)
+            }else{
+                alertarError(INPUT, "No tiene el formato --> <b>ejemplo@dominio.dominio</b>")
+            }
+        default:
+            break;
+    }
+
+}
+let letrasIncorrectas = 0
+let letrasCorrectas = 0
+
+// hacer el porcentaje que cuando esta desordenado
+function verificarSiLasContraseñaCoincide() {
+
+    const contraseña1 = inputContraseñaUsuarioRegister.value
+    const contraseña2 = inputContraseña2Usuario.value
+    if (contraseña2 == "") {
+        return "0%"
+    }
+    if (contraseña2 === contraseña1) {
+        alertarInputValid(inputContraseña2Usuario)
+    } else {
+
+        alertarError(inputContraseña2Usuario, "La contraseña no coincide")
+    }
+    if (contraseña2.slice(0, contraseña2.length) == contraseña1.slice(0, contraseña2.length)) {
+        letrasCorrectas = contraseña2.length
+        // letrasIncorrectas = 0
+    } else {
+        letrasCorrectas = letrasCorrectas - 1
+        // letrasIncorrectas = contraseña1.length - contraseña2.length
+    }
+    if (letrasCorrectas >= 0) {
+        porcentajeText.innerHTML = obtenerPorcentaje(letrasCorrectas, contraseña1.length)
+    }
+}
+
+function obtenerPorcentaje(numero, numeroBase) {
+    // let vBase = numeroBase / 100
+    let calculo = (numero / numeroBase) * 100
+    return `${Math.round(calculo)}%`
+}
+function verificarSiEsMinusculaOMayuscula(contraseña) {
+    if (expRegMayuscula.test(contraseña) || expRegMinusYMayus.test(contraseña) || expRegMinuscula.test(contraseña)) {
+        return true
+    }
+    return false
+
+}
+function validarContraseña(contraseña, INPUT) {
+    const length = contraseña.length
+
+    if (length <= 20 && length >= 15) {
+        // hacer las condificiones para muyseguro y seguro
+        if (verificarSiEsMinusculaOMayuscula(contraseña)) {
+
+            alertarInputValid(INPUT, "#F2B705", "Seguro")
+            return true
+        }
+        alertarInputValid(INPUT, "#0BD904", "Muy seguro")
+        return true
+    }
+    if (length <= 15 && length >= 10) {
+        // hacer las condificiones para seguro y noTanSeguro
+        if (verificarSiEsMinusculaOMayuscula(contraseña)) {
+            alertarInputValid(INPUT, "#BBBF45", "No tan seguro")
+            return true
+        }
+        alertarInputValid(INPUT, "#F2B705", "Seguro")
+        return true
+    }
+
+    if (length <= 10 && length >= 5) {
+        // hacer las condificiones para seguroCorto, noTanSeguro e inseguro
+        if (expContraseñaMuySegura.test(contraseña)) {
+            alertarInputValid(INPUT, "#D97904", "Tu contraseña es seguro pero corto")
+            return true
+
+        }
+        if (verificarSiEsMinusculaOMayuscula(contraseña)) {
+            alertarInputValid(INPUT, "#D93B92", "Tu contraseña es valida pero no es seguro, ingresa digitos, letras mayusculas o caracteres especiales")
+            return true
+        }
+        alertarInputValid(INPUT, "#BBBF45", "No tan seguro")
+        return true
+
+    }
+    return false
+/*
                 20-24: {
                         MUYSEGUROS
                         minusculas-mayusculas-digitos-caracteresEspeciales
@@ -243,113 +367,6 @@ function validarInput(e) {
                     mayusculas                                          (5-13)
                 }
             */
-            break
-        case "contraseña2":
-            let contraseña1 = inputContraseñaUsuarioRegister.value
-            let contraseña2 = INPUT.value
-            if (e.type == "blur" && contraseña1 !== contraseña2) {
-                alertarError(INPUT, "La contraseña no coincide")
-                verificarSiLasContraseñaCoincide()
-
-                break
-
-            }
-
-            if ((e.key.length == 1 && e.key !== " ") || e.key == "Backspace" ) {
-                
-                verificarSiLasContraseñaCoincide()
-            }
-
-            console.log(contraseña1);
-            console.log(contraseña2);
-            break
-
-        default:
-            break;
-    }
-
-}
-let letrasIncorrectas = 0
-let letrasCorrectas = 0
-
-// hacer el porcentaje que cuando esta desordenado
-function verificarSiLasContraseñaCoincide() {
-
-    const contraseña1 = inputContraseñaUsuarioRegister.value
-    const contraseña2 = inputContraseña2Usuario.value
-    if (contraseña2 == "") {
-        return "0%"
-    }
-    if (contraseña2 === contraseña1) {
-        alertarInputValid(inputContraseña2Usuario)
-    } else {
-
-        alertarError(inputContraseña2Usuario, "La contraseña no coincide")
-    }
-    if (contraseña2.slice(0,contraseña2.length) == contraseña1.slice(0, contraseña2.length)) {
-        letrasCorrectas = contraseña2.length
-        // letrasIncorrectas = 0
-    }else{
-        letrasCorrectas = letrasCorrectas - 1
-        // letrasIncorrectas = contraseña1.length - contraseña2.length
-    }
-    if (letrasCorrectas >= 0) {
-        porcentajeText.innerHTML = obtenerPorcentaje(letrasCorrectas, contraseña1.length)
-    }
-}
-
-function obtenerPorcentaje(numero, numeroBase) {
-    // let vBase = numeroBase / 100
-    let calculo = (numero / numeroBase) * 100
-    return `${Math.round(calculo)}%`
-}
-function verificarSiEsMinusculaOMayuscula(contraseña) {
-    if (expRegMayuscula.test(contraseña) || expRegMinusYMayus.test(contraseña) || expRegMinuscula.test(contraseña)) {
-        return true
-    }
-    return false
-
-}
-function validarContraseña(contraseña, INPUT) {
-    const length = contraseña.length
-
-    if (length <= 20 && length >= 15) {
-        // hacer las condificiones para muyseguro y seguro
-        if (verificarSiEsMinusculaOMayuscula(contraseña)) {
-
-            alertarInputValid(INPUT, "#ff7017", "Seguro")
-            return true
-        }
-        alertarInputValid(INPUT, "#19ff1c", "Muy seguro")
-        return true
-    }
-    if (length <= 15 && length >= 10) {
-        // hacer las condificiones para seguro y noTanSeguro
-        if (verificarSiEsMinusculaOMayuscula(contraseña)) {
-            alertarInputValid(INPUT, "#beee00", "No tan seguro")
-            return true
-        }
-        alertarInputValid(INPUT, "#ff7017", "Seguro")
-        return true
-    }
-
-    if (length <= 10 && length >= 5) {
-        // hacer las condificiones para seguroCorto, noTanSeguro e inseguro
-        if (expContraseñaMuySegura.test(contraseña)) {
-            alertarInputValid(INPUT, "#ffaa17", "Tu contraseña es seguro pero corto")
-            return true
-
-        }
-        if (verificarSiEsMinusculaOMayuscula(contraseña)) {
-            alertarInputValid(INPUT, "#be9926", "Tu contraseña es valida pero no es seguro, ingresa digitos, letras mayusculas o caracteres especiales")
-            return true
-        }
-        alertarInputValid(INPUT, "#beee00", "No tan seguro")
-        return true
-
-    }
-    return false
-
 }
 function init() {
     inputLogins.forEach(input => {
