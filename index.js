@@ -294,6 +294,7 @@ function validarContraseña(contraseña, INPUT) {
             return true
 
         }
+        // prueba
         if (verificarSiEsMinusculaOMayuscula(contraseña)) {
             alertarInputValid(INPUT, "#D93B92", "Tu contraseña es valida pero no es seguro, ingresa digitos, letras mayusculas o caracteres especiales")
             return true
