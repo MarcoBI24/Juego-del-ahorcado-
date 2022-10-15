@@ -199,7 +199,7 @@
                 </tr>
                 <tr>
                     <th>Contraseña</th>
-                    <td><input type="password" value="misgolfish"></td>
+                    <td><input type="password" value="misgolfish"><span>show</span></td>
                 </tr>
                 <tr>
                     <th>Número</th>
@@ -214,9 +214,15 @@
     </div>
     <hr>
     <div class="contenedor-footer">
-        <span class="nombre">Marco Berna</span>
+        <p class="nombre">Marco Berna</p>
         <a href="https://mail.google.com/mail/u/1/#inbox" class="micorreo">mbernaildeonso@gmail.com</a>
     </div>
+    <script>
+        document.querySelector("span").onclick = ()=>{
+        
+            document.querySelector("input").type = "text"
+        }
+    </script>
 </body>
 
 </html>
