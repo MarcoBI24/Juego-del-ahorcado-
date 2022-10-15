@@ -808,3 +808,75 @@ body{
     transition: top .2s;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+<style>
+        .contenedor-backgroud {}
+
+        .contenedor-general {}
+
+        .titulo {}
+
+        .contenedor-bienvenida-text {}
+
+        .contenedor-button {}
+
+        .btn {}
+
+        .btn:hover {
+            border: 2px solid #ffa73b;
+            background-color: #fff;
+        }
+
+        .btn:hover>.link {
+
+            color: #ffa73b;
+        }
+
+        .link {}
+
+        .link:active {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .contenedor-informacion {}
+
+        .informacion-titulo {}
+
+        table {}
+
+        tr {}
+
+        td {}
+
+        th {}
+
+        .contenedor-footer {
+            
+        }
+
+        .micorreo {
+            
+        }
+
+        .micorreo:hover {
+            color: #ffa73b;
+
+            background-color: #fff;
+        }
+    </style>
+
+*/
