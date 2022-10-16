@@ -25,7 +25,6 @@ const context = canvas.getContext('2d')
 let imagenPorDefecto = $("foto")
 let urlImagen = imagenPorDefecto.src
 let crop
-
 let USUARIO;
 let USUARIOS = JSON.parse(localStorage.getItem('usuarios'));
 const inputNombreUsuarioRegister = $('nombre-usuario')
@@ -43,6 +42,8 @@ let expRegMinuscula = /^[a-z]+$/
 let expRegMayuscula = /^[A-Z]+$/
 let expRegMinusYMayus = /^(?=[a-zA-Z])(?=.*[a-z][A-Z]+|.*[A-Z][a-z]+)[a-zA-Z]+$/
 let expRegNombreUsuario = /^[a-zA-Z0-9ü][a-zA-Z0-9ü_]{3,16}$/
+let letrasIncorrectas = 0
+let letrasCorrectas = 0
 
 // Logear el usuario
 // obtener datos del usuario (nombre de usuario,contraseña, foto )
@@ -77,70 +78,6 @@ let expRegNombreUsuario = /^[a-zA-Z0-9ü][a-zA-Z0-9ü_]{3,16}$/
 // en caso exista :: Iniciar sesión y asignarlo a la Constante USUARIO (hacer para cada página) para despues de ese usuario ya usarlos en las diferentes partes de la aplicación
 // en caso no exista :: no habra nada que asignar a la Constante USUARIO entonces quedara en undefined y hacer lo que conviene en cada parte de la aplicacion
 // En caso no exista el array se tiene que crear un array vacio llamado Usuarios y se hará lo mismo que se hace cuando no existe un usuario logeado
-
-function verificarYAlertarInputs(inputs) {
-    let inputsVacios = inputs.filter(input => input.value === "")
-    let inputsInvalidos = inputs.filter(input => input.dataset.valid === "false")
-    if (inputsVacios.length === 0 && inputsInvalidos.length === 0) {
-
-        return true
-    }
-    inputsInvalidos.forEach(inputInvalido => {
-        alertarError(inputInvalido, "Este campo es invalido")
-    })
-    inputsVacios.forEach(inputVacio => {
-        alertarError(inputVacio, "Este campo esta vacio")
-    })
-}
-
-function iniciarSesión(nombreDeUsuario, contraseña) {
-    // esta funcion debe buscar el usuario en el array de USUARIOS y verificar la contraseña y el nombre de usuario
-    USUARIOS.forEach(usuario => {
-        if (nombreDeUsuario === usuario.nombre && contraseña === usuario.contraseña) {
-            USUARIO = usuario
-        }
-    })
-}
-
-function alertarError(input, errorMessage) {
-
-    input.nextElementSibling.className = "icon-cross"
-    input.nextElementSibling.id = "icono-input-invalid"
-    input.parentElement.style.border = "3px solid #F20530"
-    input.nextElementSibling.style.background = "#F20530"
-    // input.parentElement.nextElementSibling.className = "span-alert"
-    input.parentElement.nextElementSibling.innerHTML = errorMessage
-
-}
-
-function alertarInputValid(input, color = "#0BD904", mensaje = "") {
-
-    input.nextElementSibling.setAttribute("id", "icono-input-valid")
-    input.nextElementSibling.className = "icon-checkmark"
-    input.nextElementSibling.style.background = color
-    input.parentElement.nextElementSibling.innerHTML = mensaje
-    input.parentElement.style.border = `3px solid ${color}`
-    // aqui crear un span con un icono de check y darle color verde al border del contenedor
-}
-function verificarNombre(nombre) {
-    let existe = false
-    USUARIOS.forEach(usuario => {
-        if (usuario.nombre === nombre) {
-            existe = true
-        }
-    })
-    if (existe) {
-        console.log("Ese nombre ya existe");
-        inputNombreUsuarioRegister.dataset.valid = "false"
-        alertarError(inputNombreUsuarioRegister, "Este usuario ya existe")
-
-    } else {
-        inputNombreUsuarioRegister.dataset.valid = "true"
-        alertarInputValid(inputNombreUsuarioRegister)
-
-    }
-
-}
 
 function validarInput(e) {
     const INPUT = e.target
@@ -210,157 +147,31 @@ function validarInput(e) {
             } else {
                 alertarError(INPUT, "No tiene el formato --> <b>ejemplo@dominio.dominio</b>")
             }
+            break
+        case "numero":
+            // validar que solo ingrese numeros
+            if (e.type == "keyup") {
+                const formato = "000-000-000" 
+                let numero = INPUT.value
+                // 899215151
+                let numeroFormateado = ""
+                for (let i = 0; i < numero.length; i++) {
+                    if (formato[i] !== "-") {
+                        numeroFormateado += numero[i]
+                    }else{
+                        numeroFormateado += "-"
+                    }
+                }
+                INPUT.value = numeroFormateado
+
+            }
+            break
         default:
             break;
     }
 
 }
-let letrasIncorrectas = 0
-let letrasCorrectas = 0
 
-// hacer el porcentaje que cuando esta desordenado
-function verificarSiLasContraseñaCoincide() {
-
-    const contraseña1 = inputContraseñaUsuarioRegister.value
-    const contraseña2 = inputContraseña2Usuario.value
-    if (contraseña2 == "") {
-        return "0%"
-    }
-    if (contraseña2 === contraseña1) {
-        alertarInputValid(inputContraseña2Usuario)
-    } else {
-
-        alertarError(inputContraseña2Usuario, "La contraseña no coincide")
-    }
-    if (contraseña2.slice(0, contraseña2.length) == contraseña1.slice(0, contraseña2.length)) {
-        letrasCorrectas = contraseña2.length
-        // letrasIncorrectas = 0
-    } else {
-        letrasCorrectas = letrasCorrectas - 1
-        // letrasIncorrectas = contraseña1.length - contraseña2.length
-    }
-    if (letrasCorrectas >= 0) {
-        porcentajeText.innerHTML = obtenerPorcentaje(letrasCorrectas, contraseña1.length)
-    }
-}
-
-function obtenerPorcentaje(numero, numeroBase) {
-    // let vBase = numeroBase / 100
-    let calculo = (numero / numeroBase) * 100
-    return `${Math.round(calculo)}%`
-}
-function verificarSiEsMinusculaOMayuscula(contraseña) {
-    if (expRegMayuscula.test(contraseña) || expRegMinusYMayus.test(contraseña) || expRegMinuscula.test(contraseña)) {
-        return true
-    }
-    return false
-
-}
-function validarContraseña(contraseña, INPUT) {
-    const length = contraseña.length
-
-    if (length <= 20 && length >= 15) {
-        // hacer las condificiones para muyseguro y seguro
-        if (verificarSiEsMinusculaOMayuscula(contraseña)) {
-
-            alertarInputValid(INPUT, "#F2B705", "Seguro")
-            return true
-        }
-        alertarInputValid(INPUT, "#0BD904", "Muy seguro")
-        return true
-    }
-    if (length <= 15 && length >= 10) {
-        // hacer las condificiones para seguro y noTanSeguro
-        if (verificarSiEsMinusculaOMayuscula(contraseña)) {
-            alertarInputValid(INPUT, "#BBBF45", "No tan seguro")
-            return true
-        }
-        alertarInputValid(INPUT, "#F2B705", "Seguro")
-        return true
-    }
-
-    if (length <= 10 && length >= 5) {
-        // hacer las condificiones para seguroCorto, noTanSeguro e inseguro
-        if (expContraseñaMuySegura.test(contraseña)) {
-            alertarInputValid(INPUT, "#D97904", "Tu contraseña es seguro pero corto")
-            return true
-
-        }
-        // prueba
-        if (verificarSiEsMinusculaOMayuscula(contraseña)) {
-            alertarInputValid(INPUT, "#D93B92", "Tu contraseña es valida pero no es seguro, ingresa digitos, letras mayusculas o caracteres especiales")
-            return true
-        }
-        alertarInputValid(INPUT, "#BBBF45", "No tan seguro")
-        return true
-
-    }
-    return false
-    /*
-                    20-24: {
-                            MUYSEGUROS
-                            minusculas-mayusculas-digitos-caracteresEspeciales
-                            minusculas-mayusculas-digitos
-                            minusculas-mayusculas-caracteresEspeciales
-                            SEGUROS
-                            minusculas-mayusculas
-                            minusculas
-                            mayusculas
-                        }
-                    13-20: {
-                            SEGUROS
-                            minusculas-mayusculas-digitos
-                            minusculas-mayusculas-digitos-caracteresEspeciales
-                            minusculas-mayusculas-caracteresEspeciales
-                            NOTANSEGUROS
-                            minusculas-mayusculas
-                            minusculas
-                            mayusculas
-                        }
-                    5-13: {
-                            SEGURO PERO CORTO
-                            minusculas-mayusculas-digitos-caracteresEspeciales
-                            NO TAN SEGUR0
-                            minusculas-mayusculas-digitos
-                            minusculas-mayusculas-caracteresEspeciales
-                            INSEGURO
-                            minusculas-mayusculas
-                            minusculas
-                            mayusculas
-                    }
-                    muySeguro : {
-                        minusculas-mayusculas-digitos-caracteresEspeciales  (20-24)
-                        minusculas-mayusculas-digitos                       (20-24)
-                        minusculas-mayusculas-caracteresEspeciales          (20-24)
-
-                    }
-                    seguro: {
-                        minusculas-mayusculas-digitos                       (13-20)
-                        minusculas-mayusculas-digitos-caracteresEspeciales  (13-20)
-                        minusculas-mayusculas-caracteresEspeciales          (13-20)
-                        minusculas-mayusculas                               (20-24)
-                        minusculas                                          (20-24)
-                        mayusculas                                          (20-24)
-                    }
-
-                    seguroCorto: {
-                        minusculas-mayusculas-digitos-caracteresEspeciales   (5-13)
-
-                    }
-                    noTanSeguro: {
-                        minusculas-mayusculas-digitos                       (5-13)
-                        minusculas-mayusculas-caracteresEspeciales          (5-13)
-                        minusculas-mayusculas                               (13-20)
-                        minusculas                                          (13-20)
-                        mayusculas                                          (13-20)
-                    }
-                    inseguro: {
-                        minusculas-mayusculas                               (5-13)
-                        minusculas                                          (5-13)
-                        mayusculas                                          (5-13)
-                    }
-                */
-}
 function init() {
     inputLogins.forEach(input => {
         input.onkeydown = validarInput
@@ -513,6 +324,238 @@ window.onload = () => {
     recortarImg(imagenPorDefecto)
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// hacer el porcentaje que cuando esta desordenado
+function verificarSiLasContraseñaCoincide() {
+
+    const contraseña1 = inputContraseñaUsuarioRegister.value
+    const contraseña2 = inputContraseña2Usuario.value
+    if (contraseña2 == "") {
+        return "0%"
+    }
+    if (contraseña2 === contraseña1) {
+        alertarInputValid(inputContraseña2Usuario)
+    } else {
+
+        alertarError(inputContraseña2Usuario, "La contraseña no coincide")
+    }
+    if (contraseña2.slice(0, contraseña2.length) == contraseña1.slice(0, contraseña2.length)) {
+        letrasCorrectas = contraseña2.length
+        // letrasIncorrectas = 0
+    } else {
+        letrasCorrectas = letrasCorrectas - 1
+        // letrasIncorrectas = contraseña1.length - contraseña2.length
+    }
+    if (letrasCorrectas >= 0) {
+        porcentajeText.innerHTML = obtenerPorcentaje(letrasCorrectas, contraseña1.length)
+    }
+}
+
+function obtenerPorcentaje(numero, numeroBase) {
+    // let vBase = numeroBase / 100
+    let calculo = (numero / numeroBase) * 100
+    return `${Math.round(calculo)}%`
+}
+function verificarSiEsMinusculaOMayuscula(contraseña) {
+    if (expRegMayuscula.test(contraseña) || expRegMinusYMayus.test(contraseña) || expRegMinuscula.test(contraseña)) {
+        return true
+    }
+    return false
+
+}
+function validarContraseña(contraseña, INPUT) {
+    const length = contraseña.length
+
+    if (length <= 20 && length >= 15) {
+        // hacer las condificiones para muyseguro y seguro
+        if (verificarSiEsMinusculaOMayuscula(contraseña)) {
+
+            alertarInputValid(INPUT, "#F2B705", "Seguro")
+            return true
+        }
+        alertarInputValid(INPUT, "#0BD904", "Muy seguro")
+        return true
+    }
+    if (length <= 15 && length >= 10) {
+        // hacer las condificiones para seguro y noTanSeguro
+        if (verificarSiEsMinusculaOMayuscula(contraseña)) {
+            alertarInputValid(INPUT, "#BBBF45", "No tan seguro")
+            return true
+        }
+        alertarInputValid(INPUT, "#F2B705", "Seguro")
+        return true
+    }
+
+    if (length <= 10 && length >= 5) {
+        // hacer las condificiones para seguroCorto, noTanSeguro e inseguro
+        if (expContraseñaMuySegura.test(contraseña)) {
+            alertarInputValid(INPUT, "#D97904", "Tu contraseña es seguro pero corto")
+            return true
+
+        }
+        // prueba
+        if (verificarSiEsMinusculaOMayuscula(contraseña)) {
+            alertarInputValid(INPUT, "#D93B92", "Tu contraseña es valida pero no es seguro, ingresa digitos, letras mayusculas o caracteres especiales")
+            return true
+        }
+        alertarInputValid(INPUT, "#BBBF45", "No tan seguro")
+        return true
+
+    }
+    return false
+    /*
+                    20-24: {
+                            MUYSEGUROS
+                            minusculas-mayusculas-digitos-caracteresEspeciales
+                            minusculas-mayusculas-digitos
+                            minusculas-mayusculas-caracteresEspeciales
+                            SEGUROS
+                            minusculas-mayusculas
+                            minusculas
+                            mayusculas
+                        }
+                    13-20: {
+                            SEGUROS
+                            minusculas-mayusculas-digitos
+                            minusculas-mayusculas-digitos-caracteresEspeciales
+                            minusculas-mayusculas-caracteresEspeciales
+                            NOTANSEGUROS
+                            minusculas-mayusculas
+                            minusculas
+                            mayusculas
+                        }
+                    5-13: {
+                            SEGURO PERO CORTO
+                            minusculas-mayusculas-digitos-caracteresEspeciales
+                            NO TAN SEGUR0
+                            minusculas-mayusculas-digitos
+                            minusculas-mayusculas-caracteresEspeciales
+                            INSEGURO
+                            minusculas-mayusculas
+                            minusculas
+                            mayusculas
+                    }
+                    muySeguro : {
+                        minusculas-mayusculas-digitos-caracteresEspeciales  (20-24)
+                        minusculas-mayusculas-digitos                       (20-24)
+                        minusculas-mayusculas-caracteresEspeciales          (20-24)
+
+                    }
+                    seguro: {
+                        minusculas-mayusculas-digitos                       (13-20)
+                        minusculas-mayusculas-digitos-caracteresEspeciales  (13-20)
+                        minusculas-mayusculas-caracteresEspeciales          (13-20)
+                        minusculas-mayusculas                               (20-24)
+                        minusculas                                          (20-24)
+                        mayusculas                                          (20-24)
+                    }
+
+                    seguroCorto: {
+                        minusculas-mayusculas-digitos-caracteresEspeciales   (5-13)
+
+                    }
+                    noTanSeguro: {
+                        minusculas-mayusculas-digitos                       (5-13)
+                        minusculas-mayusculas-caracteresEspeciales          (5-13)
+                        minusculas-mayusculas                               (13-20)
+                        minusculas                                          (13-20)
+                        mayusculas                                          (13-20)
+                    }
+                    inseguro: {
+                        minusculas-mayusculas                               (5-13)
+                        minusculas                                          (5-13)
+                        mayusculas                                          (5-13)
+                    }
+                */
+}
+
+function verificarYAlertarInputs(inputs) {
+    let inputsVacios = inputs.filter(input => input.value === "")
+    let inputsInvalidos = inputs.filter(input => input.dataset.valid === "false")
+    if (inputsVacios.length === 0 && inputsInvalidos.length === 0) {
+
+        return true
+    }
+    inputsInvalidos.forEach(inputInvalido => {
+        alertarError(inputInvalido, "Este campo es invalido")
+    })
+    inputsVacios.forEach(inputVacio => {
+        alertarError(inputVacio, "Este campo esta vacio")
+    })
+}
+
+function iniciarSesión(nombreDeUsuario, contraseña) {
+    // esta funcion debe buscar el usuario en el array de USUARIOS y verificar la contraseña y el nombre de usuario
+    USUARIOS.forEach(usuario => {
+        if (nombreDeUsuario === usuario.nombre && contraseña === usuario.contraseña) {
+            USUARIO = usuario
+        }
+    })
+}
+
+function alertarError(input, errorMessage) {
+
+    input.nextElementSibling.className = "icon-cross"
+    input.nextElementSibling.id = "icono-input-invalid"
+    input.parentElement.style.border = "3px solid #F20530"
+    input.nextElementSibling.style.background = "#F20530"
+    // input.parentElement.nextElementSibling.className = "span-alert"
+    input.parentElement.nextElementSibling.innerHTML = errorMessage
+
+}
+
+function alertarInputValid(input, color = "#0BD904", mensaje = "") {
+
+    input.nextElementSibling.setAttribute("id", "icono-input-valid")
+    input.nextElementSibling.className = "icon-checkmark"
+    input.nextElementSibling.style.background = color
+    input.parentElement.nextElementSibling.innerHTML = mensaje
+    input.parentElement.style.border = `3px solid ${color}`
+    // aqui crear un span con un icono de check y darle color verde al border del contenedor
+}
+function verificarNombre(nombre) {
+    let existe = false
+    USUARIOS.forEach(usuario => {
+        if (usuario.nombre === nombre) {
+            existe = true
+        }
+    })
+    if (existe) {
+        console.log("Ese nombre ya existe");
+        inputNombreUsuarioRegister.dataset.valid = "false"
+        alertarError(inputNombreUsuarioRegister, "Este usuario ya existe")
+
+    } else {
+        inputNombreUsuarioRegister.dataset.valid = "true"
+        alertarInputValid(inputNombreUsuarioRegister)
+
+    }
+
+}
+
 
 function recortarImg(element) {
 
