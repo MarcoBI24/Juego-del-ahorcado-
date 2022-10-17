@@ -1,32 +1,41 @@
 // va a exportar una funcion para que en router la ejecute cuando haga el metodo post al formulario
 const nodemailer = require('nodemailer')
-
+const sid = "AC5de12d20dddbcf7af06d1e7e6cd0ba2d"
+const authToken = "c2e0ad9d60cd1a75e053814ab82a3935"
+const clientTwilio = require('twilio')(sid, authToken)
 const transportador = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
-  auth: {
-    user: 'mbernaildeonso@gmail.com',
-    pass: 'qvnvdefdsljpclrh' // entregado por Google
-  }
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        user: 'mbernaildeonso@gmail.com',
+        pass: 'qvnvdefdsljpclrh' // entregado por Google
+    }
 })
 
 transportador
-  .verify()
-  .then(() => {
-    console.log('Listo para enviar correo!!')
-  })
-  .catch(e => {
-    console.log(e)
-    console.log('Hubo un error ^^^')
-  })
+    .verify()
+    .then(() => {
+        console.log('Listo para enviar correo!!')
+    })
+    .catch(e => {
+        console.log(e)
+        console.log('Hubo un error ^^^')
+    })
+
 module.exports = async function (usuario, correo, contraseña) {
-  const d = new Date()
-  const statusMail = await transportador.sendMail({
-    from: 'Juego del ahorcado 💂‍♂️<mbernaildeonso@gmail.com>',
-    to: correo,
-    subject: 'Registro',
-    html: `<!DOCTYPE html>
+    const d = new Date()
+    const msg = await clientTwilio.messages.create({
+        from: "+14155238886",
+        body : "Bienvenido a The Hangman Game, tu registro fue exitoso",
+        to: "+51900866170"
+    })
+
+    const statusMail = await transportador.sendMail({
+        from: 'Juego del ahorcado 💂‍♂️<mbernaildeonso@gmail.com>',
+        to: correo,
+        subject: 'Registro',
+        html: `<!DOCTYPE html>
         <html lang="en">
       
       <head>
@@ -251,48 +260,6 @@ module.exports = async function (usuario, correo, contraseña) {
       </body>
       
       </html>`
-  })
-  return statusMail
+    })
+    return statusMail
 }
-
-// const transporter = nodemailer.createTransport({
-//   host: 'smtp.gmail.com',
-//   port: 465,
-//   secure: true,
-//   auth: {
-//     user: 'mbernaildeonso@gmail.com',
-//     pass: 'qvnvdefdsljpclrh'
-//   }
-// })
-// transporter.verify().then(() => {
-//   console.log('Listo para enviar correos')
-// })
-// app.post('/', async (req, res) => {
-//   try {
-//     // const { body } = req.body
-//     // console.log(body)
-//     // const { subject, message } = body
-//     // const content = `<i>You are a crack</i>
-//     // <img src="./img/user.png">`
-//     // const message = {}
-
-//     let info = await transporter.sendMail({
-//       from: `<mbernaildeonso@gmail.com>`,
-//       to: 'marcobernaildefonso@gmail.com',
-//       text: 'For clients with plaintext support only',
-//       html: ,
-
-//     })
-
-//     if (!info.error) {
-//         console.log(info.messageId)
-//       res.send('mensaje enviado')
-//     } else {
-//       console.log(info.error)
-//       res.send(info.error)
-//     }
-//   } catch (error) {
-//     res.send(error.message)
-//     console.log(error.message)
-//   }
-// })
