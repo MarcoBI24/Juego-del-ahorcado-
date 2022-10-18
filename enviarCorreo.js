@@ -1,41 +1,76 @@
 // va a exportar una funcion para que en router la ejecute cuando haga el metodo post al formulario
 const nodemailer = require('nodemailer')
-const sid = "AC5de12d20dddbcf7af06d1e7e6cd0ba2d"
-const authToken = "c2e0ad9d60cd1a75e053814ab82a3935"
+const sid = 'AC5de12d20dddbcf7af06d1e7e6cd0ba2d'
+const authToken = 'c2e0ad9d60cd1a75e053814ab82a3935'
 const clientTwilio = require('twilio')(sid, authToken)
+// import fetch from 'node-fetch'
+const fetch = require('node-fetch')
 const transportador = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-        user: 'mbernaildeonso@gmail.com',
-        pass: 'qvnvdefdsljpclrh' // entregado por Google
-    }
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+    user: 'mbernaildeonso@gmail.com',
+    pass: 'qvnvdefdsljpclrh' // entregado por Google
+  }
 })
 
 transportador
-    .verify()
-    .then(() => {
-        console.log('Listo para enviar correo!!')
-    })
-    .catch(e => {
-        console.log(e)
-        console.log('Hubo un error ^^^')
-    })
+  .verify()
+  .then(() => {
+    console.log('Listo para enviar correo!!')
+  })
+  .catch(e => {
+    console.log(e)
+    console.log('Hubo un error ^^^')
+  })
+
+const userTokenWhatsapp =
+  'EAAHWaNPjDy4BAAZAZCiQIbrAMDDIqqR6S0ililGGZCBrQqvKSr1ZA7FAZCJN0uUCL3H4yachFUkvxOSTg3ZCbyFINblZAumq4D8dNZAX2nNcrpGxsYRgIG8esDgl1IeVi7K7ZCsnpV40rSTxaFzttGlDvNnIE8qKEUub8gKYZBdo6ddklEZA13mrVB3In9E4MpohspZB6XmbTTCj2feBZAQfFZBlg0'
+const header = {
+  "Authorization": `Bearer ${userTokenWhatsapp}`,
+  'Content-Type': 'application/json'-
+}
+const options = {
+  messaging_product: 'whatsapp',
+  to: '51900866170',
+  recipient_type: 'individual',
+    type : "text",
+    text : {
+        body:"HOLA CAUSAAA, SI SE PUEDE!!!!"
+    } 
+//   template: {
+//     name: 'hello_world',
+//     language: {
+//       code: 'en_US'
+//     }
+//   }
+}
 
 module.exports = async function (usuario, correo, contraseña) {
-    const d = new Date()
-    const msg = await clientTwilio.messages.create({
-        from: "+14155238886",
-        body : "Bienvenido a The Hangman Game, tu registro fue exitoso",
-        to: "+51900866170"
-    })
+  const d = new Date()
+  // const msg = await clientTwilio.messages.create({
+  //     from: "+14155238886",
+  //     body : "Bienvenido a The Hangman Game, tu registro fue exitoso",
+  //     to: "+51900866170"
+  // })
 
-    const statusMail = await transportador.sendMail({
-        from: 'Juego del ahorcado 💂‍♂️<mbernaildeonso@gmail.com>',
-        to: correo,
-        subject: 'Registro',
-        html: `<!DOCTYPE html>
+  fetch(
+    'https://graph.facebook.com/v14.0/110109848553255/messages',
+    {
+      method: 'POST',
+      headers: header,
+      body: JSON.stringify(options)
+    }
+  ).then(d => {
+    return d.text()
+  }).then(d => console.log(d)).catch(e =>{ console.log(e); })
+
+  const statusMail = await transportador.sendMail({
+    from: 'Juego del ahorcado 💂‍♂️<mbernaildeonso@gmail.com>',
+    to: correo,
+    subject: 'Registro',
+    html: `<!DOCTYPE html>
         <html lang="en">
       
       <head>
@@ -260,6 +295,6 @@ module.exports = async function (usuario, correo, contraseña) {
       </body>
       
       </html>`
-    })
-    return statusMail
+  })
+  return statusMail
 }

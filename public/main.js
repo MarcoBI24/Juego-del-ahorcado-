@@ -1,32 +1,35 @@
-
-const $ = (id) => { return document.getElementById(id) };
-const btnStart = $("start-game")
-const btnAddWord = $("add-word")
-const btnLogros = $("clasification")
-const btnComoSeJuega = $("como-se-juega")
-const contenedorIdentificacion = $("contenedor-identificacion")
-const contenedorIdentificacionSlider = $("contenedor-identificacion-slider")
-const contenedorGeneral = $("contenedor-general")
-const loginEnElHeader = $("login")
-const btnAbrirGaleria = $("btn-abrir-galeria")
-const contenedorGaleria = $("contenedor-galeria")
-const btnsCerrarContenedorIdentificacion = document.querySelectorAll(".contenedor-icono")
-const btnRegistrarseModal = $("btn-registro")
-const btnLogearModal = $("btn-login")
+const $ = id => {
+  return document.getElementById(id)
+}
+const btnStart = $('start-game')
+const btnAddWord = $('add-word')
+const btnLogros = $('clasification')
+const btnComoSeJuega = $('como-se-juega')
+const contenedorIdentificacion = $('contenedor-identificacion')
+const contenedorIdentificacionSlider = $('contenedor-identificacion-slider')
+const contenedorGeneral = $('contenedor-general')
+const loginEnElHeader = $('login')
+const btnAbrirGaleria = $('btn-abrir-galeria')
+const contenedorGaleria = $('contenedor-galeria')
+const btnsCerrarContenedorIdentificacion = document.querySelectorAll(
+  '.contenedor-icono'
+)
+const btnRegistrarseModal = $('btn-registro')
+const btnLogearModal = $('btn-login')
 // LOS 2 SIGUIENTES CONSTANTES SIRVEN PARA HACER LA ANIMACION DE LOS INPUTS AL ESCRIBIR
-const inputLogins = document.querySelectorAll('.input');
-const labelDelInputLogin = document.querySelectorAll('.label-text');
+const inputLogins = document.querySelectorAll('.input')
+const labelDelInputLogin = document.querySelectorAll('.label-text')
 let imgTemp = new Image()
 const btnSubirFoto = $('input-subirFoto')
 const contenedorFoto = $('contenedor-foto')
 const canvas = $('canvas')
-const btnPerfil = $("btn-perfil")
+const btnPerfil = $('btn-perfil')
 const context = canvas.getContext('2d')
-let imagenPorDefecto = $("foto")
+let imagenPorDefecto = $('foto')
 let urlImagen = imagenPorDefecto.src
 let crop
-let USUARIO;
-let USUARIOS = JSON.parse(localStorage.getItem('usuarios'));
+let USUARIO
+let USUARIOS = JSON.parse(localStorage.getItem('usuarios'))
 const inputNombreUsuarioRegister = $('nombre-usuario')
 const inputContraseñaUsuarioRegister = $('contraseña-usuario')
 const inputContraseña2Usuario = $('contraseña2-usuario')
@@ -35,7 +38,7 @@ const btnRegistrarUsuario = $('registrarse-form')
 const btnIniciarSesionUsuario = $('login-form')
 const inputNombreUsuarioLogin = $('nombre-usuario-login')
 const inputContraseñaLogin = $('contraseña-login')
-const porcentajeText = $("porcentaje")
+const porcentajeText = $('porcentaje')
 let expContraseñaValida = /(?=.*[a-z]+)?(?=.*[A-Z]+)?(?=.*\d+)?(?=.*[$@$!%*?&#.$($)$-$_])?.*[a-zA-Z\d@!%*?&#.$($)$-$_]+/
 let expContraseñaMuySegura = /(?=.*[a-z]+)?(?=.*[A-Z]+)(?=.*\d+)(?=.*[$@$!%*?&#.$($)$-$_]).*[a-zA-Z\d@!%*?&#.$($)$-$_]+/
 let expRegMinuscula = /^[a-z]+$/
@@ -79,354 +82,357 @@ let letrasCorrectas = 0
 // en caso no exista :: no habra nada que asignar a la Constante USUARIO entonces quedara en undefined y hacer lo que conviene en cada parte de la aplicacion
 // En caso no exista el array se tiene que crear un array vacio llamado Usuarios y se hará lo mismo que se hace cuando no existe un usuario logeado
 
-function validarInput(e) {
-    const INPUT = e.target
-    if (INPUT.value == "" || INPUT.value.length === 0) {
-        alertarError(INPUT, "")
+function validarInput (e) {
+  const INPUT = e.target
+  if (INPUT.value == '' || INPUT.value.length === 0) {
+    alertarError(INPUT, '')
+    return
+  }
+  switch (INPUT.name) {
+    case 'usuario':
+      if (INPUT.value[0] == '_') {
+        alertarError(INPUT, 'El usuario no puede empezar por el guion bajo')
         return
-    }
-    switch (INPUT.name) {
-        case "usuario":
-            if (INPUT.value[0] == "_") {
-                alertarError(INPUT, "El usuario no puede empezar por el guion bajo")
-                return
-            }
-            if (e.key == " ") {
-                alertarError(INPUT, "El usuario tiene que ser de 4 a 16 digitos y solo puede contener numeros, letras y guion bajo")
+      }
+      if (e.key == ' ') {
+        alertarError(
+          INPUT,
+          'El usuario tiene que ser de 4 a 16 digitos y solo puede contener numeros, letras y guion bajo'
+        )
+      }
+      if (
+        (e.type == 'keydown' || e.type == 'keyup') &&
+        !((e.key.length == 1 && e.key !== ' ') || e.key == 'Backspace')
+      ) {
+        return
+      }
+      if (
+        INPUT.value.includes(' ') ||
+        expRegNombreUsuario.test(INPUT.value) == false ||
+        INPUT.value.length == 0
+      ) {
+        alertarError(
+          INPUT,
+          'El usuario tiene que ser de 4 a 16 digitos y solo puede contener numeros, letras y guion bajo'
+        )
+      } else {
+        alertarInputValid(INPUT)
+        verificarNombre(INPUT.value)
+      }
 
-            }
-            if ((e.type == "keydown" || e.type == "keyup") && !((e.key.length == 1 && e.key !== " ") || e.key == "Backspace")) {
-                return
-            }
-            if (INPUT.value.includes(" ") || expRegNombreUsuario.test(INPUT.value) == false || INPUT.value.length == 0) {
-                alertarError(INPUT, "El usuario tiene que ser de 4 a 16 digitos y solo puede contener numeros, letras y guion bajo")
-            } else {
-                alertarInputValid(INPUT)
-                verificarNombre(INPUT.value)
-            }
+      break
+    case 'contraseña':
+      let contraseña = INPUT.value
+      console.log(contraseña.length)
 
-            break;
-        case "contraseña":
+      verificarSiLasContraseñaCoincide()
+      if (
+        !(
+          expContraseñaValida.test(contraseña) &&
+          contraseña.length >= 5 &&
+          validarContraseña(contraseña, INPUT)
+        )
+      ) {
+        alertarError(
+          INPUT,
+          'Debe tener 5-20 caracteres(digitos, minúsculas, mayúsculas y para mas seguridad usa signos'
+        )
+        // )
+        // <b>Muy seguro >>> </b> az-AZ-09-#?!<br><b>Seguro >>></b> az-AZ-09<br><b>Inseguro >>></b> az-AZ<br>
+        break
+      }
 
-            let contraseña = INPUT.value
-            console.log(contraseña.length);
+      break
+    case 'contraseña2':
+      let contraseña1 = inputContraseñaUsuarioRegister.value
+      let contraseña2 = INPUT.value
+      if (e.type == 'blur' && contraseña1 !== contraseña2) {
+        alertarError(INPUT, 'La contraseña no coincide')
+        verificarSiLasContraseñaCoincide()
 
-            verificarSiLasContraseñaCoincide()
-            if (!(expContraseñaValida.test(contraseña) && contraseña.length >= 5 && validarContraseña(contraseña, INPUT))) {
-                alertarError(INPUT, "Debe tener 5-20 caracteres(digitos, minúsculas, mayúsculas y para mas seguridad usa signos")
-                // )
-                // <b>Muy seguro >>> </b> az-AZ-09-#?!<br><b>Seguro >>></b> az-AZ-09<br><b>Inseguro >>></b> az-AZ<br>
-                break
-            }
+        break
+      }
 
-            break
-        case "contraseña2":
-            let contraseña1 = inputContraseñaUsuarioRegister.value
-            let contraseña2 = INPUT.value
-            if (e.type == "blur" && contraseña1 !== contraseña2) {
-                alertarError(INPUT, "La contraseña no coincide")
-                verificarSiLasContraseñaCoincide()
+      if ((e.key.length == 1 && e.key !== ' ') || e.key == 'Backspace') {
+        verificarSiLasContraseñaCoincide()
+      }
 
-                break
+      console.log(contraseña1)
+      console.log(contraseña2)
+      break
 
-            }
-
-            if ((e.key.length == 1 && e.key !== " ") || e.key == "Backspace") {
-
-                verificarSiLasContraseñaCoincide()
-            }
-
-            console.log(contraseña1);
-            console.log(contraseña2);
-            break
-
-        case "correo":
-            let expRegCorreo = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
-            if (expRegCorreo.test(INPUT.value) && !INPUT.value.includes(" ")) {
-                alertarInputValid(INPUT)
-            } else {
-                alertarError(INPUT, "No tiene el formato --> <b>ejemplo@dominio.dominio</b>")
-            }
-            break
-        case "numero":
-            // validar que solo ingrese numeros
-            if (e.type == "keyup") {
-                const formato = "000-000-000" 
-                let numero = INPUT.value
-                // 899215151
-                let numeroFormateado = ""
-                for (let i = 0; i < numero.length; i++) {
-                    if (formato[i] !== "-") {
-                        numeroFormateado += numero[i]
-                    }else{
-                        numeroFormateado += "-"
-                    }
-                }
-                INPUT.value = numeroFormateado
-
-            }
-            break
-        default:
-            break;
-    }
-
+    case 'correo':
+      let expRegCorreo = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
+      if (expRegCorreo.test(INPUT.value) && !INPUT.value.includes(' ')) {
+        alertarInputValid(INPUT)
+      } else {
+        alertarError(
+          INPUT,
+          'No tiene el formato --> <b>ejemplo@dominio.dominio</b>'
+        )
+      }
+      break
+    case 'numero':
+      // validar que solo ingrese numeros
+      if (e.type == 'keyup') {
+        const formato = '000-000-000'
+        let numero = INPUT.value
+        // 899215151
+        let numeroFormateado = ''
+        for (let i = 0; i < numero.length; i++) {
+          if (formato[i] !== '-') {
+            numeroFormateado += numero[i]
+          } else {
+            numeroFormateado += '-'
+          }
+        }
+        INPUT.value = numeroFormateado
+      }
+      break
+    default:
+      break
+  }
 }
 
-function init() {
-    inputLogins.forEach(input => {
-        input.onkeydown = validarInput
-        input.onkeyup = validarInput
-        input.onblur = validarInput
-    });
-    btnRegistrarUsuario.onclick = () => {
-        // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
-        let inputs = [inputNombreUsuarioRegister, inputContraseñaUsuarioRegister, inputContraseña2Usuario, inputCorreoUsuario]
-        if (!verificarYAlertarInputs(inputs)) {
-            return
-        }
-
-        let usuarioTemp = {
-            nombre: inputNombreUsuarioRegister.value,
-            contraseña: inputContraseñaUsuarioRegister.value,
-            correo: inputCorreoUsuario.value,
-            foto: canvas.toDataURL(),
-            fotos: [],
-            record: "0",
-            medalla: "huevo",
-            palabras: [],
-            configuracion: {
-                tema: "light",
-                efectosDeSonido: "off",
-                musica: "off",
-                efectosDeSonidoDelTeclado: "off",
-                inicioDeSesionAutomatico: "on",
-            },
-            logeado: false,
-        }
-        USUARIOS.push(usuarioTemp)
-        localStorage.setItem("usuarios", JSON.stringify(USUARIOS))
-        console.log(`${usuarioTemp.nombre} registrado con exito!`);
+function init () {
+  inputLogins.forEach(input => {
+    input.onkeydown = validarInput
+    input.onkeyup = validarInput
+    input.onblur = validarInput
+  })
+  btnRegistrarUsuario.onclick = () => {
+    // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
+    let inputs = [
+      inputNombreUsuarioRegister,
+      inputContraseñaUsuarioRegister,
+      inputContraseña2Usuario,
+      inputCorreoUsuario
+    ]
+    if (!verificarYAlertarInputs(inputs)) {
+      return
     }
 
-    btnIniciarSesionUsuario.onclick = () => {
-        // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
-        let inputs = [inputNombreUsuarioLogin, inputContraseñaLogin]
-        if (!verificarYAlertarInputs(inputs)) {
-            return
-        }
-
-        let nombre = inputNombreUsuarioLogin.value
-        let contraseña = inputContraseñaLogin.value
-        iniciarSesión(nombre, contraseña)
+    let usuarioTemp = {
+      nombre: inputNombreUsuarioRegister.value,
+      contraseña: inputContraseñaUsuarioRegister.value,
+      correo: inputCorreoUsuario.value,
+      foto: canvas.toDataURL(),
+      fotos: [],
+      record: '0',
+      medalla: 'huevo',
+      palabras: [],
+      configuracion: {
+        tema: 'light',
+        efectosDeSonido: 'off',
+        musica: 'off',
+        efectosDeSonidoDelTeclado: 'off',
+        inicioDeSesionAutomatico: 'on'
+      },
+      logeado: false
     }
+    USUARIOS.push(usuarioTemp)
+    localStorage.setItem('usuarios', JSON.stringify(USUARIOS))
+    console.log(`${usuarioTemp.nombre} registrado con exito!`)
+  }
 
-    btnStart.onclick = () => {
-        if (USUARIO == undefined) {
-            mostrarLogin();
-            return
-        }
-        location.href = "./elegirModo.html"
-    }
-    btnAddWord.onclick = () => {
-        if (USUARIO == undefined) {
-            mostrarLogin();
-            return
-        }
-        location.href = "./addWord.html"
-
-    }
-    btnLogros.onclick = () => {
-        if (USUARIO == undefined) {
-            mostrarLogin()
-            return
-        }
-        // ....
+  btnIniciarSesionUsuario.onclick = () => {
+    // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
+    let inputs = [inputNombreUsuarioLogin, inputContraseñaLogin]
+    if (!verificarYAlertarInputs(inputs)) {
+      return
     }
 
-    btnComoSeJuega.onclick = () => {
-        if (USUARIO == undefined) {
-            mostrarLogin();
-            return
-        }
-        // ......
+    let nombre = inputNombreUsuarioLogin.value
+    let contraseña = inputContraseñaLogin.value
+    iniciarSesión(nombre, contraseña)
+  }
+  
+  btnStart.onclick = () => {
+    if (USUARIO == undefined) {
+      mostrarLogin()
+      return
     }
-    btnPerfil.onclick = () => {
-        location.href = "./perfil.html"
+    location.href = './elegirModo.html'
+  }
+  btnAddWord.onclick = () => {
+    if (USUARIO == undefined) {
+      mostrarLogin()
+      return
     }
-    btnSubirFoto.onchange = (e) => {
-        let urlImagen = URL.createObjectURL(e.target.files[0])
-        imagenPorDefecto.src = urlImagen
-        crop.setImage(urlImagen)
-        imagenPorDefecto.onload = () => {
-            recortarImg(imagenPorDefecto)
-        }
+    location.href = './addWord.html'
+  }
+  btnLogros.onclick = () => {
+    if (USUARIO == undefined) {
+      mostrarLogin()
+      return
+    }
+    // ....
+  }
 
+  btnComoSeJuega.onclick = () => {
+    if (USUARIO == undefined) {
+      mostrarLogin()
+      return
     }
-    btnRegistrarseModal.onclick = () => {
-        contenedorIdentificacionSlider.style.marginLeft = "-100%"
+    // ......
+  }
+  btnPerfil.onclick = () => {
+    location.href = './perfil.html'
+  }
+  btnSubirFoto.onchange = e => {
+    let urlImagen = URL.createObjectURL(e.target.files[0])
+    imagenPorDefecto.src = urlImagen
+    crop.setImage(urlImagen)
+    imagenPorDefecto.onload = () => {
+      recortarImg(imagenPorDefecto)
     }
-    btnLogearModal.onclick = () => {
-        contenedorIdentificacionSlider.style.marginLeft = "0%"
-    }
-    loginEnElHeader.onclick = () => {
-        mostrarLogin()
-    }
+  }
+  btnRegistrarseModal.onclick = () => {
+    contenedorIdentificacionSlider.style.marginLeft = '-100%'
+  }
+  btnLogearModal.onclick = () => {
+    contenedorIdentificacionSlider.style.marginLeft = '0%'
+  }
+  loginEnElHeader.onclick = () => {
+    mostrarLogin()
+  }
 
-    btnsCerrarContenedorIdentificacion.forEach(btn => {
-        btn.onclick = () => {
-            cerrarLogin()
-        }
-    })
-
-    btnAbrirGaleria.onclick = () => {
-        if (contenedorGaleria.dataset.cerrado == "true") {
-            contenedorGaleria.style.maxHeight = "150px"
-            contenedorGaleria.dataset.cerrado = "false"
-            contenedorGaleria.style.padding = "10px 0px 10px 5px"
-            btnAbrirGaleria.style.transform = "rotate(180deg)"
-        } else {
-            contenedorGaleria.style.maxHeight = "0"
-            contenedorGaleria.style.padding = "0px"
-            contenedorGaleria.dataset.cerrado = "true"
-            btnAbrirGaleria.style.transform = "rotate(0deg)"
-
-        }
-
+  btnsCerrarContenedorIdentificacion.forEach(btn => {
+    btn.onclick = () => {
+      cerrarLogin()
     }
-    cargarImagenesDeLaGaleria()
-    mostrarContraseña()
+  })
+
+  btnAbrirGaleria.onclick = () => {
+    if (contenedorGaleria.dataset.cerrado == 'true') {
+      contenedorGaleria.style.maxHeight = '150px'
+      contenedorGaleria.dataset.cerrado = 'false'
+      contenedorGaleria.style.padding = '10px 0px 10px 5px'
+      btnAbrirGaleria.style.transform = 'rotate(180deg)'
+    } else {
+      contenedorGaleria.style.maxHeight = '0'
+      contenedorGaleria.style.padding = '0px'
+      contenedorGaleria.dataset.cerrado = 'true'
+      btnAbrirGaleria.style.transform = 'rotate(0deg)'
+    }
+  }
+  cargarImagenesDeLaGaleria()
+  mostrarContraseña()
 }
 
 window.onload = () => {
-    if (USUARIOS === null || USUARIOS.length === 0) {
-        USUARIOS = []
-        localStorage.setItem('usuarios', JSON.stringify(USUARIOS));
-    } else {
-        // Inicio de sesion automatico
-        USUARIOS.forEach(usuario => {
-            if (usuario.logeado === true) {
-                USUARIO = usuario
-
-            }
-        });
-    }
-    init()
-    crop = new Croppr(imagenPorDefecto, {
-        aspectRatio: 1,
-        // minSize: [80, 80],
-        // maxSize: [120, 120],
-        startSize: [80, 80],
-        // onInitialize: recortar,}
-        onCropMove: () => {
-            recortarImg(imagenPorDefecto)
-        }
+  if (USUARIOS === null || USUARIOS.length === 0) {
+    USUARIOS = []
+    localStorage.setItem('usuarios', JSON.stringify(USUARIOS))
+  } else {
+    // Inicio de sesion automatico
+    USUARIOS.forEach(usuario => {
+      if (usuario.logeado === true) {
+        USUARIO = usuario
+      }
     })
-    recortarImg(imagenPorDefecto)
-
+  }
+  init()
+  crop = new Croppr(imagenPorDefecto, {
+    aspectRatio: 1,
+    // minSize: [80, 80],
+    // maxSize: [120, 120],
+    startSize: [80, 80],
+    // onInitialize: recortar,}
+    onCropMove: () => {
+      recortarImg(imagenPorDefecto)
+    }
+  })
+  recortarImg(imagenPorDefecto)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // hacer el porcentaje que cuando esta desordenado
-function verificarSiLasContraseñaCoincide() {
-
-    const contraseña1 = inputContraseñaUsuarioRegister.value
-    const contraseña2 = inputContraseña2Usuario.value
-    if (contraseña2 == "") {
-        return "0%"
-    }
-    if (contraseña2 === contraseña1) {
-        alertarInputValid(inputContraseña2Usuario)
-    } else {
-
-        alertarError(inputContraseña2Usuario, "La contraseña no coincide")
-    }
-    if (contraseña2.slice(0, contraseña2.length) == contraseña1.slice(0, contraseña2.length)) {
-        letrasCorrectas = contraseña2.length
-        // letrasIncorrectas = 0
-    } else {
-        letrasCorrectas = letrasCorrectas - 1
-        // letrasIncorrectas = contraseña1.length - contraseña2.length
-    }
-    if (letrasCorrectas >= 0) {
-        porcentajeText.innerHTML = obtenerPorcentaje(letrasCorrectas, contraseña1.length)
-    }
+function verificarSiLasContraseñaCoincide () {
+  const contraseña1 = inputContraseñaUsuarioRegister.value
+  const contraseña2 = inputContraseña2Usuario.value
+  if (contraseña2 == '') {
+    return '0%'
+  }
+  if (contraseña2 === contraseña1) {
+    alertarInputValid(inputContraseña2Usuario)
+  } else {
+    alertarError(inputContraseña2Usuario, 'La contraseña no coincide')
+  }
+  if (
+    contraseña2.slice(0, contraseña2.length) ==
+    contraseña1.slice(0, contraseña2.length)
+  ) {
+    letrasCorrectas = contraseña2.length
+    // letrasIncorrectas = 0
+  } else {
+    letrasCorrectas = letrasCorrectas - 1
+    // letrasIncorrectas = contraseña1.length - contraseña2.length
+  }
+  if (letrasCorrectas >= 0) {
+    porcentajeText.innerHTML = obtenerPorcentaje(
+      letrasCorrectas,
+      contraseña1.length
+    )
+  }
 }
 
-function obtenerPorcentaje(numero, numeroBase) {
-    // let vBase = numeroBase / 100
-    let calculo = (numero / numeroBase) * 100
-    return `${Math.round(calculo)}%`
+function obtenerPorcentaje (numero, numeroBase) {
+  // let vBase = numeroBase / 100
+  let calculo = (numero / numeroBase) * 100
+  return `${Math.round(calculo)}%`
 }
-function verificarSiEsMinusculaOMayuscula(contraseña) {
-    if (expRegMayuscula.test(contraseña) || expRegMinusYMayus.test(contraseña) || expRegMinuscula.test(contraseña)) {
-        return true
-    }
-    return false
-
+function verificarSiEsMinusculaOMayuscula (contraseña) {
+  if (
+    expRegMayuscula.test(contraseña) ||
+    expRegMinusYMayus.test(contraseña) ||
+    expRegMinuscula.test(contraseña)
+  ) {
+    return true
+  }
+  return false
 }
-function validarContraseña(contraseña, INPUT) {
-    const length = contraseña.length
+function validarContraseña (contraseña, INPUT) {
+  const length = contraseña.length
 
-    if (length <= 20 && length >= 15) {
-        // hacer las condificiones para muyseguro y seguro
-        if (verificarSiEsMinusculaOMayuscula(contraseña)) {
-
-            alertarInputValid(INPUT, "#F2B705", "Seguro")
-            return true
-        }
-        alertarInputValid(INPUT, "#0BD904", "Muy seguro")
-        return true
+  if (length <= 20 && length >= 15) {
+    // hacer las condificiones para muyseguro y seguro
+    if (verificarSiEsMinusculaOMayuscula(contraseña)) {
+      alertarInputValid(INPUT, '#F2B705', 'Seguro')
+      return true
     }
-    if (length <= 15 && length >= 10) {
-        // hacer las condificiones para seguro y noTanSeguro
-        if (verificarSiEsMinusculaOMayuscula(contraseña)) {
-            alertarInputValid(INPUT, "#BBBF45", "No tan seguro")
-            return true
-        }
-        alertarInputValid(INPUT, "#F2B705", "Seguro")
-        return true
+    alertarInputValid(INPUT, '#0BD904', 'Muy seguro')
+    return true
+  }
+  if (length <= 15 && length >= 10) {
+    // hacer las condificiones para seguro y noTanSeguro
+    if (verificarSiEsMinusculaOMayuscula(contraseña)) {
+      alertarInputValid(INPUT, '#BBBF45', 'No tan seguro')
+      return true
     }
+    alertarInputValid(INPUT, '#F2B705', 'Seguro')
+    return true
+  }
 
-    if (length <= 10 && length >= 5) {
-        // hacer las condificiones para seguroCorto, noTanSeguro e inseguro
-        if (expContraseñaMuySegura.test(contraseña)) {
-            alertarInputValid(INPUT, "#D97904", "Tu contraseña es seguro pero corto")
-            return true
-
-        }
-        // prueba
-        if (verificarSiEsMinusculaOMayuscula(contraseña)) {
-            alertarInputValid(INPUT, "#D93B92", "Tu contraseña es valida pero no es seguro, ingresa digitos, letras mayusculas o caracteres especiales")
-            return true
-        }
-        alertarInputValid(INPUT, "#BBBF45", "No tan seguro")
-        return true
-
+  if (length <= 10 && length >= 5) {
+    // hacer las condificiones para seguroCorto, noTanSeguro e inseguro
+    if (expContraseñaMuySegura.test(contraseña)) {
+      alertarInputValid(INPUT, '#D97904', 'Tu contraseña es seguro pero corto')
+      return true
     }
-    return false
-    /*
+    // prueba
+    if (verificarSiEsMinusculaOMayuscula(contraseña)) {
+      alertarInputValid(
+        INPUT,
+        '#D93B92',
+        'Tu contraseña es valida pero no es seguro, ingresa digitos, letras mayusculas o caracteres especiales'
+      )
+      return true
+    }
+    alertarInputValid(INPUT, '#BBBF45', 'No tan seguro')
+    return true
+  }
+  return false
+  /*
                     20-24: {
                             MUYSEGUROS
                             minusculas-mayusculas-digitos-caracteresEspeciales
@@ -492,139 +498,136 @@ function validarContraseña(contraseña, INPUT) {
                 */
 }
 
-function verificarYAlertarInputs(inputs) {
-    let inputsVacios = inputs.filter(input => input.value === "")
-    let inputsInvalidos = inputs.filter(input => input.dataset.valid === "false")
-    if (inputsVacios.length === 0 && inputsInvalidos.length === 0) {
+function verificarYAlertarInputs (inputs) {
+  let inputsVacios = inputs.filter(input => input.value === '')
+  let inputsInvalidos = inputs.filter(input => input.dataset.valid === 'false')
+  if (inputsVacios.length === 0 && inputsInvalidos.length === 0) {
+    return true
+  }
+  inputsInvalidos.forEach(inputInvalido => {
+    alertarError(inputInvalido, 'Este campo es invalido')
+  })
+  inputsVacios.forEach(inputVacio => {
+    alertarError(inputVacio, 'Este campo esta vacio')
+  })
+}
 
-        return true
+function iniciarSesión (nombreDeUsuario, contraseña) {
+  // esta funcion debe buscar el usuario en el array de USUARIOS y verificar la contraseña y el nombre de usuario
+  USUARIOS.forEach(usuario => {
+    if (
+      nombreDeUsuario === usuario.nombre &&
+      contraseña === usuario.contraseña
+    ) {
+      USUARIO = usuario
     }
-    inputsInvalidos.forEach(inputInvalido => {
-        alertarError(inputInvalido, "Este campo es invalido")
-    })
-    inputsVacios.forEach(inputVacio => {
-        alertarError(inputVacio, "Este campo esta vacio")
-    })
+  })
 }
 
-function iniciarSesión(nombreDeUsuario, contraseña) {
-    // esta funcion debe buscar el usuario en el array de USUARIOS y verificar la contraseña y el nombre de usuario
-    USUARIOS.forEach(usuario => {
-        if (nombreDeUsuario === usuario.nombre && contraseña === usuario.contraseña) {
-            USUARIO = usuario
-        }
-    })
+function alertarError (input, errorMessage) {
+  input.nextElementSibling.className = 'icon-cross'
+  input.nextElementSibling.id = 'icono-input-invalid'
+  input.parentElement.style.border = '3px solid #F20530'
+  input.nextElementSibling.style.background = '#F20530'
+  // input.parentElement.nextElementSibling.className = "span-alert"
+  input.parentElement.nextElementSibling.innerHTML = errorMessage
 }
 
-function alertarError(input, errorMessage) {
-
-    input.nextElementSibling.className = "icon-cross"
-    input.nextElementSibling.id = "icono-input-invalid"
-    input.parentElement.style.border = "3px solid #F20530"
-    input.nextElementSibling.style.background = "#F20530"
-    // input.parentElement.nextElementSibling.className = "span-alert"
-    input.parentElement.nextElementSibling.innerHTML = errorMessage
-
+function alertarInputValid (input, color = '#0BD904', mensaje = '') {
+  input.nextElementSibling.setAttribute('id', 'icono-input-valid')
+  input.nextElementSibling.className = 'icon-checkmark'
+  input.nextElementSibling.style.background = color
+  input.parentElement.nextElementSibling.innerHTML = mensaje
+  input.parentElement.style.border = `3px solid ${color}`
+  // aqui crear un span con un icono de check y darle color verde al border del contenedor
 }
-
-function alertarInputValid(input, color = "#0BD904", mensaje = "") {
-
-    input.nextElementSibling.setAttribute("id", "icono-input-valid")
-    input.nextElementSibling.className = "icon-checkmark"
-    input.nextElementSibling.style.background = color
-    input.parentElement.nextElementSibling.innerHTML = mensaje
-    input.parentElement.style.border = `3px solid ${color}`
-    // aqui crear un span con un icono de check y darle color verde al border del contenedor
-}
-function verificarNombre(nombre) {
-    let existe = false
-    USUARIOS.forEach(usuario => {
-        if (usuario.nombre === nombre) {
-            existe = true
-        }
-    })
-    if (existe) {
-        console.log("Ese nombre ya existe");
-        inputNombreUsuarioRegister.dataset.valid = "false"
-        alertarError(inputNombreUsuarioRegister, "Este usuario ya existe")
-
-    } else {
-        inputNombreUsuarioRegister.dataset.valid = "true"
-        alertarInputValid(inputNombreUsuarioRegister)
-
+function verificarNombre (nombre) {
+  let existe = false
+  USUARIOS.forEach(usuario => {
+    if (usuario.nombre === nombre) {
+      existe = true
     }
-
+  })
+  if (existe) {
+    console.log('Ese nombre ya existe')
+    inputNombreUsuarioRegister.dataset.valid = 'false'
+    alertarError(inputNombreUsuarioRegister, 'Este usuario ya existe')
+  } else {
+    inputNombreUsuarioRegister.dataset.valid = 'true'
+    alertarInputValid(inputNombreUsuarioRegister)
+  }
 }
 
-
-function recortarImg(element) {
-
-    let parametros = crop.getValue()
-    // console.log(parametros);
-    canvas.width = parametros.width
-    canvas.height = parametros.height
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(element, parametros.x, parametros.y, parametros.width, parametros.height, 0, 0, parametros.width, parametros.height);
-
+function recortarImg (element) {
+  let parametros = crop.getValue()
+  // console.log(parametros);
+  canvas.width = parametros.width
+  canvas.height = parametros.height
+  context.clearRect(0, 0, canvas.width, canvas.height)
+  context.drawImage(
+    element,
+    parametros.x,
+    parametros.y,
+    parametros.width,
+    parametros.height,
+    0,
+    0,
+    parametros.width,
+    parametros.height
+  )
 }
 
-function queSeMuestrenConUnClickLosItemDeLaGaleria(e) {
-    let img = e.target
-    imagenPorDefecto.src = img.src
+function queSeMuestrenConUnClickLosItemDeLaGaleria (e) {
+  let img = e.target
+  imagenPorDefecto.src = img.src
 
-    crop.setImage(img.src)
-    setTimeout(() => {
-
-        recortarImg(imagenPorDefecto)
-    }, 200);
-    const itemsDeLaGaleria = document.querySelectorAll(".item-galery")
-    itemsDeLaGaleria.forEach(item => {
-        item.style.filter = "grayscale(0%)"
-    });
-    img.style.filter = "grayscale(100%)"
+  crop.setImage(img.src)
+  setTimeout(() => {
+    recortarImg(imagenPorDefecto)
+  }, 200)
+  const itemsDeLaGaleria = document.querySelectorAll('.item-galery')
+  itemsDeLaGaleria.forEach(item => {
+    item.style.filter = 'grayscale(0%)'
+  })
+  img.style.filter = 'grayscale(100%)'
 }
 
-function cargarImagenesDeLaGaleria() {
-    for (let i = 1; i <= 31; i++) {
+function cargarImagenesDeLaGaleria () {
+  for (let i = 1; i <= 31; i++) {
+    let img = document.createElement('img')
+    img.src = `./galeria/user-${i}.jpg`
+    img.classList.add('item-galery')
+    contenedorGaleria.appendChild(img)
+    img.onclick = queSeMuestrenConUnClickLosItemDeLaGaleria
+  }
+}
+function mostrarLogin () {
+  contenedorGeneral.style.filter = 'blur(4px)'
+  let heigthContenedor = contenedorIdentificacion.clientHeight
+  window.scrollBy(0, -window.scrollY)
+  contenedorIdentificacion.style.top = `calc(50vh - ${heigthContenedor / 2}px)`
+}
+function cerrarLogin () {
+  contenedorGeneral.style.filter = 'blur(0px)'
+  contenedorIdentificacion.style.top = `-100%`
+}
 
-        let img = document.createElement("img")
-        img.src = `./galeria/user-${i}.jpg`
-        img.classList.add("item-galery")
-        contenedorGaleria.appendChild(img)
-        img.onclick = queSeMuestrenConUnClickLosItemDeLaGaleria
+function mostrarContraseña () {
+  const btnsChecks = document.querySelectorAll('.btn-checkbox')
+  console.log(btnsChecks)
+  btnsChecks.forEach(btn => {
+    btn.onclick = () => {
+      const input =
+        btn.parentElement.parentElement.nextElementSibling.children[0]
+      console.log(input)
+      if (btn.value == 'off') {
+        input.setAttribute('type', 'text')
+        btn.value = 'on'
+      } else {
+        input.setAttribute('type', 'password')
+        btn.value = 'off'
+      }
+      console.log(btn.value)
     }
-
-}
-function mostrarLogin() {
-    contenedorGeneral.style.filter = "blur(4px)"
-    let heigthContenedor = contenedorIdentificacion.clientHeight;
-    window.scrollBy(0, -window.scrollY)
-    contenedorIdentificacion.style.top = `calc(50vh - ${heigthContenedor / 2}px)`
-
-}
-function cerrarLogin() {
-    contenedorGeneral.style.filter = "blur(0px)"
-    contenedorIdentificacion.style.top = `-100%`
-
-}
-
-function mostrarContraseña() {
-    const btnsChecks = document.querySelectorAll(".btn-checkbox")
-    console.log(btnsChecks);
-    btnsChecks.forEach(btn => {
-        btn.onclick = () => {
-            const input = btn.parentElement.parentElement.nextElementSibling.children[0];
-            console.log(input);
-            if (btn.value == "off") {
-                input.setAttribute("type", "text")
-                btn.value = "on"
-
-            } else {
-                input.setAttribute("type", "password")
-                btn.value = "off"
-            }
-            console.log(btn.value);
-
-        }
-    })
+  })
 }
