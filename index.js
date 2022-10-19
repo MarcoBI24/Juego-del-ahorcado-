@@ -9,7 +9,7 @@ const app = express().use(body_parser.json())
 app.use(express.urlencoded({ extended: false }))
 app.use('/', express.static(path.join(__dirname, 'public')))
 // app.use('/', require('./routes'))
-app.use('/facebook', require("./verificarTokenWhatsapp"))
+app.get('/facebook', require("./verificarTokenWhatsapp"))
 app.listen(process.env.PORT || 3000)
 // app.listen(, () => console.log('Se prendio la máquina'))
 
