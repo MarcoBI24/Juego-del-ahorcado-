@@ -13,8 +13,11 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 // })
 // app.post('/',require("./enviarMensajeWhatsapp"))
 // app.use('/', require('./routes'))
-app.get('/facebook', require("./verificarTokenWhatsapp"))
-app.post('/facebook', require("./obtenerMensajeWhatsapp"))
+app.get('/facebook', require('./verificarTokenWhatsapp'))
+app.post('/facebook', (req, res) => {
+  console.log(req.body)
+  res.send(200)
+})
 app.listen(process.env.PORT || 3000)
 // app.listen(, () => console.log('Se prendio la máquina'))
 
