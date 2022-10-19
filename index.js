@@ -17,7 +17,8 @@ app.post('/',require("./enviarMensajeWhatsapp"))
 // app.use('/', require('./routes'))
 app.get('/facebook', require('./verificarTokenWhatsapp'))
 app.post('/facebook', (req, res) => {
-  console.log('Facebook request body:', req.body);
+  console.log('Facebook request body')
+  console.log(JSON.stringify(req.body));
 
 
   console.log('request header X-Hub-Signature validated');
