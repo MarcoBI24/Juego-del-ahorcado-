@@ -8,8 +8,13 @@ const app = express().use(body_parser.json())
 // const request = require("request")
 app.use(express.urlencoded({ extended: false }))
 app.use('/', express.static(path.join(__dirname, 'public')))
+// app.get("/chat", (req,res)=>{
+//     res.send("hoola")
+// })
+app.post('/',require("./enviarMensajeWhatsapp"))
 // app.use('/', require('./routes'))
 app.get('/facebook', require("./verificarTokenWhatsapp"))
+app.post('/facebook', require("./obtenerMensajeWhatsapp"))
 app.listen(process.env.PORT || 3000)
 // app.listen(, () => console.log('Se prendio la máquina'))
 
