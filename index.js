@@ -5,6 +5,8 @@ const express = require('express')
 const path = require('path')
 const body_parser = require('body-parser')
 const app = express().use(body_parser.json())
+var xhub = require('express-x-hub');
+app.use(xhub({ algorithm: 'sha1', secret: "08daf43ab4a670e4178e2922f2af9c2b" }));
 // const request = require("request")
 app.use(express.urlencoded({ extended: false }))
 app.use('/', express.static(path.join(__dirname, 'public')))
@@ -15,8 +17,17 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 // app.use('/', require('./routes'))
 app.get('/facebook', require('./verificarTokenWhatsapp'))
 app.post('/facebook', (req, res) => {
-  console.log(req.body)
-  res.send(200)
+  console.log('Facebook request body:', req.body);
+
+  if (!req.isXHubValid()) {
+    console.log('Warning - request header X-Hub-Signature not present or invalid');
+    res.sendStatus(401);
+    return;
+  }
+
+  console.log('request header X-Hub-Signature validated');
+  // Process the Facebook updates here
+    res.sendStatus(200);
 })
 app.listen(process.env.PORT || 3000)
 // app.listen(, () => console.log('Se prendio la máquina'))
