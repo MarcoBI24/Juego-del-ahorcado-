@@ -13,7 +13,7 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 // app.get("/chat", (req,res)=>{
 //     res.send("hoola")
 // })
-// app.post('/',require("./enviarMensajeWhatsapp"))
+app.post('/',require("./enviarMensajeWhatsapp"))
 // app.use('/', require('./routes'))
 app.get('/facebook', require('./verificarTokenWhatsapp'))
 app.post('/facebook', (req, res) => {
