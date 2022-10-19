@@ -1,0 +1,25 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    padding: 40px;
+    justify-content: center;
+}
+.contenedor-general{
+    width: 100%;
+    border: 1px solid;
+    display: flex;    
+}
+    .contenedor-mensajes{
+        width: 100%;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        background-color: antiquewhite;
+    }
+        .mensaje{
+            padding: 5px;
+        }
