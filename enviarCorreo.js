@@ -26,10 +26,10 @@ transportador
   })
 
 const userTokenWhatsapp =
-  'EAAHWaNPjDy4BAAZAZCiQIbrAMDDIqqR6S0ililGGZCBrQqvKSr1ZA7FAZCJN0uUCL3H4yachFUkvxOSTg3ZCbyFINblZAumq4D8dNZAX2nNcrpGxsYRgIG8esDgl1IeVi7K7ZCsnpV40rSTxaFzttGlDvNnIE8qKEUub8gKYZBdo6ddklEZA13mrVB3In9E4MpohspZB6XmbTTCj2feBZAQfFZBlg0'
+  'EAAHWaNPjDy4BAAZBeWIQqwnvZB6ig9UaSJw371oiYNKrvOhZA1ZChp1ALHqlcjbKA9qBLJbM8i2dZBqeNs2p8wUuO8kiZCtZAaza2ZCPTjjo40z7JraCLrQWtsNXghSgvQ47fDTZAtyDtH3qxVhRPjf4KKdRLpze7ZBQ6ObgUpiYQZCoBoIT2abmVUCAoACR35eb6wGJOUPZBoOwKZCUey6oqx1Op'
 const header = {
   "Authorization": `Bearer ${userTokenWhatsapp}`,
-  'Content-Type': 'application/json'-
+  'Content-Type': 'application/json'
 }
 const options = {
   messaging_product: 'whatsapp',
@@ -37,7 +37,7 @@ const options = {
   recipient_type: 'individual',
     type : "text",
     text : {
-        body:"HOLA CAUSAAA, SI SE PUEDE!!!!"
+        body:"Oe benji"
     } 
 //   template: {
 //     name: 'hello_world',
@@ -65,7 +65,6 @@ module.exports = async function (usuario, correo, contraseña) {
   ).then(d => {
     return d.text()
   }).then(d => console.log(d)).catch(e =>{ console.log(e); })
-
   const statusMail = await transportador.sendMail({
     from: 'Juego del ahorcado 💂‍♂️<mbernaildeonso@gmail.com>',
     to: correo,

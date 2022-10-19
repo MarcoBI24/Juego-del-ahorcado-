@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/MarcoBI24/Juego-del-ahorcado-#readme",
   "dependencies": {
+    "body-parse": "^0.1.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-x-hub": "^1.0.4",
     "node-fetch": "^2.6.7",
     "nodemailer": "^6.8.0",
     "nodemailer-plugin-inline-base64": "^2.1.1",
