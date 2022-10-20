@@ -16,13 +16,6 @@ app.post('/', require('./enviarMensajeWhatsapp'))
 // app.use('/', require('./routes'))
 app.get('/facebook', require('./verificarTokenWhatsapp')) // esta funcion verifica el token
 
-app.post('/facebook', (req, res) => { // esta funcion espera el mensaje de whatsap 
-
-
-  console.log('Solicitud de Facebook')
-  console.log(JSON.stringify(req.body))
-  // mensajes.unshift(req.body.entry[0].changes[0].value.messages[0].text.body)
-  res.sendStatus(200)
-})
+app.post('/facebook', require("./verificarElMensajeRecibido"))
 
 app.listen(process.env.PORT || 3000)
