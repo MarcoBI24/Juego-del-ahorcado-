@@ -16,7 +16,7 @@ module.exports = (nameTemplate) => {
     template: {
       name: nameTemplate,
       language: {
-        code : "US"
+        code : "en_US"
       }
     }
   }
