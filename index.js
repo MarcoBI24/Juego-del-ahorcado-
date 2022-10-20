@@ -21,7 +21,7 @@ app.post('/facebook', (req, res) => { // esta funcion espera el mensaje de whats
 
   console.log('Solicitud de Facebook')
   console.log(JSON.stringify(req.body))
-  mensajes.unshift(req.body.entry[0].changes[0].value.messages[0].text.body)
+  // mensajes.unshift(req.body.entry[0].changes[0].value.messages[0].text.body)
   res.sendStatus(200)
 })
 
