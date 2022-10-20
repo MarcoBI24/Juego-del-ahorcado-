@@ -10,7 +10,7 @@ router.route("/facebook").post((req, res) => { // esta funcion espera el mensaje
     console.log(JSON.stringify(req.body))
     mensaje = req.body.entry[0].changes[0].value.messages[0].text.body
     if (mensaje === "/opciones") {
-        enviarMensaje("mostar_opciones")
+        enviarMensaje("mostrar_opciones")
     }
     res.sendStatus(200)
   })
