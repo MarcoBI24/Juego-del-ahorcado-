@@ -69,12 +69,12 @@ router.route('/facebook').post((req, res) => {
   // esta funcion espera el mensaje de whatsap
   mensaje = req.body.entry[0].changes[0].value.messages[0].text.body
   if (mensaje === '/opciones' && jugando == false) {
-    enviarMensaje('mostrar_opciones')
+    enviarMensaje('mostrar_opciones',null)
   }
   
   if (mensaje === "Jugar") {
     jugando = true
-    enviarMensaje('como_jugar')
+    enviarMensaje('como_jugar',null)
   }
   if (jugando == true) {
     // tener la palabra secreta
