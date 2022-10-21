@@ -8,7 +8,7 @@ module.exports = (nameTemplate, mensaje) => {
     'Content-Type': 'application/json'
   }
   let options = {}
-  if (nameTemplate === null) {
+  if (nameTemplate !== null) {
     options = {
       messaging_product: 'whatsapp',
       to: '51900866170',
