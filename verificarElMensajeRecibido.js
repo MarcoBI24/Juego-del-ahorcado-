@@ -67,7 +67,7 @@ const IMAGENES_AHORCADO = [`
 =========`]
 router.route('/facebook').post((req, res) => {
   // esta funcion espera el mensaje de whatsap
-  if ( req.body.entry[0].changes[0].value.messages[0].text !== undefined && req.body.entry[0].changes[0].value.messages[0].text.body !== undefined) {
+  if ( req.body.entry[0].changes[0].value.messages !== undefined && req.body.entry[0].changes[0].value.messages[0].text.body !== undefined) {
     
     mensaje = req.body.entry[0].changes[0].value.messages[0].text.body
     if (mensaje === '/opciones' && jugando == false) {
