@@ -94,6 +94,7 @@ router.route('/facebook').post(async (req, res) => {
       palabraSecreta.split("").forEach(letra => {
         mensajeGuiones+="_"
       });
+      mensajeGuiones = mensajeGuiones.split("")
       mensajeGuiones = mensajeGuiones.join(" ")
       mensaje = mensajeHombre + "\n\n" + mensajeGuiones
      await enviarMensaje(null,mensaje)
