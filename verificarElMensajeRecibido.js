@@ -74,12 +74,13 @@ router.route('/facebook').post((req, res) => {
       enviarMensaje('mostrar_opciones',null)
     }
     
-    if (mensaje === "Jugar") {
+    if (mensaje === "Jugar" && jugando == false) {
       jugando = true
       enviarMensaje('como_jugar',null)
     }
-    if (mensaje === "/salir") {
+    if (mensaje === "/salir" && jugando == true) {
       jugando = false
+      enviarMensaje(null,"Saliste del juego")
     }
     if (jugando == true) {
       // tener la palabra secreta
