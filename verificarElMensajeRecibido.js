@@ -65,22 +65,24 @@ const IMAGENES_AHORCADO = [`
  / \  |
       |
 =========`]
-router.route('/facebook').post((req, res) => {
+router.route('/facebook').post(async (req, res) => {
   // esta funcion espera el mensaje de whatsap
   if ( req.body.entry[0].changes[0].value.messages !== undefined && req.body.entry[0].changes[0].value.messages[0].text.body !== undefined) {
     
     mensaje = req.body.entry[0].changes[0].value.messages[0].text.body
     if (mensaje === '/opciones' && jugando == false) {
-      enviarMensaje('mostrar_opciones',null)
+      await enviarMensaje('mostrar_opciones',null)
     }
     
     if (mensaje === "Jugar" && jugando == false) {
       jugando = true
-      enviarMensaje('como_jugar',null)
+      await enviarMensaje('como_jugar',null)
+      mensaje = ""
     }
     if (mensaje === "/salir" && jugando == true) {
       jugando = false
-      enviarMensaje(null,"Saliste del juego")
+      await enviarMensaje(null,"Saliste del juego")
+      mensaje = ""
     }
     if (jugando == true) {
       // tener la palabra secreta
@@ -94,16 +96,13 @@ router.route('/facebook').post((req, res) => {
       });
       mensajeGuiones = mensajeGuiones.join(" ")
       mensaje = mensajeHombre + "\n\n" + mensajeGuiones
-      enviarMensaje(null,mensaje)
-  
+     await enviarMensaje(null,mensaje)
+      mensaje = ""
   
   
     }  
     
-  }else{
-    res.sendStatus(403)
   }
-
 
 
 
