@@ -77,7 +77,7 @@ router.route('/facebook').post(async (req, res) => {
       await enviarMensaje('mostrar_opciones',null)
     }else if (mensaje === '/opciones' && jugando == true) {
       await enviarMensaje(null,'Escribe /salir para abandonar el juego ')
-      res.sendStatus(200)
+      return
     }
     
     if (mensaje === "Jugar" && jugando == false) {
