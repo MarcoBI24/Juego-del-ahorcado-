@@ -72,7 +72,7 @@ router.route('/facebook').post(async (req, res) => {
   if ( req.body.entry[0].changes[0].value.messages !== undefined && req.body.entry[0].changes[0].value.messages[0].text.body !== undefined) {
     
     mensaje = req.body.entry[0].changes[0].value.messages[0].text.body
-    console.log(mensaje);
+    console.log(mensaje + "MENSAJE RECIBIDO");
     if (mensaje === '/opciones' && jugando == false) {
       await enviarMensaje('mostrar_opciones',null)
     }

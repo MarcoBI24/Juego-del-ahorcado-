@@ -40,6 +40,7 @@ module.exports = async (nameTemplate, mensaje) => {
     })
     .then(r => {
       console.log(r)
+      console.log(mensaje | nameTemplate + "MENSAJE ENVIADO!!");
     })
     .catch(e => {
       console.log(e)
