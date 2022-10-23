@@ -65,6 +65,8 @@ const IMAGENES_AHORCADO = [`
  / \  |
       |
 =========`]
+// en req me envia la data
+// en res le envio el status
 router.route('/facebook').post(async (req, res) => {
   // esta funcion espera el mensaje de whatsap
   if ( req.body.entry[0].changes[0].value.messages !== undefined && req.body.entry[0].changes[0].value.messages[0].text.body !== undefined) {
@@ -103,6 +105,8 @@ router.route('/facebook').post(async (req, res) => {
   
     }  
     
+  }else{
+    console.log("El mensaje se ha enviado,entregado o leido");
   }
 
 
