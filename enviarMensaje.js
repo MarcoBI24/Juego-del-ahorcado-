@@ -30,21 +30,12 @@ module.exports = async (nameTemplate, mensaje) => {
       }
     }
   }
-  await fetch('https://graph.facebook.com/v15.0/110109848553255/messages', {
+ const peticion =  await fetch('https://graph.facebook.com/v15.0/110109848553255/messages', {
     method: 'POST',
     headers: headers,
     body: JSON.stringify(options)
   })
-    .then(r => {
-      return r.text()
-    })
-    .then(r => {
-      console.log(r)
-      console.log(mensaje | nameTemplate + "MENSAJE ENVIADO!!");
-    })
-    .catch(e => {
-      console.log(e)
-    })
+  console.log(peticion);
 
   console.log('MENSAJE ENVIADO...')
 }
