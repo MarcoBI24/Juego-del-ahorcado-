@@ -35,7 +35,12 @@ module.exports = async (nameTemplate, mensaje) => {
     headers: headers,
     body: JSON.stringify(options)
   })
-  console.log(peticion);
+  if (peticion.status == 200) {
+    console.log(peticion.json());
+    console.log("Mensaje o template enviado!!!");
+  }else{
+    console.log("Hubo un error al enviar el mensaje o template!!!");
+  }
 
   console.log('MENSAJE ENVIADO...')
 }
