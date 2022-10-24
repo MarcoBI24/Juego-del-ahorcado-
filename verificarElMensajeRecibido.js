@@ -136,7 +136,7 @@ router.route('/facebook').post(async (req, res) => {
         // hacer un mensaje con guiones del largo de la palabra secreta
         // hacer un mensaje con el dibujo en la posicion del numero de errores
         // recibir la letra
-        mensajeGuiones = mensajeGuiones.split('')
+        mensajeGuiones = mensajeGuiones.split("")
         if (
           arrPalabraSecreta.includes(mensaje) &&
           !mensajeGuiones.includes(mensaje)
@@ -147,11 +147,11 @@ router.route('/facebook').post(async (req, res) => {
               mensajeGuiones[i] = letra
             }
           }
-        } else {
+        } else { //corregir que errores debe empezar en 0
           errores++
         }
         mensajeHombre = IMAGENES_AHORCADO[errores]
-        mensajeGuiones = mensajeGuiones.join(' ')
+        mensajeGuiones = mensajeGuiones.join(" ")
         mensaje = mensajeHombre + '\n\n' + mensajeGuiones
         await enviarMensaje(null, mensaje)
         mensaje = ''
