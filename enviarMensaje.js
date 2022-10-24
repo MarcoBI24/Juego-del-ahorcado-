@@ -43,6 +43,7 @@ module.exports = async (nameTemplate, mensaje) => {
     console.log('Mensaje o template enviado!!!')
   } else {
     console.log('Hubo un error al enviar el mensaje o template!!!')
+    console.log(peticion.status)
   }
 
   console.log('MENSAJE ENVIADO...')
