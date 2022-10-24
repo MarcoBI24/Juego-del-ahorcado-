@@ -119,13 +119,17 @@ router.route('/facebook').post(async (req, res) => {
             jugando = false
             await enviarMensaje(null, 'Saliste del juego')
             mensaje = ''
+            errores = 0
+            arrPalabraSecreta.forEach(letra => {
+              mensajeGuiones += '_'
+            })
           }
           break
         default:
           break
       }
 
-      if ((jugando == true) || (mensaje.length === 1 && jugando === true)) {
+      if (jugando == true || (mensaje.length === 1 && jugando === true)) {
         // tener la palabra secreta
         // el largo de la palabra secreta
         // hacer un mensaje con guiones del largo de la palabra secreta
