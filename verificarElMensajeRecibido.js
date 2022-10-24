@@ -103,11 +103,13 @@ router.route('/facebook').post(async (req, res) => {
       }
       console.log(mensaje + 'MENSAJE RECIBIDO')
       switch (mensaje) {
-        case 'Hola' && jugando === false:
-          let nombreUser =
-            req.body.entry[0].changes[0].value.contacts[0].profile.name
-          await enviarMensaje(null, `Hola ${nombreUser}, ¿Qué tal?`)
-          mensaje = ''
+        case 'Hola':
+          if (!jugando) {
+            let nombreUser =
+              req.body.entry[0].changes[0].value.contacts[0].profile.name
+            await enviarMensaje(null, `Hola ${nombreUser}, ¿Qué tal?`)
+            mensaje = ''
+          }
           break
         case '/opciones':
           if (jugando == false) {
@@ -117,47 +119,24 @@ router.route('/facebook').post(async (req, res) => {
           }
           mensaje = ''
           break
-        case 'Jugar' && jugando === false:
-          jugando = true
-          await enviarMensaje('como_jugar', null)
-          mensaje = ""
+        case 'Jugar':
+          if (!jugando) {
+            jugando = true
+            await enviarMensaje('como_jugar', null)
+            mensaje = ''
+          }
           break
-        case '/salir' && jugando === true:
-          jugando = false
-          await enviarMensaje(null, 'Saliste del juego')
-          mensaje = ""
+        case '/salir':
+          if (jugando) {
+            jugando = false
+            await enviarMensaje(null, 'Saliste del juego')
+            mensaje = ''
+          }
           break
         default:
           break
       }
-      // if (mensaje === 'Hola' && jugando === false) {
-      //   let nombreUser =
-      //     req.body.entry[0].changes[0].value.contacts[0].profile.name
-      //   await enviarMensaje(null, `Hola ${nombreUser}, ¿Qué tal?`)
-      //   mensaje = ''
-      //   res.sendStatus(200)
-      //   return
-      // }
-      // if (mensaje === '/opciones' && jugando == false) {
-      //   await enviarMensaje('mostrar_opciones', null)
-      //   mensaje = ''
-      // } else if (mensaje === '/opciones' && jugando == true) {
-      //   await enviarMensaje(null, 'Escribe /salir para abandonar el juego ')
-      //   res.sendStatus(200)
-      //   mensaje = ''
-      //   return
-      // }
-
-      // if (mensaje === 'Jugar' && jugando == false) {
-      //   jugando = true
-      //   await enviarMensaje('como_jugar', null)
-      //   mensaje = ''
-      // }
-      // if (mensaje === '/salir' && jugando == true) {
-      //   jugando = false
-      //   await enviarMensaje(null, 'Saliste del juego')
-      //   mensaje = ''
-      // }
+     
       if (jugando == true) {
         // tener la palabra secreta
         // el largo de la palabra secreta
