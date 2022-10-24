@@ -120,6 +120,7 @@ router.route('/facebook').post(async (req, res) => {
             await enviarMensaje(null, 'Saliste del juego')
             mensaje = ''
             errores = 0
+            mensajeGuiones = ""
             arrPalabraSecreta.forEach(letra => {
               mensajeGuiones += '_'
             })
