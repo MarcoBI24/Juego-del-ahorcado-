@@ -33,7 +33,9 @@
 // let str2 = "hola"
 // console.log()
 let ar = ['a','b','c']
+let str = "H _ l a"
 console.log(ar.includes("a"));
+console.log(str.split(" "))
 // console.log(str2.slice(0,str2.length));
 
 // \w -- es para cualquier letra o digito y guion bajo o tambien cualquier letra de una palabra

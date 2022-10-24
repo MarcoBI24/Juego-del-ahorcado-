@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const enviarMensaje = require('./enviarMensaje')
 
-let palabraSecreta = 'marco'
+let palabraSecreta = 'banana'
 let mensaje = ''
 let jugando = false
 let errores = 0
@@ -155,6 +155,7 @@ router.route('/facebook').post(async (req, res) => {
         mensaje = mensajeHombre + '\n\n' + mensajeGuiones
         await enviarMensaje(null, mensaje)
         mensaje = ''
+        mensajeGuiones = mensajeGuiones.split(" ")
       }
     } else {
       console.log('El mensaje se ha enviado,entregado o leido')
