@@ -21,61 +21,61 @@ const IMAGENES_AHORCADO = [
        |
        |
 
-  =========`,
+=========`,
   `
-  
-    +---+
-    |   |
-    O   |
-        |
-        |
-        |
-  =========`,
+
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========`,
   `
-  
-    +---+
-    |   |
-    O   |
-    |   |
-        |
-        |
-  =========`,
+
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========`,
   `
-  
-    +---+
-    |   |
-    O   |
-   /|   |
-        |
-        |
-  =========`,
+
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========`,
   `
-  
-    +---+
-    |   |
-    O   |
-   /|\  |
-        |
-        |
-  =========`,
+
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========`,
   `
-  
-    +---+
-    |   |
-    O   |
-   /|\  |
-   /    |
-        |
-  =========`,
+
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========`,
   `
-  
-    +---+
-    |   |
-    O   |
-   /|\  |
-   / \  |
-        |
-  =========`
+
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========`
 ]
 
 router.route('/facebook').post(async (req, res) => {
@@ -125,7 +125,7 @@ router.route('/facebook').post(async (req, res) => {
           break
       }
 
-      if (jugando == true || (mensaje.length === 1 && jugando === true)) {
+      if ((jugando == true) || (mensaje.length === 1 && jugando === true)) {
         // tener la palabra secreta
         // el largo de la palabra secreta
         // hacer un mensaje con guiones del largo de la palabra secreta
