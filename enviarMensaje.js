@@ -39,7 +39,7 @@ module.exports = async (nameTemplate, mensaje) => {
     }
   )
   if (peticion.status == 200) {
-    console.log(peticion.text())
+    console.log(await peticion.text())
     console.log('Mensaje o template enviado!!!')
   } else {
     console.log('Hubo un error al enviar el mensaje o template!!!')
