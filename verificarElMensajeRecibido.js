@@ -7,6 +7,10 @@ let jugando = false
 let errores = 0
 let mensajeGuiones = ''
 let mensajeHombre = ''
+let arrPalabraSecreta = palabraSecreta.split('')
+arrPalabraSecreta.forEach(letra => {
+  mensajeGuiones += '_'
+})
 const IMAGENES_AHORCADO = [
   `
 
@@ -73,22 +77,6 @@ const IMAGENES_AHORCADO = [
       |
 =========`
 ]
-// [
-//   // en req me envia la data
-//   // en res le envio el status
-//   {
-//     context: {
-//       from: '15550877052',
-//       id: 'wamid.HBgLNTE5MDA4NjYxNzAVAgARGBI4MDVCMDJGRDk2QTNDNDVEMzAA'
-//     },
-//     from: '51900866170',
-//     id:
-//       'wamid.HBgLNTE5MDA4NjYxNzAVAgASGCBFMzY2QzZDODFGQTJFODFDRjAzRDJGRTA2QjZFNDFFRgA=',
-//     timestamp: '1666585809',
-//     type: 'button',
-//     button: { payload: 'Jugar', text: 'Jugar' }
-//   }
-// ]
 
 router.route('/facebook').post(async (req, res) => {
   // esta funcion espera el mensaje de whatsap
@@ -136,18 +124,28 @@ router.route('/facebook').post(async (req, res) => {
         default:
           break
       }
-     
-      if (jugando == true) {
+
+      if (jugando == true || (mensaje.length === 1 && jugando === true)) {
         // tener la palabra secreta
         // el largo de la palabra secreta
         // hacer un mensaje con guiones del largo de la palabra secreta
         // hacer un mensaje con el dibujo en la posicion del numero de errores
         // recibir la letra
-        mensajeHombre = IMAGENES_AHORCADO[errores]
-        palabraSecreta.split('').forEach(letra => {
-          mensajeGuiones += '_'
-        })
         mensajeGuiones = mensajeGuiones.split('')
+        if (
+          arrPalabraSecreta.includes(mensaje) &&
+          !mensajeGuiones.includes(mensaje)
+        ) {
+          for (let i = 0; i < arrPalabraSecreta.length; i++) {
+            const letra = arrPalabraSecreta[i]
+            if (letra === mensaje) {
+              mensajeGuiones[i] = letra
+            }
+          }
+        } else {
+          errores++
+        }
+        mensajeHombre = IMAGENES_AHORCADO[errores]
         mensajeGuiones = mensajeGuiones.join(' ')
         mensaje = mensajeHombre + '\n\n' + mensajeGuiones
         await enviarMensaje(null, mensaje)
