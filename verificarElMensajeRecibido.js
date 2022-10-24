@@ -94,7 +94,11 @@ router.route('/facebook').post(async (req, res) => {
   const REQ = req.body.entry[0].changes[0].value.messages
   if (REQ !== undefined && REQ[0] !== undefined) {
     console.log(REQ)
-    mensaje = REQ[0].text.body
+    if (REQ[0].button.payload) {
+      mensaje = REQ[0].button.payload
+    } else if (REQ[0].text.body) {
+      mensaje = REQ[0].text.body
+    }
     console.log(mensaje + 'MENSAJE RECIBIDO')
     if (mensaje === 'Hola' && jugando === false) {
       let nombreUser =
@@ -114,7 +118,7 @@ router.route('/facebook').post(async (req, res) => {
       return
     }
 
-    if ((mensaje === 'Jugar' && jugando == false) || (REQ[0].button.payload == "Jugar" && jugando == false) ) {
+    if (mensaje === 'Jugar' && jugando == false) {
       jugando = true
       await enviarMensaje('como_jugar', null)
       mensaje = ''
