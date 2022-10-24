@@ -130,25 +130,28 @@ router.route('/facebook').post(async (req, res) => {
           break
       }
 
-      if (jugando == true || (mensaje.length === 1 && jugando === true)) {
+      if (jugando == true ) {
         // tener la palabra secreta
         // el largo de la palabra secreta
         // hacer un mensaje con guiones del largo de la palabra secreta
         // hacer un mensaje con el dibujo en la posicion del numero de errores
         // recibir la letra
-        mensajeGuiones = mensajeGuiones.split("")
-        if (
-          arrPalabraSecreta.includes(mensaje) &&
-          !mensajeGuiones.includes(mensaje)
-        ) {
-          for (let i = 0; i < arrPalabraSecreta.length; i++) {
-            const letra = arrPalabraSecreta[i]
-            if (letra === mensaje) {
-              mensajeGuiones[i] = letra
+        if (mensaje.length == 1) {
+          console.log(mensajeGuiones);
+          mensajeGuiones = mensajeGuiones.split('')
+          if (
+            arrPalabraSecreta.includes(mensaje) &&
+            !mensajeGuiones.includes(mensaje)
+          ) {
+            for (let i = 0; i < arrPalabraSecreta.length; i++) {
+              const letra = arrPalabraSecreta[i]
+              if (letra === mensaje) {
+                mensajeGuiones[i] = letra
+              }
             }
+          } else { //corregir que errores debe empezar en 0
+            errores++
           }
-        } else { //corregir que errores debe empezar en 0
-          errores++
         }
         mensajeHombre = IMAGENES_AHORCADO[errores]
         mensajeGuiones = mensajeGuiones.join(" ")

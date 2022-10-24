@@ -3,6 +3,8 @@
 // const exp = /\W/
 // // console.log(expMayusculaYMinusculaYDigitos.test("n2#"))
 
+const { AuthRegistrationsCredentialListMappingContext } = require("twilio/lib/rest/api/v2010/account/sip/domain/authTypes/authRegistrationsMapping/authRegistrationsCredentialListMapping");
+
 // // console.log(porcentajeDeParecido("mundoundoo", "undo"));
 
 // function porcentajeDeParecido(palabra, palabraO) {
@@ -32,14 +34,20 @@
 // let str1 = "holaa"
 // let str2 = "hola"
 // console.log()
-let ar = ['a','b','c']
+let ar = ['a','b','c','c','c','c']
 let str = "_a_a_a"
+let str2 = ''
+ar.forEach(element => {
+    str2 += "-"
+});
+console.log(str2.split(``));
 console.log(ar.includes("a"));
 str =str.split("")
 console.log(str);
 console.log(str.join(" "));
 str = str.join(" ")
 console.log(str.split(" "));
+
 // console.log(str2.slice(0,str2.length));
 
 // \w -- es para cualquier letra o digito y guion bajo o tambien cualquier letra de una palabra
