@@ -11,9 +11,10 @@ let mensajeHombre = ''
 let arrPalabraSecreta = palabraSecreta.split('')
 for (let i = 0; i < arrPalabraSecreta.length; i++) {
   if (i == arrPalabraSecreta.length - 1) {
-    mensajeGuiones += '_'
+    // _ _ _ _ _ _
+    mensajeGuiones += `_`
   } else {
-    mensajeGuiones += '_ '
+    mensajeGuiones += `_ `
   }
 }
 const IMAGENES_AHORCADO = [
@@ -85,16 +86,17 @@ const IMAGENES_AHORCADO = [
 
 router.route('/facebook').post(async (req, res) => {
   // esta funcion espera el mensaje de whatsap
+
   try {
     const REQ = req.body.entry[0].changes[0].value.messages
     if (REQ !== undefined && REQ[0] !== undefined) {
       console.log(REQ)
+      console.log('RECIBIDO ^^^^^^^^^')
       if (REQ[0].button) {
         mensaje = REQ[0].button.payload
       } else if (REQ[0].text) {
         mensaje = REQ[0].text.body
       }
-      console.log(mensaje + ' MENSAJE RECIBIDO')
       switch (mensaje) {
         case 'Hola':
           if (!jugando) {
@@ -145,28 +147,33 @@ router.route('/facebook').post(async (req, res) => {
         if (mensaje.length == 1) {
           mensaje = mensaje.toLowerCase()
           console.log(mensajeGuiones)
-          // mensajeGuiones = mensajeGuiones.split('')
+          // mensajeGuiones = mensajeGuiones.split(' ') // vuelve a hacer un
           if (
             arrPalabraSecreta.includes(mensaje) &&
             !mensajeGuiones.includes(mensaje)
           ) {
             for (let i = 0; i < arrPalabraSecreta.length; i++) {
+              // aqui se da agregan las letras que son correctas
               const letra = arrPalabraSecreta[i]
               if (letra === mensaje) {
                 mensajeGuiones[i] = letra
               }
             }
-            let mensajeGuionesTemp = ""
-            for (let i = 0; i < mensajeGuiones.length; i++) {
-              const letra = mensajeGuiones[i];
-              mensajeGuionesTemp += letra
-            }
-            mensajeGuiones = mensajeGuionesTemp
           } else {
             //corregir que errores debe empezar en 0
             errores++
           }
         }
+        let mensajeGuionesTemp = '' // aqui da el espaciado al mensajeGuiones
+        for (let i = 0; i < mensajeGuiones.length; i++) {
+          if (i == mensajeGuiones.length - 1) {
+            // _ _ _ _ _ _
+            mensajeGuionesTemp += `${mensajeGuiones[i]}`
+          } else {
+            mensajeGuionesTemp += `${mensajeGuiones[i]} `
+          }
+        }
+        mensajeGuiones = mensajeGuionesTemp
         mensajeHombre = IMAGENES_AHORCADO[errores]
         console.log(mensajeGuiones)
 
@@ -174,7 +181,7 @@ router.route('/facebook').post(async (req, res) => {
         mensaje = mensajeHombre + '\n\n' + mensajeGuiones
         await enviarMensaje(null, mensaje)
         mensaje = ''
-        mensajeGuiones = mensajeGuiones.split(' ')
+        mensajeGuiones = mensajeGuiones.split(' ') // se vuelve un array
       }
     } else {
       console.log('El mensaje se ha enviado,entregado o leido')
