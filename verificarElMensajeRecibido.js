@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const e = require('express')
 const enviarMensaje = require('./enviarMensaje')
 
 let palabraSecreta = 'banana'
@@ -8,9 +9,13 @@ let errores = 0
 let mensajeGuiones = ''
 let mensajeHombre = ''
 let arrPalabraSecreta = palabraSecreta.split('')
-arrPalabraSecreta.forEach(letra => {
-  mensajeGuiones += '_ '
-})
+for (let i = 0; i < arrPalabraSecreta.length; i++) {
+  if (i == arrPalabraSecreta.length - 1) {
+    mensajeGuiones += '_'
+  } else {
+    mensajeGuiones += '_ '
+  }
+}
 const IMAGENES_AHORCADO = [
   `
 
@@ -89,7 +94,7 @@ router.route('/facebook').post(async (req, res) => {
       } else if (REQ[0].text) {
         mensaje = REQ[0].text.body
       }
-      console.log(mensaje + 'MENSAJE RECIBIDO')
+      console.log(mensaje + ' MENSAJE RECIBIDO')
       switch (mensaje) {
         case 'Hola':
           if (!jugando) {
@@ -121,7 +126,7 @@ router.route('/facebook').post(async (req, res) => {
             await enviarMensaje(null, 'Saliste del juego')
             mensaje = ''
             errores = 0
-            mensajeGuiones = ""
+            mensajeGuiones = ''
             arrPalabraSecreta.forEach(letra => {
               mensajeGuiones += '_'
             })
@@ -131,14 +136,15 @@ router.route('/facebook').post(async (req, res) => {
           break
       }
 
-      if (jugando == true ) {
+      if (jugando == true) {
         // tener la palabra secreta
         // el largo de la palabra secreta
         // hacer un mensaje con guiones del largo de la palabra secreta
         // hacer un mensaje con el dibujo en la posicion del numero de errores
         // recibir la letra
         if (mensaje.length == 1) {
-          console.log(mensajeGuiones);
+          mensaje = mensaje.toLowerCase()
+          console.log(mensajeGuiones)
           // mensajeGuiones = mensajeGuiones.split('')
           if (
             arrPalabraSecreta.includes(mensaje) &&
@@ -150,18 +156,19 @@ router.route('/facebook').post(async (req, res) => {
                 mensajeGuiones[i] = letra
               }
             }
-          } else { //corregir que errores debe empezar en 0
+          } else {
+            //corregir que errores debe empezar en 0
             errores++
           }
         }
         mensajeHombre = IMAGENES_AHORCADO[errores]
-        console.log(mensajeGuiones);
-        
+        console.log(mensajeGuiones)
+
         // mensajeGuiones = mensajeGuiones.join(" ")
         mensaje = mensajeHombre + '\n\n' + mensajeGuiones
         await enviarMensaje(null, mensaje)
         mensaje = ''
-        mensajeGuiones = mensajeGuiones.split(" ")
+        mensajeGuiones = mensajeGuiones.split(' ')
       }
     } else {
       console.log('El mensaje se ha enviado,entregado o leido')
