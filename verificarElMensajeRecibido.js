@@ -9,7 +9,7 @@ let mensajeGuiones = ''
 let mensajeHombre = ''
 let arrPalabraSecreta = palabraSecreta.split('')
 arrPalabraSecreta.forEach(letra => {
-  mensajeGuiones += '_'
+  mensajeGuiones += '_ '
 })
 const IMAGENES_AHORCADO = [
   `
@@ -155,7 +155,8 @@ router.route('/facebook').post(async (req, res) => {
         }
         mensajeHombre = IMAGENES_AHORCADO[errores]
         console.log(mensajeGuiones);
-        mensajeGuiones = mensajeGuiones.join(" ")
+        
+        // mensajeGuiones = mensajeGuiones.join(" ")
         mensaje = mensajeHombre + '\n\n' + mensajeGuiones
         await enviarMensaje(null, mensaje)
         mensaje = ''
