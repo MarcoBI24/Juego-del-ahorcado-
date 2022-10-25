@@ -147,7 +147,7 @@ router.route('/facebook').post(async (req, res) => {
               const letra = arrPalabraSecreta[i]
               if (letra === mensaje) {
                 mensajeGuiones[i] = letra
-              }:
+              }
             }
           } else { //corregir que errores debe empezar en 0
             errores++
