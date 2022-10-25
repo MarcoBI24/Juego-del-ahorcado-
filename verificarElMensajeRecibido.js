@@ -20,14 +20,14 @@ for (let i = 0; i < arrPalabraSecreta.length; i++) {
 const IMAGENES_AHORCADO = [
   `
 
-   +---+
-   |   |
-       |
-       |
-       |
-       |
-
-=========`,
+       +---+
+       |   |
+           |
+           |
+           |
+           |
+    
+    =========`,
   `
 
   +---+
@@ -163,6 +163,8 @@ router.route('/facebook').post(async (req, res) => {
             //corregir que errores debe empezar en 0
             errores++
           }
+        }else{
+          errores++
         }
         let mensajeGuionesTemp = '' // aqui da el espaciado al mensajeGuiones
         for (let i = 0; i < mensajeGuiones.length; i++) {
