@@ -164,7 +164,7 @@ router.route('/facebook').post(async (req, res) => {
             errores++
           }
         } else {
-          if (mensaje !== 'Jugar') {
+          if (mensaje !== '') {
             errores++
             await enviarMensaje(null,"Recuerda, es solo 1 letra...")
           }
