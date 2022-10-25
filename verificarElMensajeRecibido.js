@@ -156,6 +156,12 @@ router.route('/facebook').post(async (req, res) => {
                 mensajeGuiones[i] = letra
               }
             }
+            let mensajeGuionesTemp = ""
+            for (let i = 0; i < mensajeGuiones.length; i++) {
+              const letra = mensajeGuiones[i];
+              mensajeGuionesTemp += letra
+            }
+            mensajeGuiones = mensajeGuionesTemp
           } else {
             //corregir que errores debe empezar en 0
             errores++
