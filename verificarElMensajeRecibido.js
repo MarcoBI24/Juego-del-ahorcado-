@@ -79,6 +79,7 @@ const IMAGENES_AHORCADO = [
 ]
 
 router.route('/facebook').post(async (req, res) => {
+  console.log(arrPalabraSecreta);
   // esta funcion espera el mensaje de whatsap
   try {
     const REQ = req.body.entry[0].changes[0].value.messages
@@ -138,7 +139,7 @@ router.route('/facebook').post(async (req, res) => {
         // recibir la letra
         if (mensaje.length == 1) {
           console.log(mensajeGuiones);
-          mensajeGuiones = mensajeGuiones.split('')
+          // mensajeGuiones = mensajeGuiones.split('')
           if (
             arrPalabraSecreta.includes(mensaje) &&
             !mensajeGuiones.includes(mensaje)
