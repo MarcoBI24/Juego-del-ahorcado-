@@ -30,20 +30,16 @@ module.exports = async (nameTemplate, mensaje) => {
       }
     }
   }
-  const peticion = await fetch(
-    'https://graph.facebook.com/v15.0/110109848553255/messages',
-    {
+  try {
+    await fetch('https://graph.facebook.com/v15.0/110109848553255/messages', {
       method: 'POST',
       headers: headers,
       body: JSON.stringify(options)
-    }
-  )
-  if (peticion.status == 200) {
-    console.log(await peticion.text())
+    })
     console.log('Mensaje o template enviado!!!')
-  } else {
+  } catch (error) {
     console.log('Hubo un error al enviar el mensaje o template!!!')
-    console.log(peticion.status)
+    console.log(error)
   }
 
   console.log('MENSAJE ENVIADO...')
