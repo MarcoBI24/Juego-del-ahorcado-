@@ -147,13 +147,14 @@ router.route('/facebook').post(async (req, res) => {
               const letra = arrPalabraSecreta[i]
               if (letra === mensaje) {
                 mensajeGuiones[i] = letra
-              }
+              }:
             }
           } else { //corregir que errores debe empezar en 0
             errores++
           }
         }
         mensajeHombre = IMAGENES_AHORCADO[errores]
+        console.log(mensajeGuiones);
         mensajeGuiones = mensajeGuiones.join(" ")
         mensaje = mensajeHombre + '\n\n' + mensajeGuiones
         await enviarMensaje(null, mensaje)
