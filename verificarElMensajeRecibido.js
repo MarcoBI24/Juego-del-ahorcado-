@@ -16,7 +16,7 @@ for (let i = 0; i < arrPalabraSecreta.length; i++) {
   // } else {
   //   mensajeGuiones += `_ `
   // }
-  mensajeGuiones += "_"
+  mensajeGuiones += '_'
 }
 const IMAGENES_AHORCADO = [
   `
@@ -27,7 +27,6 @@ const IMAGENES_AHORCADO = [
            |
            |
            |
-
     =========`,
   `
 
@@ -164,8 +163,11 @@ router.route('/facebook').post(async (req, res) => {
             //corregir que errores debe empezar en 0
             errores++
           }
-        }else{
-          errores++
+        } else {
+          if (mensaje !== 'Jugar') {
+            errores++
+            await enviarMensaje(null,"Recuerda, es solo 1 letra...")
+          }
         }
         let mensajeGuionesTemp = '' // aqui da el espaciado al mensajeGuiones
         for (let i = 0; i < mensajeGuiones.length; i++) {
