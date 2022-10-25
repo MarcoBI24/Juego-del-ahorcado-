@@ -10,12 +10,13 @@ let mensajeGuiones = ''
 let mensajeHombre = ''
 let arrPalabraSecreta = palabraSecreta.split('')
 for (let i = 0; i < arrPalabraSecreta.length; i++) {
-  if (i == arrPalabraSecreta.length - 1) {
-    // _ _ _ _ _ _
-    mensajeGuiones += `_`
-  } else {
-    mensajeGuiones += `_ `
-  }
+  // if (i == arrPalabraSecreta.length - 1) {
+  //   // _ _ _ _ _ _
+  //   mensajeGuiones += `_`
+  // } else {
+  //   mensajeGuiones += `_ `
+  // }
+  mensajeGuiones += "_"
 }
 const IMAGENES_AHORCADO = [
   `
@@ -26,7 +27,7 @@ const IMAGENES_AHORCADO = [
            |
            |
            |
-    
+
     =========`,
   `
 
