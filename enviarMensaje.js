@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-
+const dotenv = require("dotenv").config()
 module.exports = async (nameTemplate, mensaje) => {
   let token = process.env.TOKEN
   const headers = {
