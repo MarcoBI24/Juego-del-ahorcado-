@@ -19,12 +19,12 @@ for (let i = 0; i < arrPalabraSecreta.length; i++) {
   mensajeGuiones += '_'
 }
 const IMAGENES_AHORCADO = [
-  `\t\t  +---+
-\t\t  |     |
-\t\t        |
-\t\t        |
-\t\t        |
-\t\t        |
+  `\t\t\t\t+---+
+\t\t  |\t\t|
+\t\t   \t\t|
+\t\t   \t\t|
+\t\t   \t\t|
+\t\t   \t\t|
 \t\t=========`, `
 \t\t  +---+
 \t\t  |   |
