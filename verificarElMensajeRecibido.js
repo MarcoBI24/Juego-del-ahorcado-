@@ -37,13 +37,13 @@ async function mostrarAhorcado (
     `\t\t\t\t\t\t` +
     formatearMensaje(palabraSecretaMensaje) +
     `\n\n` +
-    `_Letras erróneas : ${formatearMensaje(letrasErroneas)}_`
+    `_Letras erróneas:_ ${formatearMensaje(letrasErroneas)}`
   await enviarMensaje(null, aviso)
   await enviarMensaje(null, mensaje) // se envia el mensaje
 }
 
 const IMAGENES_AHORCADO = [
-  `+\t\t\t\t\t +------+
+  `\n\n+\t\t\t\t\t +------+
 \t\t\t\t\t  |\t\t\t|
 \t\t\t\t\t   \t\t\t|
 \t\t\t\t\t   \t\t\t|
@@ -146,7 +146,8 @@ router.route('/facebook').post(async (req, res) => {
             mensaje = ''
             errores = 0
             letrasErroneas = ''
-            palabraSecreta = "holamundo"
+            palabraSecreta = 'holamundo'
+            arrPalabraSecreta = palabraSecreta.split('')
             for (let i = 0; i < arrPalabraSecreta.length; i++) {
               palabraSecretaMensaje += '_'
             }
