@@ -1,5 +1,4 @@
 const router = require('express').Router()
-const e = require('express')
 const enviarMensaje = require('./enviarMensaje')
 
 let palabraSecreta = 'banana'
@@ -38,7 +37,7 @@ async function mostrarAhorcado (
     `\t\t\t\t\t\t` +
     formatearMensaje(palabraSecretaMensaje) +
     `\n\n` +
-    `_Letras erróneas : ${formatearMensaje(letrasErroneas)}`
+    `_Letras erróneas : ${formatearMensaje(letrasErroneas)}_`
   await enviarMensaje(null, aviso)
   await enviarMensaje(null, mensaje) // se envia el mensaje
 }
