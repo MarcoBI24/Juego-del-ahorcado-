@@ -6,17 +6,12 @@ let palabraSecreta = 'banana'
 let mensaje = ''
 let jugando = false
 let errores = 0
-let mensajeGuiones = ''
+let palabraSecretaMensaje = ''
 let mensajeHombre = ''
 let arrPalabraSecreta = palabraSecreta.split('')
 for (let i = 0; i < arrPalabraSecreta.length; i++) {
-  // if (i == arrPalabraSecreta.length - 1) {
-  //   // _ _ _ _ _ _
-  //   mensajeGuiones += `_`
-  // } else {
-  //   mensajeGuiones += `_ `
-  // }
-  mensajeGuiones += '_'
+
+  palabraSecretaMensaje += '_'
 }
 const IMAGENES_AHORCADO = [
   `+\t\t\t\t\t +------+
@@ -26,42 +21,42 @@ const IMAGENES_AHORCADO = [
 \t\t\t\t\t   \t\t\t|
 \t\t\t\t\t   \t\t\t|
 \t\t\t\t\t=========`,
-`+\t\t\t\t\t +------+
+  `+\t\t\t\t\t +------+
 \t\t\t\t\t  |\t\t\t|
 \t\t\t\t\t O\t\t\t|
 \t\t\t\t\t   \t\t\t|
 \t\t\t\t\t   \t\t\t|
 \t\t\t\t\t   \t\t\t|
 \t\t\t\t\t=========`,
-`+\t\t\t\t\t +------+
+  `+\t\t\t\t\t +------+
 \t\t\t\t\t  |\t\t\t|
 \t\t\t\t\t O\t\t\t|
 \t\t\t\t\t  |\t\t\t|
 \t\t\t\t\t   \t\t\t|
 \t\t\t\t\t   \t\t\t|
 \t\t\t\t\t=========`,
-`+\t\t\t\t\t +------+
+  `+\t\t\t\t\t +------+
 \t\t\t\t\t  |\t\t\t|
 \t\t\t\t\t O\t\t\t|
 \t\t\t\t\t/|\t\t\t|
 \t\t\t\t\t\t\t\t\t|
 \t\t\t\t\t   \t\t\t|
 \t\t\t\t\t=========`,
-`+\t\t\t\t\t +------+
+  `+\t\t\t\t\t +------+
 \t\t\t\t\t  |\t\t\t|
 \t\t\t\t\t O\t\t\t|
 \t\t\t\t\t/|\\ \t\t|
 \t\t\t\t\t   \t\t\t|
 \t\t\t\t\t    \t\t\t|
 \t\t\t\t\t=========`,
-`+\t\t\t\t\t +------+
+  `+\t\t\t\t\t +------+
 \t\t\t\t\t  | \t\t\t|
 \t\t\t\t\t O \t\t\t|
 \t\t\t\t\t/|\\ \t\t|
 \t\t\t\t\t/  \t\t\t|
 \t\t\t\t\t    \t\t\t|
 \t\t\t\t\t=========`,
-`+\t\t\t\t\t +------+
+  `+\t\t\t\t\t +------+
 \t\t\t\t\t  |\t\t\t|
 \t\t\t\t\t O\t\t\t|
 \t\t\t\t\t/|\\ \t\t|
@@ -114,9 +109,9 @@ router.route('/facebook').post(async (req, res) => {
             await enviarMensaje(null, 'Saliste del juego')
             mensaje = ''
             errores = 0
-            mensajeGuiones = ''
+            palabraSecretaMensaje = ''
             arrPalabraSecreta.forEach(letra => {
-              mensajeGuiones += '_'
+              palabraSecretaMensaje += '_'
             })
           }
           break
@@ -132,50 +127,35 @@ router.route('/facebook').post(async (req, res) => {
         // recibir la letra
         if (mensaje.length == 1) {
           mensaje = mensaje.toLowerCase()
-          console.log(mensajeGuiones)
-          // mensajeGuiones = mensajeGuiones.split(' ') // vuelve a hacer un
+          console.log(palabraSecretaMensaje)
           if (
             arrPalabraSecreta.includes(mensaje) &&
-            !mensajeGuiones.includes(mensaje)
+            !palabraSecretaMensaje.includes(mensaje)
           ) {
             for (let i = 0; i < arrPalabraSecreta.length; i++) {
-              //  se aquida agregan las letras que son correctas
-              const letra = arrPalabraSecreta[i]
-              if (letra === mensaje) {
-                mensajeGuiones[i] = letra
-
+              //  aqui se agregan las letras que son correctas
+              if (arrPalabraSecreta[i] === mensaje) {
+                palabraSecretaMensaje[i] = letra
               }
             }
-
           } else {
-            //corregir que errores debe empezar en 0
             errores++
           }
         } else {
           if (mensaje !== '') {
             errores++
-            await enviarMensaje(null,"Recuerda, es solo 1 letra...")
+            await enviarMensaje(null, 'Recuerda, es solo 1 letra...')
           }
         }
-        let mensajeGuionesTemp = '' // aqui da el espaciado al mensajeGuiones
-        for (let i = 0; i < mensajeGuiones.length; i++) {
-          if (i == mensajeGuiones.length - 1) {
-            // _ _ _ _ _ _
-            mensajeGuionesTemp += `${mensajeGuiones[i]}`
-          } else {
-            mensajeGuionesTemp += `${mensajeGuiones[i]} `
-          }
-        }
-        
-        mensajeGuiones = mensajeGuionesTemp
-        mensajeHombre = IMAGENES_AHORCADO[errores]
-        console.log(mensajeGuiones)
-
-        // mensajeGuiones = mensajeGuiones.join(" ")
-        mensaje = mensajeHombre + `\n\n` + `\t\t\t\t\t\t` + mensajeGuiones
-        await enviarMensaje(null, mensaje)
-        mensaje = ''
-        mensajeGuiones = mensajeGuiones.split(' ') // se vuelve un array
+        console.log(palabraSecretaMensaje)
+        mensaje =
+          IMAGENES_AHORCADO[errores] +
+          `\n\n` +
+          `\t\t\t\t\t\t` +
+          formatearMensaje(palabraSecretaMensaje)
+        await enviarMensaje(null, mensaje) // se envia el mensaje
+        mensaje = '' // se reinicia la varibale mensaje
+        palabraSecretaMensaje = palabraSecretaMensaje.split(' ') // se vuelve un array
       }
     } else {
       console.log('El mensaje se ha enviado,entregado o leido')
@@ -189,3 +169,18 @@ router.route('/facebook').post(async (req, res) => {
 })
 
 module.exports = router
+function mostrarAhorcado() {
+  
+}
+function formatearMensaje (msg) {
+  let mensajeGuionesTemp = '' // aqui da el espaciado al mensajeGuiones
+  for (let i = 0; i < msg.length; i++) {
+    if (i == msg.length - 1) {
+      // _ _ _ _ _ _
+      mensajeGuionesTemp += `${msg[i]}`
+    } else {
+      mensajeGuionesTemp += `${msg[i]} `
+    }
+  }
+  return mensajeGuionesTemp
+}
