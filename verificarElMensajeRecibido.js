@@ -160,7 +160,7 @@ router.route('/facebook').post(async (req, res) => {
           !palabraSecretaMensaje.includes(mensaje) &&
           mensaje.length == 1
         ) {
-          palabraSecretaMensaje = palabraSecretaMensaje.split(' ') // se vuelve un array
+          palabraSecretaMensaje = palabraSecretaMensaje.split('') // se vuelve un array
           for (let i = 0; i < arrPalabraSecreta.length; i++) {
             //  aqui se agregan las letras que son correctas
             if (arrPalabraSecreta[i] === mensaje) {
