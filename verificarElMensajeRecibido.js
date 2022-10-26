@@ -148,7 +148,7 @@ router.route('/facebook').post(async (req, res) => {
             letrasErroneas = ''
             palabraSecreta = 'holamundo'
             arrPalabraSecreta = palabraSecreta.split('')
-            palabraSecretaMensaje = ""
+            palabraSecretaMensaje = ''
             for (let i = 0; i < arrPalabraSecreta.length; i++) {
               palabraSecretaMensaje += '_'
             }
@@ -162,23 +162,27 @@ router.route('/facebook').post(async (req, res) => {
             mensaje = mensaje.toLowerCase()
             console.log(palabraSecretaMensaje)
             if (expNum.test(mensaje)) {
-              aviso = "_Recuerda, solo letras(a-z)._"
-            }else if (mensaje.length > 1) {
+              aviso = '_Recuerda, solo letras(a-z)._'
+            } else if (mensaje.length > 1) {
               // verifica que sea una letra
               aviso = '_Recuerda, es 1 letra a la vez_'
             } else if (
               arrPalabraSecreta.includes(mensaje) &&
-              !palabraSecretaMensaje.includes(mensaje) &&
+              
               mensaje.length == 1
             ) {
-              // palabraSecretaMensaje = palabraSecretaMensaje.split('') // se vuelve un array
-              for (let i = 0; i < arrPalabraSecreta.length; i++) {
-                //  aqui se agregan las letras que son correctas
-                if (arrPalabraSecreta[i] === mensaje) {
-                  palabraSecretaMensaje[i] = arrPalabraSecreta[i]
+              if (!palabraSecretaMensaje.includes(mensaje) &&) {
+                for (let i = 0; i < arrPalabraSecreta.length; i++) {
+                  //  aqui se agregan las letras que son correctas
+                  if (arrPalabraSecreta[i] === mensaje) {
+                    palabraSecretaMensaje[i] = arrPalabraSecreta[i]
+                  }
                 }
+                aviso = '_¡Genial! Has acertado una letra._'
+                
+              }else{
+                aviso = "_Mmmm... Esa letra ya existe._"
               }
-              aviso = '_¡Genial! Has acertado una letra._'
             } else {
               errores++
               letrasErroneas += mensaje
