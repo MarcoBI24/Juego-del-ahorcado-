@@ -117,7 +117,7 @@ router.route('/facebook').post(async (req, res) => {
             mensaje = ''
           }
           break
-        case '/opciones':
+        case '/menu':
           if (jugando == false) {
             await enviarMensaje('mostrar_opciones', null)
           } else {
