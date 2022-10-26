@@ -151,22 +151,15 @@ router.route('/facebook').post(async (req, res) => {
           }
           break
         default:
+          let aviso = ""
           if (jugando == true) {
-            // if (mensaje.length == 1) {
             mensaje = mensaje.toLowerCase()
             console.log(palabraSecretaMensaje)
             if (mensaje.length > 1) {
               // verifica que sea una letra
-              await mostrarAhorcado(
-                letrasErroneas,
-                errores,
-                palabraSecretaMensaje,
-                '_Recuerda, es 1 letra a la vez_'
-              )
-              res.sendStatus(200)
-              return
-            }
-            if (
+              aviso = '_Recuerda, es 1 letra a la vez_'
+              
+            } else if (
               arrPalabraSecreta.includes(mensaje) &&
               !palabraSecretaMensaje.includes(mensaje) &&
               mensaje.length == 1
@@ -178,30 +171,14 @@ router.route('/facebook').post(async (req, res) => {
                   palabraSecretaMensaje[i] = arrPalabraSecreta[i]
                 }
               }
-              await mostrarAhorcado(
-                letrasErroneas,
-                errores,
-                palabraSecretaMensaje,
-                '_¡Genial! Has acertado una letra._'
-              )
+              aviso = '_¡Genial! Has acertado una letra._'
             } else {
               errores++
               letrasErroneas += mensaje
-              await mostrarAhorcado(
-                letrasErroneas,
-                errores,
-                palabraSecretaMensaje,
-                '_¡Oh! Has fallado._'
-              )
+              aviso = '_¡Oh! Has fallado._'
+              
             }
-
-            // } else {
-            // if (mensaje !== '') {
-            // errores++
-            // await enviarMensaje(null, 'Recuerda, es solo 1 letra...')
-            // }
-            // }
-
+            await mostrarAhorcado(letrasErroneas,errores,palabraSecretaMensaje, aviso)
             mensaje = '' // se reinicia la varibale mensaje
           }
           break
