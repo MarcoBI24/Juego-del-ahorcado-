@@ -1,7 +1,7 @@
 const fetch = require('node-fetch')
 
 module.exports = async (nameTemplate, mensaje) => {
-  const token = process.env.token
+  let token = process.env.TOKEN
   const headers = {
     Authorization: `Bearer ${token}`,
     'Content-Type': 'application/json'
