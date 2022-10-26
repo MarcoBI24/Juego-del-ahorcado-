@@ -31,8 +31,8 @@ async function mostrarAhorcado (errores, palabraSecretaMensaje, aviso) {
     `\n\n` +
     `\t\t\t\t\t\t` +
     formatearMensaje(palabraSecretaMensaje) +
-    `\n\n` +
-    aviso
+    `\n\n`
+  await enviarMensaje(null,aviso)
   await enviarMensaje(null, mensaje) // se envia el mensaje
 }
 
@@ -149,7 +149,7 @@ router.route('/facebook').post(async (req, res) => {
               await mostrarAhorcado(
                 errores,
                 palabraSecretaMensaje,
-                'Recuerda, es 1 letra a la vez'
+                '_Recuerda, es 1 letra a la vez_'
               )
               res.sendStatus(200)
               return
@@ -169,14 +169,14 @@ router.route('/facebook').post(async (req, res) => {
               await mostrarAhorcado(
                 errores,
                 palabraSecretaMensaje,
-                'Acertaste 👍'
+                '_Acertaste_'
               )
             } else {
               errores++
               await mostrarAhorcado(
                 errores,
                 palabraSecretaMensaje,
-                'Fallaste 👎'
+                '_Fallaste_'
               )
             }
 
