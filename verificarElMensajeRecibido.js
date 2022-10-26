@@ -9,6 +9,7 @@ let errores = 0
 let palabraSecretaMensaje = ''
 let mensajeHombre = ''
 let arrPalabraSecreta = palabraSecreta.split('')
+let letrasErroneas = ''
 for (let i = 0; i < arrPalabraSecreta.length; i++) {
   palabraSecretaMensaje += '_'
 }
@@ -25,14 +26,20 @@ function formatearMensaje (msg) {
   console.log(mensajeGuionesTemp)
   return mensajeGuionesTemp
 }
-async function mostrarAhorcado (errores, palabraSecretaMensaje, aviso) {
+async function mostrarAhorcado (
+  letrasErroneas,
+  errores,
+  palabraSecretaMensaje,
+  aviso
+) {
   let mensaje =
     IMAGENES_AHORCADO[errores] +
     `\n\n` +
     `\t\t\t\t\t\t` +
     formatearMensaje(palabraSecretaMensaje) +
-    `\n\n`
-  await enviarMensaje(null,aviso)
+    `\n\n` +
+    `_Letras erróneas : ${formatearMensaje(letrasErroneas)}`
+  await enviarMensaje(null, aviso)
   await enviarMensaje(null, mensaje) // se envia el mensaje
 }
 
@@ -123,9 +130,13 @@ router.route('/facebook').post(async (req, res) => {
           if (!jugando) {
             jugando = true
             await enviarMensaje('como_jugar', null)
-            await mostrarAhorcado(errores,palabraSecretaMensaje," ")
+            await mostrarAhorcado(
+              letrasErroneas,
+              errores,
+              palabraSecretaMensaje,
+              'EL JUEGO DEL AHORCADO 🧑‍🔬'
+            )
             mensaje = ''
-
           }
           break
         case '/salir':
@@ -145,8 +156,10 @@ router.route('/facebook').post(async (req, res) => {
             // if (mensaje.length == 1) {
             mensaje = mensaje.toLowerCase()
             console.log(palabraSecretaMensaje)
-            if (mensaje.length > 1 || mensaje.length !== 1) {
+            if (mensaje.length > 1) {
+              // verifica que sea una letra
               await mostrarAhorcado(
+                letrasErroneas,
                 errores,
                 palabraSecretaMensaje,
                 '_Recuerda, es 1 letra a la vez_'
@@ -167,16 +180,19 @@ router.route('/facebook').post(async (req, res) => {
                 }
               }
               await mostrarAhorcado(
+                letrasErroneas,
                 errores,
                 palabraSecretaMensaje,
-                '_Acertaste_'
+                '_¡Genial! Has acertado una letra._'
               )
             } else {
               errores++
+              letrasErroneas += mensaje
               await mostrarAhorcado(
+                letrasErroneas,
                 errores,
                 palabraSecretaMensaje,
-                '_Fallaste_'
+                '_¡Oh! Has fallado._'
               )
             }
 
