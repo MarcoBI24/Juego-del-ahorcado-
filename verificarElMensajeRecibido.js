@@ -139,48 +139,55 @@ router.route('/facebook').post(async (req, res) => {
           }
           break
         default:
-          break
-      }
-
-      if (jugando == true) {
-        // if (mensaje.length == 1) {
-        mensaje = mensaje.toLowerCase()
-        console.log(palabraSecretaMensaje)
-        if (mensaje.length > 1 || mensaje.length !== 1) {
-          await mostrarAhorcado(
-            errores,
-            palabraSecretaMensaje,
-            'Recuerda, es 1 letra a la vez'
-          )
-          res.sendStatus(200)
-          return 
-        }
-        if (
-          arrPalabraSecreta.includes(mensaje) &&
-          !palabraSecretaMensaje.includes(mensaje) &&
-          mensaje.length == 1
-        ) {
-          palabraSecretaMensaje = palabraSecretaMensaje.split('') // se vuelve un array
-          for (let i = 0; i < arrPalabraSecreta.length; i++) {
-            //  aqui se agregan las letras que son correctas
-            if (arrPalabraSecreta[i] === mensaje) {
-              palabraSecretaMensaje[i] = arrPalabraSecreta[i]
+          if (jugando == true) {
+            // if (mensaje.length == 1) {
+            mensaje = mensaje.toLowerCase()
+            console.log(palabraSecretaMensaje)
+            if (mensaje.length > 1 || mensaje.length !== 1) {
+              await mostrarAhorcado(
+                errores,
+                palabraSecretaMensaje,
+                'Recuerda, es 1 letra a la vez'
+              )
+              res.sendStatus(200)
+              return
             }
+            if (
+              arrPalabraSecreta.includes(mensaje) &&
+              !palabraSecretaMensaje.includes(mensaje) &&
+              mensaje.length == 1
+            ) {
+              palabraSecretaMensaje = palabraSecretaMensaje.split('') // se vuelve un array
+              for (let i = 0; i < arrPalabraSecreta.length; i++) {
+                //  aqui se agregan las letras que son correctas
+                if (arrPalabraSecreta[i] === mensaje) {
+                  palabraSecretaMensaje[i] = arrPalabraSecreta[i]
+                }
+              }
+              await mostrarAhorcado(
+                errores,
+                palabraSecretaMensaje,
+                'Acertaste 👍'
+              )
+            } else {
+              errores++
+              await mostrarAhorcado(
+                errores,
+                palabraSecretaMensaje,
+                'Fallaste 👎'
+              )
+            }
+
+            // } else {
+            // if (mensaje !== '') {
+            // errores++
+            // await enviarMensaje(null, 'Recuerda, es solo 1 letra...')
+            // }
+            // }
+
+            mensaje = '' // se reinicia la varibale mensaje
           }
-          await mostrarAhorcado(errores, palabraSecretaMensaje, 'Acertaste 👍')
-        } else {
-          errores++
-          await mostrarAhorcado(errores, palabraSecretaMensaje, 'Fallaste 👎')
-        }
-
-        // } else {
-        // if (mensaje !== '') {
-        // errores++
-        // await enviarMensaje(null, 'Recuerda, es solo 1 letra...')
-        // }
-        // }
-
-        mensaje = '' // se reinicia la varibale mensaje
+          break
       }
     } else {
       console.log('El mensaje se ha enviado,entregado o leido')
