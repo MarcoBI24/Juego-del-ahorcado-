@@ -19,7 +19,7 @@ for (let i = 0; i < arrPalabraSecreta.length; i++) {
   mensajeGuiones += '_'
 }
 const IMAGENES_AHORCADO = [
-  `+\t\t\t +------+\t\t\t\t\t\t✅
+  `+\t\t\t +------+
 \t\t\t  |\t\t\t|
 \t\t\t   \t\t\t|
 \t\t\t   \t\t\t|
@@ -172,7 +172,7 @@ router.route('/facebook').post(async (req, res) => {
         console.log(mensajeGuiones)
 
         // mensajeGuiones = mensajeGuiones.join(" ")
-        mensaje = mensajeHombre + `\n\n` + `\t\t` + mensajeGuiones
+        mensaje = mensajeHombre + `\n\n` + `\t\t\t\t\t` + mensajeGuiones
         await enviarMensaje(null, mensaje)
         mensaje = ''
         mensajeGuiones = mensajeGuiones.split(' ') // se vuelve un array
