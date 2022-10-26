@@ -134,7 +134,7 @@ router.route('/facebook').post(async (req, res) => {
               letrasErroneas,
               errores,
               palabraSecretaMensaje,
-              'EL JUEGO DEL AHORCADO 🧑‍🔬'
+              'Empezando...'
             )
             mensaje = ''
           }
@@ -148,6 +148,7 @@ router.route('/facebook').post(async (req, res) => {
             letrasErroneas = ''
             palabraSecreta = 'holamundo'
             arrPalabraSecreta = palabraSecreta.split('')
+            palabraSecretaMensaje = ""
             for (let i = 0; i < arrPalabraSecreta.length; i++) {
               palabraSecretaMensaje += '_'
             }
