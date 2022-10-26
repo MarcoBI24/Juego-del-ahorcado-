@@ -19,7 +19,7 @@ for (let i = 0; i < arrPalabraSecreta.length; i++) {
   mensajeGuiones += '_'
 }
 const IMAGENES_AHORCADO = [
-  `+\t\t\t +------+
+  `+\t\t\t +------+\t\t\t\t✔️
 \t\t\t  |\t\t\t|
 \t\t\t   \t\t\t|
 \t\t\t   \t\t\t|
@@ -139,12 +139,14 @@ router.route('/facebook').post(async (req, res) => {
             !mensajeGuiones.includes(mensaje)
           ) {
             for (let i = 0; i < arrPalabraSecreta.length; i++) {
-              // aqui se da agregan las letras que son correctas
+              //  se aquida agregan las letras que son correctas
               const letra = arrPalabraSecreta[i]
               if (letra === mensaje) {
                 mensajeGuiones[i] = letra
+
               }
             }
+
           } else {
             //corregir que errores debe empezar en 0
             errores++
@@ -164,6 +166,7 @@ router.route('/facebook').post(async (req, res) => {
             mensajeGuionesTemp += `${mensajeGuiones[i]} `
           }
         }
+        
         mensajeGuiones = mensajeGuionesTemp
         mensajeHombre = IMAGENES_AHORCADO[errores]
         console.log(mensajeGuiones)
