@@ -6,13 +6,12 @@ let mensaje = ''
 let jugando = false
 let errores = 0
 let palabraSecretaMensaje = ''
-let mensajeHombre = ''
 let arrPalabraSecreta = palabraSecreta.split('')
 let letrasErroneas = ''
 for (let i = 0; i < arrPalabraSecreta.length; i++) {
   palabraSecretaMensaje += '_'
 }
-palabraSecretaMensaje = palabraSecretaMensaje.split("")
+palabraSecretaMensaje = palabraSecretaMensaje.split('')
 function formatearMensaje (msg) {
   let mensajeGuionesTemp = '' // aqui da el espaciado al mensajeGuiones
   for (let i = 0; i < msg.length; i++) {
@@ -97,13 +96,14 @@ const IMAGENES_AHORCADO = [
 
 router.route('/facebook').post(async (req, res) => {
   // esta funcion espera el mensaje de whatsap
-
   try {
     const REQ = req.body.entry[0].changes[0].value.messages
     if (REQ !== undefined && REQ[0] !== undefined) {
+      // verifica que la req sea un mensaje
       console.log(REQ)
       console.log('RECIBIDO ^^^^^^^^^')
       if (REQ[0].button) {
+        //verifica si el mensaje fue un boton o un texto
         mensaje = REQ[0].button.payload
       } else if (REQ[0].text) {
         mensaje = REQ[0].text.body
@@ -145,21 +145,22 @@ router.route('/facebook').post(async (req, res) => {
             await enviarMensaje(null, 'Saliste del juego')
             mensaje = ''
             errores = 0
-            palabraSecretaMensaje = ''
-            arrPalabraSecreta.forEach(letra => {
+            letrasErroneas = ''
+            palabraSecreta = "holamundo"
+            for (let i = 0; i < arrPalabraSecreta.length; i++) {
               palabraSecretaMensaje += '_'
-            })
+            }
+            palabraSecretaMensaje = palabraSecretaMensaje.split('')
           }
           break
         default:
-          let aviso = ""
+          let aviso = ''
           if (jugando == true) {
             mensaje = mensaje.toLowerCase()
             console.log(palabraSecretaMensaje)
             if (mensaje.length > 1) {
               // verifica que sea una letra
               aviso = '_Recuerda, es 1 letra a la vez_'
-              
             } else if (
               arrPalabraSecreta.includes(mensaje) &&
               !palabraSecretaMensaje.includes(mensaje) &&
@@ -177,9 +178,13 @@ router.route('/facebook').post(async (req, res) => {
               errores++
               letrasErroneas += mensaje
               aviso = '_¡Oh! Has fallado._'
-              
             }
-            await mostrarAhorcado(letrasErroneas,errores,palabraSecretaMensaje, aviso)
+            await mostrarAhorcado(
+              letrasErroneas,
+              errores,
+              palabraSecretaMensaje,
+              aviso
+            )
             mensaje = '' // se reinicia la varibale mensaje
           }
           break
