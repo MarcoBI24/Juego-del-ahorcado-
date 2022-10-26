@@ -246,7 +246,7 @@ function init () {
     let contraseña = inputContraseñaLogin.value
     iniciarSesión(nombre, contraseña)
   }
-  
+
   btnStart.onclick = () => {
     if (USUARIO == undefined) {
       mostrarLogin()
