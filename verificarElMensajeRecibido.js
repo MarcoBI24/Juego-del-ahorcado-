@@ -171,7 +171,7 @@ router.route('/facebook').post(async (req, res) => {
               
               mensaje.length == 1
             ) {
-              if (!palabraSecretaMensaje.includes(mensaje) &&) {
+              if (!palabraSecretaMensaje.includes(mensaje)) { // verifica que no exista
                 for (let i = 0; i < arrPalabraSecreta.length; i++) {
                   //  aqui se agregan las letras que son correctas
                   if (arrPalabraSecreta[i] === mensaje) {
