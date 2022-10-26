@@ -20,11 +20,11 @@ for (let i = 0; i < arrPalabraSecreta.length; i++) {
 }
 const IMAGENES_AHORCADO = [
   `+\t\t\t+-------+
-\t\t  | \t\t\t |
-\t\t    \t\t\t |
-\t\t    \t\t\t |
-\t\t    \t\t\t |
-\t\t    \t\t\t |
+\t\t  |\t\t\t|
+\t\t   \t\t\t|
+\t\t   \t\t\t|
+\t\t   \t\t\t|
+\t\t   \t\t\t|
 \t\t=========`,
 `+\t\t\t+-------+
 \t\t  |\t\t\t|
@@ -48,25 +48,25 @@ const IMAGENES_AHORCADO = [
 \t\t   \t\t\t|
 \t\t=========`,
 `+\t\t\t+-------+
-\t\t  | \t\t|
-\t\t  O \t\t|
+\t\t  |\t\t\t|
+\t\t  O\t\t\t|
 \t\t /|\\t\t\t|
-\t\t    \t\t|
-\t\t    \t\t|
+\t\t    \t\t\t|
+\t\t    \t\t\t|
 \t\t=========`,
 `+\t\t\t+-------+
 \t\t  | \t\t\t|
 \t\t  O \t\t\t|
-\t\t /|\\t\t\t|
+\t\t /|\ \t\t|
 \t\t /  \t\t\t|
 \t\t    \t\t\t|
 \t\t=========`,
 `+\t\t\t+-------+
-\t\t  |   |
-\t\t  O   |
-\t\t /|\  |
-\t\t / \  |
-\t\t      |
+\t\t  |\t\t\t|
+\t\t  O\t\t\t|
+\t\t /|\ \t\t|
+\t\t / \ \t\t|
+\t\t    \t\t\t|
 \t\t=========`
 ]
 
