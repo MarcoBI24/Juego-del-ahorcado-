@@ -10,9 +10,36 @@ let palabraSecretaMensaje = ''
 let mensajeHombre = ''
 let arrPalabraSecreta = palabraSecreta.split('')
 for (let i = 0; i < arrPalabraSecreta.length; i++) {
-
   palabraSecretaMensaje += '_'
 }
+function formatearMensaje (msg) {
+  let mensajeGuionesTemp = '' // aqui da el espaciado al mensajeGuiones
+  for (let i = 0; i < msg.length; i++) {
+    if (i == msg.length - 1) {
+      // _ _ _ _ _ _
+      mensajeGuionesTemp += `${msg[i]}`
+    } else {
+      mensajeGuionesTemp += `${msg[i]} `
+    }
+  }
+  console.log(mensajeGuionesTemp)
+  return mensajeGuionesTemp
+}
+async function mostrarAhorcado (
+  errores,
+  palabraSecretaMensaje,
+  aviso
+) {
+  let mensaje =
+    IMAGENES_AHORCADO[errores] +
+    `\n\n` +
+    `\t\t\t\t\t\t` +
+    formatearMensaje(palabraSecretaMensaje) +
+    `\n` +
+    aviso
+  await enviarMensaje(null, mensaje) // se envia el mensaje
+}
+
 const IMAGENES_AHORCADO = [
   `+\t\t\t\t\t +------+
 \t\t\t\t\t  |\t\t\t|
@@ -120,40 +147,38 @@ router.route('/facebook').post(async (req, res) => {
       }
 
       if (jugando == true) {
-        // tener la palabra secreta
-        // el largo de la palabra secreta
-        // hacer un mensaje con guiones del largo de la palabra secreta
-        // hacer un mensaje con el dibujo en la posicion del numero de errores
-        // recibir la letra
-        if (mensaje.length == 1) {
-          mensaje = mensaje.toLowerCase()
-          console.log(palabraSecretaMensaje)
-          if (
-            arrPalabraSecreta.includes(mensaje) &&
-            !palabraSecretaMensaje.includes(mensaje)
-          ) {
-            for (let i = 0; i < arrPalabraSecreta.length; i++) {
-              //  aqui se agregan las letras que son correctas
-              if (arrPalabraSecreta[i] === mensaje) {
-                palabraSecretaMensaje[i] = letra
-              }
-            }
-          } else {
-            errores++
-          }
-        } else {
-          if (mensaje !== '') {
-            errores++
-            await enviarMensaje(null, 'Recuerda, es solo 1 letra...')
-          }
-        }
+        // if (mensaje.length == 1) {
+        mensaje = mensaje.toLowerCase()
         console.log(palabraSecretaMensaje)
-        mensaje =
-          IMAGENES_AHORCADO[errores] +
-          `\n\n` +
-          `\t\t\t\t\t\t` +
-          formatearMensaje(palabraSecretaMensaje)
-        await enviarMensaje(null, mensaje) // se envia el mensaje
+        if (mensaje.length > 1 || mensaje.length !== 1) {
+          await mostrarAhorcado(errores,palabraSecretaMensaje,"Recuerda, es 1 letra a la vez")
+          return
+        }
+        if (
+          arrPalabraSecreta.includes(mensaje) &&
+          !palabraSecretaMensaje.includes(mensaje)
+          && mensaje.length == 1
+          ) {
+          
+          for (let i = 0; i < arrPalabraSecreta.length; i++) {
+            //  aqui se agregan las letras que son correctas
+            if (arrPalabraSecreta[i] === mensaje) {
+              palabraSecretaMensaje[i] = arrPalabraSecreta[i]
+            }
+          }
+          await mostrarAhorcado(errores,palabraSecretaMensaje,"Acertaste 👍")
+        } else {
+          errores++
+          await mostrarAhorcado(errores,palabraSecretaMensaje,"Fallaste 👎")
+        }
+
+        // } else {
+        // if (mensaje !== '') {
+        // errores++
+        // await enviarMensaje(null, 'Recuerda, es solo 1 letra...')
+        // }
+        // }
+
         mensaje = '' // se reinicia la varibale mensaje
         palabraSecretaMensaje = palabraSecretaMensaje.split(' ') // se vuelve un array
       }
@@ -169,18 +194,3 @@ router.route('/facebook').post(async (req, res) => {
 })
 
 module.exports = router
-function mostrarAhorcado() {
-  
-}
-function formatearMensaje (msg) {
-  let mensajeGuionesTemp = '' // aqui da el espaciado al mensajeGuiones
-  for (let i = 0; i < msg.length; i++) {
-    if (i == msg.length - 1) {
-      // _ _ _ _ _ _
-      mensajeGuionesTemp += `${msg[i]}`
-    } else {
-      mensajeGuionesTemp += `${msg[i]} `
-    }
-  }
-  return mensajeGuionesTemp
-}
