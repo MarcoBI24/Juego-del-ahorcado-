@@ -123,7 +123,9 @@ router.route('/facebook').post(async (req, res) => {
           if (!jugando) {
             jugando = true
             await enviarMensaje('como_jugar', null)
+            await mostrarAhorcado(errores,palabraSecretaMensaje," ")
             mensaje = ''
+
           }
           break
         case '/salir':
