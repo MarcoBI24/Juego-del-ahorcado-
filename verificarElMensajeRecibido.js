@@ -157,10 +157,13 @@ router.route('/facebook').post(async (req, res) => {
           break
         default:
           let aviso = ''
+          let expNum = /[.\d*]/
           if (jugando == true) {
             mensaje = mensaje.toLowerCase()
             console.log(palabraSecretaMensaje)
-            if (mensaje.length > 1) {
+            if (expNum.test(mensaje)) {
+              aviso = "_Recuerda, solo letras(a-z)._"
+            }else if (mensaje.length > 1) {
               // verifica que sea una letra
               aviso = '_Recuerda, es 1 letra a la vez_'
             } else if (
