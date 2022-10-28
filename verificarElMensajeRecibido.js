@@ -1,7 +1,23 @@
 const router = require('express').Router()
 const enviarMensaje = require('./enviarMensaje')
-
-let palabraSecreta = 'banana'
+const fetch = require('node-fetch')
+const { reservationsUrl } = require('twilio/lib/jwt/taskrouter/util')
+async function obtenerPalabra () {
+  //  https://clientes.api.greenborn.com.ar/public-random-word
+  try {
+    return fetch('https://clientes.api.greenborn.com.ar/public-random-word?l=6')
+      .then(r => r.json())
+      .then(d => {
+        console.log(d)
+        return d
+      })
+  } catch (error) {
+    console.log(error)
+    console.log('No se pudo obtener la palabra')
+    return 'banana'
+  }
+}
+let palabraSecreta = await obtenerPalabra()
 let mensaje = ''
 let jugando = false
 let errores = 0
@@ -146,7 +162,7 @@ router.route('/facebook').post(async (req, res) => {
             mensaje = ''
             errores = 0
             letrasErroneas = ''
-            palabraSecreta = 'holamundo'
+            palabraSecreta = await obtenerPalabra()
             arrPalabraSecreta = palabraSecreta.split('')
             palabraSecretaMensaje = ''
             for (let i = 0; i < arrPalabraSecreta.length; i++) {
@@ -155,6 +171,30 @@ router.route('/facebook').post(async (req, res) => {
             palabraSecretaMensaje = palabraSecretaMensaje.split('')
           }
           break
+        case '/rendir':
+          if (jugando) {
+            mensaje = ''
+            errores = 0
+            letrasErroneas = ''
+            palabraSecreta = await obtenerPalabra()
+            arrPalabraSecreta = palabraSecreta.split('')
+            palabraSecretaMensaje = ''
+            for (let i = 0; i < arrPalabraSecreta.length; i++) {
+              palabraSecretaMensaje += '_'
+            }
+            palabraSecretaMensaje = palabraSecretaMensaje.split('')
+            mostrarAhorcado(
+              letrasErroneas,
+              errores,
+              palabraSecretaMensaje,
+              'Cambiando palabra...'
+            )
+          } else {
+            await enviarMensaje(null, 'Comando no disponible')
+          }
+
+          break
+
         default:
           let aviso = ''
           let expNum = /[.\d*]/
@@ -168,10 +208,10 @@ router.route('/facebook').post(async (req, res) => {
               aviso = '_Recuerda, es 1 letra a la vez_'
             } else if (
               arrPalabraSecreta.includes(mensaje) &&
-              
               mensaje.length == 1
             ) {
-              if (!palabraSecretaMensaje.includes(mensaje)) { // verifica que no exista
+              if (!palabraSecretaMensaje.includes(mensaje)) {
+                // verifica que no exista
                 for (let i = 0; i < arrPalabraSecreta.length; i++) {
                   //  aqui se agregan las letras que son correctas
                   if (arrPalabraSecreta[i] === mensaje) {
@@ -179,9 +219,8 @@ router.route('/facebook').post(async (req, res) => {
                   }
                 }
                 aviso = '_¡Genial! Has acertado una letra._'
-                
-              }else{
-                aviso = "_Mmmm... Esa letra ya existe._"
+              } else {
+                aviso = '_Mmmm... Esa letra ya existe._'
               }
             } else {
               errores++
