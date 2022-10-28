@@ -5,11 +5,13 @@ const { reservationsUrl } = require('twilio/lib/jwt/taskrouter/util')
 function obtenerPalabra () {
   //  https://clientes.api.greenborn.com.ar/public-random-word
   try {
+    let res
     return fetch('https://clientes.api.greenborn.com.ar/public-random-word?l=6')
       .then(r => r.json())
       .then(d => {
         console.log(d)
-        return d
+        res = d
+        return res[0]
       })
   } catch (error) {
     console.log(error)
@@ -162,7 +164,7 @@ router.route('/facebook').post(async (req, res) => {
             mensaje = ''
             errores = 0
             letrasErroneas = ''
-            palabraSecreta = await obtenerPalabra()
+            palabraSecreta = obtenerPalabra()
             arrPalabraSecreta = palabraSecreta.split('')
             palabraSecretaMensaje = ''
             for (let i = 0; i < arrPalabraSecreta.length; i++) {
@@ -176,7 +178,7 @@ router.route('/facebook').post(async (req, res) => {
             mensaje = ''
             errores = 0
             letrasErroneas = ''
-            palabraSecreta = await obtenerPalabra()
+            palabraSecreta = obtenerPalabra()
             arrPalabraSecreta = palabraSecreta.split('')
             palabraSecretaMensaje = ''
             for (let i = 0; i < arrPalabraSecreta.length; i++) {
