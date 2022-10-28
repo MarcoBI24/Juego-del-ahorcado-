@@ -14,7 +14,10 @@ async function peticionPalabra () {
 async function obtenerPalabra () {
   return await peticionPalabra()
 }
-let palabraSecreta = obtenerPalabra()
+let palabraSecreta = ""
+obtenerPalabra().then(d => {
+  palabraSecreta = d
+})
 console.log(palabraSecreta);
 let mensaje = ''
 let jugando = false
