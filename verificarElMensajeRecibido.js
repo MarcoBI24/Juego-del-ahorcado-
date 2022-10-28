@@ -7,8 +7,8 @@ function peticionPalabra () {
   let res = fetch(
     'https://clientes.api.greenborn.com.ar/public-random-word?l=6'
   )
-    .then(d => d.json())
-    .then(r => {
+    .then((d) => {return d.json()})
+    .then((r) => {
       return r
     })
     .catch(e => {
