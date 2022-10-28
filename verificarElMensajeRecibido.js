@@ -16,6 +16,9 @@ async function peticionPalabra () {
 }
 async function obtenerPalabra() {
    let res = await peticionPalabra()
+   if (!res.ok()) {
+    console.log(res.status());
+   }
    return res
 }
 let palabraSecreta = obtenerPalabra()
