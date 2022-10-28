@@ -15,11 +15,12 @@ async function obtenerPalabra () {
   return await peticionPalabra()
 }
 let palabraSecreta = obtenerPalabra()
+console.log(palabraSecreta);
 let mensaje = ''
 let jugando = false
 let errores = 0
 let palabraSecretaMensaje = ''
-let arrPalabraSecreta = palabraSecreta.split('')
+let arrPalabraSecreta = palabraSecreta[0].split('')
 let letrasErroneas = ''
 for (let i = 0; i < arrPalabraSecreta.length; i++) {
   palabraSecretaMensaje += '_'
