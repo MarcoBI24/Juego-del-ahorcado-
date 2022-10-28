@@ -9,7 +9,7 @@ function peticionPalabra () {
       return d.json()
     })
     .then(r => {
-      console.log(r);
+      console.log(r + "LInea 12");
       return r
     })
     .catch(e => {
@@ -19,11 +19,13 @@ function peticionPalabra () {
 // async function obtenerPalabra () {
 //   palabraSecreta = await peticionPalabra()
 // }
-let palabraSecreta = peticionPalabra().then((d)=>{
-  return d
+let palabraSecreta
+ peticionPalabra().then((d)=>{
+  palabraSecreta = d
+  console.log(palabraSecreta + "linea 25!!!");
 } )
 // obtenerPalabra()
-console.log(palabraSecreta)
+console.log(palabraSecreta + "linea 26!!")
 let mensaje = ''
 let jugando = false
 let errores = 0
