@@ -1,24 +1,26 @@
 const router = require('express').Router()
 const enviarMensaje = require('./enviarMensaje')
 const fetch = require('node-fetch')
-const { reservationsUrl } = require('twilio/lib/jwt/taskrouter/util')
-async function peticionPalabra () {
+// const { reservationsUrl } = require('twilio/lib/jwt/taskrouter/util')
+function peticionPalabra () {
   //  https://clientes.api.greenborn.com.ar/public-random-word
-  let res = await fetch(
+  let res = fetch(
     'https://clientes.api.greenborn.com.ar/public-random-word?l=6'
   )
-  let data = await res.json()
-  console.log(data)
-  return data[0]
+    .then(d => d)
+    .then(r => {
+      return r.json()
+    })
+  // let data = await res.json()
+  // console.log(data)
+  return res[0]
 }
-async function obtenerPalabra () {
-  return await peticionPalabra()
-}
-let palabraSecreta = ""
-obtenerPalabra().then(d => {
-  palabraSecreta = d
-})
-console.log(palabraSecreta);
+// async function obtenerPalabra () {
+//   palabraSecreta = await peticionPalabra()
+// }
+let palabraSecreta = peticionPalabra()
+// obtenerPalabra()
+console.log(palabraSecreta)
 let mensaje = ''
 let jugando = false
 let errores = 0
@@ -163,7 +165,7 @@ router.route('/facebook').post(async (req, res) => {
             mensaje = ''
             errores = 0
             letrasErroneas = ''
-            palabraSecreta = obtenerPalabra()
+            palabraSecreta = peticionPalabra()
             arrPalabraSecreta = palabraSecreta.split('')
             palabraSecretaMensaje = ''
             for (let i = 0; i < arrPalabraSecreta.length; i++) {
@@ -177,7 +179,7 @@ router.route('/facebook').post(async (req, res) => {
             mensaje = ''
             errores = 0
             letrasErroneas = ''
-            palabraSecreta = obtenerPalabra()
+            palabraSecreta = peticionPalabra()
             arrPalabraSecreta = palabraSecreta.split('')
             palabraSecretaMensaje = ''
             for (let i = 0; i < arrPalabraSecreta.length; i++) {
