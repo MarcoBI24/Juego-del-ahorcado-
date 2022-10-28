@@ -1,7 +1,32 @@
-
 const $ = id => {
   return document.getElementById(id)
 }
+
+// function peticionPalabra () {
+//   //  https://clientes.api.greenborn.com.ar/public-random-word
+//   return new Promise((resolve, reject) => {
+//     resolve(
+//       fetch('https://clientes.api.greenborn.com.ar/public-random-word?l=6')
+//     )
+//   })
+// }
+// async function obtenerPalabra () {
+//   let palabra = await fetch(
+    
+//   )
+//   let json = await palabra.json()
+//   console.log(json)
+//   return json
+// }
+// let palabraSecreta = obtenerPalabra()
+//   .then(palabra => {
+//     palabraSecreta = palabra[0]
+//   })
+//   .then(() => {
+//     let arrPalabraSecreta = palabraSecreta.split('')
+//     console.log(arrPalabraSecreta)
+//   })
+
 const btnStart = $('start-game')
 const btnAddWord = $('add-word')
 const btnLogros = $('clasification')

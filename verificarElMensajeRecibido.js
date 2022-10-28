@@ -1,40 +1,43 @@
 const router = require('express').Router()
 const enviarMensaje = require('./enviarMensaje')
 const fetch = require('node-fetch')
-// const { reservationsUrl } = require('twilio/lib/jwt/taskrouter/util')
-function peticionPalabra () {
-  //  https://clientes.api.greenborn.com.ar/public-random-word
-  return fetch('https://clientes.api.greenborn.com.ar/public-random-word?l=6')
-    .then(d => {
-      return d.json()
-    })
-    .then(r => {
-      console.log(r + "LInea 12");
-      return r
+const {
+  LogInstance
+} = require('twilio/lib/rest/serverless/v1/service/environment/log')
+
+let palabraSecreta = ''
+let mensaje = ''
+let jugando = false
+let errores = 0
+let letrasErroneas = ''
+let palabraSecretaMensaje = ''
+let arrPalabraSecreta
+let urlPalabra = 'https://clientes.api.greenborn.com.ar/public-random-word?l=6'
+async function peticionPalabra () {
+  let peticion = await fetch(urlPalabra)
+  let respuesta = await peticion.json()
+  return respuesta
+}
+function asignarVariables () {
+  peticionPalabra()
+    .then(palabra => {
+      palabraSecreta = palabra[0]
+      mensaje = ''
+      errores = 0
+      letrasErroneas = ''
+      palabraSecretaMensaje = ''
+      arrPalabraSecreta = palabraSecreta[0].split('')
+      for (let i = 0; i < arrPalabraSecreta.length; i++) {
+        palabraSecretaMensaje += '_'
+      }
+      palabraSecretaMensaje = palabraSecretaMensaje.split('')
+      console.log(palabra[0])
     })
     .catch(e => {
+      console.log('NO SE PUDO OBTENER LA PALABRA SECRETA')
       console.log(e)
     })
 }
-// async function obtenerPalabra () {
-//   palabraSecreta = await peticionPalabra()
-// }
-let palabraSecreta
- peticionPalabra().then((d)=>{
-  palabraSecreta = d
-  // console.log(palabraSecreta + "linea 25!!!");
-  console.log(palabraSecreta + "linea 26!!")
-  let mensaje = ''
-  let jugando = false
-  let errores = 0
-  let palabraSecretaMensaje = ''
-  let arrPalabraSecreta = palabraSecreta[0].split('')
-  let letrasErroneas = ''
-  for (let i = 0; i < arrPalabraSecreta.length; i++) {
-    palabraSecretaMensaje += '_'
-  }
-  palabraSecretaMensaje = palabraSecretaMensaje.split('')
-} )
 // obtenerPalabra()
 function formatearMensaje (msg) {
   let mensajeGuionesTemp = '' // aqui da el espaciado al mensajeGuiones
@@ -120,6 +123,9 @@ const IMAGENES_AHORCADO = [
 
 router.route('/facebook').post(async (req, res) => {
   // esta funcion espera el mensaje de whatsap
+  if (palabraSecreta === "") {
+    asignarVariables()
+  }
   try {
     const REQ = req.body.entry[0].changes[0].value.messages
     if (REQ !== undefined && REQ[0] !== undefined) {
