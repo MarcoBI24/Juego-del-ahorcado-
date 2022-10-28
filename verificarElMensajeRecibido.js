@@ -4,23 +4,15 @@ const fetch = require('node-fetch')
 const { reservationsUrl } = require('twilio/lib/jwt/taskrouter/util')
 async function peticionPalabra () {
   //  https://clientes.api.greenborn.com.ar/public-random-word
-  try {
-    let res = await fetch(
-      'https://clientes.api.greenborn.com.ar/public-random-word?l=6'
-    )
-    let data = await res.json()
-    console.log(data)
-    return data[0]
-  } catch (error) {
-    console.log(error)
-    console.log('No se pudo obtener la palabra')
-    return 'banana'
-  }
+  let res = await fetch(
+    'https://clientes.api.greenborn.com.ar/public-random-word?l=6'
+  )
+  let data = await res.json()
+  console.log(data)
+  return data[0]
 }
 async function obtenerPalabra () {
-  let res = await peticionPalabra()
-
-  return res
+  return await peticionPalabra()
 }
 let palabraSecreta = obtenerPalabra()
 let mensaje = ''
