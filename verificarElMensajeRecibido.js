@@ -11,8 +11,12 @@ function peticionPalabra () {
     .then(r => {
       return r.json()
     })
+    .catch(e => {
+      console.log(e)
+    })
   // let data = await res.json()
   // console.log(data)
+  console.log(res[0])
   return res[0]
 }
 // async function obtenerPalabra () {
