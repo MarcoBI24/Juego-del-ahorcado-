@@ -22,20 +22,20 @@ function peticionPalabra () {
 let palabraSecreta
  peticionPalabra().then((d)=>{
   palabraSecreta = d
-  console.log(palabraSecreta + "linea 25!!!");
+  // console.log(palabraSecreta + "linea 25!!!");
+  console.log(palabraSecreta + "linea 26!!")
+  let mensaje = ''
+  let jugando = false
+  let errores = 0
+  let palabraSecretaMensaje = ''
+  let arrPalabraSecreta = palabraSecreta[0].split('')
+  let letrasErroneas = ''
+  for (let i = 0; i < arrPalabraSecreta.length; i++) {
+    palabraSecretaMensaje += '_'
+  }
+  palabraSecretaMensaje = palabraSecretaMensaje.split('')
 } )
 // obtenerPalabra()
-console.log(palabraSecreta + "linea 26!!")
-let mensaje = ''
-let jugando = false
-let errores = 0
-let palabraSecretaMensaje = ''
-let arrPalabraSecreta = palabraSecreta[0].split('')
-let letrasErroneas = ''
-for (let i = 0; i < arrPalabraSecreta.length; i++) {
-  palabraSecretaMensaje += '_'
-}
-palabraSecretaMensaje = palabraSecretaMensaje.split('')
 function formatearMensaje (msg) {
   let mensajeGuionesTemp = '' // aqui da el espaciado al mensajeGuiones
   for (let i = 0; i < msg.length; i++) {
