@@ -18,7 +18,7 @@ async function peticionPalabra () {
 function asignarVariables () {
   peticionPalabra()
     .then(palabra => {
-      palabraSecreta = palabra[0]
+      palabraSecreta = palabra
       mensaje = ''
       errores = 0
       letrasErroneas = ''
@@ -170,7 +170,16 @@ router.route('/facebook').post(async (req, res) => {
           if (jugando) {
             jugando = false
             await enviarMensaje(null, 'Saliste del juego')
-            asignarVariables()
+            mensaje = ''
+            errores = 0
+            letrasErroneas = ''
+            palabraSecreta = ""
+            arrPalabraSecreta = []
+            palabraSecretaMensaje = ''
+            // for (let i = 0; i < arrPalabraSecreta.length; i++) {
+            //   palabraSecretaMensaje += '_'
+            // }
+            // palabraSecretaMensaje = palabraSecretaMensaje.split('')
           }
           break
         case '/rendir':
