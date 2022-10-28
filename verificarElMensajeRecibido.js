@@ -19,7 +19,9 @@ function peticionPalabra () {
 // async function obtenerPalabra () {
 //   palabraSecreta = await peticionPalabra()
 // }
-let palabraSecreta = peticionPalabra()
+let palabraSecreta = peticionPalabra().then((d)=>{
+  return d
+} )
 // obtenerPalabra()
 console.log(palabraSecreta)
 let mensaje = ''
