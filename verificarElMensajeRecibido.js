@@ -1,9 +1,6 @@
 const router = require('express').Router()
 const enviarMensaje = require('./enviarMensaje')
 const fetch = require('node-fetch')
-const {
-  LogInstance
-} = require('twilio/lib/rest/serverless/v1/service/environment/log')
 
 let palabraSecreta = ''
 let mensaje = ''
@@ -123,7 +120,7 @@ const IMAGENES_AHORCADO = [
 
 router.route('/facebook').post(async (req, res) => {
   // esta funcion espera el mensaje de whatsap
-  if (palabraSecreta === "") {
+  if (palabraSecreta === '') {
     asignarVariables()
   }
   try {
@@ -173,36 +170,30 @@ router.route('/facebook').post(async (req, res) => {
           if (jugando) {
             jugando = false
             await enviarMensaje(null, 'Saliste del juego')
-            mensaje = ''
-            errores = 0
-            letrasErroneas = ''
-            palabraSecreta = peticionPalabra()
-            arrPalabraSecreta = palabraSecreta.split('')
-            palabraSecretaMensaje = ''
-            for (let i = 0; i < arrPalabraSecreta.length; i++) {
-              palabraSecretaMensaje += '_'
-            }
-            palabraSecretaMensaje = palabraSecretaMensaje.split('')
+            asignarVariables()
           }
           break
         case '/rendir':
           if (jugando) {
-            mensaje = ''
-            errores = 0
-            letrasErroneas = ''
-            palabraSecreta = peticionPalabra()
-            arrPalabraSecreta = palabraSecreta.split('')
-            palabraSecretaMensaje = ''
-            for (let i = 0; i < arrPalabraSecreta.length; i++) {
-              palabraSecretaMensaje += '_'
-            }
-            palabraSecretaMensaje = palabraSecretaMensaje.split('')
-            mostrarAhorcado(
-              letrasErroneas,
-              errores,
-              palabraSecretaMensaje,
-              'Cambiando palabra...'
-            )
+            // mensaje = ''
+            // errores = 0
+            // letrasErroneas = ''
+            // palabraSecreta = peticionPalabra()
+            // arrPalabraSecreta = palabraSecreta.split('')
+            // palabraSecretaMensaje = ''
+            // for (let i = 0; i < arrPalabraSecreta.length; i++) {
+            //   palabraSecretaMensaje += '_'
+            // }
+            // palabraSecretaMensaje = palabraSecretaMensaje.split('')
+            asignarVariables().then(()=>{
+              mostrarAhorcado(
+                letrasErroneas,
+                errores,
+                palabraSecretaMensaje,
+                'Cambiando palabra...'
+              )
+
+            })
           } else {
             await enviarMensaje(null, 'Comando no disponible')
           }
