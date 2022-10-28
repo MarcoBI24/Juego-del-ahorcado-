@@ -2,22 +2,21 @@ const router = require('express').Router()
 const enviarMensaje = require('./enviarMensaje')
 const fetch = require('node-fetch')
 const { reservationsUrl } = require('twilio/lib/jwt/taskrouter/util')
-function obtenerPalabra () {
+async function peticionPalabra () {
   //  https://clientes.api.greenborn.com.ar/public-random-word
   try {
-    let res
-    return fetch('https://clientes.api.greenborn.com.ar/public-random-word?l=6')
-      .then(r => r.json())
-      .then(d => {
-        console.log(d)
-        res = d
-        return res[0]
-      })
+    let res = await fetch('https://clientes.api.greenborn.com.ar/public-random-word?l=6')
+    let data = await res.json()
+    return data[0]
   } catch (error) {
     console.log(error)
     console.log('No se pudo obtener la palabra')
     return 'banana'
   }
+}
+async function obtenerPalabra() {
+   let res = await peticionPalabra()
+   return res
 }
 let palabraSecreta = obtenerPalabra()
 let mensaje = ''
