@@ -7,22 +7,22 @@ function peticionPalabra () {
   let res = fetch(
     'https://clientes.api.greenborn.com.ar/public-random-word?l=6'
   )
-    .then(d => d)
+    .then(d => d.json())
     .then(r => {
-      return r.json()
+      return r
     })
     .catch(e => {
       console.log(e)
     })
   // let data = await res.json()
   // console.log(data)
-  console.log(res)
-  return res
+  console.log(res[0])
+  return res[0]
 }
 // async function obtenerPalabra () {
 //   palabraSecreta = await peticionPalabra()
 // }
-let palabraSecreta = peticionPalabra().then(d => d)
+let palabraSecreta = peticionPalabra()
 // obtenerPalabra()
 console.log(palabraSecreta)
 let mensaje = ''
