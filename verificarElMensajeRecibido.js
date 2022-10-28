@@ -2,7 +2,7 @@ const router = require('express').Router()
 const enviarMensaje = require('./enviarMensaje')
 const fetch = require('node-fetch')
 const { reservationsUrl } = require('twilio/lib/jwt/taskrouter/util')
-async function obtenerPalabra () {
+function obtenerPalabra () {
   //  https://clientes.api.greenborn.com.ar/public-random-word
   try {
     return fetch('https://clientes.api.greenborn.com.ar/public-random-word?l=6')
@@ -17,7 +17,7 @@ async function obtenerPalabra () {
     return 'banana'
   }
 }
-let palabraSecreta = await obtenerPalabra()
+let palabraSecreta = obtenerPalabra()
 let mensaje = ''
 let jugando = false
 let errores = 0
