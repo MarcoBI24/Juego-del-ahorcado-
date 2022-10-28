@@ -16,13 +16,13 @@ function peticionPalabra () {
     })
   // let data = await res.json()
   // console.log(data)
-  console.log(res[0])
-  return res[0]
+  console.log(res)
+  return res
 }
 // async function obtenerPalabra () {
 //   palabraSecreta = await peticionPalabra()
 // }
-let palabraSecreta = peticionPalabra()
+let palabraSecreta = peticionPalabra().then(d => d)
 // obtenerPalabra()
 console.log(palabraSecreta)
 let mensaje = ''
