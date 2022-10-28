@@ -35,6 +35,7 @@ function asignarVariables () {
       console.log(e)
     })
 }
+let nombreUser
 // obtenerPalabra()
 function formatearMensaje (msg) {
   let mensajeGuionesTemp = '' // aqui da el espaciado al mensajeGuiones
@@ -138,7 +139,7 @@ router.route('/facebook').post(async (req, res) => {
       switch (mensaje) {
         case 'Hola':
           if (!jugando) {
-            let nombreUser =
+             nombreUser =
               req.body.entry[0].changes[0].value.contacts[0].profile.name
             await enviarMensaje(null, `Hola ${nombreUser}, ¿Qué tal?`)
             mensaje = ''
@@ -173,35 +174,20 @@ router.route('/facebook').post(async (req, res) => {
             mensaje = ''
             errores = 0
             letrasErroneas = ''
-            palabraSecreta = ""
+            palabraSecreta = ''
             arrPalabraSecreta = []
             palabraSecretaMensaje = ''
-            // for (let i = 0; i < arrPalabraSecreta.length; i++) {
-            //   palabraSecretaMensaje += '_'
-            // }
-            // palabraSecretaMensaje = palabraSecretaMensaje.split('')
           }
           break
         case '/rendir':
           if (jugando) {
-            // mensaje = ''
-            // errores = 0
-            // letrasErroneas = ''
-            // palabraSecreta = peticionPalabra()
-            // arrPalabraSecreta = palabraSecreta.split('')
-            // palabraSecretaMensaje = ''
-            // for (let i = 0; i < arrPalabraSecreta.length; i++) {
-            //   palabraSecretaMensaje += '_'
-            // }
-            // palabraSecretaMensaje = palabraSecretaMensaje.split('')
-            asignarVariables().then(()=>{
+            asignarVariables().then(() => {
               mostrarAhorcado(
                 letrasErroneas,
                 errores,
                 palabraSecretaMensaje,
                 'Cambiando palabra...'
               )
-
             })
           } else {
             await enviarMensaje(null, 'Comando no disponible')
@@ -225,20 +211,28 @@ router.route('/facebook').post(async (req, res) => {
               mensaje.length == 1
             ) {
               if (!palabraSecretaMensaje.includes(mensaje)) {
-                // verifica que no exista
+                // verifica que no se repita
                 for (let i = 0; i < arrPalabraSecreta.length; i++) {
                   //  aqui se agregan las letras que son correctas
                   if (arrPalabraSecreta[i] === mensaje) {
                     palabraSecretaMensaje[i] = arrPalabraSecreta[i]
                   }
                 }
-                aviso = '_¡Genial! Has acertado una letra._'
+                if (palabraSecretaMensaje.length == arrPalabraSecreta.length) {
+                  aviso = `_Felicidades ${nombreUser}!! Has completado la palabra (+100px)_.\n
+                  /Escribe /siguiente para la proxima palabra o /salir para abandonar.`
+                }else{
+                  aviso = '_¡Genial! Has acertado una letra._'
+
+                }
               } else {
                 aviso = '_Mmmm... Esa letra ya existe._'
               }
             } else {
               errores++
-              letrasErroneas += mensaje
+              if (!letrasErroneas.includes(mensaje)) {
+                letrasErroneas += mensaje
+              }
               aviso = '_¡Oh! Has fallado._'
             }
             await mostrarAhorcado(
