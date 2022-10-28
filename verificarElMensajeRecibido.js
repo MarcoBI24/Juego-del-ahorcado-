@@ -18,6 +18,8 @@ async function obtenerPalabra() {
    let res = await peticionPalabra()
    if (!res.ok()) {
     console.log(res.status());
+   }else{
+    console.log(res.status);
    }
    return res
 }
