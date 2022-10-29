@@ -1,4 +1,3 @@
-const enviarMensaje = require("./enviarMensaje")
 
 const router = require("express").Router()
 const enviarMensaje = require("./enviarMensaje") 
