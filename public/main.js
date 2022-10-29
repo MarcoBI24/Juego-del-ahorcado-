@@ -2,7 +2,6 @@ const $ = id => {
   return document.getElementById(id)
 }
 
-// asignarVariables()
 const btnStart = $('start-game')
 const btnAddWord = $('add-word')
 const btnLogros = $('clasification')
