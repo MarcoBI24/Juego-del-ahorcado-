@@ -30,7 +30,7 @@ module.exports = async (nameTemplate, mensaje) => {
     }
   }
   try {
-    await fetch('https://graph.facebook.com/v15.0/110725255170473/messages', {
+    await fetch('https://graph.facebook.com/v15.0/110109848553255/messages', {
       method: 'POST',
       headers: headers,
       body: JSON.stringify(options)
