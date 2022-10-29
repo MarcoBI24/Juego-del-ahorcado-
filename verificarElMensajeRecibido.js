@@ -139,7 +139,7 @@ router.route('/facebook').post(async (req, res) => {
       }
       mensaje = mensaje.toLowerCase()
       switch (mensaje) {
-        case 'Hola':
+        case 'hola':
           if (!jugando) {
             nombreUser =
               req.body.entry[0].changes[0].value.contacts[0].profile.name
@@ -156,7 +156,7 @@ router.route('/facebook').post(async (req, res) => {
           mensaje = ''
           return res.sendStatus(200)
           break
-        case 'Jugar':
+        case 'jugar':
           if (!jugando) {
             jugando = true
             await enviarMensaje('como_jugar', null)
