@@ -137,6 +137,7 @@ router.route('/facebook').post(async (req, res) => {
       } else if (REQ[0].text) {
         mensaje = REQ[0].text.body
       }
+      mensaje = mensaje.toLowerCase()
       switch (mensaje) {
         case 'Hola':
           if (!jugando) {
@@ -209,13 +210,15 @@ router.route('/facebook').post(async (req, res) => {
         default:
           let aviso = ''
           let expNum = /[.\d*]/
-          if (jugando == true ) {
+          if (jugando == true) {
             if (gano === true || perdio === true) {
-              await enviarMensaje(null,"Escriba /siguiente para seguir jugando")
-              
+              await enviarMensaje(
+                null,
+                'Escriba /siguiente para seguir jugando'
+              )
+
               break
             }
-            mensaje = mensaje.toLowerCase()
             console.log(palabraSecretaMensaje)
             if (expNum.test(mensaje)) {
               // verifica si es un numero
@@ -268,8 +271,7 @@ router.route('/facebook').post(async (req, res) => {
               aviso
             )
             mensaje = '' // se reinicia la varibale mensaje
-          }else{
-
+          } else {
           }
           break
       }
