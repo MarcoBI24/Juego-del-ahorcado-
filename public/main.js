@@ -2,53 +2,6 @@ const $ = id => {
   return document.getElementById(id)
 }
 
-let palabraSecreta = ''
-let mensaje = ''
-let jugando = false
-let errores = 0
-let letrasErroneas = ''
-let palabraSecretaMensaje = ''
-let arrPalabraSecreta
-let urlPalabra = 'https://clientes.api.greenborn.com.ar/public-random-word?l=6'
-async function peticionPalabra () {
-  try {
-    let peticion = await fetch(urlPalabra)
-    let respuesta = await peticion.json()
-    return respuesta
-  } catch (error) {
-    console.log("N");
-    console.log(error)
-    return ["error"]
-  }
-}
-// peticionPalabra().then((d) => {
-//   console.log(d)
-// })
-asignarVariables().then((d)=>{
-  console.log(d);
-})
-async function asignarVariables () {
-  let expRegPalabras = /\w*?[áéíóú]+\w*/
-  let res = []
-  do {
-    res = await peticionPalabra()
-    palabraSecreta = res[0]
-    console.log(res)
-    console.log(palabraSecreta)
-    mensaje = ''
-    errores = 0
-    letrasErroneas = ''
-    palabraSecretaMensaje = ''
-    arrPalabraSecreta = palabraSecreta.split('')
-    for (let i = 0; i < arrPalabraSecreta.length; i++) {
-      palabraSecretaMensaje += '_'
-    }
-    palabraSecretaMensaje = palabraSecretaMensaje.split('')
-
- 
-  } while (expRegPalabras.test(palabraSecreta))
-  return res 
-}
 // asignarVariables()
 const btnStart = $('start-game')
 const btnAddWord = $('add-word')

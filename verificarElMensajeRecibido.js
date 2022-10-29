@@ -5,11 +5,14 @@ const fetch = require('node-fetch')
 let palabraSecreta = ''
 let mensaje = ''
 let jugando = false
+let perdio = false
+let gano = false
 let errores = 0
 let letrasErroneas = ''
 let palabraSecretaMensaje = ''
 let arrPalabraSecreta
 let urlPalabra = 'https://clientes.api.greenborn.com.ar/public-random-word?l=5'
+
 async function peticionPalabra () {
   let peticion = await fetch(urlPalabra)
   let respuesta = await peticion.json()
@@ -20,7 +23,7 @@ async function asignarVariables () {
   let expRegPalabras = /\w*?[áéíóú]+\w*/
   do {
     let res = await peticionPalabra()
-    palabraSecreta = res[0]
+    palabraSecreta = res[0].toLowerCase()
     mensaje = ''
     errores = 0
     letrasErroneas = ''
@@ -187,7 +190,22 @@ router.route('/facebook').post(async (req, res) => {
           }
 
           break
-
+        case '/siguiente':
+          if (jugando == true && (gano == true || perdio == true)) {
+            asignarVariables().then(() => {
+              mostrarAhorcado(
+                letrasErroneas,
+                errores,
+                palabraSecretaMensaje,
+                'Nueva palabra'
+              )
+            })
+            gano = false
+            perdio = false
+          } else {
+            await enviarMensaje(null, 'Comando no disponible')
+          }
+          break
         default:
           let aviso = ''
           let expNum = /[.\d*]/
@@ -195,41 +213,48 @@ router.route('/facebook').post(async (req, res) => {
             mensaje = mensaje.toLowerCase()
             console.log(palabraSecretaMensaje)
             if (expNum.test(mensaje)) {
+              // verifica si es un numero
               aviso = '_Recuerda, solo letras(a-z)._'
             } else if (mensaje.length > 1) {
               // verifica que sea una letra
               aviso = '_Recuerda, es 1 letra a la vez_'
             } else if (
               arrPalabraSecreta.includes(mensaje) &&
-              mensaje.length == 1
+              mensaje.length == 1 // se verifica que sea 1 letra y que este incluida en la palabraOriginal
             ) {
               if (!palabraSecretaMensaje.includes(mensaje)) {
-                // verifica que no se repita
+                // verifica que no se repita en las palabras correctas
                 for (let i = 0; i < arrPalabraSecreta.length; i++) {
                   //  aqui se agregan las letras que son correctas
                   if (arrPalabraSecreta[i] === mensaje) {
                     palabraSecretaMensaje[i] = arrPalabraSecreta[i]
                   }
                 }
-                if (!palabraSecretaMensaje.includes("_")) {
+                if (!palabraSecretaMensaje.includes('_')) {
+                  // verifica que no existe un guion ya que cuando no haya ningun guion significa que la palabra esta completo
                   aviso = `_Felicidades ${nombreUser}!! Has completado la palabra (+100px)_.\n
-                  /Escribe /siguiente para la proxima palabra o /salir para abandonar.`
+                Escribe /siguiente para la proxima palabra o /salir para abandonar.`
+                  gano = true
                 } else {
+                  // en caso contrario solo a acertado una letra
                   aviso = '_¡Genial! Has acertado una letra._'
                 }
               } else {
                 aviso = '_Mmmm... Esa letra ya existe._'
               }
             } else {
+              // en caso contrario fue un error
               errores++
               if (!letrasErroneas.includes(mensaje)) {
+                // verifica que la letra erronea no se repita
                 letrasErroneas += mensaje
               }
-              if (errores === (IMAGENES_AHORCADO.length - 1)) {
-                aviso = `Hey ${nombreUser}!! No pudo completar la palabra (-50px)_.\n
-                  /Escribe /siguiente para la proxima palabra o /salir para abandonar.`
-              }else{
-
+              if (errores === IMAGENES_AHORCADO.length - 1) {
+                // verifica el largo de las img's con los errores para ver si perdio
+                aviso = `_Hey ${nombreUser}!! No pudo completar la palabra (-50px)._\n
+                  Escribe /siguiente para la proxima palabra o /salir para abandonar.`
+                perdio = true
+              } else {
                 aviso = '_¡Oh! Has fallado._'
               }
             }
