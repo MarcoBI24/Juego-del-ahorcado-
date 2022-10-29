@@ -9,32 +9,30 @@ let errores = 0
 let letrasErroneas = ''
 let palabraSecretaMensaje = ''
 let arrPalabraSecreta
-let urlPalabra = 'https://clientes.api.greenborn.com.ar/public-random-word?l=6'
+let urlPalabra = 'https://clientes.api.greenborn.com.ar/public-random-word?l=5'
 async function peticionPalabra () {
   let peticion = await fetch(urlPalabra)
   let respuesta = await peticion.json()
   return respuesta
 }
-function asignarVariables () {
-  peticionPalabra()
-    .then(palabra => {
-      palabraSecreta = palabra
-      mensaje = ''
-      errores = 0
-      letrasErroneas = ''
-      palabraSecretaMensaje = ''
-      arrPalabraSecreta = palabraSecreta[0].split('')
-      for (let i = 0; i < arrPalabraSecreta.length; i++) {
-        palabraSecretaMensaje += '_'
-      }
-      palabraSecretaMensaje = palabraSecretaMensaje.split('')
-      console.log(palabra[0])
-    })
-    .catch(e => {
-      console.log('NO SE PUDO OBTENER LA PALABRA SECRETA')
-      console.log(e)
-    })
+
+async function asignarVariables () {
+  let expRegPalabras = /\w*?[áéíóú]+\w*/
+  do {
+    let res = await peticionPalabra()
+    palabraSecreta = res[0]
+    mensaje = ''
+    errores = 0
+    letrasErroneas = ''
+    palabraSecretaMensaje = ''
+    arrPalabraSecreta = palabraSecreta.split('')
+    for (let i = 0; i < arrPalabraSecreta.length; i++) {
+      palabraSecretaMensaje += '_'
+    }
+    palabraSecretaMensaje = palabraSecretaMensaje.split('')
+  } while (expRegPalabras.test(palabraSecreta))
 }
+asignarVariables()
 let nombreUser
 // obtenerPalabra()
 function formatearMensaje (msg) {
@@ -139,7 +137,7 @@ router.route('/facebook').post(async (req, res) => {
       switch (mensaje) {
         case 'Hola':
           if (!jugando) {
-             nombreUser =
+            nombreUser =
               req.body.entry[0].changes[0].value.contacts[0].profile.name
             await enviarMensaje(null, `Hola ${nombreUser}, ¿Qué tal?`)
             mensaje = ''
@@ -171,12 +169,7 @@ router.route('/facebook').post(async (req, res) => {
           if (jugando) {
             jugando = false
             await enviarMensaje(null, 'Saliste del juego')
-            mensaje = ''
-            errores = 0
-            letrasErroneas = ''
-            palabraSecreta = ''
-            arrPalabraSecreta = []
-            palabraSecretaMensaje = ''
+            await asignarVariables()
           }
           break
         case '/rendir':
@@ -218,12 +211,11 @@ router.route('/facebook').post(async (req, res) => {
                     palabraSecretaMensaje[i] = arrPalabraSecreta[i]
                   }
                 }
-                if (palabraSecretaMensaje.length == arrPalabraSecreta.length) {
+                if (!palabraSecretaMensaje.includes("_")) {
                   aviso = `_Felicidades ${nombreUser}!! Has completado la palabra (+100px)_.\n
                   /Escribe /siguiente para la proxima palabra o /salir para abandonar.`
-                }else{
+                } else {
                   aviso = '_¡Genial! Has acertado una letra._'
-
                 }
               } else {
                 aviso = '_Mmmm... Esa letra ya existe._'
@@ -233,7 +225,13 @@ router.route('/facebook').post(async (req, res) => {
               if (!letrasErroneas.includes(mensaje)) {
                 letrasErroneas += mensaje
               }
-              aviso = '_¡Oh! Has fallado._'
+              if (errores === (IMAGENES_AHORCADO.length - 1)) {
+                aviso = `Hey ${nombreUser}!! No pudo completar la palabra (-50px)_.\n
+                  /Escribe /siguiente para la proxima palabra o /salir para abandonar.`
+              }else{
+
+                aviso = '_¡Oh! Has fallado._'
+              }
             }
             await mostrarAhorcado(
               letrasErroneas,
