@@ -75,49 +75,49 @@ const IMAGENES_AHORCADO = [
 \t\t\t\t\t\t\t   \t\t\t|
 \t\t\t\t\t\t\t   \t\t\t|
 \t\t\t\t\t\t\t   \t\t\t|
-\t\t\t\t\t\t\t=========`,
+\t\t\t\t\t\t\t==========`,
   `.\t\t\t\t\t\t\t +------+
 \t\t\t\t\t\t\t  |\t\t\t|
 \t\t\t\t\t\t\t O\t\t\t|
 \t\t\t\t\t\t\t   \t\t\t|
 \t\t\t\t\t\t\t   \t\t\t|
 \t\t\t\t\t\t\t   \t\t\t|
-\t\t\t\t\t\t\t=========`,
+\t\t\t\t\t\t\t==========`,
   `.\t\t\t\t\t\t\t +------+
 \t\t\t\t\t\t\t  |\t\t\t|
 \t\t\t\t\t\t\t O\t\t\t|
 \t\t\t\t\t\t\t  |\t\t\t|
 \t\t\t\t\t\t\t   \t\t\t|
 \t\t\t\t\t\t\t   \t\t\t|
-\t\t\t\t\t\t\t=========`,
+\t\t\t\t\t\t\t==========`,
   `.\t\t\t\t\t\t\t +------+
 \t\t\t\t\t\t\t  |\t\t\t|
 \t\t\t\t\t\t\t O\t\t\t|
 \t\t\t\t\t\t\t/|\t\t\t|
 \t\t\t\t\t\t\t\t\t\t\t|
 \t\t\t\t\t\t\t   \t\t\t|
-\t\t\t\t\t\t\t=========`,
+\t\t\t\t\t\t\t==========`,
   `.\t\t\t\t\t\t\t +------+
 \t\t\t\t\t\t\t  |\t\t\t|
 \t\t\t\t\t\t\t O\t\t\t|
 \t\t\t\t\t\t\t/|\\ \t\t|
 \t\t\t\t\t\t\t   \t\t\t|
 \t\t\t\t\t\t\t    \t\t\t|
-\t\t\t\t\t\t\t=========`,
+\t\t\t\t\t\t\t==========`,
   `.\t\t\t\t\t\t\t +------+
 \t\t\t\t\t\t\t  | \t\t\t|
 \t\t\t\t\t\t\t O \t\t\t|
 \t\t\t\t\t\t\t/|\\ \t\t|
 \t\t\t\t\t\t\t/  \t\t\t|
 \t\t\t\t\t\t\t    \t\t\t|
-\t\t\t\t\t\t\t=========`,
+\t\t\t\t\t\t\t==========`,
   `.\t\t\t\t\t\t\t +------+
 \t\t\t\t\t\t\t  |\t\t\t|
 \t\t\t\t\t\t\t O\t\t\t|
 \t\t\t\t\t\t\t/|\\ \t\t|
 \t\t\t\t\t\t\t/ \\ \t\t|
 \t\t\t\t\t\t\t    \t\t\t|
-\t\t\t\t\t\t\t=========`
+\t\t\t\t\t\t\t==========`
 ]
 
 router.route('/facebook').post(async (req, res) => {
