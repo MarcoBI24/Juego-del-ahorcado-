@@ -145,8 +145,8 @@ router.route('/facebook').post(async (req, res) => {
               req.body.entry[0].changes[0].value.contacts[0].profile.name
             await enviarMensaje(null, `Hola ${nombreUser}, ¿Qué tal?`)
             mensaje = ''
+            break
           }
-          break
         case '/menu':
           if (jugando == false) {
             await enviarMensaje('mostrar_opciones', null)
@@ -166,13 +166,15 @@ router.route('/facebook').post(async (req, res) => {
               'Empezando...'
             )
             mensaje = ''
+            break
           }
-          break
         case '/salir':
           if (jugando) {
             jugando = false
-            await enviarMensaje(null, 'Saliste del juego')
+            await enviarMensaje(null, 'Saliste del juego.')
             await asignarVariables()
+          }else{
+            await enviarMensaje(null, 'Comando no disponible.')
           }
           break
         case '/rendir':
@@ -243,7 +245,7 @@ router.route('/facebook').post(async (req, res) => {
                   gano = true
                 } else {
                   // en caso contrario solo a acertado una letra
-                  aviso = '_¡Genial! Has acertado una letra._'
+                  aviso = '_¡Genial! Has acertado._'
                 }
               } else {
                 aviso = '_Mmmm... Esa letra ya existe._'
@@ -257,7 +259,7 @@ router.route('/facebook').post(async (req, res) => {
               }
               if (errores === IMAGENES_AHORCADO.length - 1) {
                 // verifica el largo de las img's con los errores para ver si perdio
-                aviso = `_¡Perdiste!😪(-50px)._\nLa palabra secreta era: ${palabraSecreta}\nEscribe /siguiente para la proxima palabra o /salir para abandonar.`
+                aviso = `_¡Perdiste!😪(-50px)._\nLa palabra secreta era: *${palabraSecreta}*.\nEscribe /siguiente para la proxima palabra o /salir para abandonar.`
                 perdio = true
               } else {
                 aviso = '_¡Oh! Has fallado._'
