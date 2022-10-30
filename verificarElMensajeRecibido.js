@@ -69,55 +69,55 @@ async function mostrarAhorcado (
 }
 
 const IMAGENES_AHORCADO = [
-  `\n\n.\t\t\t\t\t\t\t +------+
-\t\t\t\t\t\t\t  |\t\t\t|
-\t\t\t\t\t\t\t   \t\t\t|
-\t\t\t\t\t\t\t   \t\t\t|
-\t\t\t\t\t\t\t   \t\t\t|
-\t\t\t\t\t\t\t   \t\t\t|
-\t\t\t\t\t\t==========`,
-  `.\t\t\t\t\t\t\t +------+
-\t\t\t\t\t\t\t  |\t\t\t|
-\t\t\t\t\t\t\t O\t\t\t|
-\t\t\t\t\t\t\t   \t\t\t|
-\t\t\t\t\t\t\t   \t\t\t|
-\t\t\t\t\t\t\t   \t\t\t|
-\t\t\t\t\t\t==========`,
-  `.\t\t\t\t\t\t\t +------+
-\t\t\t\t\t\t\t  |\t\t\t|
-\t\t\t\t\t\t\t O\t\t\t|
-\t\t\t\t\t\t\t  |\t\t\t|
-\t\t\t\t\t\t\t   \t\t\t|
-\t\t\t\t\t\t\t   \t\t\t|
-\t\t\t\t\t\t==========`,
-  `.\t\t\t\t\t\t\t +------+
-\t\t\t\t\t\t\t  |\t\t\t|
-\t\t\t\t\t\t\t O\t\t\t|
-\t\t\t\t\t\t\t/|\t\t\t|
-\t\t\t\t\t\t\t\t\t\t\t|
-\t\t\t\t\t\t\t   \t\t\t|
-\t\t\t\t\t\t==========`,
-  `.\t\t\t\t\t\t\t +------+
-\t\t\t\t\t\t\t  |\t\t\t|
-\t\t\t\t\t\t\t O\t\t\t|
-\t\t\t\t\t\t\t/|\\ \t\t|
-\t\t\t\t\t\t\t   \t\t\t|
-\t\t\t\t\t\t\t    \t\t\t|
-\t\t\t\t\t\t==========`,
-  `.\t\t\t\t\t\t\t +------+
-\t\t\t\t\t\t\t  | \t\t\t|
-\t\t\t\t\t\t\t O \t\t\t|
-\t\t\t\t\t\t\t/|\\ \t\t|
-\t\t\t\t\t\t\t/  \t\t\t|
-\t\t\t\t\t\t\t    \t\t\t|
-\t\t\t\t\t\t==========`,
-  `.\t\t\t\t\t\t\t +------+
-\t\t\t\t\t\t\t  |\t\t\t|
-\t\t\t\t\t\t\t O\t\t\t|
-\t\t\t\t\t\t\t/|\\ \t\t|
-\t\t\t\t\t\t\t/ \\ \t\t|
-\t\t\t\t\t\t\t    \t\t\t|
-\t\t\t\t\t\t==========`
+  `\n\n.\t\t\t\t\t\t\t *+------+*
+\t\t\t\t\t\t\t  *|*\t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t*|*
+\t\t\t\t\t\t*==========*`,
+  `.\t\t\t\t\t\t\t *+------+*
+\t\t\t\t\t\t\t  *|*\t\t\t*|*
+\t\t\t\t\t\t\t *O*\t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t*|*
+\t\t\t\t\t\t*==========*`,
+  `.\t\t\t\t\t\t\t *+------+*
+\t\t\t\t\t\t\t  *|*\t\t\t*|*
+\t\t\t\t\t\t\t *O*\t\t\t*|*
+\t\t\t\t\t\t\t  *|*\t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t*|*
+\t\t\t\t\t\t*==========*`,
+  `.\t\t\t\t\t\t\t *+------+*
+\t\t\t\t\t\t\t  *|*\t\t\t*|*
+\t\t\t\t\t\t\t *O*\t\t\t*|*
+\t\t\t\t\t\t\t*/|*\t\t\t*|*
+\t\t\t\t\t\t\t\t\t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t*|*
+\t\t\t\t\t\t*==========*`,
+  `.\t\t\t\t\t\t\t *+------+*
+\t\t\t\t\t\t\t  *|*\t\t\t*|*
+\t\t\t\t\t\t\t *O*\t\t\t*|*
+\t\t\t\t\t\t\t*/|\\* \t\t*|*
+\t\t\t\t\t\t\t   \t\t\t*|*
+\t\t\t\t\t\t\t    \t\t\t*|*
+\t\t\t\t\t\t*==========*`,
+  `.\t\t\t\t\t\t\t *+------+*
+\t\t\t\t\t\t\t  *|* \t\t\t*|*
+\t\t\t\t\t\t\t *O* \t\t\t*|*
+\t\t\t\t\t\t\t*/|\\* \t\t*|*
+\t\t\t\t\t\t\t/  \t\t\t*|*
+\t\t\t\t\t\t\t    \t\t\t*|*
+\t\t\t\t\t\t*==========*`,
+  `.\t\t\t\t\t\t\t *+------+*
+\t\t\t\t\t\t\t  *|*\t\t\t*|*
+\t\t\t\t\t\t\t *O*\t\t\t*|*
+\t\t\t\t\t\t\t*/|\\* \t\t*|*
+\t\t\t\t\t\t\t*/* *\\* \t\t*|*
+\t\t\t\t\t\t\t    \t\t\t*|*
+\t\t\t\t\t\t*==========*`
 ]
 
 router.route('/facebook').post(async (req, res) => {
