@@ -70,53 +70,53 @@ async function mostrarAhorcado (
 
 const IMAGENES_AHORCADO = [
   `\n\n.\t\t\t\t\t\t\t *+------+*
-\t\t\t\t\t\t\t  *|*\t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t*|*
+\t\t\t\t\t\t\t  *|*\t\t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t\t*|*
 \t\t\t\t\t\t*==========*`,
   `.\t\t\t\t\t\t\t *+------+*
-\t\t\t\t\t\t\t  *|*\t\t\t*|*
-\t\t\t\t\t\t\t *O*\t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t*|*
+\t\t\t\t\t\t\t  *|*\t\t\t\t*|*
+\t\t\t\t\t\t\t *O*\t\t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t\t*|*
 \t\t\t\t\t\t*==========*`,
   `.\t\t\t\t\t\t\t *+------+*
-\t\t\t\t\t\t\t  *|*\t\t\t*|*
-\t\t\t\t\t\t\t *O*\t\t\t*|*
-\t\t\t\t\t\t\t  *|*\t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t*|*
+\t\t\t\t\t\t\t  *|*\t\t\t\t*|*
+\t\t\t\t\t\t\t *O*\t\t\t\t*|*
+\t\t\t\t\t\t\t  *|*\t\t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t\t*|*
 \t\t\t\t\t\t*==========*`,
   `.\t\t\t\t\t\t\t *+------+*
-\t\t\t\t\t\t\t  *|*\t\t\t*|*
-\t\t\t\t\t\t\t *O*\t\t\t*|*
-\t\t\t\t\t\t\t*/|*\t\t\t*|*
-\t\t\t\t\t\t\t\t\t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t*|*
+\t\t\t\t\t\t\t  *|*\t\t\t\t*|*
+\t\t\t\t\t\t\t *O*\t\t\t\t*|*
+\t\t\t\t\t\t\t*/|*\t\t\t\t*|*
+\t\t\t\t\t\t\t\t\t\t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t\t*|*
 \t\t\t\t\t\t*==========*`,
   `.\t\t\t\t\t\t\t *+------+*
-\t\t\t\t\t\t\t  *|*\t\t\t*|*
-\t\t\t\t\t\t\t *O*\t\t\t*|*
-\t\t\t\t\t\t\t*/|\\* \t\t*|*
-\t\t\t\t\t\t\t   \t\t\t*|*
-\t\t\t\t\t\t\t    \t\t\t*|*
+\t\t\t\t\t\t\t  *|*\t\t\t\t*|*
+\t\t\t\t\t\t\t *O*\t\t\t\t*|*
+\t\t\t\t\t\t\t*/|\\* \t\t\t*|*
+\t\t\t\t\t\t\t   \t\t\t\t*|*
+\t\t\t\t\t\t\t    \t\t\t\t*|*
 \t\t\t\t\t\t*==========*`,
   `.\t\t\t\t\t\t\t *+------+*
-\t\t\t\t\t\t\t  *|* \t\t\t*|*
-\t\t\t\t\t\t\t *O* \t\t\t*|*
-\t\t\t\t\t\t\t*/|\\* \t\t*|*
-\t\t\t\t\t\t\t/  \t\t\t*|*
-\t\t\t\t\t\t\t    \t\t\t*|*
+\t\t\t\t\t\t\t  *|* \t\t\t\t*|*
+\t\t\t\t\t\t\t *O* \t\t\t\t*|*
+\t\t\t\t\t\t\t*/|\\* \t\t\t*|*
+\t\t\t\t\t\t\t*/*  \t\t\t\t*|*
+\t\t\t\t\t\t\t    \t\t\t\t*|*
 \t\t\t\t\t\t*==========*`,
   `.\t\t\t\t\t\t\t *+------+*
-\t\t\t\t\t\t\t  *|*\t\t\t*|*
-\t\t\t\t\t\t\t *O*\t\t\t*|*
-\t\t\t\t\t\t\t*/|\\* \t\t*|*
-\t\t\t\t\t\t\t*/* *\\* \t\t*|*
-\t\t\t\t\t\t\t    \t\t\t*|*
+\t\t\t\t\t\t\t  *|*\t\t\t\t*|*
+\t\t\t\t\t\t\t *O*\t\t\t\t*|*
+\t\t\t\t\t\t\t*/|\\* \t\t\t*|*
+\t\t\t\t\t\t\t*/* *\\* \t\t\t*|*
+\t\t\t\t\t\t\t    \t\t\t\t*|*
 \t\t\t\t\t\t*==========*`
 ]
 
@@ -241,7 +241,7 @@ router.route('/facebook').post(async (req, res) => {
                 }
                 if (!palabraSecretaMensaje.includes('_')) {
                   // verifica que no existe un guion ya que cuando no haya ningun guion significa que la palabra esta completo
-                  aviso = `_Felicidades *${nombreUser}*!! Has completado la palabra (+100px)_.\nEscribe /siguiente para la proxima palabra o /salir para abandonar.`
+                  aviso = `*¡Felicidades *${nombreUser}*! Has completado +100px*.\nEscribe _/siguiente_ para la proxima palabra o _/salir_ para abandonar.`
                   gano = true
                 } else {
                   // en caso contrario solo a acertado una letra
@@ -259,7 +259,7 @@ router.route('/facebook').post(async (req, res) => {
               }
               if (errores === IMAGENES_AHORCADO.length - 1) {
                 // verifica el largo de las img's con los errores para ver si perdio
-                aviso = `_¡Perdiste!😪(-50px)._\nLa palabra secreta era: *${palabraSecreta}*.\nEscribe /siguiente para la proxima palabra o /salir para abandonar.`
+                aviso = `*¡Perdiste!😪 -50px.*\nLa palabra secreta era: *${palabraSecreta}*.\nEscribe _/siguiente_ para la proxima palabra o _/salir_ para abandonar.`
                 perdio = true
               } else {
                 aviso = '_¡Oh! Has fallado._'
