@@ -60,13 +60,12 @@ function formatearMensaje (msg) {
 function obtener_imagen_ahorcado (errores, aciertos, siAcerto) {
   let emoji
   if (siAcerto) {
-    aciertos--
     if (palabraSecreta.length === 5) {
-      emoji = EMOJIS.alegres[aciertos]
+      emoji = EMOJIS.alegres[aciertos - 1]
     } else {
-      emoji = EMOJIS.alegres2[aciertos]
+      emoji = EMOJIS.alegres2[aciertos - 1]
     }
-    if (aciertos == palabraSecreta.length) {
+    if (aciertos == palabraSecreta.length ) {
       emoji = '🥳'
     }
   } else {
