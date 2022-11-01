@@ -61,8 +61,6 @@ function formatearMensaje (msg) {
 }
 function obtener_imagen_ahorcado (errores, aciertos, siAcerto) {
   let emoji
-  errores--
-  aciertos--
   if (siAcerto) {
     if (palabraSecreta.length === 5) {
       emoji = EMOJIS.alegres[aciertos]
@@ -76,7 +74,7 @@ function obtener_imagen_ahorcado (errores, aciertos, siAcerto) {
     if (errores == EMOJIS.tristes1.length + 1) {
       emoji = '💀'
     } else {
-      emoji = EMOJIS.tristes1[errores]
+      emoji = EMOJIS.tristes1[errores - 1]
     }
   }
   const IMAGENES_AHORCADO = [
