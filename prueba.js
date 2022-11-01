@@ -53,6 +53,4 @@ const { AuthRegistrationsCredentialListMappingContext } = require("twilio/lib/re
 // \w -- es para cualquier letra o digito y guion bajo o tambien cualquier letra de una palabra
 // \W -- es para caracteres especiales o digitos
 
-let slaudo = "hola"
-
-console.log(slaudo.toLowerCase())
+let saludo = "hola"

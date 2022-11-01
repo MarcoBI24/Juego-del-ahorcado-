@@ -8,9 +8,17 @@ let jugando = false
 let perdio = false
 let gano = false
 let errores = 0
+let aciertos = 0
+let siAcerto = false
 let letrasErroneas = ''
 let palabraSecretaMensaje = ''
 let arrPalabraSecreta
+const EMOJIS = {
+  alegres: ['😀', '😃', '😄', '😎'], // para palabras de 5 letras
+  alegres2: ['😀', '😃', '😄'], // para palabras de 4 letras
+  tristes1: ['😟', '😥', '😨', '😰', '😭']
+}
+let nombreUser
 let urlPalabra = 'https://clientes.api.greenborn.com.ar/public-random-word?l=5'
 
 async function peticionPalabra () {
@@ -36,7 +44,6 @@ async function asignarVariables () {
   } while (expRegPalabras.test(palabraSecreta))
 }
 asignarVariables()
-let nombreUser
 // obtenerPalabra()
 function formatearMensaje (msg) {
   let mensajeGuionesTemp = '' // aqui da el espaciado al mensajeGuiones
@@ -51,14 +58,81 @@ function formatearMensaje (msg) {
   console.log(mensajeGuionesTemp)
   return mensajeGuionesTemp
 }
+function obtener_imagen_ahorcado (errores, aciertos, siAcerto) {
+  let emoji
+  if (siAcerto) {
+    if (palabraSecreta.length === 5) {
+      emoji = EMOJIS.alegres[aciertos]
+    } else {
+      emoji = EMOJIS.alegres2[aciertos]
+    }
+  } else {
+    emoji = EMOJIS.tristes1
+  }
+  const IMAGENES_AHORCADO = [
+    `\n\n.\t\t\t\t\t\t\t *+------+*
+  \t\t\t\t\t\t\t  *|*\t\t\t\t*|*
+  \t\t\t\t\t\t\t   \t\t\t\t*|*
+  \t\t\t\t\t\t\t   \t\t\t\t*|*
+  \t\t\t\t\t\t\t   \t\t\t\t*|*
+  \t\t\t\t\t\t\t   \t\t\t\t*|*
+  \t\t\t\t\t\t*==========*`,
+    `.\t\t\t\t\t\t\t *+------+*
+  \t\t\t\t\t\t\t  *|*\t\t\t\t*|*
+  \t\t\t\t\t\t\t *${emoji}*\t\t\t\t*|*
+  \t\t\t\t\t\t\t   \t\t\t\t*|*
+  \t\t\t\t\t\t\t   \t\t\t\t*|*
+  \t\t\t\t\t\t\t   \t\t\t\t*|*
+  \t\t\t\t\t\t*==========*`,
+    `.\t\t\t\t\t\t\t *+------+*
+  \t\t\t\t\t\t\t  *|*\t\t\t\t*|*
+  \t\t\t\t\t\t\t *${emoji}*\t\t\t\t*|*
+  \t\t\t\t\t\t\t  *|*\t\t\t\t*|*
+  \t\t\t\t\t\t\t   \t\t\t\t*|*
+  \t\t\t\t\t\t\t   \t\t\t\t*|*
+  \t\t\t\t\t\t*==========*`,
+    `.\t\t\t\t\t\t\t *+------+*
+  \t\t\t\t\t\t\t  *|*\t\t\t\t*|*
+  \t\t\t\t\t\t\t *${emoji}*\t\t\t\t*|*
+  \t\t\t\t\t\t\t*/|*\t\t\t\t*|*
+  \t\t\t\t\t\t\t\t\t\t\t\t*|*
+  \t\t\t\t\t\t\t   \t\t\t\t*|*
+  \t\t\t\t\t\t*==========*`,
+    `.\t\t\t\t\t\t\t *+------+*
+  \t\t\t\t\t\t\t  *|*\t\t\t\t*|*
+  \t\t\t\t\t\t\t *${emoji}*\t\t\t\t*|*
+  \t\t\t\t\t\t\t*/|\\* \t\t\t*|*
+  \t\t\t\t\t\t\t   \t\t\t\t*|*
+  \t\t\t\t\t\t\t    \t\t\t\t*|*
+  \t\t\t\t\t\t*==========*`,
+    `.\t\t\t\t\t\t\t *+------+*
+  \t\t\t\t\t\t\t  *|* \t\t\t\t*|*
+  \t\t\t\t\t\t\t *${emoji}* \t\t\t\t*|*
+  \t\t\t\t\t\t\t*/|\\* \t\t\t*|*
+  \t\t\t\t\t\t\t*/*  \t\t\t\t*|*
+  \t\t\t\t\t\t\t    \t\t\t\t*|*
+  \t\t\t\t\t\t*==========*`,
+    `.\t\t\t\t\t\t\t *+------+*
+  \t\t\t\t\t\t\t  *|*\t\t\t\t*|*
+  \t\t\t\t\t\t\t *${emoji}*\t\t\t\t*|*
+  \t\t\t\t\t\t\t*/|\\* \t\t\t*|*
+  \t\t\t\t\t\t\t*/* *\\* \t\t\t*|*
+  \t\t\t\t\t\t\t    \t\t\t\t*|*
+  \t\t\t\t\t\t*==========*`
+  ]
+
+  return IMAGENES_AHORCADO[errores]
+}
 async function mostrarAhorcado (
   letrasErroneas,
   errores,
+  aciertos,
+  siAcerto,
   palabraSecretaMensaje,
   aviso
 ) {
   let mensaje =
-    IMAGENES_AHORCADO[errores] +
+    obtener_imagen_ahorcado(errores, aciertos, siAcerto) +
     `\n\n` +
     `\t\t\t\t\t\t` +
     formatearMensaje(palabraSecretaMensaje) +
@@ -68,58 +142,7 @@ async function mostrarAhorcado (
   await enviarMensaje(null, mensaje) // se envia el mensaje
 }
 
-const IMAGENES_AHORCADO = [
-  `\n\n.\t\t\t\t\t\t\t *+------+*
-\t\t\t\t\t\t\t  *|*\t\t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t\t*|*
-\t\t\t\t\t\t*==========*`,
-  `.\t\t\t\t\t\t\t *+------+*
-\t\t\t\t\t\t\t  *|*\t\t\t\t*|*
-\t\t\t\t\t\t\t *O*\t\t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t\t*|*
-\t\t\t\t\t\t*==========*`,
-  `.\t\t\t\t\t\t\t *+------+*
-\t\t\t\t\t\t\t  *|*\t\t\t\t*|*
-\t\t\t\t\t\t\t *O*\t\t\t\t*|*
-\t\t\t\t\t\t\t  *|*\t\t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t\t*|*
-\t\t\t\t\t\t*==========*`,
-  `.\t\t\t\t\t\t\t *+------+*
-\t\t\t\t\t\t\t  *|*\t\t\t\t*|*
-\t\t\t\t\t\t\t *O*\t\t\t\t*|*
-\t\t\t\t\t\t\t*/|*\t\t\t\t*|*
-\t\t\t\t\t\t\t\t\t\t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t\t*|*
-\t\t\t\t\t\t*==========*`,
-  `.\t\t\t\t\t\t\t *+------+*
-\t\t\t\t\t\t\t  *|*\t\t\t\t*|*
-\t\t\t\t\t\t\t *O*\t\t\t\t*|*
-\t\t\t\t\t\t\t*/|\\* \t\t\t*|*
-\t\t\t\t\t\t\t   \t\t\t\t*|*
-\t\t\t\t\t\t\t    \t\t\t\t*|*
-\t\t\t\t\t\t*==========*`,
-  `.\t\t\t\t\t\t\t *+------+*
-\t\t\t\t\t\t\t  *|* \t\t\t\t*|*
-\t\t\t\t\t\t\t *O* \t\t\t\t*|*
-\t\t\t\t\t\t\t*/|\\* \t\t\t*|*
-\t\t\t\t\t\t\t*/*  \t\t\t\t*|*
-\t\t\t\t\t\t\t    \t\t\t\t*|*
-\t\t\t\t\t\t*==========*`,
-  `.\t\t\t\t\t\t\t *+------+*
-\t\t\t\t\t\t\t  *|*\t\t\t\t*|*
-\t\t\t\t\t\t\t *O*\t\t\t\t*|*
-\t\t\t\t\t\t\t*/|\\* \t\t\t*|*
-\t\t\t\t\t\t\t*/* *\\* \t\t\t*|*
-\t\t\t\t\t\t\t    \t\t\t\t*|*
-\t\t\t\t\t\t*==========*`
-]
-
+// hacer una variable con intento acertado que se asignara cada que ocurre un error o acierta y se validara cunaod se lanzara el emoji
 router.route('/facebook').post(async (req, res) => {
   // esta funcion espera el mensaje de whatsap
   if (palabraSecreta === '') {
@@ -148,7 +171,7 @@ router.route('/facebook').post(async (req, res) => {
             break
           }
         case '/menu':
-          if (jugando == false) {
+          if (!jugando) {
             await enviarMensaje('mostrar_opciones', null)
           } else {
             await enviarMensaje(null, 'Escribe /salir para abandonar el juego ')
@@ -168,12 +191,14 @@ router.route('/facebook').post(async (req, res) => {
             mensaje = ''
             break
           }
+
+          break
         case '/salir':
           if (jugando) {
             jugando = false
             await enviarMensaje(null, 'Saliste del juego.')
             await asignarVariables()
-          }else{
+          } else {
             await enviarMensaje(null, 'Comando no disponible.')
           }
           break
@@ -236,6 +261,7 @@ router.route('/facebook').post(async (req, res) => {
                 for (let i = 0; i < arrPalabraSecreta.length; i++) {
                   //  aqui se agregan las letras que son correctas
                   if (arrPalabraSecreta[i] === mensaje) {
+                    aciertos++
                     palabraSecretaMensaje[i] = arrPalabraSecreta[i]
                   }
                 }
@@ -246,6 +272,7 @@ router.route('/facebook').post(async (req, res) => {
                 } else {
                   // en caso contrario solo a acertado una letra
                   aviso = '_¡Genial! Has acertado._'
+                  siAcerto = false
                 }
               } else {
                 aviso = '_Mmmm... Esa letra ya existe._'
@@ -259,10 +286,11 @@ router.route('/facebook').post(async (req, res) => {
               }
               if (errores === IMAGENES_AHORCADO.length - 1) {
                 // verifica el largo de las img's con los errores para ver si perdio
-                aviso = `*¡Perdiste!😪 -50px.*\nLa palabra secreta era: *${palabraSecreta}*.\nEscribe _/siguiente_ para la proxima palabra o _/salir_ para abandonar.`
+                aviso = `*¡Perdiste! -50px.*\nLa palabra secreta era: *${palabraSecreta}*.\nEscribe _/siguiente_ para la proxima palabra o _/salir_ para abandonar.`
                 perdio = true
               } else {
                 aviso = '_¡Oh! Has fallado._'
+                siAcerto = false
               }
             }
             await mostrarAhorcado(
