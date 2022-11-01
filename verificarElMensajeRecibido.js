@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const enviarMensaje = require('./enviarMensaje')
 const fetch = require('node-fetch')
+const e = require('express')
 
 let palabraSecreta = ''
 let mensaje = ''
@@ -66,8 +67,15 @@ function obtener_imagen_ahorcado (errores, aciertos, siAcerto) {
     } else {
       emoji = EMOJIS.alegres2[aciertos]
     }
+    if (aciertos == palabraSecreta.length) {
+      emoji = '🥳'
+    }
   } else {
-    emoji = EMOJIS.tristes1
+    if (errores == EMOJIS.tristes1.length + 1) {
+      emoji = '💀'
+    } else {
+      emoji = EMOJIS.tristes1[errores]
+    }
   }
   const IMAGENES_AHORCADO = [
     `\n\n.\t\t\t\t\t\t\t *+------+*
@@ -291,7 +299,7 @@ router.route('/facebook').post(async (req, res) => {
                 // verifica que la letra erronea no se repita
                 letrasErroneas += mensaje
               }
-              if (errores === IMAGENES_AHORCADO.length - 1) {
+              if (errores === EMOJIS.tristes1.length + 1) {
                 // verifica el largo de las img's con los errores para ver si perdio
                 aviso = `*¡Perdiste! -50px.*\nLa palabra secreta era: *${palabraSecreta}*.\nEscribe _/siguiente_ para la proxima palabra o _/salir_ para abandonar.`
                 perdio = true
