@@ -34,6 +34,8 @@ async function asignarVariables () {
     palabraSecreta = res[0].toLowerCase()
     mensaje = ''
     errores = 0
+    aciertos = 0
+    siAcerto = false
     letrasErroneas = ''
     palabraSecretaMensaje = ''
     arrPalabraSecreta = palabraSecreta.split('')
@@ -59,13 +61,13 @@ function formatearMensaje (msg) {
 }
 function obtener_imagen_ahorcado (errores, aciertos, siAcerto) {
   let emoji
-  if (siAcerto) {
+  if (siAcerto == true) {
     if (palabraSecreta.length === 5) {
       emoji = EMOJIS.alegres[aciertos - 1]
     } else {
       emoji = EMOJIS.alegres2[aciertos - 1]
     }
-    if (aciertos == palabraSecreta.length ) {
+    if (aciertos == palabraSecreta.length) {
       emoji = '🥳'
     }
   } else {
@@ -151,7 +153,7 @@ async function mostrarAhorcado (
 // hacer una variable con intento acertado que se asignara cada que ocurre un error o acierta y se validara cunaod se lanzara el emoji
 router.route('/facebook').post(async (req, res) => {
   // esta funcion espera el mensaje de whatsap
-  console.log(palabraSecreta);
+  console.log(palabraSecreta)
   if (palabraSecreta === '') {
     asignarVariables()
   }
@@ -189,6 +191,8 @@ router.route('/facebook').post(async (req, res) => {
           break
         case 'jugar':
           if (!jugando) {
+            nombreUser =
+              req.body.entry[0].changes[0].value.contacts[0].profile.name
             jugando = true
             await mostrarAhorcado(
               letrasErroneas,
