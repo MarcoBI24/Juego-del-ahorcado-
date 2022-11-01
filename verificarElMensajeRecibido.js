@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const enviarMensaje = require('./enviarMensaje')
 const fetch = require('node-fetch')
-const e = require('express')
 
 let palabraSecreta = ''
 let mensaje = ''
@@ -45,7 +44,6 @@ async function asignarVariables () {
   } while (expRegPalabras.test(palabraSecreta))
 }
 asignarVariables()
-// obtenerPalabra()
 function formatearMensaje (msg) {
   let mensajeGuionesTemp = '' // aqui da el espaciado al mensajeGuiones
   for (let i = 0; i < msg.length; i++) {
@@ -68,7 +66,7 @@ function obtener_imagen_ahorcado (errores, aciertos, siAcerto) {
     } else {
       emoji = EMOJIS.alegres2[aciertos]
     }
-    if (aciertos == palabraSecreta.length) {
+    if (aciertos == palabraSecreta.length - 1) {
       emoji = '🥳'
     }
   } else {
@@ -284,7 +282,7 @@ router.route('/facebook').post(async (req, res) => {
                 }
                 if (!palabraSecretaMensaje.includes('_')) {
                   // verifica que no existe un guion ya que cuando no haya ningun guion significa que la palabra esta completo
-                  aviso = `*¡Felicidades *${nombreUser}*! Has completado +100px*.\nEscribe _/siguiente_ para la proxima palabra o _/salir_ para abandonar.`
+                  aviso = `*¡Felicidades ${nombreUser}*! Has completado +100px*.\nEscribe _/siguiente_ para la proxima palabra o _/salir_ para abandonar.`
                   gano = true
                 } else {
                   // en caso contrario solo a acertado una letra
