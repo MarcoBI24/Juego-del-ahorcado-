@@ -287,7 +287,7 @@ router.route('/facebook').post(async (req, res) => {
                 } else {
                   // en caso contrario solo a acertado una letra
                   aviso = '_¡Genial! Has acertado._'
-                  siAcerto = false
+                  siAcerto = true
                 }
               } else {
                 aviso = '_Mmmm... Esa letra ya existe._'
