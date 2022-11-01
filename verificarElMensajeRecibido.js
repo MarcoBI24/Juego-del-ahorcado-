@@ -170,6 +170,7 @@ router.route('/facebook').post(async (req, res) => {
             mensaje = ''
             break
           }
+          break
         case '/menu':
           if (!jugando) {
             await enviarMensaje('mostrar_opciones', null)
@@ -185,6 +186,8 @@ router.route('/facebook').post(async (req, res) => {
             await mostrarAhorcado(
               letrasErroneas,
               errores,
+              aciertos,
+              siAcerto,
               palabraSecretaMensaje,
               'Empezando...'
             )
@@ -208,6 +211,8 @@ router.route('/facebook').post(async (req, res) => {
               mostrarAhorcado(
                 letrasErroneas,
                 errores,
+                aciertos,
+                siAcerto,
                 palabraSecretaMensaje,
                 'Cambiando palabra...'
               )
@@ -223,6 +228,8 @@ router.route('/facebook').post(async (req, res) => {
               mostrarAhorcado(
                 letrasErroneas,
                 errores,
+                aciertos,
+                siAcerto,
                 palabraSecretaMensaje,
                 'Nueva palabra'
               )
@@ -296,6 +303,8 @@ router.route('/facebook').post(async (req, res) => {
             await mostrarAhorcado(
               letrasErroneas,
               errores,
+              aciertos,
+              siAcerto,
               palabraSecretaMensaje,
               aviso
             )
