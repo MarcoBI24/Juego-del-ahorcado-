@@ -61,6 +61,8 @@ function formatearMensaje (msg) {
 }
 function obtener_imagen_ahorcado (errores, aciertos, siAcerto) {
   let emoji
+  errores--
+  aciertos--
   if (siAcerto) {
     if (palabraSecreta.length === 5) {
       emoji = EMOJIS.alegres[aciertos]
@@ -87,42 +89,42 @@ function obtener_imagen_ahorcado (errores, aciertos, siAcerto) {
   \t\t\t\t\t\t*==========*`,
     `.\t\t\t\t\t\t\t *+------+*
   \t\t\t\t\t\t\t  *|*\t\t\t\t*|*
-  \t\t\t\t\t\t\t *${emoji}*\t\t\t\t*|*
+  \t\t\t\t\t\t  *${emoji}*\t\t\t\t*|*
   \t\t\t\t\t\t\t   \t\t\t\t*|*
   \t\t\t\t\t\t\t   \t\t\t\t*|*
   \t\t\t\t\t\t\t   \t\t\t\t*|*
   \t\t\t\t\t\t*==========*`,
     `.\t\t\t\t\t\t\t *+------+*
   \t\t\t\t\t\t\t  *|*\t\t\t\t*|*
-  \t\t\t\t\t\t\t *${emoji}*\t\t\t\t*|*
+  \t\t\t\t\t\t  *${emoji}*\t\t\t\t*|*
   \t\t\t\t\t\t\t  *|*\t\t\t\t*|*
   \t\t\t\t\t\t\t   \t\t\t\t*|*
   \t\t\t\t\t\t\t   \t\t\t\t*|*
   \t\t\t\t\t\t*==========*`,
     `.\t\t\t\t\t\t\t *+------+*
   \t\t\t\t\t\t\t  *|*\t\t\t\t*|*
-  \t\t\t\t\t\t\t *${emoji}*\t\t\t\t*|*
+  \t\t\t\t\t\t  *${emoji}*\t\t\t\t*|*
   \t\t\t\t\t\t\t*/|*\t\t\t\t*|*
   \t\t\t\t\t\t\t\t\t\t\t\t*|*
   \t\t\t\t\t\t\t   \t\t\t\t*|*
   \t\t\t\t\t\t*==========*`,
     `.\t\t\t\t\t\t\t *+------+*
   \t\t\t\t\t\t\t  *|*\t\t\t\t*|*
-  \t\t\t\t\t\t\t *${emoji}*\t\t\t\t*|*
+  \t\t\t\t\t\t  *${emoji}*\t\t\t\t*|*
   \t\t\t\t\t\t\t*/|\\* \t\t\t*|*
   \t\t\t\t\t\t\t   \t\t\t\t*|*
   \t\t\t\t\t\t\t    \t\t\t\t*|*
   \t\t\t\t\t\t*==========*`,
     `.\t\t\t\t\t\t\t *+------+*
   \t\t\t\t\t\t\t  *|* \t\t\t\t*|*
-  \t\t\t\t\t\t\t *${emoji}* \t\t\t\t*|*
+  \t\t\t\t\t\t  *${emoji}* \t\t\t\t*|*
   \t\t\t\t\t\t\t*/|\\* \t\t\t*|*
   \t\t\t\t\t\t\t*/*  \t\t\t\t*|*
   \t\t\t\t\t\t\t    \t\t\t\t*|*
   \t\t\t\t\t\t*==========*`,
     `.\t\t\t\t\t\t\t *+------+*
   \t\t\t\t\t\t\t  *|*\t\t\t\t*|*
-  \t\t\t\t\t\t\t *${emoji}*\t\t\t\t*|*
+  \t\t\t\t\t\t  *${emoji}*\t\t\t\t*|*
   \t\t\t\t\t\t\t*/|\\* \t\t\t*|*
   \t\t\t\t\t\t\t*/* *\\* \t\t\t*|*
   \t\t\t\t\t\t\t    \t\t\t\t*|*
@@ -300,7 +302,7 @@ router.route('/facebook').post(async (req, res) => {
                 letrasErroneas += mensaje
               }
               if (errores === EMOJIS.tristes1.length + 1) {
-                // verifica el largo de las img's con los errores para ver si perdio
+                // verifica el largo de los emojis tristes + 1(emoji final cuando pierde) con los errores para ver si perdio
                 aviso = `*¡Perdiste! -50px.*\nLa palabra secreta era: *${palabraSecreta}*.\nEscribe _/siguiente_ para la proxima palabra o _/salir_ para abandonar.`
                 perdio = true
               } else {
