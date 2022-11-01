@@ -62,6 +62,7 @@ function formatearMensaje (msg) {
 function obtener_imagen_ahorcado (errores, aciertos, siAcerto) {
   let emoji
   if (siAcerto) {
+    aciertos--
     if (palabraSecreta.length === 5) {
       emoji = EMOJIS.alegres[aciertos]
     } else {
@@ -153,6 +154,7 @@ async function mostrarAhorcado (
 // hacer una variable con intento acertado que se asignara cada que ocurre un error o acierta y se validara cunaod se lanzara el emoji
 router.route('/facebook').post(async (req, res) => {
   // esta funcion espera el mensaje de whatsap
+  console.log(palabraSecreta);
   if (palabraSecreta === '') {
     asignarVariables()
   }
