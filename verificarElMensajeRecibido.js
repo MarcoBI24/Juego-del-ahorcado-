@@ -66,7 +66,7 @@ function obtener_imagen_ahorcado (errores, aciertos, siAcerto) {
     } else {
       emoji = EMOJIS.alegres2[aciertos]
     }
-    if (aciertos == palabraSecreta.length - 1) {
+    if (aciertos == palabraSecreta.length) {
       emoji = '🥳'
     }
   } else {
@@ -284,6 +284,7 @@ router.route('/facebook').post(async (req, res) => {
                   // verifica que no existe un guion ya que cuando no haya ningun guion significa que la palabra esta completo
                   aviso = `*¡Felicidades ${nombreUser}*! Has completado +100px*.\nEscribe _/siguiente_ para la proxima palabra o _/salir_ para abandonar.`
                   gano = true
+                  siAcerto = true
                 } else {
                   // en caso contrario solo a acertado una letra
                   aviso = '_¡Genial! Has acertado._'
