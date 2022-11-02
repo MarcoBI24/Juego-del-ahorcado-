@@ -1,8 +1,12 @@
+// IDEAS:
+  // HACER UN BOTON PARA VER LA DEFINICION DE LA PALABRA
+  // CONECTAR CON LA IA PARA QUE CONVERSE
+
+
 const router = require('express').Router()
 const enviarMensaje = require('./enviarMensaje')
 const fetch = require('node-fetch')
 const dotenv = require("dotenv").config()
-
 let palabraSecreta = ''
 let mensaje = ''
 let jugando = false

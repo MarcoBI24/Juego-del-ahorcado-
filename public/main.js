@@ -176,18 +176,24 @@ function validarInput (e) {
     case 'numero':
       // validar que solo ingrese numeros
       if (e.type == 'keyup') {
-        const formato = '000-000-000'
-        let numero = INPUT.value
-        // 899215151
-        let numeroFormateado = ''
-        for (let i = 0; i < numero.length; i++) {
-          if (formato[i] !== '-') {
-            numeroFormateado += numero[i]
+        const formato = '000-000-000' // form
+                      // 123-45-789 num
+                      // 123-457 89 numFor
+        let numero = INPUT.value.split("-").join("")
+        let posicion = 0;
+        let contador = 0;
+        let numeroFormateado = '';
+        while(posicion < formato.length && contador < numero.length) {
+          if(formato[posicion] === '0') {
+            numeroFormateado += numero[contador];
+            contador++;
           } else {
-            numeroFormateado += '-'
+            numeroFormateado += formato[posicion];
           }
+          posicion++;
         }
         INPUT.value = numeroFormateado
+        console.log(INPUT.value);
       }
       break
     default:
