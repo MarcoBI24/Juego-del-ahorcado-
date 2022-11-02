@@ -92,42 +92,42 @@ function obtener_imagen_ahorcado (errores, aciertos, intentoAcertado) {
   \t\t\t\t\t\t\t   \t\t\t\t*|*
   \t\t\t\t\t\t\t   \t\t\t\t*|*
   \t\t\t\t\t\t\t   \t\t\t\t*|*
-  \t\t\t\t\t\t*==========*`,
+  \t\t\t\t\t\t*===========*`,
     `.\t\t\t\t\t\t\t *+------+*
   \t\t\t\t\t\t\t  *|*\t\t\t\t*|*
   \t\t\t\t\t\t  *${emoji}*\t\t\t\t*|*
   \t\t\t\t\t\t\t  *|*\t\t\t\t*|*
   \t\t\t\t\t\t\t   \t\t\t\t*|*
   \t\t\t\t\t\t\t   \t\t\t\t*|*
-  \t\t\t\t\t\t*==========*`,
+  \t\t\t\t\t\t*===========*`,
     `.\t\t\t\t\t\t\t *+------+*
   \t\t\t\t\t\t\t  *|*\t\t\t\t*|*
   \t\t\t\t\t\t  *${emoji}*\t\t\t\t*|*
   \t\t\t\t\t\t\t*/|*\t\t\t\t*|*
   \t\t\t\t\t\t\t\t\t\t\t\t*|*
   \t\t\t\t\t\t\t   \t\t\t\t*|*
-  \t\t\t\t\t\t*==========*`,
+  \t\t\t\t\t\t*===========*`,
     `.\t\t\t\t\t\t\t *+------+*
   \t\t\t\t\t\t\t  *|*\t\t\t\t*|*
   \t\t\t\t\t\t  *${emoji}*\t\t\t\t*|*
   \t\t\t\t\t\t\t*/|\\* \t\t\t*|*
   \t\t\t\t\t\t\t   \t\t\t\t*|*
   \t\t\t\t\t\t\t    \t\t\t\t*|*
-  \t\t\t\t\t\t*==========*`,
+  \t\t\t\t\t\t*===========*`,
     `.\t\t\t\t\t\t\t *+------+*
   \t\t\t\t\t\t\t  *|* \t\t\t\t*|*
   \t\t\t\t\t\t  *${emoji}* \t\t\t\t*|*
   \t\t\t\t\t\t\t*/|\\* \t\t\t*|*
   \t\t\t\t\t\t\t*/*  \t\t\t\t*|*
   \t\t\t\t\t\t\t    \t\t\t\t*|*
-  \t\t\t\t\t\t*==========*`,
+  \t\t\t\t\t\t*===========*`,
     `.\t\t\t\t\t\t\t *+------+*
   \t\t\t\t\t\t\t  *|*\t\t\t\t*|*
   \t\t\t\t\t\t  *${emoji}*\t\t\t\t*|*
   \t\t\t\t\t\t\t*/|\\* \t\t\t*|*
   \t\t\t\t\t\t\t*/* *\\* \t\t\t*|*
   \t\t\t\t\t\t\t    \t\t\t\t*|*
-  \t\t\t\t\t\t*==========*`
+  \t\t\t\t\t\t*===========*`
   ]
 
   return IMAGENES_AHORCADO[errores]
