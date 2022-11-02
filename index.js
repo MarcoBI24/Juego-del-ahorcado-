@@ -13,7 +13,7 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 
 
 app.post('/', require('./enviarMensajeWhatsapp'))
-// app.use('/', require('./routes')) // esto es para enviar el correo
+app.use('/', require('./routes')) // esto es para enviar el correo
 app.get('/facebook', require('./verificarTokenWhatsapp')) // esta funcion verifica el token
 
 app.post('/facebook', require("./verificarElMensajeRecibido"))
