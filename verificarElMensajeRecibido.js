@@ -143,7 +143,7 @@ async function mostrarAhorcado (
   let mensaje =
     obtener_imagen_ahorcado(errores, aciertos, intentoAcertado) +
     `\n\n` +
-    `\t\t\t\t\t\t\t` +
+    `\t\t\t\t\t\t\t\t` +
     `*${formatearMensaje(palabraSecretaMensaje).toUpperCase()}*` +
     `\n\n` +
     `_Letras erróneas:_ ${formatearMensaje(letrasErroneas)}`
