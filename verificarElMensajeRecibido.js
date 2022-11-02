@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const enviarMensaje = require('./enviarMensaje')
 const fetch = require('node-fetch')
+const dotenv = require("dotenv").config()
 
 let palabraSecreta = ''
 let mensaje = ''
@@ -9,7 +10,7 @@ let perdio = false
 let gano = false
 let errores = 0
 let aciertos = 0
-let siAcerto = false
+let intentoAcertado = false
 let letrasErroneas = ''
 let palabraSecretaMensaje = ''
 let arrPalabraSecreta
@@ -18,8 +19,7 @@ const EMOJIS = {
   alegres2: ['😀', '😃', '😄'], // para palabras de 4 letras
   tristes1: ['😟', '😥', '😨', '😰', '😭']
 }
-let nombreUser
-let urlPalabra = 'https://clientes.api.greenborn.com.ar/public-random-word?l=5'
+let urlPalabra = process.env.URLPALABRA
 
 async function peticionPalabra () {
   let peticion = await fetch(urlPalabra)
@@ -30,12 +30,12 @@ async function peticionPalabra () {
 async function asignarVariables () {
   let expRegPalabras = /\w*?[áéíóú]+\w*/
   do {
-    let res = await peticionPalabra()
+    let res = await peticionPalabra() // recibe una res en forma de array con un solo elemento
     palabraSecreta = res[0].toLowerCase()
     mensaje = ''
     errores = 0
     aciertos = 0
-    siAcerto = false
+    intentoAcertado = false
     letrasErroneas = ''
     palabraSecretaMensaje = ''
     arrPalabraSecreta = palabraSecreta.split('')
@@ -46,6 +46,8 @@ async function asignarVariables () {
   } while (expRegPalabras.test(palabraSecreta))
 }
 asignarVariables()
+let nombreUser
+
 function formatearMensaje (msg) {
   let mensajeGuionesTemp = '' // aqui da el espaciado al mensajeGuiones
   for (let i = 0; i < msg.length; i++) {
@@ -56,12 +58,11 @@ function formatearMensaje (msg) {
       mensajeGuionesTemp += `${msg[i]} `
     }
   }
-  console.log(mensajeGuionesTemp)
   return mensajeGuionesTemp
 }
-function obtener_imagen_ahorcado (errores, aciertos, siAcerto) {
+function obtener_imagen_ahorcado (errores, aciertos, intentoAcertado) {
   let emoji
-  if (siAcerto == true) {
+  if (intentoAcertado == true) {
     if (palabraSecreta.length === 5) {
       emoji = EMOJIS.alegres[aciertos - 1]
     } else {
@@ -135,15 +136,15 @@ async function mostrarAhorcado (
   letrasErroneas,
   errores,
   aciertos,
-  siAcerto,
+  intentoAcertado,
   palabraSecretaMensaje,
   aviso
 ) {
   let mensaje =
-    obtener_imagen_ahorcado(errores, aciertos, siAcerto) +
+    obtener_imagen_ahorcado(errores, aciertos, intentoAcertado) +
     `\n\n` +
-    `\t\t\t\t\t\t` +
-    formatearMensaje(palabraSecretaMensaje) +
+    `\t\t\t\t\t\t\t` +
+    `*${formatearMensaje(palabraSecretaMensaje).toUpperCase()}*` +
     `\n\n` +
     `_Letras erróneas:_ ${formatearMensaje(letrasErroneas)}`
   await enviarMensaje(null, aviso)
@@ -198,7 +199,7 @@ router.route('/facebook').post(async (req, res) => {
               letrasErroneas,
               errores,
               aciertos,
-              siAcerto,
+              intentoAcertado,
               palabraSecretaMensaje,
               'Empezando...'
             )
@@ -223,7 +224,7 @@ router.route('/facebook').post(async (req, res) => {
                 letrasErroneas,
                 errores,
                 aciertos,
-                siAcerto,
+                intentoAcertado,
                 palabraSecretaMensaje,
                 'Cambiando palabra...'
               )
@@ -240,7 +241,7 @@ router.route('/facebook').post(async (req, res) => {
                 letrasErroneas,
                 errores,
                 aciertos,
-                siAcerto,
+                intentoAcertado,
                 palabraSecretaMensaje,
                 'Nueva palabra'
               )
@@ -287,11 +288,11 @@ router.route('/facebook').post(async (req, res) => {
                   // verifica que no existe un guion ya que cuando no haya ningun guion significa que la palabra esta completo
                   aviso = `*¡Felicidades ${nombreUser}*! Has completado +100px*.\nEscribe _/siguiente_ para la proxima palabra o _/salir_ para abandonar.`
                   gano = true
-                  siAcerto = true
+                  intentoAcertado = true
                 } else {
                   // en caso contrario solo a acertado una letra
                   aviso = '_¡Genial! Has acertado._'
-                  siAcerto = true
+                  intentoAcertado = true
                 }
               } else {
                 aviso = '_Mmmm... Esa letra ya existe._'
@@ -309,14 +310,14 @@ router.route('/facebook').post(async (req, res) => {
                 perdio = true
               } else {
                 aviso = '_¡Oh! Has fallado._'
-                siAcerto = false
+                intentoAcertado = false
               }
             }
             await mostrarAhorcado(
               letrasErroneas,
               errores,
               aciertos,
-              siAcerto,
+              intentoAcertado,
               palabraSecretaMensaje,
               aviso
             )
