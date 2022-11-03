@@ -17,7 +17,7 @@ const btnsCerrarContenedorIdentificacion = document.querySelectorAll(
 )
 const btnRegistrarseModal = $('btn-registro')
 const btnLogearModal = $('btn-login')
-// LOS 2 SIGUIENTES CONSTANTES SIRVEN PARA HACER LA ANIMACION DE LOS INPUTS AL ESCRIBIR
+
 const inputLogins = document.querySelectorAll('.input')
 const labelDelInputLogin = document.querySelectorAll('.label-text')
 let imgTemp = new Image()
