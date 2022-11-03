@@ -35,6 +35,8 @@ async function asignarVariables () {
   let expRegPalabras = /\w*?[áéíóú]+\w*/
   do {
     let res = await peticionPalabra() // recibe una res en forma de array con un solo elemento
+    gano = false
+    perdio = false
     palabraSecreta = res[0].toLowerCase()
     mensaje = ''
     errores = 0
