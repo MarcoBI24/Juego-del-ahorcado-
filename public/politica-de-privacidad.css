@@ -1,0 +1,21 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    padding: 10px;
+    background-color: rgb(241, 241, 241);
+}
+.contenedor-general{
+    width: 100%;
+    max-width: 750px;
+    display: flex;
+    margin: auto;
+    padding: 40px;
+    gap: 20px;
+    flex-direction: column;
+    border: 3px solid white;
+    border-radius: 10px;
+    box-shadow: 5px 10px 20px 2px rgb(158, 158, 158);
+}

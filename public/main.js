@@ -1,6 +1,7 @@
 const $ = id => {
   return document.getElementById(id)
 }
+
 const btnStart = $('start-game')
 const btnAddWord = $('add-word')
 const btnLogros = $('clasification')
@@ -16,7 +17,7 @@ const btnsCerrarContenedorIdentificacion = document.querySelectorAll(
 )
 const btnRegistrarseModal = $('btn-registro')
 const btnLogearModal = $('btn-login')
-// LOS 2 SIGUIENTES CONSTANTES SIRVEN PARA HACER LA ANIMACION DE LOS INPUTS AL ESCRIBIR
+
 const inputLogins = document.querySelectorAll('.input')
 const labelDelInputLogin = document.querySelectorAll('.label-text')
 let imgTemp = new Image()
@@ -176,17 +177,21 @@ function validarInput (e) {
       // validar que solo ingrese numeros
       if (e.type == 'keyup') {
         const formato = '000-000-000'
-        let numero = INPUT.value
-        // 899215151
-        let numeroFormateado = ''
-        for (let i = 0; i < numero.length; i++) {
-          if (formato[i] !== '-') {
-            numeroFormateado += numero[i]
+        let numero = INPUT.value.split("-").join("")
+        let posicion = 0;
+        let contador = 0;
+        let numeroFormateado = '';
+        while(posicion < formato.length && contador < numero.length) {
+          if(formato[posicion] === '0') {
+            numeroFormateado += numero[contador];
+            contador++;
           } else {
-            numeroFormateado += '-'
+            numeroFormateado += formato[posicion];
           }
+          posicion++;
         }
         INPUT.value = numeroFormateado
+        console.log(INPUT.value);
       }
       break
     default:
@@ -246,7 +251,7 @@ function init () {
     let contraseña = inputContraseñaLogin.value
     iniciarSesión(nombre, contraseña)
   }
-  
+
   btnStart.onclick = () => {
     if (USUARIO == undefined) {
       mostrarLogin()

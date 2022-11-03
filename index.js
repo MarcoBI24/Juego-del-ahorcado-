@@ -5,24 +5,17 @@ const express = require('express')
 const path = require('path')
 const body_parser = require('body-parser')
 const app = express().use(body_parser.json())
+var xhub = require('express-x-hub')
+app.use(xhub({ algorithm: 'sha1', secret: process.env.CODEWAS }))
 // const request = require("request")
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 app.use('/', express.static(path.join(__dirname, 'public')))
-// app.use('/', require('./routes'))
-app.get('/facebook', require("./verificarTokenWhatsapp"))
+
+
+app.post('/', require('./enviarMensajeWhatsapp'))
+app.use('/', require('./routes')) // esto es para enviar el correo
+app.get('/facebook', require('./verificarTokenWhatsapp')) // esta funcion verifica el token
+
+app.post('/facebook', require("./verificarElMensajeRecibido"))
+
 app.listen(process.env.PORT || 3000)
-// app.listen(, () => console.log('Se prendio la máquina'))
-
-// links:
-
-/*
-https://console.twilio.com/?frameUrl=%2Fconsole%3Fx-target-region%3Dus1
-https://www.twilio.com/es-mx/docs/sms/api/message-resource
-https://www.twilio.com/es-mx/docs/sms/api/message-resource
-https://www.twilio.com/es-mx/docs/messaging/twiml
-
-
-https://intl-tel-input.com/node_modules/intl-tel-input/examples/gen/country-sync.html
-https://www.twilio.com/blog/validate-phone-number-input
-https://github.com/jackocnr/intl-tel-input#features
-*/

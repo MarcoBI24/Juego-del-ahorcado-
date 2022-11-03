@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,20 +8,26 @@
     <title>chat</title>
     <link rel="stylesheet" href="./chat.css">
 </head>
+
 <body>
     <di class="contenedor-general">
 
         <div class="contenedor-mensajes">
             <span class="mensaje">Hola</span>
         </div>
-        <form action="">
-            <input type="text" id="input-mensaje">
-            <input type="submit" value="Enviar">
+        <form action="/" method="post">
+            <input type="text" id="input-mensaje" name="mensaje">
+            <input type="submit" value="Enviar" id="btn">
 
         </form>
-
+        <object type="text/html"
+            data="https://juegodel-ahorcado.herokuapp.com/chat"
+            style="width: 425px; height:350px;">
+            ERROR (no puede mostrarse el objeto)
+        </object>
     </di>
 
     <script src="./chat.js"></script>
 </body>
+
 </html>
