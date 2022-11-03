@@ -176,9 +176,7 @@ function validarInput (e) {
     case 'numero':
       // validar que solo ingrese numeros
       if (e.type == 'keyup') {
-        const formato = '000-000-000' // form
-                      // 123-45-789 num
-                      // 123-457 89 numFor
+        const formato = '000-000-000'
         let numero = INPUT.value.split("-").join("")
         let posicion = 0;
         let contador = 0;
