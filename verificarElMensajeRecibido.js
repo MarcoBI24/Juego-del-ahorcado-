@@ -211,6 +211,8 @@ router.route('/facebook').post(async (req, res) => {
             )
             mensaje = ''
             break
+          }else{
+            await enviarMensaje(null, "Comando no disponible.")
           }
 
           break

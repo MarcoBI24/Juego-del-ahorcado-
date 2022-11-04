@@ -1,7 +1,8 @@
 const $ = id => {
   return document.getElementById(id)
 }
-
+// import intlTelInput from "./intl-tel-input/build/js/intlTelInput.js"
+// intlTelInput
 const btnStart = $('start-game')
 const btnAddWord = $('add-word')
 const btnLogros = $('clasification')
@@ -35,8 +36,11 @@ const inputNombreUsuarioRegister = $('nombre-usuario')
 const inputContraseñaUsuarioRegister = $('contraseña-usuario')
 const inputContraseña2Usuario = $('contraseña2-usuario')
 const inputCorreoUsuario = $('correo-usuario')
+const inputNumeroUsuario = $('numero-usuario')
+
 const btnRegistrarUsuario = $('registrarse-form')
 const btnIniciarSesionUsuario = $('login-form')
+
 const inputNombreUsuarioLogin = $('nombre-usuario-login')
 const inputContraseñaLogin = $('contraseña-login')
 const porcentajeText = $('porcentaje')
@@ -48,7 +52,28 @@ let expRegMinusYMayus = /^(?=[a-zA-Z])(?=.*[a-z][A-Z]+|.*[A-Z][a-z]+)[a-zA-Z]+$/
 let expRegNombreUsuario = /^[a-zA-Z0-9ü][a-zA-Z0-9ü_]{3,16}$/
 let letrasIncorrectas = 0
 let letrasCorrectas = 0
-
+let formato = ''
+window.intlTelInput(inputNumeroUsuario, {
+  initialCountry: 'PE',
+  utilsScript: './intl-tel-input/build/js/utils.js',
+  customPlaceholder: function (
+    selectedCountryPlaceholder,
+    selectedCountryData
+  ) {
+    formato = ''
+    let numeros = '0123456789'
+    console.log(selectedCountryPlaceholder)
+    for (let i = 0; i < selectedCountryPlaceholder.length; i++) {
+      if (numeros.includes(selectedCountryPlaceholder[i])) {
+        formato += '0'
+      } else {
+        formato += selectedCountryPlaceholder[i]
+      }
+    }
+    console.log(formato)
+    return selectedCountryPlaceholder
+  }
+})
 // Logear el usuario
 // obtener datos del usuario (nombre de usuario,contraseña, foto )
 //  de ahi guarda en un objeto llamado usuario que tenga NOMBRE, CONTRASEÑA, URL DE LA FOTO(guardar todas las que usó anterior mente y mostrarla en la galeria), RECORD, MELLADA, configuracion, palabras Y SI ESTA LOGEADO
@@ -175,23 +200,52 @@ function validarInput (e) {
       break
     case 'numero':
       // validar que solo ingrese numeros
-      if (e.type == 'keyup') {
-        const formato = '000-000-000'
-        let numero = INPUT.value.split("-").join("")
-        let posicion = 0;
-        let contador = 0;
-        let numeroFormateado = '';
-        while(posicion < formato.length && contador < numero.length) {
-          if(formato[posicion] === '0') {
-            numeroFormateado += numero[contador];
-            contador++;
+      if (e.type == 'keydown') {
+        let numeros = '0123456789'
+        // let numTemp = ""
+        // let numero = INPUT.value // elimina los
+        // for (let i = 0; i < numero.length; i++) {
+        //     if (numeros.includes(numero[i])) {
+        //         numTemp += numero[i]
+        //     }
+        // }
+        // 123 4
+        //  000.000.000
+        let numero = INPUT.value
+        let posicion = 0
+        let contador = 0
+        let numeroFormateado = ''
+        while (posicion < formato.length && contador < numero.length) {
+
+          let coincide = false     
+          /// contador 8
+          /// posicion 6}8
+          if (formato[posicion] === '0') {
+            numeroFormateado += numero[contador]
+            contador++
+            coincide = true
           } else {
-            numeroFormateado += formato[posicion];
+            numeroFormateado += formato[posicion]
           }
-          posicion++;
+          posicion++
+          
+          if (
+            coincide === false &&
+            numero[contador + 1] !== undefined &&
+            numeros.includes(numero[contador + 1])
+          ) {
+            contador++
+          } else if (
+            coincide == true &&
+            numero[contador] !== undefined &&
+            !numeros.includes(numero[contador])
+          ) {
+            contador++
+          }
         }
+
         INPUT.value = numeroFormateado
-        console.log(INPUT.value);
+        console.log(INPUT.value)
       }
       break
     default:
