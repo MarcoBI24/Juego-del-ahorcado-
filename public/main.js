@@ -74,6 +74,10 @@ window.intlTelInput(inputNumeroUsuario, {
     return selectedCountryPlaceholder
   }
 })
+inputNumeroUsuario.addEventListener("countrychange", function () {
+  // do something with iti.getSelectedCountryData()
+  console.log("funciona!!!!");
+});
 // Logear el usuario
 // obtener datos del usuario (nombre de usuario,contraseña, foto )
 //  de ahi guarda en un objeto llamado usuario que tenga NOMBRE, CONTRASEÑA, URL DE LA FOTO(guardar todas las que usó anterior mente y mostrarla en la galeria), RECORD, MELLADA, configuracion, palabras Y SI ESTA LOGEADO
@@ -108,9 +112,10 @@ window.intlTelInput(inputNumeroUsuario, {
 // en caso no exista :: no habra nada que asignar a la Constante USUARIO entonces quedara en undefined y hacer lo que conviene en cada parte de la aplicacion
 // En caso no exista el array se tiene que crear un array vacio llamado Usuarios y se hará lo mismo que se hace cuando no existe un usuario logeado
 
-function validarInput (e) {
+function validarInput(e) {
   const INPUT = e.target
-  if (INPUT.value == '' || INPUT.value.length === 0) {
+
+  if (e.key !== "Backspace" && e.type === "keyup" && (INPUT.value == '' || INPUT.value.length === 0)) {
     alertarError(INPUT, '')
     return
   }
@@ -200,8 +205,7 @@ function validarInput (e) {
       break
     case 'numero':
       // validar que solo ingrese numeros
-      if (e.type == 'keydown') {
-        let numeros = '0123456789'
+      if (e.type == 'keyup') {
         // let numTemp = ""
         // let numero = INPUT.value // elimina los
         // for (let i = 0; i < numero.length; i++) {
@@ -211,40 +215,11 @@ function validarInput (e) {
         // }
         // 123 4
         //  000.000.000
+
         let numero = INPUT.value
-        let posicion = 0
-        let contador = 0
-        let numeroFormateado = ''
-        while (posicion < formato.length && contador < numero.length) {
 
-          let coincide = false     
-          /// contador 8
-          /// posicion 6}8
-          if (formato[posicion] === '0') {
-            numeroFormateado += numero[contador]
-            contador++
-            coincide = true
-          } else {
-            numeroFormateado += formato[posicion]
-          }
-          posicion++
-          
-          if (
-            coincide === false &&
-            numero[contador + 1] !== undefined &&
-            numeros.includes(numero[contador + 1])
-          ) {
-            contador++
-          } else if (
-            coincide == true &&
-            numero[contador] !== undefined &&
-            !numeros.includes(numero[contador])
-          ) {
-            contador++
-          }
-        }
 
-        INPUT.value = numeroFormateado
+        INPUT.value = formatearNumero(numero, formato)
         console.log(INPUT.value)
       }
       break
@@ -252,8 +227,59 @@ function validarInput (e) {
       break
   }
 }
+function formatearNumero(numero, formato) {
+  let numeros = '0123456789'
+  let posicion = 0
+  let contador = 0
+  let numeroFormateado = ''
+  let coincidido = false
 
-function init () {
+  while (posicion < formato.length && contador < numero.length) {
+
+    /// contador 0
+    /// posicion 1
+    /// (12
+    if (formato[posicion] === '0') {
+      // se espera que el proximo se un numero
+      if (coincidido) { // si ha coincidido
+
+      } else { /// el numero en la posicion si es un numero
+        if (numero[contador + 1] !== undefined && numeros.includes(numero[contador + 1])) {
+          if (numeros.includes(numero[contador])) {
+
+          } else {
+
+            contador++
+          }
+        }
+      }
+    } else {
+      // no se espera un numero
+      if (coincidido) { // si ha coincidido
+        if (numero[contador] !== undefined && !numeros.includes(numero[contador])) {
+          contador++
+        }
+      } else { //  si no ha coincidido
+        if (numero[contador + 1] !== undefined && !numeros.includes(numero[contador + 1])) {
+          contador++
+        }
+      }
+    }
+    if (formato[posicion] === '0') {
+      numeroFormateado += numero[contador]
+      contador++
+      coincidido = true
+    } else {
+      numeroFormateado += formato[posicion]
+      coincidido = false
+    }
+    posicion++
+
+
+  }
+  return numeroFormateado
+}
+function init() {
   inputLogins.forEach(input => {
     input.onkeydown = validarInput
     input.onkeyup = validarInput
@@ -406,7 +432,7 @@ window.onload = () => {
 }
 
 // hacer el porcentaje que cuando esta desordenado
-function verificarSiLasContraseñaCoincide () {
+function verificarSiLasContraseñaCoincide() {
   const contraseña1 = inputContraseñaUsuarioRegister.value
   const contraseña2 = inputContraseña2Usuario.value
   if (contraseña2 == '') {
@@ -435,12 +461,12 @@ function verificarSiLasContraseñaCoincide () {
   }
 }
 
-function obtenerPorcentaje (numero, numeroBase) {
+function obtenerPorcentaje(numero, numeroBase) {
   // let vBase = numeroBase / 100
   let calculo = (numero / numeroBase) * 100
   return `${Math.round(calculo)}%`
 }
-function verificarSiEsMinusculaOMayuscula (contraseña) {
+function verificarSiEsMinusculaOMayuscula(contraseña) {
   if (
     expRegMayuscula.test(contraseña) ||
     expRegMinusYMayus.test(contraseña) ||
@@ -450,7 +476,7 @@ function verificarSiEsMinusculaOMayuscula (contraseña) {
   }
   return false
 }
-function validarContraseña (contraseña, INPUT) {
+function validarContraseña(contraseña, INPUT) {
   const length = contraseña.length
 
   if (length <= 20 && length >= 15) {
@@ -557,7 +583,7 @@ function validarContraseña (contraseña, INPUT) {
                 */
 }
 
-function verificarYAlertarInputs (inputs) {
+function verificarYAlertarInputs(inputs) {
   let inputsVacios = inputs.filter(input => input.value === '')
   let inputsInvalidos = inputs.filter(input => input.dataset.valid === 'false')
   if (inputsVacios.length === 0 && inputsInvalidos.length === 0) {
@@ -571,7 +597,7 @@ function verificarYAlertarInputs (inputs) {
   })
 }
 
-function iniciarSesión (nombreDeUsuario, contraseña) {
+function iniciarSesión(nombreDeUsuario, contraseña) {
   // esta funcion debe buscar el usuario en el array de USUARIOS y verificar la contraseña y el nombre de usuario
   USUARIOS.forEach(usuario => {
     if (
@@ -583,7 +609,8 @@ function iniciarSesión (nombreDeUsuario, contraseña) {
   })
 }
 
-function alertarError (input, errorMessage) {
+function alertarError(input, errorMessage) {
+  console.log(input);
   input.nextElementSibling.className = 'icon-cross'
   input.nextElementSibling.id = 'icono-input-invalid'
   input.parentElement.style.border = '3px solid #F20530'
@@ -592,7 +619,7 @@ function alertarError (input, errorMessage) {
   input.parentElement.nextElementSibling.innerHTML = errorMessage
 }
 
-function alertarInputValid (input, color = '#0BD904', mensaje = '') {
+function alertarInputValid(input, color = '#0BD904', mensaje = '') {
   input.nextElementSibling.setAttribute('id', 'icono-input-valid')
   input.nextElementSibling.className = 'icon-checkmark'
   input.nextElementSibling.style.background = color
@@ -600,7 +627,7 @@ function alertarInputValid (input, color = '#0BD904', mensaje = '') {
   input.parentElement.style.border = `3px solid ${color}`
   // aqui crear un span con un icono de check y darle color verde al border del contenedor
 }
-function verificarNombre (nombre) {
+function verificarNombre(nombre) {
   let existe = false
   USUARIOS.forEach(usuario => {
     if (usuario.nombre === nombre) {
@@ -617,7 +644,7 @@ function verificarNombre (nombre) {
   }
 }
 
-function recortarImg (element) {
+function recortarImg(element) {
   let parametros = crop.getValue()
   // console.log(parametros);
   canvas.width = parametros.width
@@ -636,7 +663,7 @@ function recortarImg (element) {
   )
 }
 
-function queSeMuestrenConUnClickLosItemDeLaGaleria (e) {
+function queSeMuestrenConUnClickLosItemDeLaGaleria(e) {
   let img = e.target
   imagenPorDefecto.src = img.src
 
@@ -651,7 +678,7 @@ function queSeMuestrenConUnClickLosItemDeLaGaleria (e) {
   img.style.filter = 'grayscale(100%)'
 }
 
-function cargarImagenesDeLaGaleria () {
+function cargarImagenesDeLaGaleria() {
   for (let i = 1; i <= 31; i++) {
     let img = document.createElement('img')
     img.src = `./galeria/user-${i}.jpg`
@@ -660,18 +687,18 @@ function cargarImagenesDeLaGaleria () {
     img.onclick = queSeMuestrenConUnClickLosItemDeLaGaleria
   }
 }
-function mostrarLogin () {
+function mostrarLogin() {
   contenedorGeneral.style.filter = 'blur(4px)'
   let heigthContenedor = contenedorIdentificacion.clientHeight
   window.scrollBy(0, -window.scrollY)
   contenedorIdentificacion.style.top = `calc(50vh - ${heigthContenedor / 2}px)`
 }
-function cerrarLogin () {
+function cerrarLogin() {
   contenedorGeneral.style.filter = 'blur(0px)'
   contenedorIdentificacion.style.top = `-100%`
 }
 
-function mostrarContraseña () {
+function mostrarContraseña() {
   const btnsChecks = document.querySelectorAll('.btn-checkbox')
   console.log(btnsChecks)
   btnsChecks.forEach(btn => {
