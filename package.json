@@ -22,6 +22,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-x-hub": "^1.0.4",
+    "intl-tel-input": "^17.0.19",
     "node-fetch": "^2.6.7",
     "nodemailer": "^6.8.0",
     "nodemailer-plugin-inline-base64": "^2.1.1",
