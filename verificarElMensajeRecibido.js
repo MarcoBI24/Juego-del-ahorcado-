@@ -166,9 +166,9 @@ router.route('/facebook').post(async (req, res) => {
   }
   try {
     const REQ = req.body.entry[0].changes[0].value.messages
-    const REQNumber = REQ[0].from
     if (REQ !== undefined && REQ[0] !== undefined) {
       // verifica que la req sea un mensaje
+      const REQNumber = REQ[0].from
       console.log(REQ)
       console.log('RECIBIDO ^^^^^^^^^')
       if (REQ[0].button) {
