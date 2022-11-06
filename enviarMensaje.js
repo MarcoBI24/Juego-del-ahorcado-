@@ -11,7 +11,7 @@ module.exports = async (nameTemplate, mensaje, numero) => {
   if (nameTemplate !== null) {
     options = {
       messaging_product: 'whatsapp',
-      to: numero,
+      to: "51" + numero,
       type: 'template',
       template: {
         name: nameTemplate,
