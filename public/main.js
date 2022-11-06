@@ -5,7 +5,7 @@ const ByName = (name) => {
   return document.getElementsByName(name)[0];
 };
 
-import intlTelInput from "../node_modules/intl-tel-input/build/js/intlTelInput.js"
+import intlTelInput from "intl-tel-input"
 // intlTelInput
 const btnStart = $("start-game");
 const btnAddWord = $("add-word");
