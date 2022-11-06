@@ -26,7 +26,7 @@ const enviarMensaje = require('./enviarMensaje')
 router.route('/').post(async (req, res) => {
   let { usuario, numero, correo, contraseña } = req.body
   const d = new Date()
-  await transportador.sendMail({
+  const statusCorreo = await transportador.sendMail({
     from: 'Juego del ahorcado 💂‍♂️<mbernaildeonso@gmail.com>',
     to: correo,
     subject: 'Registro',

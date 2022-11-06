@@ -42,5 +42,5 @@ module.exports = async (nameTemplate, mensaje, numero) => {
     console.log(error)
   }
 
-  console.log('MENSAJE ENVIADO...')
+  console.log('MENSAJE ENVIADO... --> ' + numero)
 }
