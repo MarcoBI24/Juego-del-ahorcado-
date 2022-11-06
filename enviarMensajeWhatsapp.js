@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const enviarMensaje = require('./enviarMensaje')
 router.route('/').post(async (req, res) => {
-  const { usuario, numero, correo } = req.body
+  let { usuario, numero, correo } = req.body
   console.log(usuario)
   console.log(numero)
   console.log(correo)
