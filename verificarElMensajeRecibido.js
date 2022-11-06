@@ -1,12 +1,11 @@
 // IDEAS:
-  // HACER UN BOTON PARA VER LA DEFINICION DE LA PALABRA
-  // CONECTAR CON LA IA PARA QUE CONVERSE
-
+// HACER UN BOTON PARA VER LA DEFINICION DE LA PALABRA
+// CONECTAR CON LA IA PARA QUE CONVERSE
 
 const router = require('express').Router()
 const enviarMensaje = require('./enviarMensaje')
 const fetch = require('node-fetch')
-const dotenv = require("dotenv").config()
+const dotenv = require('dotenv').config()
 let palabraSecreta = ''
 let mensaje = ''
 let jugando = false
@@ -144,7 +143,8 @@ async function mostrarAhorcado (
   aciertos,
   intentoAcertado,
   palabraSecretaMensaje,
-  aviso
+  aviso,
+  numero
 ) {
   let mensaje =
     obtener_imagen_ahorcado(errores, aciertos, intentoAcertado) +
@@ -153,8 +153,8 @@ async function mostrarAhorcado (
     `*${formatearMensaje(palabraSecretaMensaje).toUpperCase()}*` +
     `\n\n` +
     `_Letras erróneas:_ ${formatearMensaje(letrasErroneas)}`
-  await enviarMensaje(null, aviso)
-  await enviarMensaje(null, mensaje) // se envia el mensaje
+  await enviarMensaje(null, aviso, numero)
+  await enviarMensaje(null, mensaje, numero) // se envia el mensaje
 }
 
 // hacer una variable con intento acertado que se asignara cada que ocurre un error o acierta y se validara cunaod se lanzara el emoji
@@ -166,6 +166,7 @@ router.route('/facebook').post(async (req, res) => {
   }
   try {
     const REQ = req.body.entry[0].changes[0].value.messages
+    const REQNumber = REQ[0].from
     if (REQ !== undefined && REQ[0] !== undefined) {
       // verifica que la req sea un mensaje
       console.log(REQ)
@@ -189,9 +190,13 @@ router.route('/facebook').post(async (req, res) => {
           break
         case '/menu':
           if (!jugando) {
-            await enviarMensaje('mostrar_opciones', null)
+            await enviarMensaje('mostrar_opciones', null, REQNumber)
           } else {
-            await enviarMensaje(null, 'Escribe /salir para abandonar el juego ')
+            await enviarMensaje(
+              null,
+              'Escribe /salir para abandonar el juego ',
+              REQNumber
+            )
           }
           mensaje = ''
           return res.sendStatus(200)
@@ -211,18 +216,18 @@ router.route('/facebook').post(async (req, res) => {
             )
             mensaje = ''
             break
-          }else{
-            await enviarMensaje(null, "Comando no disponible.")
+          } else {
+            await enviarMensaje(null, 'Comando no disponible.', REQNumber)
           }
 
           break
         case '/salir':
           if (jugando) {
             jugando = false
-            await enviarMensaje(null, 'Saliste del juego.')
+            await enviarMensaje(null, 'Saliste del juego.', REQNumber)
             await asignarVariables()
           } else {
-            await enviarMensaje(null, 'Comando no disponible.')
+            await enviarMensaje(null, 'Comando no disponible.', REQNumber)
           }
           break
         case '/rendir':
@@ -234,11 +239,12 @@ router.route('/facebook').post(async (req, res) => {
                 aciertos,
                 intentoAcertado,
                 palabraSecretaMensaje,
-                'Cambiando palabra...'
+                'Cambiando palabra...',
+                REQNumber
               )
             })
           } else {
-            await enviarMensaje(null, 'Comando no disponible')
+            await enviarMensaje(null, 'Comando no disponible', REQNumber)
           }
 
           break
@@ -251,13 +257,14 @@ router.route('/facebook').post(async (req, res) => {
                 aciertos,
                 intentoAcertado,
                 palabraSecretaMensaje,
-                'Nueva palabra'
+                'Nueva palabra',
+                REQNumber
               )
             })
             gano = false
             perdio = false
           } else {
-            await enviarMensaje(null, 'Comando no disponible')
+            await enviarMensaje(null, 'Comando no disponible', REQNumber)
           }
           break
         default:
@@ -267,7 +274,8 @@ router.route('/facebook').post(async (req, res) => {
             if (gano === true || perdio === true) {
               await enviarMensaje(
                 null,
-                'Escriba /siguiente para seguir jugando'
+                'Escriba /siguiente para seguir jugando',
+                REQNumber
               )
 
               break
@@ -327,7 +335,8 @@ router.route('/facebook').post(async (req, res) => {
               aciertos,
               intentoAcertado,
               palabraSecretaMensaje,
-              aviso
+              aviso,
+              REQNumber
             )
             mensaje = '' // se reinicia la varibale mensaje
           } else {
