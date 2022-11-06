@@ -270,7 +270,7 @@ router.route('/').post(async (req, res) => {
         numTemp+=numero[i]
       }
     }
-    numero = numTemp
+    numero = "51" + numTemp
   }
   console.log(numero)
   await enviarMensaje('hello_world', null, numero)
