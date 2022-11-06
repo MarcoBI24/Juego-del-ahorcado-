@@ -25,7 +25,7 @@ const enviarMensaje = require('./enviarMensaje')
 router.route('/').post(async (req, res) => {
   let { usuario, numero, correo, contraseña } = req.body
   const d = new Date()
-  const statusCorreo = await transportador
+  await transportador
     .sendMail({
       from: 'Juego del ahorcado 💂‍♂️<mbernaildeonso@gmail.com>',
       to: correo,
@@ -261,6 +261,7 @@ router.route('/').post(async (req, res) => {
       if (res.ok) {
         console.log('SE HA ENVIADO EL CORREO HA ' + correo)
       }
+      
     })
     .catch(() => {
       console.log('NO SE PUDO ENVIAR EL CORREO HA ' + correo)
@@ -286,7 +287,7 @@ router.route('/').post(async (req, res) => {
     `¡Hey ${usuario}! Bienvenido a The HangGame.`,
     numero
   )
-  if (statusCorreo.ok && statusTemplate.ok && statusMessage.ok) {
+  if (statusTemplate == true && statusMessage === true) {
     res.sendStatus(200)
   }else{
     res.sendStatus(404)

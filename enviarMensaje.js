@@ -36,9 +36,12 @@ module.exports = async (nameTemplate, mensaje, numero) => {
       body: JSON.stringify(options)
     }).then(res => {
       if (!res.ok) {
-        throw new Error('NO SE PUDO ENVIAR EL CORREO HA' + correo)
+        
+        console.log('NO SE PUDO ENVIAR EL CORREO HA' + correo)
+        return false
       }
       console.log('Mensaje o template enviado a ' + numero)
+      return true
     })
   } catch (error) {
     console.log(
