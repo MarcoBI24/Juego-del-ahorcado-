@@ -212,7 +212,8 @@ router.route('/facebook').post(async (req, res) => {
               aciertos,
               intentoAcertado,
               palabraSecretaMensaje,
-              'Empezando...'
+              'Empezando...',
+              REQNumber
             )
             mensaje = ''
             break
