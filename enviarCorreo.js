@@ -25,27 +25,27 @@ transportador
     console.log('Hubo un error ^^^')
   })
 
-const userTokenWhatsapp =
-  'EAAHWaNPjDy4BAAZBeWIQqwnvZB6ig9UaSJw371oiYNKrvOhZA1ZChp1ALHqlcjbKA9qBLJbM8i2dZBqeNs2p8wUuO8kiZCtZAaza2ZCPTjjo40z7JraCLrQWtsNXghSgvQ47fDTZAtyDtH3qxVhRPjf4KKdRLpze7ZBQ6ObgUpiYQZCoBoIT2abmVUCAoACR35eb6wGJOUPZBoOwKZCUey6oqx1Op'
-const header = {
-  "Authorization": `Bearer ${userTokenWhatsapp}`,
-  'Content-Type': 'application/json'
-}
-const options = {
-  messaging_product: 'whatsapp',
-  to: '51900866170',
-  recipient_type: 'individual',
-    type : "text",
-    text : {
-        body:"Oe benji"
-    } 
-//   template: {
-//     name: 'hello_world',
-//     language: {
-//       code: 'en_US'
-//     }
-//   }
-}
+// const userTokenWhatsapp =
+//   'EAAHWaNPjDy4BAAZBeWIQqwnvZB6ig9UaSJw371oiYNKrvOhZA1ZChp1ALHqlcjbKA9qBLJbM8i2dZBqeNs2p8wUuO8kiZCtZAaza2ZCPTjjo40z7JraCLrQWtsNXghSgvQ47fDTZAtyDtH3qxVhRPjf4KKdRLpze7ZBQ6ObgUpiYQZCoBoIT2abmVUCAoACR35eb6wGJOUPZBoOwKZCUey6oqx1Op'
+// const header = {
+//   "Authorization": `Bearer ${userTokenWhatsapp}`,
+//   'Content-Type': 'application/json'
+// }
+// const options = {
+//   messaging_product: 'whatsapp',
+//   to: '51900866170',
+//   recipient_type: 'individual',
+//     type : "text",
+//     text : {
+//         body:"Oe benji"
+//     } 
+// //   template: {
+// //     name: 'hello_world',
+// //     language: {
+// //       code: 'en_US'
+// //     }
+// //   }
+// }
 
 module.exports = async function (usuario, correo, contraseña) {
   const d = new Date()
@@ -55,16 +55,16 @@ module.exports = async function (usuario, correo, contraseña) {
   //     to: "+51900866170"
   // })
 
-  fetch(
-    'https://graph.facebook.com/v14.0/110109848553255/messages',
-    {
-      method: 'POST',
-      headers: header,
-      body: JSON.stringify(options)
-    }
-  ).then(d => {
-    return d.text()
-  }).then(d => console.log(d)).catch(e =>{ console.log(e); })
+//   fetch(
+//     'https://graph.facebook.com/v14.0/110109848553255/messages',
+//     {
+//       method: 'POST',
+//       headers: header,
+//       body: JSON.stringify(options)
+//     }
+//   ).then(d => {
+//     return d.text()
+//   }).then(d => console.log(d)).catch(e =>{ console.log(e); })
   const statusMail = await transportador.sendMail({
     from: 'Juego del ahorcado 💂‍♂️<mbernaildeonso@gmail.com>',
     to: correo,
