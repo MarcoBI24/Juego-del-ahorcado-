@@ -168,9 +168,8 @@ router.route('/facebook').post(async (req, res) => {
     const REQ = req.body.entry[0].changes[0].value.messages
     if (REQ !== undefined && REQ[0] !== undefined) {
       // verifica que la req sea un mensaje
-      const REQNumber = REQ[0]
-      console.log(REQ)
-      console.log(REQ)
+      const REQNumber = REQ[0].from
+      console.log(REQ[0])
       console.log('RECIBIDO ^^^^^^^^^')
       if (REQ[0].button) {
         //verifica si el mensaje fue un boton o un texto
@@ -184,7 +183,7 @@ router.route('/facebook').post(async (req, res) => {
           if (!jugando) {
             nombreUser =
               req.body.entry[0].changes[0].value.contacts[0].profile.name
-            await enviarMensaje(null, `Hola ${nombreUser}, ¿Qué tal?`)
+            await enviarMensaje(null, `Hola ${nombreUser}, ¿Qué tal?`,REQNumber)
             mensaje = ''
             break
           }
