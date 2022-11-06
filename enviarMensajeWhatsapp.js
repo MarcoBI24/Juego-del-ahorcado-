@@ -16,11 +16,11 @@ router.route('/').post(async (req, res) => {
   }
   console.log(numero)
   await enviarMensaje('hello_world', null, numero)
-  //  await enviarMensaje(
-  //   null,
-  //   `¡Hey ${usuario}! Bienvenido a The HangGame.`,
-  //   numero
-  // )
+   await enviarMensaje(
+    null,
+    `¡Hey ${usuario}! Bienvenido a The HangGame.`,
+    numero
+  )
  
 })
 
