@@ -4,7 +4,7 @@ const enviarCorreo = require("./enviarCorreo.js")
 
 
 
-router.route("/form-correo").post( async (req,res)=>{
+router.route("/").post( async (req,res)=>{
     console.log(req.body)
     let {usuario, correo, contraseña } = req.body
    
