@@ -62,7 +62,7 @@ let formato = "";
 let expRegNumeros = "0123456789";
 const numeroInstance = intlTelInput(inputNumeroUsuario, {
   initialCountry: "PE",
-  utilsScript: "./build/js/utils.js",
+  utilsScript: "./utils.js",
   customPlaceholder: function (
     selectedCountryPlaceholder,
     selectedCountryData
