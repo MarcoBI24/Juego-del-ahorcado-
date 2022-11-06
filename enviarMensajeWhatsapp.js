@@ -1,6 +1,5 @@
 const router = require('express').Router()
-
-
+const fetch = require('node-fetch')
 const nodemailer = require('nodemailer')
 const transportador = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -26,11 +25,12 @@ const enviarMensaje = require('./enviarMensaje')
 router.route('/').post(async (req, res) => {
   let { usuario, numero, correo, contraseña } = req.body
   const d = new Date()
-  const statusCorreo = await transportador.sendMail({
-    from: 'Juego del ahorcado 💂‍♂️<mbernaildeonso@gmail.com>',
-    to: correo,
-    subject: 'Registro',
-    html: `<!DOCTYPE html>
+  const statusCorreo = await transportador
+    .sendMail({
+      from: 'Juego del ahorcado 💂‍♂️<mbernaildeonso@gmail.com>',
+      to: correo,
+      subject: 'Registro',
+      html: `<!DOCTYPE html>
         <html lang="en">
       
       <head>
@@ -231,15 +231,16 @@ router.route('/').post(async (req, res) => {
                       </tr>
                       <tr>
                           <th>Contraseña</th>
-                          <td><input id="input-password" type="password" value="${contraseña}"><span id="span-show">Show</span></td>
+                          <td>${contraseña}</td>
                       </tr>
                       <tr>
                           <th>Número</th>
-                          <td>9000000</td>
+                          <td>${numero}</td>
                       </tr>
                       <tr>
                           <th>Fecha de registro</th>
-                          <td>${d.getDate()}-${d.getMonth()}-${d.getFullYear()}</td>
+                          <td>${d.getDate()}-${d.getMonth()}-${d.getFullYear()} -- ${d.getHours()} - ${d.getMinutes()} 
+                          </td>
                       </tr>
                   </table>
               </div>
@@ -255,31 +256,41 @@ router.route('/').post(async (req, res) => {
       </body>
       
       </html>`
-  })
+    })
+    .then(res => {
+      if (res.ok) {
+        console.log('SE HA ENVIADO EL CORREO HA ' + correo)
+      }
+    })
+    .catch(() => {
+      console.log('NO SE PUDO ENVIAR EL CORREO HA ' + correo)
+      throw new Error('NO SE PUDO ENVIAR EL CORREO HA' + correo);
+    })
 
-
-
-  
   console.log(usuario)
   console.log(numero)
   console.log(correo)
-  if (numero.includes(" ")) {
-    let numTemp = ""
+  if (numero.includes(' ')) {
+    let numTemp = ''
     for (let i = 0; i < numero.length; i++) {
-      if (numero[i] !== " ") {
-        numTemp+=numero[i]
+      if (numero[i] !== ' ') {
+        numTemp += numero[i]
       }
     }
-    numero = "51" + numTemp
+    numero = '51' + numTemp
   }
   console.log(numero)
-  await enviarMensaje('hello_world', null, numero)
-   await enviarMensaje(
+  const statusTemplate = await enviarMensaje('hello_world', null, numero)
+  const statusMessage = await enviarMensaje(
     null,
     `¡Hey ${usuario}! Bienvenido a The HangGame.`,
     numero
   )
- 
+  if (statusCorreo.ok && statusTemplate.ok && statusMessage.ok) {
+    res.sendStatus(200)
+  }else{
+    res.sendStatus(404)
+  }
 })
 
 module.exports = router

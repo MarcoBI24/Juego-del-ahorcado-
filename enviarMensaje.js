@@ -1,7 +1,6 @@
 const fetch = require('node-fetch')
-const dotenv = require("dotenv").config()
+const dotenv = require('dotenv').config()
 module.exports = async (nameTemplate, mensaje, numero) => {
-  
   let token = process.env.TOKEN
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -11,7 +10,7 @@ module.exports = async (nameTemplate, mensaje, numero) => {
   if (nameTemplate !== null) {
     options = {
       messaging_product: 'whatsapp',
-      to:  numero,
+      to: numero,
       type: 'template',
       template: {
         name: nameTemplate,
@@ -35,12 +34,18 @@ module.exports = async (nameTemplate, mensaje, numero) => {
       method: 'POST',
       headers: headers,
       body: JSON.stringify(options)
+    }).then(res => {
+      if (!res.ok) {
+        throw new Error('NO SE PUDO ENVIAR EL CORREO HA' + correo)
+      }
+      console.log('Mensaje o template enviado a ' + numero)
     })
-    console.log('Mensaje o template enviado!!!')
   } catch (error) {
-    console.log('Hubo un error al enviar el mensaje o template!!!')
+    console.log(
+      'Hubo un error al enviar el mensaje o template al enviar a ' + numero
+    )
     console.log(error)
   }
 
-  console.log('MENSAJE ENVIADO... --> ' + numero)
+  // console.log('MENSAJE ENVIADO... --> ' + numero)
 }
