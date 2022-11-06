@@ -1,5 +1,5 @@
 /* hacer las aniamciones de los modales, de los botones y cambios de pagina con la libreria Velocity.js */
-@import './intl-tel-input/build/css/intlTelInput.css';
+@import './build/css/intlTelInput.css';
 
 
 *{
@@ -886,7 +886,7 @@ body{
 
 */
 .iti__flag {
-    background-image: url("./intl-tel-input/build/img/flags.png");
+    background-image: url("./build/img/flags.png");
     width: 20px;    
 
 }
@@ -901,5 +901,5 @@ body{
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .iti__flag {background-image: url("./intl-tel-input/build/img/flags@2x.png");}
+  .iti__flag {background-image: url("./build/img/flags@2x.png");}
 }
