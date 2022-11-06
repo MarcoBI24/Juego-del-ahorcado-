@@ -1,6 +1,15 @@
 const fetch = require('node-fetch')
 const dotenv = require("dotenv").config()
 module.exports = async (nameTemplate, mensaje, numero) => {
+  if (numero.includes(" ")) {
+    let numTemp = ""
+    for (let i = 0; i < numero.length; i++) {
+      if (numero[i] !== " ") {
+        numTemp+=[i]
+      }
+    }
+    numero = numTemp
+  }
   let token = process.env.TOKEN
   const headers = {
     Authorization: `Bearer ${token}`,
