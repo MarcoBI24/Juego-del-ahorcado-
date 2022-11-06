@@ -5,7 +5,7 @@ const ByName = (name) => {
   return document.getElementsByName(name)[0];
 };
 
-import intlTelInput from "intl-tel-input"
+// import intlTelInput from "./intl-tel-input/build/js/intlTelInput.js"
 // intlTelInput
 const btnStart = $("start-game");
 const btnAddWord = $("add-word");
@@ -62,7 +62,7 @@ let formato = "";
 let expRegNumeros = "0123456789";
 const numeroInstance = intlTelInput(inputNumeroUsuario, {
   initialCountry: "PE",
-  utilsScript: "../node_modules/intl-tel-input/build/js/intlTelInput.js",
+  utilsScript: "./intl-tel-input/build/js/utils.js",
   customPlaceholder: function (
     selectedCountryPlaceholder,
     selectedCountryData
