@@ -9,7 +9,7 @@ router.route('/').post(async (req, res) => {
     let numTemp = ""
     for (let i = 0; i < numero.length; i++) {
       if (numero[i] !== " ") {
-        numTemp+=[i]
+        numTemp+=numero[i]
       }
     }
     numero = numTemp
