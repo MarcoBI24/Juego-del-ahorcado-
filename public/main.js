@@ -60,7 +60,7 @@ let letrasIncorrectas = 0;
 let letrasCorrectas = 0;
 let formato = "";
 let expRegNumeros = "0123456789";
-const numeroInstance = window.intlTelInput(inputNumeroUsuario, {
+const numeroInstance = intlTelInput(inputNumeroUsuario, {
   initialCountry: "PE",
   utilsScript: "./intl-tel-input/build/js/utils.js",
   customPlaceholder: function (
