@@ -307,6 +307,7 @@ body{
                         border-radius: 5px;
                         height: min-content;
                         padding: 5px;
+                        justify-content: space-between;
                     }
                         .input{
                             flex: 0 1 90%;
@@ -315,13 +316,16 @@ body{
                             font-weight: 500;
                             background-color: transparent;
                             border: 0px solid #0073ff;
-                            /* width: 100%; */
+                            /* max-width: 250px; */
                             /* border-width: 0px 0px 3px 0px; */
                             font-size: 16px;
                             outline: none;
                             border-radius: 7px;
                             cursor: pointer;
 
+                        }
+                        #numero-usuario{
+                            max-width: 250px;
                         }
                         #icono-input-invalid{
                             flex: 0 1 5%;
@@ -881,7 +885,20 @@ body{
     </style>
 
 */
-.iti__flag {background-image: url("./intl-tel-input/build/img/flags.png");}
+.iti__flag {
+    background-image: url("./intl-tel-input/build/img/flags.png");
+    width: 20px;    
+
+}
+.iti__arrow{
+    display: none;
+}
+.iti__selected-flag{
+}
+.iti__arrow{
+    width: 100%;
+    max-width: 250px;
+}
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .iti__flag {background-image: url("./intl-tel-input/build/img/flags@2x.png");}

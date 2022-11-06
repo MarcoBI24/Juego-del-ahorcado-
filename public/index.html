@@ -101,7 +101,7 @@
 
     <div class="contenedor-identificacion" id="contenedor-identificacion">
         <div class="contenedor-identificacion-slider" id="contenedor-identificacion-slider">
-
+            <!-- INICIAR SESION -->
             <div class="contenedor-login">
                 <button class="contenedor-icono">
                     <span class="icon-cross"></span>
@@ -113,30 +113,31 @@
                     <div class="label-form">
 
                         <span class="label-text">Usuario</span>
-                        <div class="contenedor-input">
-                            <input type="text" class="input" id="nombre-usuario-login" name="usuario-login">
+                        <div class="contenedor-input" name="usuario-login-contenedor">
+                            <input type="text" class="input" id="nombre-usuario-login" name="usuario-login"
+                                data-valid="false">
                             <!-- Aqui va el icono -->
-                            <span></span>
+                            <span name="usuario-login-icon-alert"></span>
                         </div>
                         <!-- Aqui va el mensaje de error -->
-                        <span class="span-alert"></span>
+                        <span class="span-alert" name="usuario-login-alert"></span>
                     </div>
                     <div class="label-form">
                         <span class="label-text" id="contra-text">
                             Contraseña
                             <label class="mostrar-contraseña">
-                                <input type="checkbox" value="off" class="btn-checkbox">
+                                <input type="checkbox" value="off" class="btn-checkbox" data-valid="false">
                                 <span class="circle"></span>
                             </label>
                         </span>
-                        <div class="contenedor-input">
+                        <div class="contenedor-input" name="contraseña-login-contenedor">
                             <input type="password" class="input" id="contraseña-login" name="contraseña-login">
-                            <span></span>
+                            <span name="contraseña-login-icon-alert"></span>
                         </div>
-                        <span class="span-alert"></span>
+                        <span class="span-alert" name="contraseña-login-alert"></span>
 
                     </div>
-                    <label class="checkbox"><input type="checkbox" id="input-inicio-sesion-automatico">Inicio de sesion
+                    <label class="checkbox"> <input type="checkbox" id="input-inicio-sesion-automatico">Inicio de sesion
                         automatico</label>
                 </div>
                 <div class="contenedor-login-footer">
@@ -174,15 +175,15 @@
 
                         </div>
                     </div>
-                    <!-- ---------------------------------------------------------------------------- -->
-                    <form action="/form-correo" method="post" class="contenedor-formulario">
+                    <!--MODAL DE  REGISTRO  ---------------------------------------------------------------------------- -->
+                    <form action="/" method="post" class="contenedor-formulario">
                         <div class="label-form">
                             <span class="label-text">Nombre de usuario</span>
-                            <div class="contenedor-input">
-                                <input type="text" class="input" id="nombre-usuario" name="usuario">
-                                <span></span>
+                            <div class="contenedor-input" name="usuario-contenedor">
+                                <input type="text" class="input" id="nombre-usuario" name="usuario" data-valid="false">
+                                <span name="usuario-icon-alert"></span>
                             </div>
-                            <span class="span-alert"></span>
+                            <span class="span-alert" name="usuario-alert"></span>
 
                         </div>
                         <div class="label-form">
@@ -194,11 +195,12 @@
                                     <span class="circle"></span>
                                 </label>
                             </span>
-                            <div class="contenedor-input">
-                                <input type="password" class="input" id="contraseña-usuario" name="contraseña">
-                                <span></span>
+                            <div class="contenedor-input" name="contraseña-contenedor">
+                                <input type="password" class="input" id="contraseña-usuario" name="contraseña"
+                                    data-valid="false">
+                                <span name="contraseña-icon-alert"></span>
                             </div>
-                            <span class="span-alert"></span>
+                            <span class="span-alert" name="contraseña-alert"></span>
 
                         </div>
                         <div class="label-form">
@@ -210,30 +212,31 @@
 
                                 </label>
                             </span>
-                            <div class="contenedor-input">
-                                <input type="password" class="input" id="contraseña2-usuario" name="contraseña2">
-                                <span></span>
+                            <div class="contenedor-input" name="contraseña2-contenedor">
+                                <input type="password" class="input" id="contraseña2-usuario" name="contraseña2"
+                                    data-valid="false">
+                                <span name="contraseña2-icon-alert"></span>
                             </div>
-                            <span class="span-alert"></span>
+                            <span class="span-alert" name="contraseña2-alert"></span>
                             <span class="porcentaje" id="porcentaje">0%</span>
                         </div>
                         <div class="label-form">
 
                             <span class="label-text">Correo</span>
-                            <div class="contenedor-input">
-                                <input type="email" class="input" id="correo-usuario" name="correo">
-                                <span></span>
+                            <div class="contenedor-input" name="correo-contenedor">
+                                <input type="email" class="input" id="correo-usuario" name="correo" data-valid="false">
+                                <span name="correo-icon-alert"></span>
                             </div>
-                            <span class="span-alert"></span>
+                            <span class="span-alert" name="correo-alert"></span>
                         </div>
                         <div class="label-form">
 
                             <span class="label-text">Número</span>
-                            <div class="contenedor-input">
-                                <input type="text" class="input" id="numero-usuario" name="numero">
-                                <span></span>
+                            <div class="contenedor-input" name="numero-contenedor">
+                                <input type="text" class="input" id="numero-usuario" name="numero" data-valid="false">
+                                <span name="numero-icon-alert"></span>
                             </div>
-                            <span class="span-alert"></span>
+                            <span class="span-alert" name="numero-alert"></span>
                         </div>
                         <input type="submit" id="btn-enviar" value="enviar">
                     </form>

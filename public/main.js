@@ -1,82 +1,102 @@
-const $ = id => {
-  return document.getElementById(id)
-}
+const $ = (id) => {
+  return document.getElementById(id);
+};
+const ByName = (name) => {
+  return document.getElementsByName(name)[0];
+};
+
 // import intlTelInput from "./intl-tel-input/build/js/intlTelInput.js"
 // intlTelInput
-const btnStart = $('start-game')
-const btnAddWord = $('add-word')
-const btnLogros = $('clasification')
-const btnComoSeJuega = $('como-se-juega')
-const contenedorIdentificacion = $('contenedor-identificacion')
-const contenedorIdentificacionSlider = $('contenedor-identificacion-slider')
-const contenedorGeneral = $('contenedor-general')
-const loginEnElHeader = $('login')
-const btnAbrirGaleria = $('btn-abrir-galeria')
-const contenedorGaleria = $('contenedor-galeria')
-const btnsCerrarContenedorIdentificacion = document.querySelectorAll(
-  '.contenedor-icono'
-)
-const btnRegistrarseModal = $('btn-registro')
-const btnLogearModal = $('btn-login')
+const btnStart = $("start-game");
+const btnAddWord = $("add-word");
+const btnLogros = $("clasification");
+const btnComoSeJuega = $("como-se-juega");
+const contenedorIdentificacion = $("contenedor-identificacion");
+const contenedorIdentificacionSlider = $("contenedor-identificacion-slider");
+const contenedorGeneral = $("contenedor-general");
+const loginEnElHeader = $("login");
+const btnAbrirGaleria = $("btn-abrir-galeria");
+const contenedorGaleria = $("contenedor-galeria");
+const btnsCerrarContenedorIdentificacion =
+  document.querySelectorAll(".contenedor-icono");
+const btnRegistrarseModal = $("btn-registro");
+const btnLogearModal = $("btn-login");
 
-const inputLogins = document.querySelectorAll('.input')
-const labelDelInputLogin = document.querySelectorAll('.label-text')
-let imgTemp = new Image()
-const btnSubirFoto = $('input-subirFoto')
-const contenedorFoto = $('contenedor-foto')
-const canvas = $('canvas')
-const btnPerfil = $('btn-perfil')
-const context = canvas.getContext('2d')
-let imagenPorDefecto = $('foto')
-let urlImagen = imagenPorDefecto.src
-let crop
-let USUARIO
-let USUARIOS = JSON.parse(localStorage.getItem('usuarios'))
-const inputNombreUsuarioRegister = $('nombre-usuario')
-const inputContraseñaUsuarioRegister = $('contraseña-usuario')
-const inputContraseña2Usuario = $('contraseña2-usuario')
-const inputCorreoUsuario = $('correo-usuario')
-const inputNumeroUsuario = $('numero-usuario')
+const inputLogins = document.querySelectorAll(".input");
+const labelDelInputLogin = document.querySelectorAll(".label-text");
+let imgTemp = new Image();
+const btnSubirFoto = $("input-subirFoto");
+const contenedorFoto = $("contenedor-foto");
+const canvas = $("canvas");
+const btnPerfil = $("btn-perfil");
+const context = canvas.getContext("2d");
+let imagenPorDefecto = $("foto");
+let urlImagen = imagenPorDefecto.src;
+let crop;
+let USUARIO;
+let USUARIOS = JSON.parse(localStorage.getItem("usuarios"));
+const inputNombreUsuarioRegister = $("nombre-usuario");
+const inputContraseñaUsuarioRegister = $("contraseña-usuario");
+const inputContraseña2Usuario = $("contraseña2-usuario");
+const inputCorreoUsuario = $("correo-usuario");
+const inputNumeroUsuario = $("numero-usuario");
 
-const btnRegistrarUsuario = $('registrarse-form')
-const btnIniciarSesionUsuario = $('login-form')
+const btnRegistrarUsuario = $("registrarse-form");
+const btnIniciarSesionUsuario = $("login-form");
 
-const inputNombreUsuarioLogin = $('nombre-usuario-login')
-const inputContraseñaLogin = $('contraseña-login')
-const porcentajeText = $('porcentaje')
-let expContraseñaValida = /(?=.*[a-z]+)?(?=.*[A-Z]+)?(?=.*\d+)?(?=.*[$@$!%*?&#.$($)$-$_])?.*[a-zA-Z\d@!%*?&#.$($)$-$_]+/
-let expContraseñaMuySegura = /(?=.*[a-z]+)?(?=.*[A-Z]+)(?=.*\d+)(?=.*[$@$!%*?&#.$($)$-$_]).*[a-zA-Z\d@!%*?&#.$($)$-$_]+/
-let expRegMinuscula = /^[a-z]+$/
-let expRegMayuscula = /^[A-Z]+$/
-let expRegMinusYMayus = /^(?=[a-zA-Z])(?=.*[a-z][A-Z]+|.*[A-Z][a-z]+)[a-zA-Z]+$/
-let expRegNombreUsuario = /^[a-zA-Z0-9ü][a-zA-Z0-9ü_]{3,16}$/
-let letrasIncorrectas = 0
-let letrasCorrectas = 0
-let formato = ''
-window.intlTelInput(inputNumeroUsuario, {
-  initialCountry: 'PE',
-  utilsScript: './intl-tel-input/build/js/utils.js',
+const inputNombreUsuarioLogin = $("nombre-usuario-login");
+const inputContraseñaLogin = $("contraseña-login");
+const porcentajeText = $("porcentaje");
+let expContraseñaValida =
+  /(?=.*[a-z]+)?(?=.*[A-Z]+)?(?=.*\d+)?(?=.*[$@$!%*?&#.$($)$-$_])?.*[a-zA-Z\d@!%*?&#.$($)$-$_]+/;
+let expContraseñaMuySegura =
+  /(?=.*[a-z]+)?(?=.*[A-Z]+)(?=.*\d+)(?=.*[$@$!%*?&#.$($)$-$_]).*[a-zA-Z\d@!%*?&#.$($)$-$_]+/;
+let expRegMinuscula = /^[a-z]+$/;
+let expRegMayuscula = /^[A-Z]+$/;
+let expRegMinusYMayus =
+  /^(?=[a-zA-Z])(?=.*[a-z][A-Z]+|.*[A-Z][a-z]+)[a-zA-Z]+$/;
+let expRegNombreUsuario = /^[a-zA-Z0-9ü][a-zA-Z0-9ü_]{3,16}$/;
+let letrasIncorrectas = 0;
+let letrasCorrectas = 0;
+let formato = "";
+let expRegNumeros = "0123456789";
+const numeroInstance = window.intlTelInput(inputNumeroUsuario, {
+  initialCountry: "PE",
+  utilsScript: "./intl-tel-input/build/js/utils.js",
   customPlaceholder: function (
     selectedCountryPlaceholder,
     selectedCountryData
   ) {
-    formato = ''
-    let numeros = '0123456789'
-    console.log(selectedCountryPlaceholder)
+    formato = ""; // se vuelve a iniciaralizar el formato
+    console.log(selectedCountryPlaceholder);
     for (let i = 0; i < selectedCountryPlaceholder.length; i++) {
-      if (numeros.includes(selectedCountryPlaceholder[i])) {
-        formato += '0'
+      if (expRegNumeros.includes(selectedCountryPlaceholder[i])) {
+        formato += "0";
       } else {
-        formato += selectedCountryPlaceholder[i]
+        formato += selectedCountryPlaceholder[i];
       }
     }
-    console.log(formato)
-    return selectedCountryPlaceholder
+    console.log(formato);
+    // formato = "(000) 000 0000"
+    return selectedCountryPlaceholder;
+  },
+  separateDialCode: true,
+  nationalMode: true,
+  autoHideDialCode: true,
+});
+console.log(numeroInstance);
+inputNumeroUsuario.addEventListener("countrychange", function (e) {
+  // cuando se cambia de pais con el numero puesto
+  console.log(e);
+  let numero = inputNumeroUsuario.value;
+  console.log(formato + "   HA CAMBIA DE PAIS");
+  inputNumeroUsuario.value = formatearNumero(numero, formato);
+  if (numeroInstance.isValidNumber()) {
+    alertarInputValid(INPUT);
+  } else {
+    alertarError(inputNumeroUsuario, "Digite un número válido");
+    console.log(numeroInstance.getNumber());
   }
-})
-inputNumeroUsuario.addEventListener("countrychange", function () {
-  // do something with iti.getSelectedCountryData()
-  console.log("funciona!!!!");
 });
 // Logear el usuario
 // obtener datos del usuario (nombre de usuario,contraseña, foto )
@@ -113,50 +133,58 @@ inputNumeroUsuario.addEventListener("countrychange", function () {
 // En caso no exista el array se tiene que crear un array vacio llamado Usuarios y se hará lo mismo que se hace cuando no existe un usuario logeado
 
 function validarInput(e) {
-  const INPUT = e.target
+  const INPUT = e.target;
 
-  if (e.key !== "Backspace" && e.type === "keyup" && (INPUT.value == '' || INPUT.value.length === 0)) {
-    alertarError(INPUT, '')
+  if (
+    e.key !== "Backspace" &&
+    e.type === "keyup" &&
+    (INPUT.value == "" || INPUT.value.length === 0)
+  ) {
+    alertarError(INPUT, "");
+    return;
+  }
+  if (e.key === " ") {
+    // INPUT.value = INPUT.value.slice(0, INPUT.value.length - 1);
+    alertarError(INPUT,"No puede contener espacios.")
     return
   }
   switch (INPUT.name) {
-    case 'usuario':
-      if (INPUT.value[0] == '_') {
-        alertarError(INPUT, 'El usuario no puede empezar por el guion bajo')
-        return
+    case "usuario":
+      if (INPUT.value[0] == "_") {
+        alertarError(INPUT, "El usuario no puede empezar por el guion bajo");
+        return;
       }
-      if (e.key == ' ') {
+      if (e.key == " ") {
         alertarError(
           INPUT,
-          'El usuario tiene que ser de 4 a 16 digitos y solo puede contener numeros, letras y guion bajo'
-        )
+          "El usuario tiene que ser de 4 a 16 digitos y solo puede contener numeros, letras y guion bajo"
+        );
       }
       if (
-        (e.type == 'keydown' || e.type == 'keyup') &&
-        !((e.key.length == 1 && e.key !== ' ') || e.key == 'Backspace')
+        (e.type == "keydown" || e.type == "keyup") &&
+        !((e.key.length == 1 && e.key !== " ") || e.key == "Backspace")
       ) {
-        return
+        return;
       }
       if (
-        INPUT.value.includes(' ') ||
+        INPUT.value.includes(" ") ||
         expRegNombreUsuario.test(INPUT.value) == false ||
         INPUT.value.length == 0
       ) {
         alertarError(
           INPUT,
-          'El usuario tiene que ser de 4 a 16 digitos y solo puede contener numeros, letras y guion bajo'
-        )
+          "El usuario tiene que ser de 4 a 16 digitos y solo puede contener numeros, letras y guion bajo"
+        );
       } else {
-        alertarInputValid(INPUT)
-        verificarNombre(INPUT.value)
+        alertarInputValid(INPUT);
+        verificarNombre(INPUT.value);
       }
 
-      break
-    case 'contraseña':
-      let contraseña = INPUT.value
-      console.log(contraseña.length)
-
-      verificarSiLasContraseñaCoincide()
+      break;
+    case "contraseña":
+      let contraseña = INPUT.value;
+      console.log(contraseña.length);
+      verificarSiLasContraseñaCoincide(contraseña, inputContraseña2Usuario.value)
       if (
         !(
           expContraseñaValida.test(contraseña) &&
@@ -166,258 +194,251 @@ function validarInput(e) {
       ) {
         alertarError(
           INPUT,
-          'Debe tener 5-20 caracteres(digitos, minúsculas, mayúsculas y para mas seguridad usa signos'
-        )
-        // )
-        // <b>Muy seguro >>> </b> az-AZ-09-#?!<br><b>Seguro >>></b> az-AZ-09<br><b>Inseguro >>></b> az-AZ<br>
-        break
+          "Debe tener 5-20 caracteres(digitos, minúsculas, mayúsculas y para mas seguridad usa signos"
+        );
+        INPUT.dataset.valid = "false"
+        break;
+      }else{
+        INPUT.dataset.valid = "true"
       }
 
-      break
-    case 'contraseña2':
-      let contraseña1 = inputContraseñaUsuarioRegister.value
-      let contraseña2 = INPUT.value
-      if (e.type == 'blur' && contraseña1 !== contraseña2) {
-        alertarError(INPUT, 'La contraseña no coincide')
-        verificarSiLasContraseñaCoincide()
-
-        break
+      break;
+    case "contraseña2":
+      let contraseña1 = inputContraseñaUsuarioRegister.value;
+      let contraseña2 = INPUT.value;
+      if (e.type == "blur") {
+        if (!verificarSiLasContraseñaCoincide(contraseña1, contraseña2)) {
+          INPUT.dataset.valid = "false";
+          break;
+        } else {
+          INPUT.dataset.valid = "true";
+        }
       }
-
-      if ((e.key.length == 1 && e.key !== ' ') || e.key == 'Backspace') {
-        verificarSiLasContraseñaCoincide()
-      }
-
-      console.log(contraseña1)
-      console.log(contraseña2)
-      break
-
-    case 'correo':
-      let expRegCorreo = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
-      if (expRegCorreo.test(INPUT.value) && !INPUT.value.includes(' ')) {
-        alertarInputValid(INPUT)
-      } else {
-        alertarError(
-          INPUT,
-          'No tiene el formato --> <b>ejemplo@dominio.dominio</b>'
-        )
-      }
-      break
-    case 'numero':
-      // validar que solo ingrese numeros
-      if (e.type == 'keyup') {
-        // let numTemp = ""
-        // let numero = INPUT.value // elimina los
-        // for (let i = 0; i < numero.length; i++) {
-        //     if (numeros.includes(numero[i])) {
-        //         numTemp += numero[i]
-        //     }
-        // }
-        // 123 4
-        //  000.000.000
-
-        let numero = INPUT.value
-
-
-        INPUT.value = formatearNumero(numero, formato)
-        console.log(INPUT.value)
-      }
-      break
-    default:
-      break
-  }
-}
-function formatearNumero(numero, formato) {
-  let numeros = '0123456789'
-  let posicion = 0
-  let contador = 0
-  let numeroFormateado = ''
-  let coincidido = false
-
-  while (posicion < formato.length && contador < numero.length) {
-
-    /// contador 0
-    /// posicion 1
-    /// (12
-    if (formato[posicion] === '0') {
-      // se espera que el proximo se un numero
-      if (coincidido) { // si ha coincidido
-
-      } else { /// el numero en la posicion si es un numero
-        if (numero[contador + 1] !== undefined && numeros.includes(numero[contador + 1])) {
-          if (numeros.includes(numero[contador])) {
-
+      if (e.type === "keyup" || e.type === "keydown") {
+        if ((e.key.length == 1 && e.key !== " ") || e.key == "Backspace") {
+          if (verificarSiLasContraseñaCoincide(contraseña1, contraseña2)) {
+            INPUT.dataset.valid = "true";
           } else {
-
-            contador++
+            INPUT.dataset.valid = "false";
           }
         }
       }
-    } else {
-      // no se espera un numero
-      if (coincidido) { // si ha coincidido
-        if (numero[contador] !== undefined && !numeros.includes(numero[contador])) {
-          contador++
-        }
-      } else { //  si no ha coincidido
-        if (numero[contador + 1] !== undefined && !numeros.includes(numero[contador + 1])) {
-          contador++
-        }
+
+      console.log(contraseña1);
+      console.log(contraseña2);
+      console.log(INPUT.dataset.valid)
+      break;
+
+    case "correo":
+      let expRegCorreo =
+        /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+      if (expRegCorreo.test(INPUT.value) && !INPUT.value.includes(" ")) {
+        alertarInputValid(INPUT);
+        INPUT.dataset.valid = "true";
+      } else {
+        alertarError(
+          INPUT,
+          "No tiene el formato --> <b>ejemplo@dominio.dominio</b>"
+        );
+        INPUT.dataset.valid = "false";
       }
-    }
-    if (formato[posicion] === '0') {
-      numeroFormateado += numero[contador]
-      contador++
-      coincidido = true
-    } else {
-      numeroFormateado += formato[posicion]
-      coincidido = false
-    }
-    posicion++
-
-
+      break;
+    case "numero":
+      // validar que solo ingrese numeros
+      // validar el numero cuando se pulsa
+      // validar que sea un nuero válido de acuerdo a la region del pais
+      if (e.type == "keyup") {
+        if (!expRegNumeros.includes(e.key) && e.key.length == 1) {
+          alertarError(
+            inputNumeroUsuario,
+            `¡Hey! "${e.key}" no es un número. `
+          );
+          INPUT.value = INPUT.value.slice(0, INPUT.value.length - 1);
+          break;
+        }
+        let numero = INPUT.value;
+        INPUT.value = formatearNumero(numero, formato);
+        console.log(INPUT.value);
+        console.log(numeroInstance.isValidNumber());
+      }
+      if (numeroInstance.isValidNumber()) {
+        alertarInputValid(INPUT);
+        INPUT.dataset.valid = "true";
+      } else {
+        alertarError(INPUT, "Digite un número válido");
+        console.log(numeroInstance.getNumber());
+        INPUT.dataset.valid = "false";
+      }
+      break;
+    default:
+      break;
   }
-  return numeroFormateado
+}
+function formatearNumero(numero, formato) {
+  let posicion = 0;
+  let contador = 0;
+  let numeroFormateado = "";
+  let numeroSinSignos = "";
+  for (let i = 0; i < numero.length; i++) {
+    // se itera para quitarle los signos y que quede solo numero plano
+    if (expRegNumeros.includes(numero[i])) {
+      numeroSinSignos += numero[i];
+    }
+  }
+  numero = numeroSinSignos;
+  while (posicion < formato.length && contador < numero.length) {
+    if (formato[posicion] === "0") {
+      numeroFormateado += numero[contador];
+      contador++;
+    } else {
+      numeroFormateado += formato[posicion];
+    }
+    posicion++;
+  }
+  return numeroFormateado;
 }
 function init() {
-  inputLogins.forEach(input => {
-    input.onkeydown = validarInput
-    input.onkeyup = validarInput
-    input.onblur = validarInput
-  })
+  inputLogins.forEach((input) => {
+    input.onkeydown = validarInput;
+    input.onkeyup = validarInput;
+    input.onblur = validarInput;
+  });
   btnRegistrarUsuario.onclick = () => {
     // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
+    // Validar que haya aceptado términos y condiciones
     let inputs = [
       inputNombreUsuarioRegister,
       inputContraseñaUsuarioRegister,
       inputContraseña2Usuario,
-      inputCorreoUsuario
-    ]
+      inputCorreoUsuario,
+      inputNumeroUsuario,
+    ];
     if (!verificarYAlertarInputs(inputs)) {
-      return
+      return;
     }
 
     let usuarioTemp = {
       nombre: inputNombreUsuarioRegister.value,
       contraseña: inputContraseñaUsuarioRegister.value,
       correo: inputCorreoUsuario.value,
+      numero: inputNumeroUsuario,
       foto: canvas.toDataURL(),
       fotos: [],
-      record: '0',
-      medalla: 'huevo',
+      record: "0",
+      medalla: "huevo",
       palabras: [],
       configuracion: {
-        tema: 'light',
-        efectosDeSonido: 'off',
-        musica: 'off',
-        efectosDeSonidoDelTeclado: 'off',
-        inicioDeSesionAutomatico: 'on'
+        tema: "light",
+        efectosDeSonido: "off",
+        musica: "off",
+        efectosDeSonidoDelTeclado: "off",
+        inicioDeSesionAutomatico: "on",
       },
-      logeado: false
-    }
-    USUARIOS.push(usuarioTemp)
-    localStorage.setItem('usuarios', JSON.stringify(USUARIOS))
-    console.log(`${usuarioTemp.nombre} registrado con exito!`)
-  }
+      logeado: false,
+    };
+    USUARIOS.push(usuarioTemp);
+    localStorage.setItem("usuarios", JSON.stringify(USUARIOS));
+    console.log(`${usuarioTemp.nombre} registrado con exito!`);
+  };
 
   btnIniciarSesionUsuario.onclick = () => {
     // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
-    let inputs = [inputNombreUsuarioLogin, inputContraseñaLogin]
+    let inputs = [inputNombreUsuarioLogin, inputContraseñaLogin];
     if (!verificarYAlertarInputs(inputs)) {
-      return
+      return;
     }
 
-    let nombre = inputNombreUsuarioLogin.value
-    let contraseña = inputContraseñaLogin.value
-    iniciarSesión(nombre, contraseña)
-  }
+    let nombre = inputNombreUsuarioLogin.value;
+    let contraseña = inputContraseñaLogin.value;
+    iniciarSesión(nombre, contraseña);
+  };
 
   btnStart.onclick = () => {
     if (USUARIO == undefined) {
-      mostrarLogin()
-      return
+      mostrarLogin();
+      return;
     }
-    location.href = './elegirModo.html'
-  }
+    location.href = "./elegirModo.html";
+  };
   btnAddWord.onclick = () => {
     if (USUARIO == undefined) {
-      mostrarLogin()
-      return
+      mostrarLogin();
+      return;
     }
-    location.href = './addWord.html'
-  }
+    location.href = "./addWord.html";
+  };
   btnLogros.onclick = () => {
     if (USUARIO == undefined) {
-      mostrarLogin()
-      return
+      mostrarLogin();
+      return;
     }
     // ....
-  }
+  };
 
   btnComoSeJuega.onclick = () => {
     if (USUARIO == undefined) {
-      mostrarLogin()
-      return
+      mostrarLogin();
+      return;
     }
     // ......
-  }
+  };
   btnPerfil.onclick = () => {
-    location.href = './perfil.html'
-  }
-  btnSubirFoto.onchange = e => {
-    let urlImagen = URL.createObjectURL(e.target.files[0])
-    imagenPorDefecto.src = urlImagen
-    crop.setImage(urlImagen)
+    location.href = "./perfil.html";
+  };
+  btnSubirFoto.onchange = (e) => {
+    let urlImagen = URL.createObjectURL(e.target.files[0]);
+    imagenPorDefecto.src = urlImagen;
+    crop.setImage(urlImagen);
     imagenPorDefecto.onload = () => {
-      recortarImg(imagenPorDefecto)
-    }
-  }
+      recortarImg(imagenPorDefecto);
+    };
+  };
   btnRegistrarseModal.onclick = () => {
-    contenedorIdentificacionSlider.style.marginLeft = '-100%'
-  }
+    contenedorIdentificacionSlider.style.marginLeft = "-100%";
+  };
   btnLogearModal.onclick = () => {
-    contenedorIdentificacionSlider.style.marginLeft = '0%'
-  }
+    contenedorIdentificacionSlider.style.marginLeft = "0%";
+  };
   loginEnElHeader.onclick = () => {
-    mostrarLogin()
-  }
+    mostrarLogin();
+  };
 
-  btnsCerrarContenedorIdentificacion.forEach(btn => {
+  btnsCerrarContenedorIdentificacion.forEach((btn) => {
     btn.onclick = () => {
-      cerrarLogin()
-    }
-  })
+      cerrarLogin();
+    };
+  });
 
   btnAbrirGaleria.onclick = () => {
-    if (contenedorGaleria.dataset.cerrado == 'true') {
-      contenedorGaleria.style.maxHeight = '150px'
-      contenedorGaleria.dataset.cerrado = 'false'
-      contenedorGaleria.style.padding = '10px 0px 10px 5px'
-      btnAbrirGaleria.style.transform = 'rotate(180deg)'
+    if (contenedorGaleria.dataset.cerrado == "true") {
+      contenedorGaleria.style.maxHeight = "150px";
+      contenedorGaleria.dataset.cerrado = "false";
+      contenedorGaleria.style.padding = "10px 0px 10px 5px";
+      btnAbrirGaleria.style.transform = "rotate(180deg)";
     } else {
-      contenedorGaleria.style.maxHeight = '0'
-      contenedorGaleria.style.padding = '0px'
-      contenedorGaleria.dataset.cerrado = 'true'
-      btnAbrirGaleria.style.transform = 'rotate(0deg)'
+      contenedorGaleria.style.maxHeight = "0";
+      contenedorGaleria.style.padding = "0px";
+      contenedorGaleria.dataset.cerrado = "true";
+      btnAbrirGaleria.style.transform = "rotate(0deg)";
     }
-  }
-  cargarImagenesDeLaGaleria()
-  mostrarContraseña()
+  };
+  cargarImagenesDeLaGaleria();
+  mostrarContraseña();
 }
 
 window.onload = () => {
   if (USUARIOS === null || USUARIOS.length === 0) {
-    USUARIOS = []
-    localStorage.setItem('usuarios', JSON.stringify(USUARIOS))
+    USUARIOS = [];
+    localStorage.setItem("usuarios", JSON.stringify(USUARIOS));
   } else {
     // Inicio de sesion automatico
-    USUARIOS.forEach(usuario => {
+    USUARIOS.forEach((usuario) => {
       if (usuario.logeado === true) {
-        USUARIO = usuario
+        USUARIO = usuario;
       }
-    })
+    });
   }
-  init()
+  init();
   crop = new Croppr(imagenPorDefecto, {
     aspectRatio: 1,
     // minSize: [80, 80],
@@ -425,46 +446,48 @@ window.onload = () => {
     startSize: [80, 80],
     // onInitialize: recortar,}
     onCropMove: () => {
-      recortarImg(imagenPorDefecto)
-    }
-  })
-  recortarImg(imagenPorDefecto)
-}
+      recortarImg(imagenPorDefecto);
+    },
+  });
+  recortarImg(imagenPorDefecto);
+};
 
 // hacer el porcentaje que cuando esta desordenado
-function verificarSiLasContraseñaCoincide() {
-  const contraseña1 = inputContraseñaUsuarioRegister.value
-  const contraseña2 = inputContraseña2Usuario.value
-  if (contraseña2 == '') {
-    return '0%'
+function verificarSiLasContraseñaCoincide(contraseña1, contraseña2) {
+  let coincide = false;
+  if (contraseña2 == "") {
+    return coincide;
   }
   if (contraseña2 === contraseña1) {
-    alertarInputValid(inputContraseña2Usuario)
+    alertarInputValid(inputContraseña2Usuario);
+    coincide = true;
   } else {
-    alertarError(inputContraseña2Usuario, 'La contraseña no coincide')
+    alertarError(inputContraseña2Usuario, "La contraseña no coincide");
+    coincide = false;
   }
   if (
     contraseña2.slice(0, contraseña2.length) ==
     contraseña1.slice(0, contraseña2.length)
   ) {
-    letrasCorrectas = contraseña2.length
+    letrasCorrectas = contraseña2.length;
     // letrasIncorrectas = 0
   } else {
-    letrasCorrectas = letrasCorrectas - 1
+    letrasCorrectas = letrasCorrectas - 1;
     // letrasIncorrectas = contraseña1.length - contraseña2.length
   }
   if (letrasCorrectas >= 0) {
     porcentajeText.innerHTML = obtenerPorcentaje(
       letrasCorrectas,
       contraseña1.length
-    )
+    );
   }
+  return coincide;
 }
 
 function obtenerPorcentaje(numero, numeroBase) {
   // let vBase = numeroBase / 100
-  let calculo = (numero / numeroBase) * 100
-  return `${Math.round(calculo)}%`
+  let calculo = (numero / numeroBase) * 100;
+  return `${Math.round(calculo)}%`;
 }
 function verificarSiEsMinusculaOMayuscula(contraseña) {
   if (
@@ -472,51 +495,51 @@ function verificarSiEsMinusculaOMayuscula(contraseña) {
     expRegMinusYMayus.test(contraseña) ||
     expRegMinuscula.test(contraseña)
   ) {
-    return true
+    return true;
   }
-  return false
+  return false;
 }
 function validarContraseña(contraseña, INPUT) {
-  const length = contraseña.length
+  const length = contraseña.length;
 
   if (length <= 20 && length >= 15) {
     // hacer las condificiones para muyseguro y seguro
     if (verificarSiEsMinusculaOMayuscula(contraseña)) {
-      alertarInputValid(INPUT, '#F2B705', 'Seguro')
-      return true
+      alertarInputValid(INPUT, "#F2B705", "Seguro");
+      return true;
     }
-    alertarInputValid(INPUT, '#0BD904', 'Muy seguro')
-    return true
+    alertarInputValid(INPUT, "#0BD904", "Muy seguro");
+    return true;
   }
   if (length <= 15 && length >= 10) {
     // hacer las condificiones para seguro y noTanSeguro
     if (verificarSiEsMinusculaOMayuscula(contraseña)) {
-      alertarInputValid(INPUT, '#BBBF45', 'No tan seguro')
-      return true
+      alertarInputValid(INPUT, "#BBBF45", "No tan seguro");
+      return true;
     }
-    alertarInputValid(INPUT, '#F2B705', 'Seguro')
-    return true
+    alertarInputValid(INPUT, "#F2B705", "Seguro");
+    return true;
   }
 
   if (length <= 10 && length >= 5) {
     // hacer las condificiones para seguroCorto, noTanSeguro e inseguro
     if (expContraseñaMuySegura.test(contraseña)) {
-      alertarInputValid(INPUT, '#D97904', 'Tu contraseña es seguro pero corto')
-      return true
+      alertarInputValid(INPUT, "#D97904", "Tu contraseña es seguro pero corto");
+      return true;
     }
     // prueba
     if (verificarSiEsMinusculaOMayuscula(contraseña)) {
       alertarInputValid(
         INPUT,
-        '#D93B92',
-        'Tu contraseña es valida pero no es seguro, ingresa digitos, letras mayusculas o caracteres especiales'
-      )
-      return true
+        "#D93B92",
+        "Tu contraseña es valida pero no es seguro, ingresa digitos, letras mayusculas o caracteres especiales"
+      );
+      return true;
     }
-    alertarInputValid(INPUT, '#BBBF45', 'No tan seguro')
-    return true
+    alertarInputValid(INPUT, "#BBBF45", "No tan seguro");
+    return true;
   }
-  return false
+  return false;
   /*
                     20-24: {
                             MUYSEGUROS
@@ -584,72 +607,84 @@ function validarContraseña(contraseña, INPUT) {
 }
 
 function verificarYAlertarInputs(inputs) {
-  let inputsVacios = inputs.filter(input => input.value === '')
-  let inputsInvalidos = inputs.filter(input => input.dataset.valid === 'false')
+  let inputsVacios = inputs.filter((input) => input.value === "");
+  let inputsInvalidos = inputs.filter(
+    (input) => input.dataset.valid === "false"
+  );
   if (inputsVacios.length === 0 && inputsInvalidos.length === 0) {
-    return true
+    return true;
   }
-  inputsInvalidos.forEach(inputInvalido => {
-    alertarError(inputInvalido, 'Este campo es invalido')
-  })
-  inputsVacios.forEach(inputVacio => {
-    alertarError(inputVacio, 'Este campo esta vacio')
-  })
+  inputsInvalidos.forEach((inputInvalido) => {
+    alertarError(inputInvalido, "Este campo es invalido");
+  });
+  inputsVacios.forEach((inputVacio) => {
+    alertarError(inputVacio, "Este campo esta vacio");
+  });
 }
 
 function iniciarSesión(nombreDeUsuario, contraseña) {
   // esta funcion debe buscar el usuario en el array de USUARIOS y verificar la contraseña y el nombre de usuario
-  USUARIOS.forEach(usuario => {
+  USUARIOS.forEach((usuario) => {
     if (
       nombreDeUsuario === usuario.nombre &&
       contraseña === usuario.contraseña
     ) {
-      USUARIO = usuario
+      USUARIO = usuario;
     }
-  })
+  });
 }
 
 function alertarError(input, errorMessage) {
-  console.log(input);
-  input.nextElementSibling.className = 'icon-cross'
-  input.nextElementSibling.id = 'icono-input-invalid'
-  input.parentElement.style.border = '3px solid #F20530'
-  input.nextElementSibling.style.background = '#F20530'
-  // input.parentElement.nextElementSibling.className = "span-alert"
-  input.parentElement.nextElementSibling.innerHTML = errorMessage
+  const nameSpanIcon = `${input.name}-icon-alert`;
+  const nameSpanAlert = `${input.name}-alert`;
+  const namePadre = `${input.name}-contenedor`;
+  const spanIcon = ByName(nameSpanIcon);
+  const spanAlert = ByName(nameSpanAlert);
+  const contenedorPadre = ByName(namePadre);
+  spanIcon.className = "icon-cross";
+  spanIcon.id = "icono-input-invalid";
+  contenedorPadre.style.border = "3px solid #F20530";
+  spanIcon.style.background = "#F20530";
+  spanAlert.className = "span-alert";
+  spanAlert.innerHTML = errorMessage;
 }
 
-function alertarInputValid(input, color = '#0BD904', mensaje = '') {
-  input.nextElementSibling.setAttribute('id', 'icono-input-valid')
-  input.nextElementSibling.className = 'icon-checkmark'
-  input.nextElementSibling.style.background = color
-  input.parentElement.nextElementSibling.innerHTML = mensaje
-  input.parentElement.style.border = `3px solid ${color}`
-  // aqui crear un span con un icono de check y darle color verde al border del contenedor
+function alertarInputValid(input, color = "#0BD904", mensaje = "") {
+  const nameSpanIcon = `${input.name}-icon-alert`;
+  const nameSpanAlert = `${input.name}-alert`;
+  const namePadre = `${input.name}-contenedor`;
+  const spanIcon = ByName(nameSpanIcon);
+  const spanAlert = ByName(nameSpanAlert);
+  const contenedorPadre = ByName(namePadre);
+  spanIcon.setAttribute("id", "icono-input-valid");
+  spanIcon.className = "icon-checkmark";
+  spanIcon.style.background = color;
+  contenedorPadre.style.border = `3px solid ${color}`;
+  spanAlert.innerHTML = mensaje;
 }
 function verificarNombre(nombre) {
-  let existe = false
-  USUARIOS.forEach(usuario => {
+  let existe = false;
+  USUARIOS.forEach((usuario) => {
     if (usuario.nombre === nombre) {
-      existe = true
+      existe = true;
     }
-  })
+  });
   if (existe) {
-    console.log('Ese nombre ya existe')
-    inputNombreUsuarioRegister.dataset.valid = 'false'
-    alertarError(inputNombreUsuarioRegister, 'Este usuario ya existe')
+    console.log("Ese nombre ya existe");
+    inputNombreUsuarioRegister.dataset.valid = "false";
+    alertarError(inputNombreUsuarioRegister, "Este usuario ya existe");
   } else {
-    inputNombreUsuarioRegister.dataset.valid = 'true'
-    alertarInputValid(inputNombreUsuarioRegister)
+    inputNombreUsuarioRegister.dataset.valid = "true";
+    alertarInputValid(inputNombreUsuarioRegister);
   }
 }
 
 function recortarImg(element) {
-  let parametros = crop.getValue()
+  let parametros = crop.getValue();
   // console.log(parametros);
-  canvas.width = parametros.width
-  canvas.height = parametros.height
-  context.clearRect(0, 0, canvas.width, canvas.height)
+  canvas.width = parametros.width;
+  canvas.height = parametros.height;
+  context.clearRect(0, 0, canvas.width, canvas.height);
   context.drawImage(
     element,
     parametros.x,
@@ -660,60 +695,60 @@ function recortarImg(element) {
     0,
     parametros.width,
     parametros.height
-  )
+  );
 }
 
 function queSeMuestrenConUnClickLosItemDeLaGaleria(e) {
-  let img = e.target
-  imagenPorDefecto.src = img.src
+  let img = e.target;
+  imagenPorDefecto.src = img.src;
 
-  crop.setImage(img.src)
+  crop.setImage(img.src);
   setTimeout(() => {
-    recortarImg(imagenPorDefecto)
-  }, 200)
-  const itemsDeLaGaleria = document.querySelectorAll('.item-galery')
-  itemsDeLaGaleria.forEach(item => {
-    item.style.filter = 'grayscale(0%)'
-  })
-  img.style.filter = 'grayscale(100%)'
+    recortarImg(imagenPorDefecto);
+  }, 200);
+  const itemsDeLaGaleria = document.querySelectorAll(".item-galery");
+  itemsDeLaGaleria.forEach((item) => {
+    item.style.filter = "grayscale(0%)";
+  });
+  img.style.filter = "grayscale(100%)";
 }
 
 function cargarImagenesDeLaGaleria() {
   for (let i = 1; i <= 31; i++) {
-    let img = document.createElement('img')
-    img.src = `./galeria/user-${i}.jpg`
-    img.classList.add('item-galery')
-    contenedorGaleria.appendChild(img)
-    img.onclick = queSeMuestrenConUnClickLosItemDeLaGaleria
+    let img = document.createElement("img");
+    img.src = `./galeria/user-${i}.jpg`;
+    img.classList.add("item-galery");
+    contenedorGaleria.appendChild(img);
+    img.onclick = queSeMuestrenConUnClickLosItemDeLaGaleria;
   }
 }
 function mostrarLogin() {
-  contenedorGeneral.style.filter = 'blur(4px)'
-  let heigthContenedor = contenedorIdentificacion.clientHeight
-  window.scrollBy(0, -window.scrollY)
-  contenedorIdentificacion.style.top = `calc(50vh - ${heigthContenedor / 2}px)`
+  contenedorGeneral.style.filter = "blur(4px)";
+  let heigthContenedor = contenedorIdentificacion.clientHeight;
+  window.scrollBy(0, -window.scrollY);
+  contenedorIdentificacion.style.top = `calc(50vh - ${heigthContenedor / 2}px)`;
 }
 function cerrarLogin() {
-  contenedorGeneral.style.filter = 'blur(0px)'
-  contenedorIdentificacion.style.top = `-100%`
+  contenedorGeneral.style.filter = "blur(0px)";
+  contenedorIdentificacion.style.top = `-100%`;
 }
 
 function mostrarContraseña() {
-  const btnsChecks = document.querySelectorAll('.btn-checkbox')
-  console.log(btnsChecks)
-  btnsChecks.forEach(btn => {
+  const btnsChecks = document.querySelectorAll(".btn-checkbox");
+  console.log(btnsChecks);
+  btnsChecks.forEach((btn) => {
     btn.onclick = () => {
       const input =
-        btn.parentElement.parentElement.nextElementSibling.children[0]
-      console.log(input)
-      if (btn.value == 'off') {
-        input.setAttribute('type', 'text')
-        btn.value = 'on'
+        btn.parentElement.parentElement.nextElementSibling.children[0];
+      console.log(input);
+      if (btn.value == "off") {
+        input.setAttribute("type", "text");
+        btn.value = "on";
       } else {
-        input.setAttribute('type', 'password')
-        btn.value = 'off'
+        input.setAttribute("type", "password");
+        btn.value = "off";
       }
-      console.log(btn.value)
-    }
-  })
+      console.log(btn.value);
+    };
+  });
 }

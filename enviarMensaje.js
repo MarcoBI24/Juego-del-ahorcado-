@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 const dotenv = require("dotenv").config()
-module.exports = async (nameTemplate, mensaje) => {
+module.exports = async (nameTemplate, mensaje, numero) => {
   let token = process.env.TOKEN
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -10,7 +10,7 @@ module.exports = async (nameTemplate, mensaje) => {
   if (nameTemplate !== null) {
     options = {
       messaging_product: 'whatsapp',
-      to: '51900866170',
+      to: numero,
       type: 'template',
       template: {
         name: nameTemplate,
@@ -22,7 +22,7 @@ module.exports = async (nameTemplate, mensaje) => {
   } else if (mensaje !== null || mensaje !== undefined) {
     options = {
       messaging_product: 'whatsapp',
-      to: '51900866170',
+      to: numero,
       type: 'text',
       text: {
         body: mensaje
