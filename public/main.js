@@ -5,7 +5,7 @@ const ByName = (name) => {
   return document.getElementsByName(name)[0];
 };
 
-// import intlTelInput from "./intl-tel-input/build/js/intlTelInput.js"
+import intlTelInput from "../node_modules/intl-tel-input/build/js/intlTelInput.js"
 // intlTelInput
 const btnStart = $("start-game");
 const btnAddWord = $("add-word");
@@ -60,9 +60,9 @@ let letrasIncorrectas = 0;
 let letrasCorrectas = 0;
 let formato = "";
 let expRegNumeros = "0123456789";
-const numeroInstance = window.intlTelInput(inputNumeroUsuario, {
+const numeroInstance = intlTelInput(inputNumeroUsuario, {
   initialCountry: "PE",
-  utilsScript: "./intl-tel-input/build/js/utils.js",
+  utilsScript: "../node_modules/intl-tel-input/build/js/intlTelInput.js",
   customPlaceholder: function (
     selectedCountryPlaceholder,
     selectedCountryData
