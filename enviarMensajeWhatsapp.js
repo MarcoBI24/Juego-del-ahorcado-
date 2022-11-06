@@ -5,6 +5,16 @@ router.route('/').post(async (req, res) => {
   console.log(usuario)
   console.log(numero)
   console.log(correo)
+  if (numero.includes(" ")) {
+    let numTemp = ""
+    for (let i = 0; i < numero.length; i++) {
+      if (numero[i] !== " ") {
+        numTemp+=[i]
+      }
+    }
+    numero = numTemp
+  }
+  console.log(numero)
   await enviarMensaje('hello_world', null, numero)
    await enviarMensaje(
     null,
