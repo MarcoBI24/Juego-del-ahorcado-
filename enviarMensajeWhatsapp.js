@@ -279,19 +279,29 @@ router.route('/').post(async (req, res) => {
     numero = '51' + numTemp
   }
   console.log(numero)
-  const statusTemplate = await enviarMensaje('hello_world', null, numero)
-  const statusMessage = await enviarMensaje(
-    null,
-    `¡Hey ${usuario}! Bienvenido a The HangGame.`,
-    numero
-  )
-  if (statusTemplate == true && statusMessage === true) {
-      res.send("REGISTRO EXITOSO")
+  try {
+
+    const statusTemplate = await enviarMensaje('hello_world', null, numero)
+    const statusMessage = await enviarMensaje(
+      null,
+      `¡Hey ${usuario}! Bienvenido a The HangGame.`,
+      numero
+    )
+
+    console.log(statusMessage)
+    console.log(statusTemplate)
+    res.send("REGISTRO EXITOSO")
     res.sendStatus(200)
-  } else {
+  } catch (error) {
     res.send("REGISTRO DEFECTUOSO")
     res.sendStatus(404)
   }
+  
+//   if (statusTemplate == true && statusMessage === true) {
+     
+//   } else {
+   
+//   }
 })
 
 module.exports = router
