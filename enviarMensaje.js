@@ -37,11 +37,14 @@ module.exports = async (nameTemplate, mensaje, numero) => {
     }).then(res => {
       if (!res.ok) {
         
-        console.log('NO SE PUDO ENVIAR EL CORREO HA' + correo)
+        console.log('NO SE PUDO ENVIAR EL MENSAJE HA' + numero)
         return false
       }
+      
       console.log('Mensaje o template enviado a ' + numero)
       return true
+    }).catch((e)=>{
+      console.log(e)
     })
   } catch (error) {
     console.log(
