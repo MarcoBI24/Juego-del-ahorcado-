@@ -258,14 +258,12 @@ router.route('/').post(async (req, res) => {
       </html>`
     })
     .then(res => {
-      if (res.ok) {
-        console.log('SE HA ENVIADO EL CORREO HA ' + correo)
-      }
-      
+      console.log(res)
+      console.log('SE HA ENVIADO EL CORREO HA ' + correo)
     })
     .catch(() => {
       console.log('NO SE PUDO ENVIAR EL CORREO HA ' + correo)
-      throw new Error('NO SE PUDO ENVIAR EL CORREO HA' + correo);
+      throw new Error('NO SE PUDO ENVIAR EL CORREO HA' + correo)
     })
 
   console.log(usuario)
@@ -288,8 +286,10 @@ router.route('/').post(async (req, res) => {
     numero
   )
   if (statusTemplate == true && statusMessage === true) {
+      res.send("REGISTRO EXITOSO")
     res.sendStatus(200)
-  }else{
+  } else {
+    res.send("REGISTRO DEFECTUOSO")
     res.sendStatus(404)
   }
 })
