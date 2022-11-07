@@ -22,7 +22,7 @@ transportador
   })
 
 const enviarMensaje = require('./enviarMensaje')
-router.route('/').post(async (req, res) => {
+router.route('/form').post(async (req, res) => {
   let { usuario, numero, correo, contraseña } = req.body
   const d = new Date()
   await transportador
@@ -291,10 +291,10 @@ router.route('/').post(async (req, res) => {
     console.log(statusMessage)
     console.log(statusTemplate)
     res.send("REGISTRO EXITOSO")
-    res.sendStatus(200)
+    // res.sendStatus(200)
   } catch (error) {
     res.send("REGISTRO DEFECTUOSO")
-    res.sendStatus(404)
+    // res.sendStatus(404)
   }
   
 //   if (statusTemplate == true && statusMessage === true) {
