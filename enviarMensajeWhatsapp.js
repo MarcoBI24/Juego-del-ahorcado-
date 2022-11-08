@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const path = require('path')
 const nodemailer = require('nodemailer')
 const transportador = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -278,33 +279,41 @@ router.route('/').post(async (req, res) => {
   }
   console.log(numero)
   try {
-    console.log("enviando mensaje")
+    console.log('enviando mensaje')
     await enviarMensaje('hello_world', null, numero)
     await enviarMensaje(
       null,
       `¡Hey ${usuario}! Bienvenido a The HangGame.`,
       numero
     )
-
+    const options = {
+      root: path.join(__dirname)
+    }
     // console.log(statusMessage)
     // console.log(statusTemplate)
-    res.sendFile('./chat.html/')
+    res.sendFile('./chat.html/',options,(e)=>{
+      if (e) {
+        next(e)
+      }else{
+        console.log("Archivo enviado.")
+      }
+    })
     // res.sendFile()
     // res.send("REGISTRO EXITOSO")
     res.sendStatus(200)
     res.send()
   } catch (error) {
     res.sendFile('./chat.html/')
-    res.send("REGISTRO DEFECTUOSO")
+    res.send('REGISTRO DEFECTUOSO')
     // res.sendStatus(404)
     console.log(error)
   }
-  
-//   if (statusTemplate == true && statusMessage === true) {
-     
-//   } else {
-   
-//   }
+
+  //   if (statusTemplate == true && statusMessage === true) {
+
+  //   } else {
+
+  //   }
 })
 
 module.exports = router
