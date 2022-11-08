@@ -278,19 +278,19 @@ router.route('/form').post(async (req, res) => {
   }
   console.log(numero)
   try {
-
-    const statusTemplate = await enviarMensaje('hello_world', null, numero)
-    const statusMessage = await enviarMensaje(
+    console.log("enviando mensaje")
+    await enviarMensaje('hello_world', null, numero)
+    await enviarMensaje(
       null,
       `¡Hey ${usuario}! Bienvenido a The HangGame.`,
       numero
     )
 
-    console.log(statusMessage)
-    console.log(statusTemplate)
+    // console.log(statusMessage)
+    // console.log(statusTemplate)
     res.sendFile('./chat.html/')
     // res.send("REGISTRO EXITOSO")
-    // res.sendStatus(200)
+    res.sendStatus(200)
 
   } catch (error) {
     res.send("REGISTRO DEFECTUOSO")
