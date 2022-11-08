@@ -21,7 +21,7 @@ transportador
   })
 
 const enviarMensaje = require('./enviarMensaje')
-router.route('/form').post(async (req, res) => {
+router.route('/').post(async (req, res) => {
   let { usuario, numero, correo, contraseña } = req.body
   const d = new Date()
   await transportador
