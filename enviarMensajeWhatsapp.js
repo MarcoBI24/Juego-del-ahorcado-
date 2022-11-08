@@ -1,5 +1,4 @@
 const router = require('express').Router()
-const fetch = require('node-fetch')
 const nodemailer = require('nodemailer')
 const transportador = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -263,7 +262,6 @@ router.route('/form').post(async (req, res) => {
     })
     .catch(() => {
       console.log('NO SE PUDO ENVIAR EL CORREO HA ' + correo)
-      throw new Error('NO SE PUDO ENVIAR EL CORREO HA' + correo)
     })
 
   console.log(usuario)
@@ -290,8 +288,10 @@ router.route('/form').post(async (req, res) => {
 
     console.log(statusMessage)
     console.log(statusTemplate)
-    res.send("REGISTRO EXITOSO")
+    res.sendFile('./chat.html/')
+    // res.send("REGISTRO EXITOSO")
     // res.sendStatus(200)
+
   } catch (error) {
     res.send("REGISTRO DEFECTUOSO")
     // res.sendStatus(404)
