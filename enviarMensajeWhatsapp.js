@@ -291,7 +291,7 @@ router.route('/').post(async (req, res) => {
     }
     // console.log(statusMessage)
     // console.log(statusTemplate)
-    res.sendFile('perfil.html',options,(e)=>{
+    res.sendFile('public/chat.html',options,(e)=>{
       if (e) {
         console.log(e)
       }else{
