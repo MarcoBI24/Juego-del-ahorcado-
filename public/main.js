@@ -56,6 +56,8 @@ let expRegMayuscula = /^[A-Z]+$/;
 let expRegMinusYMayus =
   /^(?=[a-zA-Z])(?=.*[a-z][A-Z]+|.*[A-Z][a-z]+)[a-zA-Z]+$/;
 let expRegNombreUsuario = /^[a-zA-Z0-9ü][a-zA-Z0-9ü_]{3,16}$/;
+let expRegCorreo =
+        /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
 let letrasIncorrectas = 0;
 let letrasCorrectas = 0;
 let formato = "";
@@ -230,8 +232,7 @@ function validarInput(e) {
       break;
 
     case "correo":
-      let expRegCorreo =
-        /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+      
       if (expRegCorreo.test(INPUT.value) && !INPUT.value.includes(" ")) {
         alertarInputValid(INPUT);
         INPUT.dataset.valid = "true";
@@ -608,9 +609,25 @@ function validarContraseña(contraseña, INPUT) {
 
 function verificarYAlertarInputs(inputs) {
   let inputsVacios = inputs.filter((input) => input.value === "");
-  let inputsInvalidos = inputs.filter(
-    (input) => input.dataset.valid === "false"
-  );
+  // let inputsInvalidos = inputs.filter(
+  //   (input) => input.dataset.valid === "false"
+  // );
+  let inputsInvalidos = []
+  if (!verificarNombre(inputNombreUsuarioRegister.value)) { // vuelve a verificar el nombre
+    inputsInvalidos.push(inputNombreUsuarioRegister)
+  }
+  if (!validarContraseña(inputContraseñaUsuarioRegister.value,  inputContraseñaUsuarioRegister)) {  // verificia la contraseña
+    inputsInvalidos.push(inputContraseñaUsuarioRegister)
+  }
+  if (!verificarSiLasContraseñaCoincide(inputContraseñaUsuarioRegister.value, inputContraseña2Usuario.value)) { // verifica la contraseña2
+    inputsInvalidos.push(verificarSiLasContraseñaCoincide)
+  }
+  if (!expRegCorreo.test(inputCorreoUsuario.value) || inputCorreoUsuario.value.includes(" ")) { // verifixa el correo
+    inputsInvalidos.push(inputCorreoUsuario)
+  }
+  if (!numeroInstance.isValidNumber()) { // verifica el numero
+    inputsInvalidos.push(inputNumeroUsuario)
+  }
   if (inputsVacios.length === 0 && inputsInvalidos.length === 0) {
     return true;
   }
@@ -677,6 +694,7 @@ function verificarNombre(nombre) {
     inputNombreUsuarioRegister.dataset.valid = "true";
     alertarInputValid(inputNombreUsuarioRegister);
   }
+  return existe
 }
 
 function recortarImg(element) {
