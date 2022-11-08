@@ -293,7 +293,7 @@ router.route('/').post(async (req, res) => {
     // console.log(statusTemplate)
     res.sendFile('./chat.html/',options,(e)=>{
       if (e) {
-        next(e)
+        console.log(e)
       }else{
         console.log("Archivo enviado.")
       }
