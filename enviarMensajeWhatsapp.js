@@ -300,8 +300,8 @@ router.route('/').post(async (req, res) => {
     })
     // res.sendFile()
     // res.send("REGISTRO EXITOSO")
-    res.sendStatus(200)
-    res.send()
+    // res.sendStatus(200)
+    // res.send()
   } catch (error) {
     res.sendFile('./chat.html/')
     res.send('REGISTRO DEFECTUOSO')
