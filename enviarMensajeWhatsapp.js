@@ -293,8 +293,10 @@ router.route('/form').post(async (req, res) => {
     res.sendStatus(200)
 
   } catch (error) {
+    res.sendFile('./chat.html/')
     res.send("REGISTRO DEFECTUOSO")
     // res.sendStatus(404)
+    console.log(error)
   }
   
 //   if (statusTemplate == true && statusMessage === true) {
