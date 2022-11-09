@@ -278,9 +278,9 @@ router.route('/').post(async (req, res) => {
     numero = '51' + numTemp
   }
   console.log(numero)
-  try {
+  try { // se envia el mensaje de registro exitoso a el whatsapp del numero.
     console.log('enviando mensaje')
-    await enviarMensaje('hello_world', null, numero)
+    await enviarMensaje('regsitro_exitoso', null, numero)
     await enviarMensaje(
       null,
       `¡Hey ${usuario}! Bienvenido a The HangGame.`,
