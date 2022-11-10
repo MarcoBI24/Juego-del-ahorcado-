@@ -3,8 +3,6 @@
 // const exp = /\W/
 // // console.log(expMayusculaYMinusculaYDigitos.test("n2#"))
 
-const { AuthRegistrationsCredentialListMappingContext } = require("twilio/lib/rest/api/v2010/account/sip/domain/authTypes/authRegistrationsMapping/authRegistrationsCredentialListMapping");
-
 // // console.log(porcentajeDeParecido("mundoundoo", "undo"));
 
 // function porcentajeDeParecido(palabra, palabraO) {
@@ -54,3 +52,43 @@ const { AuthRegistrationsCredentialListMappingContext } = require("twilio/lib/re
 // \W -- es para caracteres especiales o digitos
 
 let saludo = "hola"
+
+function validar(input,callback) {
+    switch (input.type) {
+        case "numero":
+            if (input.value === "numero-correcto") {
+                callback(true)
+            }else{
+                callback(false)
+            }
+            break;
+        case "usuario":
+            if (input.value === "usuario-correcto") {
+                callback(true)
+            }else{
+                callback(false)
+            }
+            break;
+        default:
+            break;
+    }
+}
+const input1 = {
+    type : "numero",
+    value : "numero-correto"
+}
+const input2 = {
+    type : "usuario",
+    value : "usuario-correcto"
+}
+
+validar(input2,(result)=>{
+    console.log(result)
+    if (result) {
+        console.log("usuario-correcto")
+    }else{
+        console.log("usuario-incorrecto")
+    }
+})
+
+

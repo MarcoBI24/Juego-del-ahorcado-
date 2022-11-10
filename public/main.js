@@ -1,3 +1,5 @@
+// INVESTIGAR COMO HACER EL INICIO DE SESION CON FACEBOOK Y QUE GUARDE SU PROGRESO.
+
 const $ = (id) => {
   return document.getElementById(id);
 };
@@ -23,6 +25,7 @@ const btnRegistrarseModal = $("btn-registro");
 const btnLogearModal = $("btn-login");
 
 const inputLogins = document.querySelectorAll(".input");
+
 const labelDelInputLogin = document.querySelectorAll(".label-text");
 let imgTemp = new Image();
 const btnSubirFoto = $("input-subirFoto");
@@ -146,96 +149,119 @@ function validarInput(e) {
     alertarError(INPUT, "");
     return;
   }
+  if (e.type == "keyup" && e.key.length !== 1 && e.key !== "Backspace") {
+    return;
+  }
   if (e.key === " ") {
     // INPUT.value = INPUT.value.slice(0, INPUT.value.length - 1);
     alertarError(INPUT, "No puede contener espacios.");
     return;
   }
-  if (INPUT.name === "numero") {
-    if (!expRegNumeros.includes(e.key) && e.key.length == 1) {
-      alertarError(inputNumeroUsuario, `¡Hey! "${e.key}" no es un número. `);
-      INPUT.value = INPUT.value.slice(0, INPUT.value.length - 1);
-    }
-    let numero = INPUT.value;
-    INPUT.value = formatearNumero(numero, formato);
-    console.log(INPUT.value);
-    console.log(numeroInstance.isValidNumber());
-  }
-  if (INPUT.name == "usuario" && INPUT.value[0] == "_") {
-    alertarError(INPUT, "El usuario no puede empezar por el guion bajo");
-    return;
-  }
-  function validarUsuario() {}
-  switch (INPUT.name) {
-    case "usuario":
-      if (
-        // hacer una funcion (validarUsuario())
-        expRegNombreUsuario.test(INPUT.value) == false
-      ) {
-        alertarError(
-          INPUT,
-          "El usuario tiene que ser de 4 a 16 digitos y solo puede contener numeros, letras y guion bajo"
-        );
-      } else {
-        verificarNombre(INPUT.value);
-      }
 
+  // hacer 2 switch, uno que tenga alertar cuando se escriba en los inputs y el otro cuando se pulse en el boton de registrar para que validade cuales son validos
+
+  switch (INPUT.name) {
+    case "usuario": // agregar validacion  : que tenga letras y numero o guion bajo
+      validarUsuario(INPUT, (valido, siExiste) => {
+        if (INPUT.value[0] == "_") {
+          alertarError(INPUT, "El usuario no puede empezar por el guion bajo");
+          return;
+        }
+        if (valido) {
+          if (siExiste) {
+            alertarError(INPUT, "Este usuario ya existe.");
+          } else {
+            alertarInputValid(INPUT);
+          }
+        } else {
+          alertarError(
+            INPUT,
+            "El usuario tiene que ser de 4 a 16 digitos y solo puede contener numeros, letras y guion bajo"
+          );
+        }
+      });
       break;
     case "contraseña":
       let contraseña = INPUT.value;
       console.log(contraseña.length);
       verificarSiLasContraseñaCoincide(
         contraseña,
-        inputContraseña2Usuario.value
+        inputContraseña2Usuario.value,
+        (result) => {
+          console.log(result);
+          if (inputContraseña2Usuario.value !== "") {
+            if (result) {
+              alertarInputValid(inputContraseña2Usuario);
+            } else {
+              alertarError(
+                inputContraseña2Usuario,
+                "La contraseña no coincide."
+              );
+            }
+            insertarPorcentajeDeCoincidenciaDeContraseña(
+              contraseña,
+              inputContraseña2Usuario.value
+            );
+          }
+        }
       );
-      if (
-        !(
-          expContraseñaValida.test(contraseña) &&
-          contraseña.length >= 5 &&
-          validarContraseña(contraseña, INPUT)
-        )
-      ) {
-        alertarError(
-          INPUT,
-          "Debe tener 5-20 caracteres(digitos, minúsculas, mayúsculas y para mas seguridad usa signos"
-        );
-      }
+      validarContraseña(INPUT, (result) => {
+        if (result) {
+          validarElLargoYSeguridadDeLaContraseña(INPUT.value, INPUT);
+        } else {
+          alertarError(
+            INPUT,
+            "Debe tener 5-20 caracteres(digitos, minúsculas, mayúsculas y para mas seguridad usa signos"
+          );
+        }
+      });
+
       break;
     case "contraseña2":
       let contraseña1 = inputContraseñaUsuarioRegister.value;
       let contraseña2 = INPUT.value;
 
-      if (verificarSiLasContraseñaCoincide(contraseña1, contraseña2)) {
-        INPUT.dataset.valid = "true";
-      } else {
-        INPUT.dataset.valid = "false";
-      }
-      console.log(contraseña1);
-      console.log(contraseña2);
-      console.log(INPUT.dataset.valid);
+      verificarSiLasContraseñaCoincide(contraseña1, contraseña2, (result) => {
+        if (result) {
+          alertarInputValid(INPUT);
+        } else {
+          alertarError(INPUT, "La contraseña no coincide.");
+        }
+        insertarPorcentajeDeCoincidenciaDeContraseña(contraseña1, contraseña2);
+      });
       break;
-
     case "correo":
-      if (expRegCorreo.test(INPUT.value)) {
-        alertarInputValid(INPUT);
-        INPUT.dataset.valid = "true";
-      } else {
-        alertarError(
-          INPUT,
-          "No tiene el formato --> <b>ejemplo@dominio.dominio</b>"
-        );
-        INPUT.dataset.valid = "false";
-      }
+      validarCorreo(INPUT.value, (result) => {
+        if (result) {
+          alertarInputValid(INPUT);
+        } else {
+          alertarError(
+            INPUT,
+            "No tiene el formato --> <b>ejemplo@dominio.dominio</b>"
+          );
+        }
+      });
       break;
     case "numero":
-      if (numeroInstance.isValidNumber()) {
-        alertarInputValid(INPUT);
-        INPUT.dataset.valid = "true";
-      } else {
-        alertarError(INPUT, "Digite un número válido");
-        console.log(numeroInstance.getNumber());
-        INPUT.dataset.valid = "false";
+      if (
+        e.type == "keyup" &&
+        !expRegNumeros.includes(e.key) &&
+        e.key.length == 1
+      ) {
+        alertarError(INPUT, `¡Hey! "${e.key}" no es un número. `);
+        INPUT.value = INPUT.value.slice(0, INPUT.value.length - 1);
       }
+      let numero = INPUT.value;
+      INPUT.value = formatearNumero(numero, formato);
+      console.log(INPUT.value);
+      console.log(numeroInstance.isValidNumber());
+      validarNumero(INPUT.value, (result) => {
+        if (result) {
+          alertarInputValid(INPUT);
+        } else {
+          alertarError(INPUT, "Digite un número válido");
+        }
+      });
       break;
     default:
       break;
@@ -264,6 +290,40 @@ function formatearNumero(numero, formato) {
   }
   return numeroFormateado;
 }
+
+function validarUsuario(INPUT, callback) {
+  if (expRegNombreUsuario.test(INPUT.value)) {
+    if (verificarNombreSiExite(INPUT.value)) {
+      callback(true, true); // si es usuario valido pero ya existe
+    } else {
+      callback(true, false); // si es usuario valido y no existe
+    }
+  } else {
+    callback(false);
+  }
+}
+function validarContraseña(INPUT, callback) {
+  if (expContraseñaValida.test(INPUT.value) && INPUT.value.length >= 5) {
+    callback(true);
+  } else {
+    callback(false);
+  }
+}
+function validarCorreo(correo, callback) {
+  if (expRegCorreo.test(correo)) {
+    callback(true);
+  } else {
+    callback(false);
+  }
+}
+function validarNumero(numero, callback) {
+  if (numeroInstance.isValidNumber()) {
+    callback(true);
+  } else {
+    callback(false);
+  }
+}
+console.log(ByName(""));
 function init() {
   inputLogins.forEach((input) => {
     // input.onkeydown = validarInput;
@@ -420,20 +480,23 @@ window.onload = () => {
 };
 
 // hacer el porcentaje que cuando esta desordenado
-function verificarSiLasContraseñaCoincide(contraseña1, contraseña2) {
-  let coincide = false;
-  console.log(contraseña2.length);
+function verificarSiLasContraseñaCoincide(contraseña1, contraseña2, callback) {
+  // console.log(contraseña1);
+  // console.log(contraseña2);
   if (contraseña2 == "" || contraseña2.length == 0) {
-    return coincide;
+    callback(false);
+    return;
   }
   if (contraseña2 === contraseña1) {
-    alertarInputValid(inputContraseña2Usuario);
-    coincide = true;
+    callback(true);
   } else {
-    alertarError(inputContraseña2Usuario, "La contraseña no coincide");
-    coincide = false;
+    callback(false);
   }
-
+}
+function insertarPorcentajeDeCoincidenciaDeContraseña(
+  contraseña1,
+  contraseña2
+) {
   if (
     contraseña2.slice(0, contraseña2.length) ==
     contraseña1.slice(0, contraseña2.length)
@@ -450,9 +513,7 @@ function verificarSiLasContraseñaCoincide(contraseña1, contraseña2) {
       contraseña1.length
     );
   }
-  return coincide;
 }
-
 function obtenerPorcentaje(numero, numeroBase) {
   // let vBase = numeroBase / 100
   let calculo = (numero / numeroBase) * 100;
@@ -468,7 +529,7 @@ function verificarSiEsMinusculaOMayuscula(contraseña) {
   }
   return false;
 }
-function validarContraseña(contraseña, INPUT) {
+function validarElLargoYSeguridadDeLaContraseña(contraseña, INPUT) {
   const length = contraseña.length;
 
   if (length <= 20 && length >= 15) {
@@ -578,26 +639,59 @@ function validarContraseña(contraseña, INPUT) {
 
 function verificarYAlertarInputs(inputs) {
   let inputsVacios = inputs.filter((input) => input.value === "");
-  let inputsInvalidos = inputs.filter(
-    (input) => input.dataset.valid === "false"
-  );
-  // verifica otra vez a cada input
-  // let inputsInvalidos = []
-  // if (!verificarNombre(inputNombreUsuarioRegister.value)) { // vuelve a verificar el nombre
-  //   inputsInvalidos.push(inputNombreUsuarioRegister)
-  // }
-  // if (!validarContraseña(inputContraseñaUsuarioRegister.value,  inputContraseñaUsuarioRegister)) {  // verificia la contraseña
-  //   inputsInvalidos.push(inputContraseñaUsuarioRegister)
-  // }
-  // if (!verificarSiLasContraseñaCoincide(inputContraseñaUsuarioRegister.value, inputContraseña2Usuario.value)) { // verifica la contraseña2
-  //   inputsInvalidos.push(verificarSiLasContraseñaCoincide)
-  // }
-  // if (!expRegCorreo.test(inputCorreoUsuario.value) || inputCorreoUsuario.value.includes(" ")) { // verifixa el correo
-  //   inputsInvalidos.push(inputCorreoUsuario)
-  // }
-  // if (!numeroInstance.isValidNumber()) { // verifica el numero
-  //   inputsInvalidos.push(inputNumeroUsuario)
-  // }
+  let inputsInvalidos = [];
+  inputs.forEach((input) => {
+    switch (input.name) {
+      case "usuario":
+        validarUsuario(input, (valido, siExiste) => {
+          if (input.value[0] == "_") {
+            inputsInvalidos.push(input);
+            return;
+          }
+          if (valido && siExiste) {
+            inputsInvalidos.push(input);
+          } else if (!valido) {
+            inputsInvalidos.push(input);
+          }
+        });
+        break;
+      case "contraseña":
+        validarContraseña(input, (valido) => {
+          if (!valido) {
+            inputsInvalidos.push(input);
+          }
+        });
+
+        break;
+      case "contraseña2":
+        let contraseña1 = inputContraseñaUsuarioRegister.value;
+        let contraseña2 = input.value;
+
+        verificarSiLasContraseñaCoincide(contraseña1, contraseña2, (valido) => {
+          if (!valido) {
+            inputsInvalidos.push(input);
+          }
+        });
+        break;
+      case "correo":
+        validarCorreo(input.value, (valido) => {
+          if (!valido) {
+            inputsInvalidos.push(input);
+          }
+        });
+        break;
+      case "numero":
+        validarNumero(input.value, (valido) => {
+          if (!valido) {
+            inputsInvalidos.push(input);
+          }
+        });
+        break;
+      default:
+        break;
+    }
+  });
+
   if (inputsVacios.length === 0 && inputsInvalidos.length === 0) {
     return true;
   }
@@ -636,6 +730,9 @@ function alertarError(input, errorMessage) {
   spanIcon.style.background = "#F20530";
   spanAlert.className = "span-alert";
   spanAlert.innerHTML = errorMessage;
+  spanIcon.onclick = (e)=>{
+    input.value = ""
+  }
 }
 
 function alertarInputValid(input, color = "#0BD904", mensaje = "") {
@@ -651,23 +748,7 @@ function alertarInputValid(input, color = "#0BD904", mensaje = "") {
   spanIcon.style.background = color;
   contenedorPadre.style.border = `3px solid ${color}`;
   spanAlert.innerHTML = mensaje;
-}
-function verificarNombre(nombre) {
-  let existe = false;
-  USUARIOS.forEach((usuario) => {
-    if (usuario.nombre === nombre) {
-      existe = true;
-    }
-  });
-  if (existe) {
-    console.log("Ese nombre ya existe");
-    inputNombreUsuarioRegister.dataset.valid = "false";
-    alertarError(inputNombreUsuarioRegister, "Este usuario ya existe");
-  } else {
-    inputNombreUsuarioRegister.dataset.valid = "true";
-    alertarInputValid(inputNombreUsuarioRegister);
-  }
-  return existe;
+  spanIcon.onclick = ()=>{}
 }
 
 function recortarImg(element) {
@@ -742,4 +823,21 @@ function mostrarContraseña() {
       console.log(btn.value);
     };
   });
+}
+function verificarNombreSiExite(nombre) {
+  let existe = false;
+  USUARIOS.forEach((usuario) => {
+    if (usuario.nombre === nombre) {
+      existe = true;
+    }
+  });
+  // if (existe) {
+  //   console.log("Ese nombre ya existe");
+  //   // inputNombreUsuarioRegister.dataset.valid = "false";
+  //   // alertarError(inputNombreUsuarioRegister, "Este usuario ya existe");
+  // } else {
+  //   // inputNombreUsuarioRegister.dataset.valid = "true";
+  //   // alertarInputValid(inputNombreUsuarioRegister);
+  // }
+  return existe;
 }
