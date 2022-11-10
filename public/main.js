@@ -161,6 +161,10 @@ function validarInput(e) {
   // hacer 2 switch, uno que tenga alertar cuando se escriba en los inputs y el otro cuando se pulse en el boton de registrar para que validade cuales son validos
 
   switch (INPUT.name) {
+    case "usuario-login":
+      break;
+    case "contraseña-login":
+      break;
     case "usuario": // agregar validacion  : que tenga letras y numero o guion bajo
       validarUsuario(INPUT, (valido, siExiste) => {
         if (INPUT.value[0] == "_") {
@@ -365,8 +369,6 @@ function init() {
       console.log(`${usuarioTemp.nombre} registrado con exito!`);
       document.form_register.submit();
     }
-
-    
   };
 
   btnIniciarSesionUsuario.onclick = () => {
@@ -498,6 +500,10 @@ function insertarPorcentajeDeCoincidenciaDeContraseña(
   contraseña1,
   contraseña2
 ) {
+  if (contraseña1.length == 0) {
+    porcentajeText.innerHTML = "0%";
+    return;
+  }
   if (
     contraseña2.slice(0, contraseña2.length) ==
     contraseña1.slice(0, contraseña2.length)
@@ -643,6 +649,12 @@ function verificarYAlertarInputs(inputs) {
   let inputsInvalidos = [];
   inputs.forEach((input) => {
     switch (input.name) {
+      case "usuario-login":
+        // validar si existe el usuario
+        // validar si la contraseña es correcta con la del usuario
+        break;
+      case "contraseña-login":
+        break;
       case "usuario":
         validarUsuario(input, (valido, siExiste) => {
           if (input.value[0] == "_") {
@@ -731,9 +743,9 @@ function alertarError(input, errorMessage) {
   spanIcon.style.background = "#F20530";
   spanAlert.className = "span-alert";
   spanAlert.innerHTML = errorMessage;
-  spanIcon.onclick = (e)=>{
-    input.value = ""
-  }
+  spanIcon.onclick = (e) => {
+    input.value = "";
+  };
 }
 
 function alertarInputValid(input, color = "#0BD904", mensaje = "") {
@@ -749,7 +761,7 @@ function alertarInputValid(input, color = "#0BD904", mensaje = "") {
   spanIcon.style.background = color;
   contenedorPadre.style.border = `3px solid ${color}`;
   spanAlert.innerHTML = mensaje;
-  spanIcon.onclick = ()=>{}
+  spanIcon.onclick = () => {};
 }
 
 function recortarImg(element) {
