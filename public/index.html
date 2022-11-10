@@ -176,7 +176,7 @@
                         </div>
                     </div>
                     <!--MODAL DE  REGISTRO  ---------------------------------------------------------------------------- -->
-                    <form action="/" method="post" class="contenedor-formulario">
+                    <form action="/" method="post" class="contenedor-formulario" name="form_register">
                         <div class="label-form">
                             <span class="label-text">Nombre de usuario</span>
                             <div class="contenedor-input" name="usuario-contenedor">
@@ -241,13 +241,13 @@
                             </div>
                             <span class="span-alert" name="numero-alert"></span>
                         </div>
-                        <input type="submit" id="btn-enviar" value="enviar">
                     </form>
 
                 </div>
                 <div class="contenedor-registro-footer">
                     <!-- hacer que este bototn cuando ya registre haga un margin-left a 0% osea lo mande para el modal de iniciar sesion -->
-                    <button class="btn-registro" id="registrarse-form">Registrase</button>
+                    <button type="submit" class="btn-registro"
+                        id="registrarse-form">Registrase</button>
                     <button class="btn-registro" id="btn-login">Iniciar sesión</button>
                 </div>
             </div>

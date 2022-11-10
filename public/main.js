@@ -340,32 +340,33 @@ function init() {
       inputCorreoUsuario,
       inputNumeroUsuario,
     ];
-    if (!verificarYAlertarInputs(inputs)) {
-      return;
+    if (verificarYAlertarInputs(inputs)) {
+      let usuarioTemp = {
+        nombre: inputNombreUsuarioRegister.value,
+        contraseña: inputContraseñaUsuarioRegister.value,
+        correo: inputCorreoUsuario.value,
+        numero: inputNumeroUsuario,
+        foto: canvas.toDataURL(),
+        fotos: [],
+        record: "0",
+        medalla: "huevo",
+        palabras: [],
+        configuracion: {
+          tema: "light",
+          efectosDeSonido: "off",
+          musica: "off",
+          efectosDeSonidoDelTeclado: "off",
+          inicioDeSesionAutomatico: "on",
+        },
+        logeado: false,
+      };
+      USUARIOS.push(usuarioTemp);
+      localStorage.setItem("usuarios", JSON.stringify(USUARIOS));
+      console.log(`${usuarioTemp.nombre} registrado con exito!`);
+      document.form_register.submit();
     }
 
-    let usuarioTemp = {
-      nombre: inputNombreUsuarioRegister.value,
-      contraseña: inputContraseñaUsuarioRegister.value,
-      correo: inputCorreoUsuario.value,
-      numero: inputNumeroUsuario,
-      foto: canvas.toDataURL(),
-      fotos: [],
-      record: "0",
-      medalla: "huevo",
-      palabras: [],
-      configuracion: {
-        tema: "light",
-        efectosDeSonido: "off",
-        musica: "off",
-        efectosDeSonidoDelTeclado: "off",
-        inicioDeSesionAutomatico: "on",
-      },
-      logeado: false,
-    };
-    USUARIOS.push(usuarioTemp);
-    localStorage.setItem("usuarios", JSON.stringify(USUARIOS));
-    console.log(`${usuarioTemp.nombre} registrado con exito!`);
+    
   };
 
   btnIniciarSesionUsuario.onclick = () => {
