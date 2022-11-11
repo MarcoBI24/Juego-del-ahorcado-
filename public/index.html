@@ -102,6 +102,8 @@
     <div class="contenedor-identificacion" id="contenedor-identificacion">
         <div class="contenedor-identificacion-slider" id="contenedor-identificacion-slider">
             <!-- INICIAR SESION -->
+
+
             <div class="contenedor-login">
                 <button class="contenedor-icono">
                     <span class="icon-cross"></span>
@@ -137,8 +139,11 @@
                         <span class="span-alert" name="contraseña-login-alert"></span>
 
                     </div>
-                    <label class="checkbox"> <input type="checkbox" id="input-inicio-sesion-automatico">Inicio de sesion
-                        automatico</label>
+                    <label class="checkbox">
+                        <input type="checkbox" id="input-inicio-sesion-automatico">
+                        Inicio de sesion
+                        automatico
+                    </label>
                 </div>
                 <div class="contenedor-login-footer">
                     <button class="btn-login" id="login-form">Iniciar sesion</button>
@@ -148,7 +153,7 @@
 
 
 
-
+            <!--------------------------------------------------------------------------------MODAL DE  REGISTRO  ------------------------------------------------------------------------------>
             <div class="contenedor-registro">
                 <div class="contenedor-registro-header">
                     <p class="titulo-header">Rellene los campos para registrarse</p>
@@ -175,7 +180,7 @@
 
                         </div>
                     </div>
-                    <!--MODAL DE  REGISTRO  ---------------------------------------------------------------------------- -->
+
                     <form action="/" method="post" class="contenedor-formulario" name="form_register">
                         <div class="label-form">
                             <span class="label-text">Nombre de usuario</span>
@@ -241,13 +246,19 @@
                             </div>
                             <span class="span-alert" name="numero-alert"></span>
                         </div>
+                        <div class="label-form">
+                            <label class="checkbox">
+                                <input type="checkbox" id="input-inicio-sesion-automatico-register">
+                                Inicio de sesion
+                                automatico
+                            </label>
+                        </div>
                     </form>
 
                 </div>
                 <div class="contenedor-registro-footer">
                     <!-- hacer que este bototn cuando ya registre haga un margin-left a 0% osea lo mande para el modal de iniciar sesion -->
-                    <button type="submit" class="btn-registro"
-                        id="registrarse-form">Registrase</button>
+                    <button type="submit" class="btn-registro" id="registrarse-form">Registrase</button>
                     <button class="btn-registro" id="btn-login">Iniciar sesión</button>
                 </div>
             </div>
@@ -257,7 +268,7 @@
     <script src="./modal.js"></script>
     <script src="./intlTelInput.js"></script>
 
-    <script src="./main.js"></script>
+    <script src="./main.js" type="module"></script>
 
 
 </body>
