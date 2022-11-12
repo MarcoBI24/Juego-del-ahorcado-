@@ -36,6 +36,11 @@ let urlImagen = imagenPorDefecto.src;
 let crop;
 let USUARIO;
 let USUARIOS = JSON.parse(localStorage.getItem("usuarios"));
+import USER from "./registroExitoso.js";
+console.log(USER)
+if (USER.USER.nombre !== null) {
+  USUARIO = USER;
+}
 const inputNombreUsuarioRegister = $("nombre-usuario");
 const inputContraseñaUsuarioRegister = $("contraseña-usuario");
 const inputContraseña2Usuario = $("contraseña2-usuario");
@@ -326,7 +331,7 @@ function validarNumero(numero, callback) {
     callback(false);
   }
 }
-console.log(ByName(""));
+// console.log(ByName(""));
 function init() {
   inputsRegister.forEach((input) => {
     input.onkeyup = validarInput;
@@ -336,7 +341,7 @@ function init() {
     // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
     // Validar que haya aceptado términos y condiciones
 
-/*
+    /*
     lo que quiero : 
         cuando el usuario se registre independientemente de que active inicioDeSesionAutomatico o no, la pagina que se mantenga iniciada la sesion hasta que salga 
         ya que cuando quiera moverse entre las paginas del juego ya sea en jugar o agregar palabras se mantenga el usuario registrado 
@@ -372,7 +377,9 @@ function init() {
       USUARIOS.push(usuarioRegistro);
       localStorage.setItem("usuarios", JSON.stringify(USUARIOS));
       console.log(`${usuarioRegistro.nombre} registrado con exito!`);
-      document.form_register.submit();
+      // document.form_register.submit();
+      window.location.href =
+        "http://127.0.0.1:5500/public/registroExitoso.html";
     }
   };
 
