@@ -2,24 +2,71 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: "Roboto";
 }
 body{
+    height: 100vh;
     display: flex;
     padding: 40px;
+    align-items: center;
     justify-content: center;
+    background: #D9D9D9;
 }
-.contenedor-general{
+.contenedor-modal{
+    background: #D9D9D9;
+    box-shadow: 0px 0px 27px 3px rgba(0, 0, 0, 0.18);
+    border-radius: 18px;
     width: 100%;
-    border: 1px solid;
-    display: flex;    
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 40px;
+    gap: 20px;
+    min-height:350px;
+    justify-content: space-between;
 }
-    .contenedor-mensajes{
-        width: 100%;
-        padding: 10px;
+
+    .contenedor-header{
+
+    }
+        .titulo{
+            font-weight: 900;
+            letter-spacing: 2px;
+            font-size: calc(1vw + 2rem)
+        }
+    .contenedor-body{
         display: flex;
         flex-direction: column;
-        background-color: antiquewhite;
+        max-width: 400px;
+        align-items: center;
+        gap: 15px;
     }
-        .mensaje{
-            padding: 5px;
+    
+        .mensajes{
+            text-align: center;
+            font-size: calc(1vw + .6rem);
+            color: #4e4e4e;
         }
+    .contenedor-footer{
+        width: 100%;
+        align-self: flex-end;
+        justify-self: flex-end;
+        /* border: 1px |solid; */
+    }
+     #btn-volver{
+        font-size: calc(1vw + 1rem);
+        /* padding: ; */
+        width: 100%;
+        border: 0px solid ;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: 600;
+        background: #B7B4B4;
+
+     }
+     #btn-volver:hover{
+        transform: scale(.95);
+     }
+
+        

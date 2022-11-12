@@ -330,26 +330,12 @@ function init () {
   btnRegistrarUsuario.onclick = () => {
     // VALIDAR CADA INPUT AQUI SOLO SE VALIDA QUE NINGUN CAMPO ESTE VACIO
     // Validar que haya aceptado términos y condiciones
-
-    /*
-    lo que quiero : 
-        cuando el usuario se registre independientemente de que active inicioDeSesionAutomatico o no, la pagina que se mantenga iniciada la sesion hasta que salga 
-        ya que cuando quiera moverse entre las paginas del juego ya sea en jugar o agregar palabras se mantenga el usuario registrado 
-
-
-    - cuando se registra el inicioDeSesionAutomatico
-
-    
-    
-    
-*/
-
     if (verificarYAlertarInputs(inputsRegister)) {
       let usuarioRegistro = {
         nombre: inputNombreUsuarioRegister.value,
         contraseña: inputContraseñaUsuarioRegister.value,
         correo: inputCorreoUsuario.value,
-        numero: inputNumeroUsuario,
+        numero: inputNumeroUsuario.value,
         foto: canvas.toDataURL(),
         fotos: [],
         record: '0',

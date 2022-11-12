@@ -289,9 +289,8 @@ router.route('/').post(async (req, res) => {
     const options = {
       root: path.join(__dirname)
     }
-    // console.log(statusMessage)
-    // console.log(statusTemplate)
-    res.sendFile('public/chat.html',options,(e)=>{
+    // se envia la pagina de registro exitoso
+    res.sendFile('public/registroExitoso.html',options,(e)=>{
       if (e) {
         console.log(e)
       }else{
