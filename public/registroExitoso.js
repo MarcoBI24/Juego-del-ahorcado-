@@ -27,7 +27,7 @@ window.onload = () => {
 
 btnVolver.onclick = () => {
   // console.log(location)
-  window.location.href = location.origin + "/public/";
+  window.location.href = location.origin;
 };
 
 function crearMensaje(estado) {
