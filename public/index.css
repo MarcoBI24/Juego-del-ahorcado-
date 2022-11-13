@@ -1,4 +1,4 @@
-/* hacer las aniamciones de los modales, de los botones y cambios de pagina con la libreria Velocity.js */
+/* hacer las animaciones de los modales, de los botones y cambios de pagina con la libreria Velocity.js */
 @import './intlTelInput.css';
 
 
@@ -69,6 +69,33 @@ body{
                 /* justify-self: flex-end; */
                 
             }   
+                .nombre-usuario{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    /* border: 1px solid; */
+                    height: min-content;
+                }
+                    #nombre-usuario-header, #btn-registrar-header{
+                        display: flex;
+                        align-items: center;
+
+                        font-weight: 600;
+                        color: #3e8ae6;
+                        /* height: min-content; */
+                        transition: color .2s;
+                        /* height: 25px; */
+                        /* margin-top: 5px; */
+                        /* border: 1px solid; */
+                        /* display: inline-block; */
+                    }
+                    #nombre-usuario-header:visited, #btn-registrar-header:visited{
+                        color: #3e8ae6;
+                    }
+                    #nombre-usuario-header:active, #btn-registrar-header:active{
+                        font-weight: 700;
+                        color: #fff;
+                    }
                 #login{
                     padding:5px 15px;
                     background-color: #3e8ae6;
