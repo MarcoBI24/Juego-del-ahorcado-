@@ -297,12 +297,9 @@ router.route('/').post(async (req, res) => {
         console.log("Archivo enviado.")
       }
     })
-    // res.sendFile()
-    // res.send("REGISTRO EXITOSO")
-    // res.sendStatus(200)
-    // res.send()
+    // mejorar que de la respuesta de error de cada mensaje que informe cual es el error si no se envio el mensaje al correo o al numero
   } catch (error) {
-    res.sendFile('./chat.html/')
+    // res.sendFile('./chat.html/')
     res.send('REGISTRO DEFECTUOSO')
     // res.sendStatus(404)
     console.log(error)
