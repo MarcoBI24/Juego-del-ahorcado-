@@ -411,27 +411,27 @@ function init () {
         cerrarLogin()
         inputNombreUsuarioLogin.value = ''
         inputContraseñaLogin.value = ''
-        console.log("Inició sesión")
+        console.log('Inició sesión')
       }
     })
-    
   }
-  
+
   btnCerrarSesion.onclick = () => {
     USUARIOS.forEach(usuario => {
       // se itera en el  array de USUARIOS
-      if (usuario.nombre === USUARIO.nombre) {
+      if (USUARIO !== undefined && usuario.nombre === USUARIO.nombre) {
         // se busca por el nombre
         // se configura el usuario como no logeado y posteriormente se setea al localStorage (se actualiza).
         usuario.logeado = false
         USUARIO = undefined
         localStorage.setItem('usuarios', JSON.stringify(USUARIOS))
+        cerrarModal()
+        actualizarPagina()
+        console.log('Se cerro la sesión')
+        return
       }
     })
     // location.reload()
-    cerrarModal()
-    actualizarPagina()
-    console.log('Se cerro la sesión')
   }
   btnStart.onclick = () => {
     if (USUARIO == undefined) {
@@ -534,15 +534,34 @@ window.onload = () => {
     aspectRatio: 1,
     // minSize: [80, 80],
     // maxSize: [120, 120],
-    startSize: [80, 80],
+    startSize: [100, 100],
     // onInitialize: recortar,}
     onCropMove: () => {
       recortarImg(imagenPorDefecto)
     }
   })
   recortarImg(imagenPorDefecto)
-}
 
+  // for (let i = 0; i < crop.handles.length; i++) {
+  //   crop.handles[i].el.style.background = '#fff'
+  //   crop.handles[i].el.style.borderRadius = '2px'
+  //   crop.handles[i].el.style.border = '0px solid'
+
+  // }
+  // crop.handles[0].el.style.background = ""
+}
+window.onresize = () => {
+  let width = crop.overlayEl.clientWidth
+  // console.log(window.screen.availWidth)
+  // let width = window.screen.availWidth
+  if (width < 100) {
+    width -= 10
+  } else {
+    width -= 30
+  }
+
+  crop.resizeTo(width, width, [0, 0])
+}
 // hacer el porcentaje que cuando esta desordenado
 function verificarSiLasContraseñaCoincide (contraseña1, contraseña2, callback) {
   // console.log(contraseña1);
@@ -879,7 +898,7 @@ function removerAlertaInput (input) {
   contenedorPadre.style.border = `none`
   spanAlert.innerHTML = ''
   spanIcon.onclick = () => {}
-  input.value = ""
+  input.value = ''
 }
 function recortarImg (element) {
   let parametros = crop.getValue()
