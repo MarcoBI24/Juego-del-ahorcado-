@@ -28,7 +28,7 @@ function abrirModal() {
     window.scrollBy(0, -window.scrollY);
     // el translate Y es -50vh - la mitad del alto del modal
     contenedorModal.style.top = `calc(${heigthModal / 2}px)`;
-  }, 200);
+  }, 1000);
 }
 btnCloseModal.onclick = cerrarModal;
 btnMenu.onclick = abrirModal;
