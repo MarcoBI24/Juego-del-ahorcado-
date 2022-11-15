@@ -28,7 +28,7 @@ function abrirModal() {
     let heigthModal = contenedorModal.clientHeight;
     window.scrollBy(0, -window.scrollY);
     // el translate Y es -50vh - la mitad del alto del modal
-    contenedorModal.style.top = `calc(${heigthModal / 2}px)`;
+    contenedorModal.style.top = `calc(50vh - ${heigthModal / 2}px)`;
   }, 500);
 }
 btnCloseModal.onclick = cerrarModal;
