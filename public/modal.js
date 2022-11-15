@@ -21,6 +21,7 @@ function cerrarModal() {
 function abrirModal() {
   modalLink.disabled = false;
   console.log(contenedorModal.clientHeight);
+  // modalLink. = function() { console.log("Ya cargo el link");}
   setTimeout(() => {
     console.log(contenedorModal.clientHeight + " --modal");
     console.log(document.body.clientHeight + " --body");
@@ -28,7 +29,7 @@ function abrirModal() {
     window.scrollBy(0, -window.scrollY);
     // el translate Y es -50vh - la mitad del alto del modal
     contenedorModal.style.top = `calc(${heigthModal / 2}px)`;
-  }, 1000);
+  }, 500);
 }
 btnCloseModal.onclick = cerrarModal;
 btnMenu.onclick = abrirModal;
