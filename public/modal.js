@@ -20,8 +20,6 @@ function cerrarModal() {
 }
 function abrirModal() {
   modalLink.disabled = false;
-  console.log(contenedorModal.clientHeight);
-  // modalLink. = function() { console.log("Ya cargo el link");}
   setTimeout(() => {
     console.log(contenedorModal.clientHeight + " --modal");
     console.log(document.body.clientHeight + " --body");
