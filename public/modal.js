@@ -29,4 +29,4 @@ function abrirModal () {
 }
 btnCloseModal.onclick = cerrarModal
 btnMenu.onclick = abrirModal
-window.onscroll = () => {}
+// window.onsc}roll = () => {}
